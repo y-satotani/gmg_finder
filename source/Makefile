@@ -1,11 +1,8 @@
 CC := g++
 IDIR := /usr/include/igraph $(shell pwd)
 LDIR := /usr/lib/x86_64-linux-gnu/
-LIBS := igraph m
-CFLAGS := -Ofast -Wall\
-	$(addprefix -I,$(IDIR))\
-	$(addprefix -L,$(LDIR))\
-	$(addprefix -l,$(LIBS))
+LIBS := -lm -ligraph
+CFLAGS := -Ofast -Wall $(addprefix -I,$(IDIR)) $(addprefix -L,$(LDIR))\
 
 LPAR := (
 OBJ := $(patsubst %.cpp,%.o,$(shell\
@@ -32,10 +29,11 @@ $(EXEDIR):
 	mkdir -p $(EXEDIR)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -c -o $@ $<
+	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
 
 %.out: %.cpp
-	$(CC) $(CFLAGS) -o $(addprefix $(join $(EXEDIR),/),$(notdir $@)) $< $(OBJ)
+	$(CC) $(CFLAGS) -o $(addprefix $(join $(EXEDIR),/),$(notdir $@)) \
+	$< $(OBJ) $(LIBS)
 
 clean:
 	find . -regextype posix-egrep -regex ".*\.(o|out)$$" | xargs rm -f

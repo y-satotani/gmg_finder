@@ -1,8 +1,10 @@
 
+extern "C" {
+#include <igraph.h>
+}
+
 #ifndef _CCHECK_GRAPH_CONFIG_HPP_
 #define _CCHECK_GRAPH_CONFIG_HPP_
-
-#include <igraph.h>
 
 namespace ccheck {
 
@@ -15,8 +17,11 @@ namespace ccheck {
     // basic properties
     unsigned int n();
     unsigned int d();
+    unsigned int depth(int vid);
     unsigned int Q();
     unsigned int R();
+    // build base graph
+    igraph_t build_base_graph();
   };
 
 } // end of ccheck
