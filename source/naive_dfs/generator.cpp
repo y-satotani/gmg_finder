@@ -75,7 +75,10 @@ namespace ccheck {
   diameter_constraint(igraph_t* G) {
     igraph_integer_t diam;
     igraph_diameter(G, &diam, 0, 0, 0, 0, 1);
-    return (unsigned int)diam == m_config.Q() + 1;
+    if(m_config.R() > 0)
+      return (unsigned int)diam == m_config.Q() + 1;
+    else
+      return (unsigned int)diam == m_config.Q();
   }
 
   dfs_generator::dfs_generator() {
