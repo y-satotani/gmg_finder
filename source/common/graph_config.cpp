@@ -17,16 +17,28 @@ namespace ccheck {
     return _d;
   }
 
-  unsigned int graph_config::Q() {
+  unsigned int graph_config::k() {
     unsigned int depth = tree_depth(_n-1, _d);
     if(_n == n_vert_btree(depth, _d))
-      return depth;
+      return depth + 1;
     else
-      return depth - 1;
+      return depth;
+  }
+
+  unsigned int graph_config::Q() {
+    return k() - 1;
   }
 
   unsigned int graph_config::R() {
-    return _n - n_vert_btree(Q() - 1, _d);
+    return _n - n_vert_btree(k() - 1, _d);
+  }
+
+  std::size_t graph_config::sspl_lb() {
+    std::size_t sspl = 0;
+    for(std::size_t j = 1; j < k(); j++)
+      sspl += j * _d * (std::size_t)pow(_d - 1, j - 1);
+    sspl = n() * (sspl + k() * R());
+    return sspl;
   }
 
   vertex_t graph_config::parent_of(vertex_t v) {
@@ -53,13 +65,13 @@ namespace ccheck {
     std::vector<vertex_t> t_verts = tree_vertices();
     for(std::size_t i = 0; i < t_verts.size(); i++)
       if(t_verts[i] > 0)
-        t_edges.push_back(edge_t(t_verts[i], parent_of(t_verts[i])));
+        t_edges.push_back(edge_t(parent_of(t_verts[i]), t_verts[i]));
     return t_edges;
   }
 
   std::vector<vertex_t> graph_config::leaf_vertices() {
     std::vector<vertex_t> leaves;
-    for(vertex_t v = n() - R(); v < n(); v++)
+    for(vertex_t v = n_vert_btree(Q() - 1, d()); v < n(); v++)
       leaves.push_back(v);
     return leaves;
   }

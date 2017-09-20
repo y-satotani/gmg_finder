@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
   cout << endl;
 
   // testing specific graph configuration
-  graph_config gconf(16, 3);
+  graph_config gconf(10, 3);
 
   // tree edges: edges in balanced tree
   vector<edge_t> t_edges = gconf.tree_edges();
@@ -36,6 +36,9 @@ int main(int argc, char* argv[]) {
     cout << l_edges[i].first << " " << l_edges[i].second << endl;
   }
   cout << endl;
+
+  // lower bound of sspl by Cerf et.al.
+  cout << gconf.sspl_lb() << endl << endl;
 
   // interface to igraph (example: calculates path length of 1->9 (3))
   igraph_t graph = gconf.build_tree();

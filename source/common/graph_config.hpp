@@ -22,8 +22,11 @@ namespace ccheck {
     // basic properties
     unsigned int n();
     unsigned int d();
+    unsigned int k();
     unsigned int Q();
     unsigned int R();
+    // lower bound of sum of shortest path length
+    std::size_t sspl_lb();
     // build base graph
     vertex_t parent_of(vertex_t v);
     std::vector<vertex_t> tree_vertices();
