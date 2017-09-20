@@ -18,9 +18,11 @@ namespace ccheck {
     ccheck::graph_config m_config;
     std::vector<dfs_node_t> m_stack;
     std::vector<edge_t> m_edges;
-    std::vector<std::pair<int, int> > m_vert_range; // inclusive
+    std::vector<std::pair<int, int> > m_vert_range;
     bool degree_constraint(std::size_t ei, igraph_t* G, bool add);
     bool cycle_constraint(std::size_t ei, igraph_t* G, bool add);
+    bool degree_constraint(igraph_t* G);
+    bool diameter_constraint(igraph_t* G);
   public:
     dfs_generator();
     dfs_generator(const graph_config& conf);
