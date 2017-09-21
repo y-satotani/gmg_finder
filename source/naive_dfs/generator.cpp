@@ -1,6 +1,5 @@
 
 #include "generator.hpp"
-#include <iostream>
 
 using namespace ccheck;
 
