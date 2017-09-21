@@ -4,6 +4,11 @@
 
 namespace ccheck {
 
+  graph_config::graph_config() {
+    _n = 0;
+    _d = 0;
+  }
+
   graph_config::graph_config(unsigned int n, unsigned int d) {
     _n = n;
     _d = d;

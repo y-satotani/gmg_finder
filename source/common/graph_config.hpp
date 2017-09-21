@@ -18,6 +18,7 @@ namespace ccheck {
     unsigned int _n;
     unsigned int _d;
   public:
+    graph_config();
     graph_config(unsigned int n, unsigned int d);
     // basic properties
     unsigned int n();
