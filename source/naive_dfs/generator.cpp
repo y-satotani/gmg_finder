@@ -22,17 +22,17 @@ namespace ccheck {
       igraph_integer_t u = (igraph_integer_t)m_edges[ei].first;
       igraph_integer_t v = (igraph_integer_t)m_edges[ei].second;
       // degree must not exceed d
-      satisfy &= igraph_vector_e(&degree, u) < m_config.d() ||
-        igraph_vector_e(&degree, v) < m_config.d();
+      satisfy &= igraph_vector_e(&degree, u) < m_config->d() ||
+        igraph_vector_e(&degree, v) < m_config->d();
     }
     // all of vertices exit from frontier, must have degree d
     // (except selected edge, must have d-1)
     for(std::size_t i = 0; i < v_exit_frontier.size(); i++) {
       igraph_integer_t v = (igraph_integer_t)v_exit_frontier[i];
       if(add) {
-        satisfy &= igraph_vector_e(&degree, v) == m_config.d() - 1;
+        satisfy &= igraph_vector_e(&degree, v) == m_config->d() - 1;
       } else {
-        satisfy &= igraph_vector_e(&degree, v) == m_config.d();
+        satisfy &= igraph_vector_e(&degree, v) == m_config->d();
       }
     }
     igraph_vector_destroy(&degree);
@@ -51,7 +51,7 @@ namespace ccheck {
     igraph_shortest_paths(G, &path_length,
                           igraph_vss_1(u), igraph_vss_1(v), IGRAPH_ALL);
 
-    bool satisfy = igraph_matrix_e(&path_length, 0, 0) >= 2*m_config.Q();
+    bool satisfy = igraph_matrix_e(&path_length, 0, 0) >= 2*m_config->Q();
     igraph_matrix_destroy(&path_length);
     return satisfy;
   }
@@ -64,7 +64,7 @@ namespace ccheck {
                   IGRAPH_ALL, 1);
     bool is_regular = true;
     for(long int i = 0; i < igraph_vector_size(&degree); i++)
-      if(igraph_vector_e(&degree, i) != m_config.d())
+      if(igraph_vector_e(&degree, i) != m_config->d())
         is_regular = false;
     igraph_vector_destroy(&degree);
     return is_regular;
@@ -73,22 +73,18 @@ namespace ccheck {
   bool dfs_generator::
   diameter_constraint(igraph_t* G) {
     igraph_integer_t diam;
-    igraph_diameter(G, &diam, 0, 0, 0, 0, 1);
-    if(m_config.R() > 0)
-      return (unsigned int)diam == m_config.Q() + 1;
+    igraph_diameter(G, &diam, 0, 0, 0, 0, 0);
+    if(m_config->R() > 0)
+      return (unsigned int)diam == m_config->Q() + 1;
     else
-      return (unsigned int)diam == m_config.Q();
+      return (unsigned int)diam == m_config->Q();
   }
 
-  dfs_generator::dfs_generator() {
-
-  }
-
-  dfs_generator::dfs_generator(const graph_config& conf) {
+  dfs_generator::dfs_generator(graph_config* conf) {
     m_config = conf;
-    m_edges = m_config.leaf_edges();
+    m_edges = m_config->leaf_edges();
     m_vert_range.clear();
-    for(size_t vi = 0; vi < m_config.n(); vi++) {
+    for(size_t vi = 0; vi < m_config->n(); vi++) {
       std::pair<int, int> p(-1, -1);
       for(size_t ei = 0; ei < m_edges.size(); ei++) {
         if(m_edges[ei].first == vi || m_edges[ei].second == vi) {
@@ -110,7 +106,7 @@ namespace ccheck {
     for(std::size_t i = 0; i < m_stack.size(); i++)
       igraph_destroy(&m_stack[i].second);
     m_stack.clear();
-    m_stack.push_back(dfs_node_t(0, m_config.build_tree()));
+    m_stack.push_back(dfs_node_t(0, m_config->build_tree()));
   }
 
   igraph_t dfs_generator::next() {

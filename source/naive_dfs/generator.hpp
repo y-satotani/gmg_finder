@@ -15,7 +15,7 @@ namespace ccheck {
 
   class dfs_generator {
   private:
-    ccheck::graph_config m_config;
+    ccheck::graph_config* m_config;
     std::vector<dfs_node_t> m_stack;
     std::vector<edge_t> m_edges;
     std::vector<std::pair<int, int> > m_vert_range;
@@ -24,8 +24,7 @@ namespace ccheck {
     bool degree_constraint(igraph_t* G);
     bool diameter_constraint(igraph_t* G);
   public:
-    dfs_generator();
-    dfs_generator(const graph_config& conf);
+    dfs_generator(graph_config* conf);
     ~dfs_generator();
     void reset();
     igraph_t next();
