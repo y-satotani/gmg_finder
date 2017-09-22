@@ -1,6 +1,6 @@
 
 #include "generator.hpp"
-#include "common/graph_config.hpp"
+#include "common/graph_config_tconj.hpp"
 extern "C" {
 #include <argp.h>
 #include <igraph.h>
@@ -87,8 +87,8 @@ int main(int argc, char* argv[]) {
   struct arguments args = { 0, 0, "", 1 };
   argp_parse(&argp, argc, argv, 0, 0, &args);
 
-  graph_config gconf = graph_config(args.n, args.d);
-  dfs_generator generator(&gconf);
+  graph_config* gconf = new graph_config_tconj(args.n, args.d);
+  dfs_generator generator(gconf);
   igraph_t graph = generator.next();
   size_t count = 0;
   while(igraph_vcount(&graph) > 0 && count < args.max_graph) {

@@ -4,11 +4,6 @@
 
 namespace ccheck {
 
-  graph_config::graph_config() {
-    _n = 0;
-    _d = 0;
-  }
-
   graph_config::graph_config(unsigned int n, unsigned int d) {
     _n = n;
     _d = d;
@@ -108,7 +103,12 @@ namespace ccheck {
   }
 
   unsigned int n_vert_btree(unsigned int dep, unsigned int deg) {
-    return (unsigned int)(deg * (pow(deg-1, dep) - 1)) / (deg - 2) + 1;
+    if(dep == 0)
+      return 1;
+    else if(dep == 1)
+      return deg + 1;
+    else
+      return (unsigned int)(deg * (pow(deg-1, dep) - 1)) / (deg - 2) + 1;
   }
 
 }
