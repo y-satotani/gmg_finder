@@ -11,6 +11,7 @@ namespace ccheck {
   private:
   public:
     graph_config_tconj(std::size_t n, std::size_t d);
+    virtual ~graph_config_tconj() {}
     vertex_t parent_of(vertex_t v);
     std::vector<vertex_t> tree_vertices();
     std::vector<edge_t> tree_edges();
