@@ -94,7 +94,9 @@ int main(int argc, char* argv[]) {
   while(igraph_vcount(&graph) > 0 && count < args.max_graph) {
     if(args.output_file.length() > 0) {
       stringstream ss;
-      ss << args.output_file << "-" << count;
+      ss << args.output_file;
+      if(args.max_graph != 1)
+        ss << "-" << count;
       ofstream os(ss.str().c_str());
       print_edge_list(os, &graph);
       os.close();
