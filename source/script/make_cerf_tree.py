@@ -39,8 +39,9 @@ def make_cerf_tree_dfs(n, d, out):
         i, G, nid, exp = stack.pop()
         if i < len(r_edges):
             lval = '-'
-        elif R(n, d) == 0 and nx.diameter(G) == Q(n, d) or\
-             nx.diameter(G) == Q(n, d) + 1:
+        elif nx.is_connected(G) and\
+             (R(n, d) == 0 and nx.diameter(G) == Q(n, d) or\
+              nx.diameter(G) == Q(n, d) + 1):
             lval = '1'
         else:
             lval = '0'
