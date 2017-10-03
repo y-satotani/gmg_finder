@@ -1,0 +1,73 @@
+\documentclass[11pt]{jarticle}
+%
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{latexsym}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage[justification=centering]{caption}
+%
+\addtolength{\textwidth}{40mm}
+\addtolength{\oddsidemargin}{-20mm}
+\addtolength{\evensidemargin}{-20mm}
+\addtolength{\textheight}{15mm}
+\addtolength{\topmargin}{-10mm}
+%
+\pagestyle{empty}
+%
+\title{研究進捗報告}
+\author{里谷 佳紀}
+%\date{\today}
+\date{平成29年10月3日}
+%
+\begin{document}
+%
+\maketitle
+\thispagestyle{empty}
+%
+\section{研究全体の目標}
+与えられた頂点数と次数をもつ正則グラフのうち，Cerfらの平均頂点間距離の
+下界\cite{Cerf1974}と一致する平均頂点間距離をもつグラフが存在するかを
+判定する方法を開発する．また，既存の方法\cite{Yamamoto2016}と比較する
+ことにより，新方法の有用性を検証する．
+
+\section{前回打ち合わせ時に定めた短期目標}
+\begin{enumerate}
+\item $d=3$,$R=2$の正則グラフにおいて，あらかじめ$Q+1$層の頂点ひとつを
+  $Q$層の頂点2個と，$2Q$以下の長さの閉路を持たないように隣接させたグラフから
+  探索を開始するプログラムを実装し，前回実装したプログラムとの比較をおこなう．
+\end{enumerate}
+
+\section{本日までの進捗状況}
+\begin{enumerate}
+\item プログラムを実装し，比較を行った．$n=12$のときと，$n=24$のときは，
+  両プログラムとも，およそ10msで終了したため，時間での比較はできなかった．
+  $n=48$のときは，今回のプログラムはおよそ15時間で終了した．対して，
+  前回のプログラムは今回のミーティングまでに終了しなかった($>$170時間)． \\
+  ちなみに，プログラムの結果から，$n=48$のときに，
+  条件(長さ$2Q$以下の閉路が存在せず，直径が$Q+1$)を満たすグラフは
+  存在しないことが分かった． \\
+\end{enumerate}
+
+
+%\begin{figure}
+%  \centering
+%  \resizebox{75mm}{!}{\input{week3-tree1.pdf_tex}}
+%  \caption{tree1}
+%  \label{fig:tree-naive}
+%\end{figure}
+
+%\begin{figure}
+%  \centering
+%  \resizebox{75mm}{!}{\input{week3-tree2.pdf_tex}}
+%  \caption{tree2}
+%  \label{fig:tree-r2}
+%\end{figure}
+
+\bibliographystyle{junsrt}
+\bibliography{refs}
+
+\end{document}
