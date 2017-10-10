@@ -4,10 +4,8 @@
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{bm}
-\usepackage{latexsym}
 \usepackage{float}
-\usepackage{hyperref}
-\usepackage{color}
+\usepackage{subfig}
 \usepackage[justification=centering]{caption}
 %
 \addtolength{\textwidth}{40mm}
@@ -21,7 +19,7 @@
 \title{研究進捗報告}
 \author{里谷 佳紀}
 %\date{\today}
-\date{平成29年10月3日}
+\date{平成29年10月10日}
 %
 \begin{document}
 %
@@ -36,36 +34,50 @@
 
 \section{前回打ち合わせ時に定めた短期目標}
 \begin{enumerate}
-\item $d=3$,$R=2$の正則グラフにおいて，あらかじめ$Q+1$層の頂点ひとつを
-  $Q$層の頂点2個と，$2Q$以下の長さの閉路を持たないように隣接させたグラフから
-  探索を開始するプログラムを実装し，前回実装したプログラムとの比較をおこなう．
+\item 全域木予想の実験
+\item 先行研究の調査
 \end{enumerate}
 
 \section{本日までの進捗状況}
 \begin{enumerate}
-\item プログラムを実装し，比較を行った．$n=12$のときと，$n=24$のときは，
-  両プログラムとも，およそ10msで終了したため，時間での比較はできなかった．
-  $n=48$のときは，今回のプログラムはおよそ15時間で終了した．対して，
-  前回のプログラムは今回のミーティングまでに終了しなかった($>$170時間)． \\
-  ちなみに，プログラムの結果から，$n=48$のときに，
-  条件(長さ$2Q$以下の閉路が存在せず，直径が$Q+1$)を満たすグラフは
-  存在しないことが分かった． \\
+\item 計算中である．計算できた頂点数と次数の組について，時間を計測した．
+  結果を図\ref{fig:time}に示す．
+\item Cerfらは，平均頂点間距離の下界\cite{Cerf1974}と一致する
+  平均頂点間距離をもつグラフを，一般ムーアグラフ(Generalized Moore Graph)
+  と定義した\cite{cerf1973computer}．
+  後の成果から，ここで一般ムーアグラフに$2Q$以下の閉路が存在しないことと，
+  直径が$Q+1$($R=0$の場合は$Q$)であることが示されたと推測できる．
+
+  McKayとStantonは，次数が3で，頂点数が48と50の一般ムーアグラフが
+  存在しないことを証明した\cite{mckay1979current}．
+  Stantonらは，頂点数が44の一般ムーアグラフが存在しないことを証明した
+  \cite{Stanton1980}．
+  しかしながら，それらの方法は場合分けを細かくするもので，一般性は低い．
+
+  Sampelsは，ケイリーグラフ(Cayley Graph)から平均頂点間距離が短いグラフを
+  抜き出すことで，一般ムーアグラフを発見するアルゴリズムを開発した
+  \cite{Sampels2004}．
 \end{enumerate}
 
+\begin{figure}[H]
+  \centering
 
-%\begin{figure}
-%  \centering
-%  \resizebox{75mm}{!}{\input{week3-tree1.pdf_tex}}
-%  \caption{tree1}
-%  \label{fig:tree-naive}
-%\end{figure}
+  \subfloat[$d=3$]{
+    \includegraphics[width=.3\linewidth]{d3.png}
+  }\hfill
+  \subfloat[$d=4$]{
+    \includegraphics[width=.3\linewidth]{d4.png}
+  }\hfill
+  \subfloat[$d=5$]{
+    \includegraphics[width=.3\linewidth]{d5.png}
+  }
 
-%\begin{figure}
-%  \centering
-%  \resizebox{75mm}{!}{\input{week3-tree2.pdf_tex}}
-%  \caption{tree2}
-%  \label{fig:tree-r2}
-%\end{figure}
+  \caption{プログラムの実行時間の比較 \\
+    横軸は頂点数を，縦軸は実行時間を表す．青い線は全域木から探索する方法を，
+    赤い線は何も工夫しない方法を表す．
+  }
+  \label{fig:time}
+\end{figure}
 
 \bibliographystyle{junsrt}
 \bibliography{refs}
