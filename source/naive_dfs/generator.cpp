@@ -6,7 +6,7 @@ using namespace ccheck;
 namespace ccheck {
 
   bool dfs_generator::
-  degree_constraint(std::size_t ei, igraph_t* G, bool add) {
+  is_valid_change_degree(std::size_t ei, igraph_t* G, bool add) {
     std::vector<vertex_t> v_exit_frontier;
     for(std::size_t i = 0; i < m_vert_range.size(); i++)
       if(m_vert_range[i].second == (int)ei)
@@ -41,7 +41,7 @@ namespace ccheck {
   }
 
   bool dfs_generator::
-  cycle_constraint(std::size_t ei, igraph_t* G, bool add) {
+  is_valid_change_cycle(std::size_t ei, igraph_t* G, bool add) {
     if(!add) return true;
 
     igraph_integer_t u = (igraph_integer_t)m_edges[ei].first;
@@ -56,8 +56,7 @@ namespace ccheck {
     return satisfy;
   }
 
-  bool dfs_generator::
-  degree_constraint(igraph_t* G) {
+  bool dfs_generator::is_valid_graph_degree(igraph_t* G) {
     igraph_vector_t degree;
     igraph_vector_init(&degree, 0);
     igraph_degree(G, &degree, igraph_vss_all(),
@@ -70,14 +69,24 @@ namespace ccheck {
     return is_regular;
   }
 
-  bool dfs_generator::
-  diameter_constraint(igraph_t* G) {
+  bool dfs_generator::is_valid_graph_diameter(igraph_t* G) {
     igraph_integer_t diam;
     igraph_diameter(G, &diam, 0, 0, 0, 0, 0);
     if(m_config->R() > 0)
       return (unsigned int)diam == m_config->Q() + 1;
     else
       return (unsigned int)diam == m_config->Q();
+  }
+
+  bool dfs_generator::
+  is_valid_change(std::size_t ei, igraph_t* G, bool add) {
+    return is_valid_change_degree(ei, G, add) &&
+      is_valid_change_cycle(ei, G, add);
+  }
+
+  bool dfs_generator::is_valid_graph(igraph_t* G) {
+    return is_valid_graph_degree(G) &&
+      is_valid_graph_diameter(G);
   }
 
   dfs_generator::dfs_generator(graph_config* conf) {
@@ -107,10 +116,12 @@ namespace ccheck {
       igraph_destroy(&m_stack[i].second);
     m_stack.clear();
     m_stack.push_back(dfs_node_t(0, m_config->build_tree()));
+    m_extracted_nodes = 0;
   }
 
   igraph_t dfs_generator::next() {
     while(m_stack.size() > 0) {
+      ++m_extracted_nodes;
       dfs_node_t node = m_stack.back();
       std::size_t ei = node.first;
       igraph_integer_t u = (igraph_integer_t)m_edges[ei].first;
@@ -119,7 +130,7 @@ namespace ccheck {
       m_stack.pop_back();
 
       if(ei == m_edges.size()) {
-        if(degree_constraint(&G) && diameter_constraint(&G)) {
+        if(is_valid_graph(&G)) {
           return G;
         } else {
           igraph_destroy(&G);
@@ -127,15 +138,13 @@ namespace ccheck {
         }
       }
 
-      if(degree_constraint(ei, &G, false) &&
-         cycle_constraint(ei, &G, false)) {
+      if(is_valid_change(ei, &G, false)) {
         igraph_t H;
         igraph_copy(&H, &G);
         m_stack.push_back(dfs_node_t(ei+1, H));
       }
 
-      if(degree_constraint(ei, &G, true) &&
-         cycle_constraint(ei, &G, true)) {
+      if(is_valid_change(ei, &G, true)) {
         igraph_t H;
         igraph_copy(&H, &G);
         igraph_add_edge(&H, u, v);
@@ -148,6 +157,10 @@ namespace ccheck {
     igraph_t dummy;
     igraph_empty(&dummy, 0, IGRAPH_UNDIRECTED);
     return dummy;
+  }
+
+  unsigned long long dfs_generator::extracted_nodes() {
+    return m_extracted_nodes;
   }
 
 }
