@@ -21,7 +21,7 @@ namespace ccheck {
       igraph_integer_t u = e.first;
       igraph_integer_t v = e.second;
       // degree must not exceed d
-      satisfy &= igraph_vector_e(&degree, u) < config->d() ||
+      satisfy &= igraph_vector_e(&degree, u) < config->d() &&
         igraph_vector_e(&degree, v) < config->d();
     }
     // all of vertices exit from frontier, must have degree d
