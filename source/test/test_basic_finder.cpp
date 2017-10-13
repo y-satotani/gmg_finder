@@ -52,7 +52,12 @@ int main(int argc, char* argv[]) {
        << "lower sspl: " << config->sspl_lb() << endl
        << "elapsed time   : " << cpu_time << endl
        << "extracted nodes: " << finder->extracted_nodes() << endl;
+
   igraph_destroy(&graph);
+  delete finder;
+  delete manager;
+  delete builder;
+  delete config;
 
   return 0;
 }

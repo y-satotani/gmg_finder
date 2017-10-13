@@ -1,6 +1,6 @@
 
-#ifndef _CCHECK_DFS_BASIC_FINDER_HPP_
-#define _CCHECK_DFS_BASIC_FINDER_HPP_
+#ifndef _CCHECK_BASIC_STATE_MANAGER_HPP_
+#define _CCHECK_BASIC_STATE_MANAGER_HPP_
 
 extern "C" {
 #include <igraph.h>
@@ -43,4 +43,4 @@ namespace ccheck {
 
 }
 
-#endif // _CCHECK_NAIVE_DFS_GENERATOR_HPP_
+#endif // _CCHECK_BASIC_STATE_MANAGER_HPP_

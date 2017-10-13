@@ -1,6 +1,5 @@
 
 #include "common/basic_state_manager.hpp"
-#include <iostream>
 
 using namespace ccheck;
 
