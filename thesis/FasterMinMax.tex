@@ -96,7 +96,7 @@ $\sigma'(s'_i,t'_i)=(1\times (d'(s'_i,t'_i)-1))/(d'(s'_i,t'_i)-1)=1$
     \State $d'(s,t)\gets\infty,\,\sigma'(s,t)\gets0,\,P\gets P\cup\{(s,t)\}$
     \EndIf
     \EndFor
-    \ForAll{$(s,t)\in P$}\Comment{}
+    \ForAll{$(s,t)\in P$}\Comment{距離を更新}
     \State $d_{\min}\gets\infty$
     \ForAll{$v\in V$}
     \If{\Call{Free From Delete}{$s,v,\alpha,\beta$}かつ
@@ -109,7 +109,7 @@ $\sigma'(s'_i,t'_i)=(1\times (d'(s'_i,t'_i)-1))/(d'(s'_i,t'_i)-1)=1$
     \State $d'(s,t)\gets d_{\min}$
     \EndFor
     \State $P$を$d'(s,t)$の昇順にソートし，$P'=\{(s'_i,t'_i)\}$を得る
-    \ForAll{$i=\{1,\ldots|P'|\}$}
+    \ForAll{$i=\{1,\ldots|P'|\}$}\Comment{最短経路数を更新}
     \State $\sigma_{\mathrm{sum}}\gets0$
     \ForAll{$v\in V$}
     \If{$d'(s'_i,t'_i)=d'(s'_i,v)+d'(v,t'_i)$}
