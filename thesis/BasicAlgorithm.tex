@@ -1,0 +1,45 @@
+
+\chapter{基本アルゴリズム}
+\label{chap:basic-algorithm}
+\ref{sect:generalized-moore-graph}節で示した一般ムーアグラフの性質を利用して，
+与えられた頂点数と次数の一般ムーアグラフを探索する基本的なアルゴリズムを
+深さ優先探索をベースに開発する．後の章で探索空間を縮小する手法の比較対象となる．
+本章では，一般的な深さ優先探索の説明をしたあと，これを一般ムーアグラフの探索に
+適応する方法を示す．最後にアルゴリズムを示し，結果を与える．
+
+\section{深さ優先探索}
+\label{sect:depth-first-search}
+深さ優先探索について説明する．理解している読者は\ref{sect:apply-to-gmg}
+まで読み飛ばして差し支えない．
+
+\section{一般ムーアグラフへの適応}
+\label{sect:apply-to-gmg}
+
+\subsection{初期グラフ}
+\label{subsect:initial-graph}
+探索の初期状態のグラフを与える．
+
+\subsection{状態遷移}
+\label{subsect:state-shifting}
+定理\ref{theorem:gmg-geometric-property}を満たさないグラフを判定するため，
+次の条件のどちらかを満足しない場合は，次の状態を作成しない．
+\begin{enumerate}
+\item フロンティアから出る頂点$v$に対して，$deg(v)\neq d$
+\item 接続しようとしている辺$e=\{u,v\}$に対して，$dist(u,v)\leq 2Q$
+\end{enumerate}
+
+\subsection{アルゴリズム}
+\label{subsect:basic-algorithm}
+最後に，本節で説明したアルゴリズムをアルゴリズム
+\ref{algo:basic-algorithm}に示す．
+\begin{algorithm}
+  \caption{基本アルゴリズム}
+  \label{algo:basic-algorithm}
+  \begin{algorithmic}
+    \State{$a^2+b^2=c^2$}
+  \end{algorithmic}
+\end{algorithm}
+
+\section{結果}
+\label{sect:basic-result}
+TBA

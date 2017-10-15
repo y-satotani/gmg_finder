@@ -1,0 +1,124 @@
+
+\chapter{経路長と直径の高速な計算法}
+\label{chap:faster-min-max}
+第\ref{chap:basic-algorithm}章において，グラフが枝刈りの対象となるかを
+判定するには，追加する辺の頂点の経路長と直径の下界を求める必要があることを述べた．
+本章では，これらの値を高速に計算するため，辺の追加と削除に対して，経路長と
+直径を更新するアルゴリズムを与える．
+探索空間の削減にはつながらないが，計算量が削減され，実行時間の短縮が期待できる．
+また，この方法は辺の追加と削除に対する媒介中心性の高速な計算法への応用が期待できる．
+
+\section{辺の追加に対する経路長の更新}
+\label{sect:update-path-length}
+TODO
+
+\section{辺の削除に対する直径の下界の更新}
+\label{sect:update-lower-bound-of-diameter}
+\ref{sect:update-path-length}節と同じく，グラフ$G=(V,E),V=\{1,\ldots n\}$
+のすべての頂点の組$(s,t)$の距離$d(s,t)$と距離が$d(s,t)$となる最短経路の数
+$\sigma(s,t)$が計算済みであるとする．$G$から辺$e=\{\alpha,\beta\}\in E(G)$
+を削除した後の頂点間距離$d'(s,t)$と経路数$\sigma'(s,t)$を求める．
+一般性を失うことなく，$s<t,\,d(s,\alpha)\leq d(s,\beta)$とできる．
+
+まず，辺の削除に影響される頂点の組$(s,t)$を考える．そのような頂点の組は，
+最短経路に辺$e$が含まれている．すなわち，$d(s,t) = d(s,\alpha)+d(\beta,t)+1$
+が成り立つことである．そのような$(s,t)$に対して，辺$e$を含まない最短経路の数は，
+$\overline{\sigma(s,t)}=\sigma(s,t)-\sigma(s,\alpha)\sigma(\beta,t)$で
+与えられる．$\overline{\sigma(s,t)}=0$ならば，$s$と$t$の最短経路はすべて
+$e$を含むので，距離を更新する必要がある．そのような$(s,t)$の列を
+$P=\{(s_i,t_i)\}$で表す．
+逆に，$\overline{\sigma(s,t)}>0$ならば，$s$と$t$の最短経路に$e$を含まない
+ものが存在し，距離の更新は行われず，最短経路の数が
+$\sigma(s,\alpha)\sigma(\beta,t)$だけ減少する．つまり，
+$d(s,t)<d(s,\alpha)+d(\beta,t)+1$または$\overline{\sigma(s,t)}>0$となる
+$(s,t)$に対して，
+\begin{align*}
+  d'(s,t) &\gets d(s,t) \\
+  \sigma'(s,t) &\gets
+  \begin{cases}
+    \sigma(s,t) & d(s,t) < d(s,\alpha) + d(\beta,t) + 1 \\
+    \overline{\sigma(s,t)} & d(s,t) = d(s,\alpha) + d(\beta,t) + 1
+  \end{cases}
+\end{align*}
+が成り立つ．
+
+次に，距離の更新が行われる組について議論する．先述のとおり，そのような
+頂点の組は，$d(s,t)=d(s,\alpha)+d(\beta,t)+1$かつ$\overline{\sigma(s,t)}=0$
+となる$(s,t)$である．まず，距離$d'(s,t)$から求める．すべての頂点$v$について，
+$d(s,v)+d(v,t)$の最小値を求める．ただし，$s$と$v$の最短経路もしくは$v$と$t$の
+最短経路に$e$が含まれないものを選ぶ．経路が$e$を含むかどうかの判定は先述のとおり．
+よって，更新後の距離$d'(s,t)$は，
+\begin{align*}
+  d'(s,t) = \min_{v\in V}(d(s,v)+d(v,t)\:|\:
+  &(d(s,v)<d(s,\alpha)+d(\beta,v)+1\,または\,\overline{\sigma(s,v)}>0),\\
+  &(d(v,t)<d(v,\alpha)+d(\beta,t)+1\,または\,\overline{\sigma(v,t)}>0))
+\end{align*}
+で与えられる．
+次に，$P$を$d'(s,t)$の昇順に並べ替え，$P'=\{(s'_i,t'_i)\}$を得る．この操作は
+不可欠であるが，まだはっきりした証明は与えられていない
+($d'(s,t)>d'(u,v)$のとき，$\sigma'(s,t)$の計算で$\sigma'(u,v)$を
+使うと思っているので，$(s,t)$から先に計算すると正しい結果が得られない
+ことは経験的に分かる)．
+最後に，並べ替えた$P'=\{(s'_i,t'_i)\}$に対して順番に以下の式で
+$\sigma'(s'_i,t'_i)$を求める．
+\[ \sigma'(s'_i,t'_i)=\left(\sum_{v\in V,d'(s'_i,t'_i)=d'(s'_i,v)+d'(v,t'_i)}
+\sigma'(s'_i,v)\sigma'(v,t'_i)\right) / (d'(s'_i,t'_i)-1) \]
+やはり，なぜ$d'(s'_i,t'_i)-1$で割るのか，まだはっきりした証明は考えていない．
+しかし，簡単な一本道($\sigma'=1$)の場合なら考えやすい．総和の対象となる
+中間頂点$v$はパス上に$d'(s'_i,t'_i)-1$個存在し，それぞれ，
+$\sigma'(s'_i,v)\sigma'(v,t'_i)=1$である．よって，
+$\sigma'(s'_i,t'_i)=(1\times (d'(s'_i,t'_i)-1))/(d'(s'_i,t'_i)-1)=1$
+となる．
+
+最後に，アルゴリズムを\ref{algo:update-distance-on-remove}に示す．
+\begin{algorithm}
+  \caption{辺$\{\alpha,\beta\}$が削除されたときの$d'(s,t)$と$\sigma'(s,t)$の
+  計算}\label{algo:update-distance-on-remove}
+  \begin{algorithmic}[1]
+    \Require $G=(V,E),\,d(s,t),\,\sigma(s,t)$
+    \Ensure $d'(s,t),\,\sigma'(s,t)$
+    \Procedure{Free From Delete}{$s,t,\alpha,\beta$}
+    \State $\{\alpha,\beta\}$のうち，$s$に近い方を$\alpha$，
+    それ以外を$\beta$とする．
+    \State \textbf{return} $d(s,t)<d(s,\alpha)+d(\beta,t)$もしくは
+    $\sigma(s,t)>\sigma(s,\alpha)\sigma(\beta,t)$
+    \EndProcedure
+    \Procedure{Update Distance on Remove}{$\alpha,\beta$}
+    \State $P\gets\varnothing$
+    \ForAll{$(s,t)\in V\times V$}
+    \Comment{更新の対象となる頂点組$(s,t)$を求める}
+    \If{$d(s,t)<d(s,\alpha)+d(\beta,t)+1$}
+    \State $d'(s,t)\gets d(s,t),\,\sigma'(s,t)\gets\sigma(s,t)$
+    \ElsIf{$\sigma(s,t)>\sigma(s,\alpha)\sigma(\beta,t)$}
+    \State $d'(s,t)\gets d(s,t),\,\sigma'(s,t)\gets\sigma(s,t)
+    -\sigma(s,\alpha)\sigma(\beta,t)$
+    \Else\Comment{距離更新が必要}
+    \State $d'(s,t)\gets\infty,\,\sigma'(s,t)\gets0,\,P\gets P\cup\{(s,t)\}$
+    \EndIf
+    \EndFor
+    \ForAll{$(s,t)\in P$}\Comment{}
+    \State $d_{\min}\gets\infty$
+    \ForAll{$v\in V$}
+    \If{\Call{Free From Delete}{$s,v,\alpha,\beta$}かつ
+      \Call{Free From Delete}{$v,t,\alpha,\beta$}}
+    \If{$d(s,v)+d(v,t)<d_{\min}$}
+    \State $d_{\min}\gets d(s,v)+d(v,t)$
+    \EndIf
+    \EndIf
+    \EndFor
+    \State $d'(s,t)\gets d_{\min}$
+    \EndFor
+    \State $P$を$d'(s,t)$の昇順にソートし，$P'=\{(s'_i,t'_i)\}$を得る
+    \ForAll{$i=\{1,\ldots|P'|\}$}
+    \State $\sigma_{\mathrm{sum}}\gets0$
+    \ForAll{$v\in V$}
+    \If{$d'(s'_i,t'_i)=d'(s'_i,v)+d'(v,t'_i)$}
+    \State $\sigma_{\mathrm{sum}}\gets
+    \sigma_{\mathrm{sum}}+\sigma'(s'_i,v)\sigma'(v,t'_i)$
+    \EndIf
+    \EndFor
+    \State $\sigma'(s_i,t_i)\gets\sigma_{\mathrm{sum}}/(d'(s_i,t_i)-1)$
+    \EndFor
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
