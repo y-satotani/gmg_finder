@@ -1,0 +1,79 @@
+\documentclass[11pt]{jarticle}
+%
+\usepackage[dvipdfmx]{graphicx}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{latexsym}
+\usepackage{float}
+\usepackage{subfig}
+\usepackage[justification=centering]{caption}
+%
+\addtolength{\textwidth}{40mm}
+\addtolength{\oddsidemargin}{-20mm}
+\addtolength{\evensidemargin}{-20mm}
+\addtolength{\textheight}{15mm}
+\addtolength{\topmargin}{-10mm}
+%
+\pagestyle{empty}
+%
+\title{研究進捗報告}
+\author{里谷 佳紀}
+%\date{\today}
+\date{平成29年10月17日}
+%
+\begin{document}
+%
+\maketitle
+\thispagestyle{empty}
+%
+\section{研究全体の目標}
+深さ優先探索をベースにした，一般ムーアグラフを発見するアルゴリズムを開発する．
+さらに，初期グラフの改良や枝刈りを導入する，更なる改良案を提案する．
+同時に，これらの改良を評価する．
+\section{前回打ち合わせ時に定めた短期目標}
+\begin{enumerate}
+\item 展開ノード数の計数による評価プログラムの機能向上
+\item 直径の下界を計算し，枝刈りを行うアルゴリズムの実装
+\item 辺を削除することによる，頂点間距離の更新の方法の開発
+\item 定理およびアルゴリズムの文書化
+  \begin{enumerate}
+  \item $2Q$以下の閉路が存在しないことの定理
+  \item 基本アルゴリズム
+  \item 辺を削除することによる，頂点間距離の更新の方法
+  \end{enumerate}
+\end{enumerate}
+\section{本日までの進捗状況}
+\begin{enumerate}
+\item 展開ノード数の計数プログラムが完成した．それに伴い，再実験を実施した．
+  結果を図\ref{fig:result}に示す．
+\item 実装を完了し，実験を行った．結果は図\ref{fig:result}に示してある．
+\item アルゴリズムを開発し，簡単なテストを行った．
+  頂点数70の完全グラフから辺を逐次削除し，提案アルゴリズムの結果と真値とを
+  比較し，間違いがないことを確認した．プログラムは別紙参照．
+\item 完成したものがある．
+  \begin{enumerate}
+  \item 未着手
+  \item 部分的に書いた．
+  \item 大部分が仕上がった．別紙参照．
+  \end{enumerate}
+\end{enumerate}
+
+\begin{figure}[H]
+  \centering
+  \subfloat[展開ノード数]{
+    \includegraphics[width=.45\linewidth]{../../source/experiment/exp_cmp_algo_result_node.pdf}
+  }\hfill
+  \subfloat[平均実行時間(秒)]{
+    \includegraphics[width=.45\linewidth]{../../source/experiment/exp_cmp_algo_result_time.pdf}
+  }
+  \caption{アルゴリズムの性能の比較 \\
+    basicは基本アルゴリズムを，
+    cycleは$2Q+2$の長さの閉路を追加したグラフを初期グラフとする方法を，
+    minmaxは直径の下界を計算し$Q+1$より大きければ枝刈りする方法を，
+    streeは全域木を初期グラフとする方法を表す．
+  }
+  \label{fig:result}
+\end{figure}
+
+\end{document}

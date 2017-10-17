@@ -9,34 +9,166 @@
 
 \section{深さ優先探索}
 \label{sect:depth-first-search}
-深さ優先探索について説明する．理解している読者は\ref{sect:apply-to-gmg}
+深さ優先探索について説明する．理解している読者は\ref{sect:apply-to-gmg}節
 まで読み飛ばして差し支えない．
 
 \section{一般ムーアグラフへの適応}
 \label{sect:apply-to-gmg}
+本節では，\ref{sect:depth-first-search}で説明した深さ優先探索を用いて，
+一般ムーアグラフを発見する方法を述べる．
 
-\subsection{初期グラフ}
+\subsection{初期グラフと辺の候補}
 \label{subsect:initial-graph}
-探索の初期状態のグラフを与える．
+探索の初期状態のグラフを与える．以下，頂点集合を$V=\{1,\ldots,n\}$とする．
+根からの距離が$i$である頂点の集合を，第$i$層と定義する．(準備でいいかも)
+頂点$1$を根とし，葉を除く頂点の次数が$k$である木を構築する．
+(これも定義でいいかも)
 
-\subsection{状態遷移}
-\label{subsect:state-shifting}
-定理\ref{theorem:gmg-geometric-property}を満たさないグラフを判定するため，
-次の条件のどちらかを満足しない場合は，次の状態を作成しない．
+いくつかの関数を与える．$\mathrm{TreeDepth}(v)$は，次数$k$の平衡木に
+おいて，頂点$v$がどの層に位置するのかを求める．その中身は，次式である．
+\[ \mathrm{TreeDepth}(v) = \begin{cases}
+  0 & v = 1 \\
+  \log_{k-1}{(\frac{(v-1)(k-2)}{k}+1)} + 1 & v > 1
+\end{cases} \]
+$\mathrm{NVertBTree}(l)$は，深さ$l$，次数$k$の
+平衡木の頂点数を計算する．その中身は，次式で与えられる．
+\[ \mathrm{NVertBTree}(l) = \begin{cases}
+  1 & l = 0 \\
+  k + 1 & l = 1 \\
+  \frac{k(k-1)^l-1}{k-2} + 1 & l > 1
+\end{cases} \]
+$\mathrm{Parent}$関数は，次数$k$の平衡木において，頂点$v$の親の頂点番号を
+求める．次式で与えられる．
+\begin{align*}
+  \mathrm{Parent}(v)=&\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-2) +\\
+  &\frac{v-\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-1)}{k-1}
+\end{align*}
+
+必要な関数が定義できたので，次の操作で初期グラフ$T$を構築する．
+$v=\{2,\ldots,\mathrm{NVertBTree}(Q)\}$に対して，$\mathrm{Parent}(v)$と
+$v$を隣接させる．こうすることで，頂点数$n-R$，次数$k$の平衡木を構築できる．
+このとき，残りの$R$個の頂点は孤立点であることに注意する．
+
+初期グラフ$T$を構築した後，$T$上での次数が$k$未満の頂点同士を
+接続させる辺の列を考える．そのような辺の列は次で与えられる．
+\[ \bar{E} = \bar{e}_i = \{(v_i,w_i)\,|
+\,d_T(v_i)<k,d_T(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\} \]
+探索では，$\bar{e}_1,\ldots,\bar{e}_m$と順番に辺を取り出し，
+グラフに追加する/しないを判定して新たなグラフを作ることを繰り返す．
+こうすることで一般ムーアグラフを構築する．
+
+\begin{example}
+  頂点数12,次数3の初期グラフ$T$を考える．
+  図\ref{fig:balanced-tree-12}に頂点数12,次数3の平衡木を示す．
+\end{example}
+
+\subsection{可能な辺の追加/無追加}
+\label{subsect:feasible-edge-(no)-addition}
+グラフ$G$と辺$\bar{e}_i$が与えられたとき，辺$\bar{e}_i$を追加した後のグラフ，
+追加しない後のグラフが定理\ref{theorem:gmg-geometric-property}を満たすか
+判定する方法を与える．
+まず，準備として，頂点$v$に対して，それと接する辺$\bar{e}_i$の$i$の
+最小値$\mathrm{Enter(v)}$と最大値$\mathrm{Exit}(v)$を考える．
+$\mathrm{Enter}(v)$は探索中，初めて$v$と接する辺の番号を，
+$\mathrm{Exit}(v)$は探索中に最後に$v$と接する辺の番号をそれぞれ表す．
+$\mathrm{Enter}(v)$と$\mathrm{Exit}(v)$の具体的な式は，次で与えられる．
+\begin{align*}
+  \mathrm{enter}(v) &= \min(i\,|\,\{v,w\}=\bar{e}_i) \\
+  \mathrm{exit}(v) &= \max(i\,|\,\{v,w\}=\bar{e}_i)
+\end{align*}
+
+以上を踏まえて，辺$\bar{e}_i$を追加した後のグラフ，しない後のグラフが
+定理\ref{theorem:gmg-geometric-property}を満たすか判定する条件を述べる．
+辺を$\bar{e}_i=\{v,w\}$，追加前のグラフを$G$，
+追加した(しない)後のグラフを$H$とする．
 \begin{enumerate}
-\item フロンティアから出る頂点$v$に対して，$deg(v)\neq d$
-\item 接続しようとしている辺$e=\{u,v\}$に対して，$dist(u,v)\leq 2Q$
+\item 次数条件
+  \label{item:degree-constraint}
+  \begin{enumerate}
+  \item $d_H(v)\leq k$かつ$d_H(w)\leq k$
+  \item $\mathrm{Exit}(x)=i$なる$x\in\bar{e}_i$について，$d_H(x)=k$
+  \end{enumerate}
+\item 閉路条件
+  \label{item:cycle-constraint}
+  \begin{enumerate}
+  \item 追加するならば，$d_G(v,w)\geq2Q$\\
+    この条件を満たすとき，$\bar{e}_i$によってできる閉路の最小の長さは$2Q+1$
+    となり，定理\ref{theorem:gmg-geometric-property}を満たす．
+  \end{enumerate}
 \end{enumerate}
+以上の条件をすべて満たしたときのみ，次の辺$\bar{e}_{i+1}$に対して同じ判定が
+行われる．これを繰り返して，最後の辺$\bar{e}_{|\bar{E}|}$を追加するとき，
+次の条件も加える．
+\begin{enumerate}\setcounter{enumi}{2}
+\item 直径条件
+  \label{item:diameter-constraint}
+  \begin{enumerate}
+  \item $H$の直径は，$R>0$のとき$Q+1$，$R=0$のとき$Q$
+  \end{enumerate}
+\end{enumerate}
+
+\begin{example}
+  再び頂点数12,次数3の場合について考える．
+\end{example}
+
+最後の辺に対する条件がすべて真のとき，アルゴリズムは一般ムーアグラフを出力する．
+判定するグラフがなくなったとき，アルゴリズムは一般ムーアグラフが存在しない
+ことを出力する．
 
 \subsection{アルゴリズム}
 \label{subsect:basic-algorithm}
-最後に，本節で説明したアルゴリズムをアルゴリズム
-\ref{algo:basic-algorithm}に示す．
+最後に，本節で説明したアルゴリズムをアルゴリズム\ref{algo:basic-algorithm}
+に示す．
 \begin{algorithm}
   \caption{基本アルゴリズム}
   \label{algo:basic-algorithm}
-  \begin{algorithmic}
-    \State{$a^2+b^2=c^2$}
+  \begin{algorithmic}[1]
+    \Require $n,k$
+    \Ensure $M(n,k)$($\varnothing$if not found)
+    \Procedure{Find generalized Moore Graph}{}
+    \State $T\gets$\ref{subsect:initial-graph}で示した初期グラフ
+    \State $\bar{E}\gets$\ref{subsect:initial-graph}で示した辺の候補
+    \ForAll{$\mathrm{addflag}\in\{\top,\bot\}$}
+    \State $I=$\Call{Search Part}{$T,1,\mathrm{addflag}$}
+    \If{$I\neq\varnothing$}
+    \State $\mathrm{return}\:I$
+    \EndIf
+    \EndFor
+    \State $\mathrm{return}\:\varnothing$
+    \EndProcedure
+    \Procedure{Search Part}{$G,i,\mathrm{addflag}$}
+    \If{$\mathrm{addflag}$}
+    \State $H\gets G\cup\bar{e}_i$
+    \Else
+    \State $H\gets G$
+    \EndIf
+    \State $\mathrm{satisfy}\gets\bot$
+    \If{$i<|\bar{E}|$かつ
+      \ref{subsect:feasible-edge-(no)-addition}で示した
+      条件\ref{item:degree-constraint},
+      \ref{item:cycle-constraint}をすべて満たす
+    }
+    \State $\mathrm{satisfy}\gets\top$
+    \EndIf
+    \If{$i=|\bar{E}|$かつ
+      \ref{subsect:feasible-edge-(no)-addition}で示した
+      条件\ref{item:degree-constraint},
+      \ref{item:cycle-constraint},
+      \ref{item:diameter-constraint}をすべて満たす
+    }
+    \State $\mathrm{satisfy}\gets\top$
+    \EndIf
+    \If{$\mathrm{satisfy}$}
+    \ForAll{$\mathrm{nextaddflag}\in\{\top,\bot\}$}
+    \State $I=$\Call{Search Part}{$H,i+1,\mathrm{nextaddflag}$}
+    \If{$I\neq\varnothing$}
+    \State $\mathrm{return}\:I$
+    \EndIf
+    \EndFor
+    \Else
+    \State $\mathrm{return}\:\varnothing$
+    \EndIf
+    \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 
