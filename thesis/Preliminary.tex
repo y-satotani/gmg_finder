@@ -2,8 +2,8 @@
 \chapter{準備}
 \label{chap:preliminary}
 本章では，後の章に向けての準備をする．はじめに，グラフ理論の基本事項を説明する．
-・・・などを含む．次に，Cerfらが提唱した一般ムーアグラフの定義を与え，
-いくつかの性質を証明する．これらの性質は，一般ムーアグラフを探索する方法に
+・・・などを含む．次に，Cerfらが提唱した一般化ムーアグラフの定義を与え，
+いくつかの性質を証明する．これらの性質は，一般化ムーアグラフを探索する方法に
 用いるもので，極めて重要である．
 
 \section{グラフ理論の基本事項}
@@ -12,15 +12,15 @@
 グラフ理論の基礎を理解している読者は\ref{sect:generalized-moore-graph}節まで
 読み飛ばしても差し支えない．
 
-\section{一般ムーアグラフ}
+\section{一般化ムーアグラフ}
 \label{sect:generalized-moore-graph}
-本節では一般ムーアグラフを定義する．
+本節では一般化ムーアグラフを定義する．
 さらに，これが満たすいくつかの性質を示す．
 
 \begin{definition}[Cerf et.al., 1973\,\cite{cerf1973computer}]
   \label{def:generalized-moore-graph}
   次の性質が成り立つ頂点数$n$,次数$k$の正則グラフを
-  \textbf{一般ムーアグラフ}(\textbf{Generalized Moore graph})とよぶ．
+  \textbf{一般化ムーアグラフ}(\textbf{Generalized Moore graph})とよぶ．
 
   すべての頂点$v$について，$v$から$i$離れた頂点の数
   $c_i = \lvert\{ w\,|\,d(v,w) = i , w\in V \}\rvert$について，
@@ -37,13 +37,13 @@
   とする．
 \end{definition}
 \begin{example}
-  頂点数12,次数3の一般ムーアグラフを考える．
+  頂点数12,次数3の一般化ムーアグラフを考える．
 \end{example}
-以下，$M(n,k)$を，頂点数$n$,次数$k$の一般ムーアグラフと記し，
+以下，$M(n,k)$を，頂点数$n$,次数$k$の一般化ムーアグラフと記し，
 $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとおりとする．
 頂点数と次数が文脈から明らかな場合は省略してそれぞれ$M,Q,R$と表す．
 
-一般ムーアグラフの頂点間距離の総和を求め，これが正則グラフの頂点間距離の総和の
+一般化ムーアグラフの頂点間距離の総和を求め，これが正則グラフの頂点間距離の総和の
 下界であることを示す．
 \begin{theorem}[Cerf et.al., 1974\,\cite{Cerf1974}]
   \label{theorem:gmg-lower-bound}
@@ -56,11 +56,11 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   眠いまた今度
 \end{proof}
 
-次の性質は，一般ムーアグラフに存在しうる閉路の長さを定める．
+次の性質は，一般化ムーアグラフに存在しうる閉路の長さを定める．
 後に説明する探索方法に用いる極めて重要な性質である．
 \begin{theorem}
   \label{theorem:gmg-geometric-property}
-  一般ムーアグラフに長さ$2Q$以下の閉路は存在しない．
+  一般化ムーアグラフに長さ$2Q$以下の閉路は存在しない．
 
 \end{theorem}
 \begin{proof}
