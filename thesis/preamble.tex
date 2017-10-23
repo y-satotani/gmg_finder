@@ -2,6 +2,9 @@
 \renewcommand{\thesubsection}{(\alph{subsection})}
 
 \graphicspath{{figure/}}
+\makeatletter
+\def\input@path{{figure/}}
+\makeatother
 
 % adding new symbol (vrectangle and vrectangleblack)
 \DeclareFontEncoding{LS1}{}{}
@@ -38,8 +41,11 @@
   style=mythmstyle,sibling=definition,qed=$\vrectangle$,title=定理,
 ]{theorem-without-proof}
 \declaretheorem[
-  style=mythmstyle,sibling=definition,qed=$\vrectangle$,title=系,
+  style=mythmstyle,sibling=definition,title=系,
 ]{collary}
+\declaretheorem[
+  style=mythmstyle,sibling=definition,qed=$\vrectangle$,title=系,
+]{collary-without-proof}
 \declaretheorem[
   style=mythmstyle,sibling=definition,qed=$\vrectangle$,title=予想,
 ]{conjecture}

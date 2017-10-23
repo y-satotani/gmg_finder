@@ -42,8 +42,8 @@ $(s,t)$に対して，
 \end{align*}
 が成り立つ．
 
-次に，距離の更新が行われる組について議論する．先述のとおり，そのような
-頂点の組は，$d(s,t)=d(s,\alpha)+d(\beta,t)+1$かつ$\overline{\sigma(s,t)}=0$
+先述のとおり，そのような頂点の組は，
+$d(s,t)=d(s,\alpha)+d(\beta,t)+1$かつ$\overline{\sigma(s,t)}=0$
 となる$(s,t)$である．まず，距離$d'(s,t)$から求める．すべての頂点$v$について，
 $d(s,v)+d(v,t)$の最小値を求める．ただし，$s$と$v$の最短経路もしくは$v$と$t$の
 最短経路に$e$が含まれないものを選ぶ．経路が$e$を含むかどうかの判定は先述のとおり．
@@ -54,6 +54,108 @@ $d(s,v)+d(v,t)$の最小値を求める．ただし，$s$と$v$の最短経路�
   &(d(v,t)<d(v,\alpha)+d(\beta,t)+1\,または\,\overline{\sigma(v,t)}>0))
 \end{align*}
 で与えられる．
+
+次に，距離の更新が行われる組$(s,t)$の$\sigma'(s,t)$について議論する．
+まず，準備のため次を証明する．
+\begin{theorem}
+  $d'(s,t)=d'(s,v)+d'(v,t)$である$v\in V$(ただし$v\neq s,v\neq t$)について，
+  \begin{equation}
+    \label{eq:number-of-paths}
+    \sigma'(s,t)=\left(
+    \sum_{v}\sigma'(s,v)\sigma'(v,t)\right) / (d'(s,t)-1)
+  \end{equation}
+  が成り立つ．
+\end{theorem}
+\begin{proof}
+  $s$と$t$の間の一般的な経路を図\ref{fig:proof-number-of-paths}に示す．
+  \begin{figure}
+    \centering
+    \def\svgwidth{.5\columnwidth}
+    \input{proof-number-of-paths.pdf_tex}
+    \caption{$s$と$t$の一般的な最短経路}
+    \label{fig:proof-number-of-paths}
+  \end{figure}
+  $s$からの距離が一定の頂点を並べて，一つの層とする．$d'(s,v)=k$なる頂点
+  $v$の集合を，第$k$層と定義し，$L_k$と表す．
+  $L_k$に属する頂点の数を$n_k$，$l$番目の頂点を$v_{kl}$と表す．
+  ここで，すべての層に属する頂点$v$は，隣接する層以外の層に属する頂点$w$と
+  隣接しないことに注意する．もしそのような頂点が存在すると，最短経路長が
+  変化する．式\ref{eq:number-of-paths}の両辺に$d'(s,t)-1$を掛けて，
+  \begin{equation}
+    \sigma'(s,t)(d'(s,t)-1)=\sum_{v}\sigma'(s,v)\sigma'(v,t)
+    \label{eq:number-of-paths1}
+  \end{equation}
+  となる．式\ref{eq:number-of-paths1}の右辺を，
+  図\ref{fig:proof-number-of-paths}にならって変形して，
+  \begin{equation}
+    \sum_{v}\sigma'(s,v)\sigma'(v,t)=
+    \sum_{k=1}^m\sum_{l=1}^{n_k}\sigma'(s,v_{kl})\sigma'(v_{kl},t)
+    \label{eq:number-of-paths2}
+  \end{equation}
+  とする．
+  $L_i$に属する頂点$v$と$L_j$に属する頂点$w$について，
+  $d'(v,w)\neq|i-j|$のとき，$\sigma'(v,w)=0$とする．これは$v$と$w$の
+  最短経路は$s$と$t$の最短経路に含まれていないことを示すため，
+  今回の計算から除外できる．
+  各々の$\sigma'(s,v_{kl})\sigma'(v_{kl},t)$について議論する．
+  定義に沿って式を変形すると，
+  \begin{align}
+    &\sigma'(s,v_{kl})\sigma'(v_{kl},t)\nonumber\\
+    =&\left(\sum_{v'\in L_{k-1}}\sigma'(s,v')\sigma'(v',v_{kl})\right)
+    \left(\sum_{v'\in L_{k+1}}\sigma'(v_{kl},v')\sigma'(v',t)\right)
+    \nonumber\\
+    =&\left(\sum_{v''\in L_{k-2}}\sum_{v'\in L_{k-1}}
+    \sigma'(s,v'')\sigma'(v'',v')\sigma'(v',v_{kl})\right)
+    \left(\sum_{v'\in L_{k+1}}\sum_{v''\in L_{k+2}}
+    \sigma'(v_{kl},v')\sigma'(v',v'')\sigma'(v'',t)\right)
+    \nonumber\\
+    &\vdots\nonumber\\
+    =&\left(\sum_{(v_1,\ldots,v_{k-1})\in L_1\times\cdots\times L_{k-1}}
+    \sigma'(s,v_1)\cdots\sigma'(v_{k-1},v_{kl})\right)\nonumber\\
+    &\left(\sum_{(v_{k+1},\ldots,v_m)\in L_{k+1}\times\cdots\times L_m}
+    \sigma'(v_{kl},v_{k+1})\cdots\sigma'(v_m,v_t)\right)\nonumber\\
+    =&\sum_{
+      (v_1,\ldots,v_{k-1},v_{k+1},\ldots,v_m)\in
+      L_1\times\cdots\times L_{k-1}\times L_{k+1}\times\cdots\times L_m
+    }
+    \sigma'(s,v_1)\cdots\sigma'(v_{k-1},v_{kl})
+    \sigma'(v_{kl},v_{k+1})\cdots\sigma'(v_m,t)
+    \label{eq:number-of-paths3}
+  \end{align}
+  となる．式\ref{eq:number-of-paths3}を式\ref{eq:number-of-paths2}に
+  代入すると，
+  \begin{align}
+    &\sum_{k=1}^m\sum_{l=1}^{n_k}\sigma'(s,v_{kl})\sigma'(v_{kl},t)\nonumber\\
+    =&\sum_{k=1}^m\sum_{l=1}^{n_k}\sum_{
+      (v_1,\ldots,v_{k-1},v_{k+1},\ldots,v_m)\in
+      L_1\times\cdots\times L_{k-1}\times L_{k+1}\times\cdots\times L_m
+    }
+    \sigma'(s,v_1)\cdots\sigma'(v_{k-1},v_{kl})
+    \sigma'(v_{kl},v_{k+1})\cdots\sigma'(v_m,t)\nonumber\\
+    =&\sum_{k=1}^m\sum_{(v_1,\ldots,v_m)\in L_1\times\cdots\times L_m}
+    \sigma'(s,v_1)\cdots\sigma'(v_m,t)\nonumber\\
+    =&m\left(\sum_{(v_1,\ldots,v_m)\in L_1\times\cdots\times L_m}
+    \sigma'(s,v_1)\cdots\sigma'(v_m,t)\right)
+    \label{eq:number-of-paths4}
+  \end{align}
+  とできる．式\ref{eq:number-of-paths4}の総和の対象が$1$となるのは，
+  $\sigma'(s,v_1),\ldots,\sigma'(v_m,t)$のすべてが$1$のとき，
+  すなわち，$s$と$t$の最短経路となっているときである．
+  従って，総和の値は$s$と$t$の最短経路の数を一致し，
+  式\ref{eq:number-of-paths4}は
+  $m\sigma'(s,t)=\sigma'(s,t)(d'(s,t)-1)$である．
+\end{proof}
+
+\begin{collary}
+  $\sigma'(s,t)$を再計算するには，すべての$d'(s,t)>d'(u,v)$の$\sigma'(u,v)$
+  を先に計算しなければならない．
+\end{collary}
+\begin{proof}
+  式\ref{eq:number-of-paths2}を見ると，$s$と$t$の最短経路の中に
+  $d'(s,t)>d'(u,v)$なる$u$と$v$の最短経路が含まれ，
+  そのような$u,v$に対する$\sigma'(u,v)$が含まれる．
+\end{proof}
+
 次に，$P$を$d'(s,t)$の昇順に並べ替え，$P'=\{(s'_i,t'_i)\}$を得る．この操作は
 不可欠であるが，まだはっきりした証明は与えられていない
 ($d'(s,t)>d'(u,v)$のとき，$\sigma'(s,t)$の計算で$\sigma'(u,v)$を
@@ -70,7 +172,7 @@ $\sigma'(s'_i,v)\sigma'(v,t'_i)=1$である．よって，
 $\sigma'(s'_i,t'_i)=(1\times (d'(s'_i,t'_i)-1))/(d'(s'_i,t'_i)-1)=1$
 となる．
 
-最後に，アルゴリズムを\ref{algo:update-distance-on-remove}に示す．
+最後に，アルゴリズムをアルゴリズム\ref{algo:update-distance-on-remove}に示す．
 \begin{algorithm}
   \caption{辺$\{\alpha,\beta\}$が削除されたときの$d'(s,t)$と$\sigma'(s,t)$の
   計算}\label{algo:update-distance-on-remove}
@@ -122,3 +224,10 @@ $\sigma'(s'_i,t'_i)=(1\times (d'(s'_i,t'_i)-1))/(d'(s'_i,t'_i)-1)=1$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
+
+\section{実験}
+\label{sect:exp-faster-min-max}
+
+\section{結果}
+\label{sect:result-faster-min-max}
+

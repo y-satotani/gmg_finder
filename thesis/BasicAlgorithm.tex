@@ -24,58 +24,68 @@
 頂点$1$を根とし，葉を除く頂点の次数が$k$である木を構築する．
 (これも定義でいいかも)
 
-いくつかの関数を与える．$\mathrm{TreeDepth}(v)$は，次数$k$の平衡木に
-おいて，頂点$v$がどの層に位置するのかを求める．その中身は，次式である．
-\[ \mathrm{TreeDepth}(v) = \begin{cases}
-  0 & v = 1 \\
-  \log_{k-1}{(\frac{(v-1)(k-2)}{k}+1)} + 1 & v > 1
-\end{cases} \]
-$\mathrm{NVertBTree}(l)$は，深さ$l$，次数$k$の
-平衡木の頂点数を計算する．その中身は，次式で与えられる．
-\[ \mathrm{NVertBTree}(l) = \begin{cases}
-  1 & l = 0 \\
-  k + 1 & l = 1 \\
-  \frac{k(k-1)^l-1}{k-2} + 1 & l > 1
-\end{cases} \]
-$\mathrm{Parent}$関数は，次数$k$の平衡木において，頂点$v$の親の頂点番号を
-求める．次式で与えられる．
-\begin{align*}
-  \mathrm{Parent}(v)=&\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-2) +\\
-  &\frac{v-\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-1)}{k-1}
-\end{align*}
+\begin{definition}
+  いくつかの関数を与える．$\mathrm{TreeDepth}(v)$は，次数$k$の平衡木に
+  おいて，頂点$v$がどの層に位置するのかを求める．その中身は，次式である．
+  \[ \mathrm{TreeDepth}(v) = \begin{cases}
+    0 & v = 1 \\
+    \log_{k-1}{(\frac{(v-1)(k-2)}{k}+1)} + 1 & v > 1
+  \end{cases} \]
+  $\mathrm{NVertBTree}(l)$は，深さ$l$，次数$k$の
+  平衡木の頂点数を計算する．その中身は，次式で与えられる．
+  \[ \mathrm{NVertBTree}(l) = \begin{cases}
+    1 & l = 0 \\
+    k + 1 & l = 1 \\
+    \frac{k(k-1)^l-1}{k-2} + 1 & l > 1
+  \end{cases} \]
+  $\mathrm{Parent}$関数は，次数$k$の平衡木において，頂点$v$の親の頂点番号を
+  求める．次式で与えられる．
+  \begin{align*}
+    \mathrm{Parent}(v)=&\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-2) +\\
+    &\frac{v-\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-1)}{k-1}
+  \end{align*}
+\end{definition}
 
 必要な関数が定義できたので，次の操作で初期グラフ$T$を構築する．
 $v=\{2,\ldots,\mathrm{NVertBTree}(Q)\}$に対して，$\mathrm{Parent}(v)$と
 $v$を隣接させる．こうすることで，頂点数$n-R$，次数$k$の平衡木を構築できる．
 このとき，残りの$R$個の頂点は孤立点であることに注意する．
 
+\begin{example}
+  頂点数12,次数3の初期グラフ$T$を考える．
+  図\ref{fig:initial-tree-example}に頂点数12,次数3の初期グラフを示す．
+  \begin{figure}
+    \centering
+    \def\svgwidth{.5\columnwidth}
+    \input{initial-tree-example.pdf_tex}
+    \caption{頂点数12,次数3の初期グラフ}
+    \label{fig:initial-tree-example}
+  \end{figure}
+\end{example}
+
+\subsection{可能な辺の追加/無追加}
+\label{subsect:feasible-edge-(no)-addition}
 初期グラフ$T$を構築した後，$T$上での次数が$k$未満の頂点同士を
 接続させる辺の列を考える．そのような辺の列は次で与えられる．
 \[ \bar{E} = \bar{e}_i = \{(v_i,w_i)\,|
 \,d_T(v_i)<k,d_T(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\} \]
 探索では，$\bar{e}_1,\ldots,\bar{e}_m$と順番に辺を取り出し，
 グラフに追加する/しないを判定して新たなグラフを作ることを繰り返す．
-こうすることで一般化ムーアグラフを構築する．
 
-\begin{example}
-  頂点数12,次数3の初期グラフ$T$を考える．
-  図\ref{fig:balanced-tree-12}に頂点数12,次数3の平衡木を示す．
-\end{example}
-
-\subsection{可能な辺の追加/無追加}
-\label{subsect:feasible-edge-(no)-addition}
 グラフ$G$と辺$\bar{e}_i$が与えられたとき，辺$\bar{e}_i$を追加した後のグラフ，
 追加しない後のグラフが定理\ref{theorem:gmg-geometric-property}を満たすか
-判定する方法を与える．
-まず，準備として，頂点$v$に対して，それと接する辺$\bar{e}_i$の$i$の
-最小値$\mathrm{Enter(v)}$と最大値$\mathrm{Exit}(v)$を考える．
-$\mathrm{Enter}(v)$は探索中，初めて$v$と接する辺の番号を，
-$\mathrm{Exit}(v)$は探索中に最後に$v$と接する辺の番号をそれぞれ表す．
-$\mathrm{Enter}(v)$と$\mathrm{Exit}(v)$の具体的な式は，次で与えられる．
-\begin{align*}
-  \mathrm{enter}(v) &= \min(i\,|\,\{v,w\}=\bar{e}_i) \\
-  \mathrm{exit}(v) &= \max(i\,|\,\{v,w\}=\bar{e}_i)
-\end{align*}
+判定する方法を与える．そのため，いくつかの関数を導入する．
+\begin{definition}
+  頂点$v$に対して，それと接する辺$\bar{e}_i$の$i$の
+  最小値$\mathrm{Enter(v)}$と最大値$\mathrm{Exit}(v)$を考える．
+  $\mathrm{Enter}(v)$は探索中，初めて$v$と接する辺の番号を，
+  $\mathrm{Exit}(v)$は探索中に最後に$v$と接する辺の番号をそれぞれ表す．
+  $\mathrm{Enter}(v)$と$\mathrm{Exit}(v)$の具体的な式は，次で与えられる．
+  \begin{align*}
+    \mathrm{Enter}(v) &= \min(i\,|\,\{v,w\}=\bar{e}_i) \\
+    \mathrm{Exit}(v) &= \max(i\,|\,\{v,w\}=\bar{e}_i)
+  \end{align*}
+\end{definition}
 
 以上を踏まえて，辺$\bar{e}_i$を追加した後のグラフ，しない後のグラフが
 定理\ref{theorem:gmg-geometric-property}を満たすか判定する条件を述べる．
@@ -109,6 +119,14 @@ $\mathrm{Enter}(v)$と$\mathrm{Exit}(v)$の具体的な式は，次で与えら�
 
 \begin{example}
   再び頂点数12,次数3の場合について考える．
+  図\ref{fig:feasible-edges-example}に頂点数12,次数3の辺の候補を示す．
+  \begin{figure}
+    \centering
+    \def\svgwidth{.5\columnwidth}
+    \input{feasible-edges-example.pdf_tex}
+    \caption{頂点数12,次数3の辺の候補}
+    \label{fig:feasible-edges-example}
+  \end{figure}
 \end{example}
 
 最後の辺に対する条件がすべて真のとき，アルゴリズムは一般化ムーアグラフを出力する．
@@ -172,6 +190,9 @@ $\mathrm{Enter}(v)$と$\mathrm{Exit}(v)$の具体的な式は，次で与えら�
   \end{algorithmic}
 \end{algorithm}
 
+\section{実験}
+\label{sect:exp-basic-algorithm}
+
 \section{結果}
-\label{sect:basic-result}
+\label{sect:result-basic-algorithm}
 TBA
