@@ -120,12 +120,31 @@ $v$を隣接させる．こうすることで，頂点数$n-R$，次数$k$の平
 \begin{example}
   再び頂点数12,次数3の場合について考える．
   図\ref{fig:feasible-edges-example}に頂点数12,次数3の辺の候補を示す．
+  いくつかの辺を追加した後のグラフを図\ref{fig:feasible-edges-example2}に
+  示す．
+  図\ref{fig:feasible-edges-example2}に示した辺
+  $a=\{9,10\},b=\{9,11\},c=\{9,12\}$について考える．
+  辺$a$を追加すると，$d(9,10)=2$のため長さ3の閉路$4\,9\,10$ができてしまい，
+  一般化ムーアグラフの条件を満たさなくなる．そのため，辺$a$は追加せず
+  次の辺に進む．
+  辺$b$についても同様で，長さ4の閉路ができてしまうため，辺を追加しない．
+  辺$c$は，$d(9,12)=5$なので長さ6の閉路が複数できる．これは，
+  $6>2Q$なので，辺を追加できる．
   \begin{figure}
     \centering
-    \def\svgwidth{.5\columnwidth}
-    \input{feasible-edges-example.pdf_tex}
-    \caption{頂点数12,次数3の辺の候補}
-    \label{fig:feasible-edges-example}
+    \begin{minipage}{.4\columnwidth}
+      \def\svgwidth{\textwidth}
+      \input{feasible-edges-example.pdf_tex}
+      \captionof{figure}{頂点数12,次数3の辺の候補}
+      \label{fig:feasible-edges-example}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{.4\columnwidth}
+      \def\svgwidth{\textwidth}
+      \input{feasible-edges-example2.pdf_tex}
+      \captionof{figure}{探索途中のグラフ}
+      \label{fig:feasible-edges-example2}
+    \end{minipage}
   \end{figure}
 \end{example}
 

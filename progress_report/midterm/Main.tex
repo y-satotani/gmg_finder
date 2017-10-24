@@ -1,0 +1,134 @@
+\documentclass[dvipdfmx]{beamer}
+\usepackage{amsmath,amsthm,amssymb}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage{bxdpx-beamer}
+\usepackage{pxjahyper}
+\usepackage{appendixnumberbeamer}
+
+\usetheme{Madrid}
+%\usetheme{Rochester}
+\setbeamertemplate{itemize items}[square]
+\setbeamertemplate{enumerate items}[square]
+\renewcommand{\kanjifamilydefault}{\gtdefault}
+\renewcommand{\familydefault}{\sfdefault}
+%\setbeamertemplate{navigation symbols}{}
+%\setbeamertemplate{footline}[frame number]
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}[space]
+\setbeamertemplate{bibliography item}[text]
+\setbeamertemplate{theorems}[numbered]
+\renewcommand{\figurename}{図}
+\renewcommand{\tablename}{表}
+\renewcommand{\appendixname}{補足}
+\theoremstyle{definition}
+%\newtheorem{theorem}{定理}
+\newtheorem{conjecture}[theorem]{予想}
+\graphicspath{{../../thesis/figure/}}
+\makeatletter
+\def\input@path{{../../thesis/figure/}}
+\makeatother
+
+\title{一般化ムーアグラフの探索の高効率化}
+\author{里谷 佳紀}
+\institute{高橋研究室}
+\date[特別研究中間発表会]{特別研究中間発表会 \\ 2017年11月15日}
+
+\begin{document}
+\begin{frame}
+  \maketitle
+\end{frame}
+
+\section{本編}
+\begin{frame}{背景と目的}
+  \begin{itemize}
+  \item データセンタではクラスタが用いられる
+  \item アプリケーションの通信のタイミングや通信先は予測は困難
+  \item 単純にホップ数が小さいトポロジが有効\cite{Koibuchi2012, Singla2011}
+  \item \alert{一般化ムーアグラフ}$\cdots$
+    ホップ数と平均頂点間距離が理論的に下界な正則グラフ
+    \cite{cerf1973computer, Cerf1974}
+  \item 一般化ムーアグラフを発見するアルゴリズムはいくつかある
+    \cite{Sampels2004, 2015, 2016}
+  \item 次をすべて満たす効率的な発見方法はまだ知られていない
+    \begin{itemize}
+    \item (可能な)頂点数と次数をすべて網羅
+    \item ランダム性がない
+    \end{itemize}
+  \item 全探索をベースにして効率的に一般化ムーアグラフを
+    探索する方法を提案・検証することが目的
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{方法}
+  \begin{enumerate}
+  \item 与えられた頂点数と次数の初期グラフを構築しておく
+  \item 図\ref{fig:feasible-edges-example}の破線部分の辺を
+    追加できる(できない)か求め真の場合次のグラフを生成
+    \begin{itemize}
+    \item 図\ref{fig:feasible-edges-example2}では最小の閉路長が
+      $5$以上のとき追加できる
+      \begin{enumerate}[a]
+      \item 3-閉路ができるので追加できない
+      \item 4-閉路ができるので追加できない
+      \item 最小の閉路長は6なので追加できる
+      \end{enumerate}
+    \end{itemize}
+    \item 初期グラフを変えることで探索を高効率化
+  \end{enumerate}
+  \begin{figure}
+    \centering
+    \begin{minipage}{.4\columnwidth}
+      \def\svgwidth{\textwidth}
+      \input{feasible-edges-example.pdf_tex}
+      \captionof{figure}{初期グラフの例と辺の候補}
+      \label{fig:feasible-edges-example}
+    \end{minipage}
+    \hspace{1em}
+    \begin{minipage}{.4\columnwidth}
+      \def\svgwidth{\textwidth}
+      \input{feasible-edges-example2.pdf_tex}
+      \captionof{figure}{探索途中のグラフ}
+      \label{fig:feasible-edges-example2}
+    \end{minipage}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{現在までの成果}
+  \begin{enumerate}
+  \item いち
+  \item に
+  \item さん
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}{今後の課題}
+  \begin{enumerate}
+  \item 直径の下界を利用した枝刈り
+  \item 予想の証明
+    \begin{conjecture}
+      hogehoge
+    \end{conjecture}
+    \begin{conjecture}
+      hogehoge
+    \end{conjecture}
+  \item 同型グラフ判定を用いた列挙
+  \item 一般化ムーアグラフが存在しない場合の考察
+  \end{enumerate}
+\end{frame}
+
+\appendix
+\begin{frame}{実行時間の比較}
+  \begin{itemize}
+  \item foo
+  \item bar
+  \end{itemize}
+\end{frame}
+
+\begin{frame}[allowframebreaks]{参考文献}
+  \bibliographystyle{jalpha}
+  \bibliography{MyCollection}
+\end{frame}
+
+\end{document}
+
