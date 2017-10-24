@@ -60,11 +60,23 @@
 
 \begin{figure}[H]
   \centering
+  \includegraphics[width=.8\linewidth]{exp_cmp_algo_result_node.pdf}
+  \caption{3-正則グラフにおける判定されたグラフの数 \\
+    $n=20$で，basicとcycleのプログラムがまだ終わっていない．
+    $n=22(R=0)$で，理論的にはbasic(cycle)とstreeが等しい結果になるはずだが，
+    そうなっていない．理由は，候補となる辺の並びが異なっているためである．
+    辺の並びを最適なものにするためのアルゴリズムが必要である．
+  }
+  \label{fig:result-ext-nodes}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
   \subfloat[ランダムネットワーク]{
-    \includegraphics[width=.7\linewidth]{exp_dist_delete_result_random.pdf}
+    \includegraphics[width=.8\linewidth]{exp_dist_delete_result_random.pdf}
   }\hfill
   \subfloat[スケールフリーネットワーク]{
-    \includegraphics[width=.7\linewidth]{exp_dist_delete_result_scale_free.pdf}
+    \includegraphics[width=.8\linewidth]{exp_dist_delete_result_scale_free.pdf}
   }
   \caption{ネットワークトポロジ別の実行時間 \\
     ネットワークのパラメータで色分けした．
