@@ -9,7 +9,7 @@
 namespace ccheck {
 
   class initial_builder_stree_conjecture : public initial_builder {
-  protected:
+  public:
     vertex_t parent_of(graph_config* c, vertex_t v);
     std::vector<vertex_t> initial_vertices(graph_config* c);
     std::vector<vertex_t> possible_vertices(graph_config* c);

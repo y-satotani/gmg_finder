@@ -2,7 +2,7 @@ CC := g++
 IDIR := /usr/include/igraph $(shell pwd)
 LDIR := /usr/lib/x86_64-linux-gnu/
 LIBS := -lm -ligraph
-CFLAGS := -Ofast -Wall $(addprefix -I,$(IDIR)) $(addprefix -L,$(LDIR))\
+CFLAGS := -std=c++11 -Ofast -Wall $(addprefix -I,$(IDIR)) $(addprefix -L,$(LDIR))\
 
 LPAR := (
 OBJ := $(patsubst %.cpp,%.o,$(shell\

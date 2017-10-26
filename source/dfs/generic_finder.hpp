@@ -63,6 +63,15 @@ namespace ccheck {
         S s = node.second;
         m_stack.pop_back();
 
+        if(ei == m_e_possible.size()) {
+          if(m_manager->can_accept(m_config, s)) {
+            return s;
+          } else {
+            m_manager->destroy(s);
+            continue;
+          }
+        }
+
         std::vector<vertex_t> enter;
         std::vector<vertex_t> exit;
         if(m_v_range[m_e_possible[ei].first].first == ei)
@@ -73,15 +82,6 @@ namespace ccheck {
           exit.push_back(m_e_possible[ei].first);
         if(m_v_range[m_e_possible[ei].second].second == ei)
           exit.push_back(m_e_possible[ei].second);
-
-        if(ei == m_e_possible.size()) {
-          if(m_manager->can_accept(m_config, s)) {
-            return s;
-          } else {
-            m_manager->destroy(s);
-            continue;
-          }
-        }
 
         for(int add = 0; add <= 1; add++) {
           if(m_manager->can_update
