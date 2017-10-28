@@ -125,4 +125,8 @@ namespace gmgf {
     igraph_destroy(&G);
   }
 
+  igraph_t basic_state_manager::graph(igraph_t G) {
+    return G;
+  }
+
 }

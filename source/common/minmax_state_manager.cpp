@@ -109,4 +109,8 @@ namespace gmgf {
     igraph_destroy(&t.second);
   }
 
+  igraph_t minmax_state_manager::graph(igraph_pair_t t) {
+    return t.first;
+  }
+
 }

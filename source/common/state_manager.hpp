@@ -73,6 +73,7 @@ namespace gmgf {
     virtual S next(S s, edge_t e, bool add) = 0;
     virtual S failure() = 0;
     virtual void destroy(S s) = 0;
+    virtual igraph_t graph(S s) = 0;
   };
 }
 
