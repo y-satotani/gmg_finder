@@ -2,7 +2,7 @@
 #include "initial_builder_sorter.hpp"
 #include <algorithm>
 
-namespace ccheck {
+namespace gmgf {
 
   initial_builder_sorter::initial_builder_sorter(initial_builder* builder) {
     m_builder = builder;

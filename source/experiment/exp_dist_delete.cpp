@@ -9,7 +9,7 @@ extern "C" {
 #include "common/distance_update.hpp"
 
 using namespace std;
-using namespace ccheck;
+using namespace gmgf;
 
 char graph_random[] = "random", graph_scale_free[] = "scale-free";
 

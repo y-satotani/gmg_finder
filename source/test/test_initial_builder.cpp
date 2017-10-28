@@ -7,7 +7,7 @@ extern "C" {
 #include "common/initial_builder.hpp"
 
 using namespace std;
-using namespace ccheck;
+using namespace gmgf;
 
 int main(int argc, char* argv[]) {
 

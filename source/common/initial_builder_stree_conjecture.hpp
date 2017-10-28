@@ -1,12 +1,12 @@
 
-#ifndef _CCHECK_INITIAL_BUILDER_STREE_CONJECTURE_HPP_
-#define _CCHECK_INITIAL_BUILDER_STREE_CONJECTURE_HPP_
+#ifndef _GMGF_INITIAL_BUILDER_STREE_CONJECTURE_HPP_
+#define _GMGF_INITIAL_BUILDER_STREE_CONJECTURE_HPP_
 
 #include <vector>
 #include "graph_config.hpp"
 #include "initial_builder.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   class initial_builder_stree_conjecture : public initial_builder {
   public:
@@ -20,4 +20,4 @@ namespace ccheck {
   };
 }
 
-#endif // _CCHECK_GRAPH_CONFIG_TCONJ_HPP_
+#endif // _GMGF_GRAPH_CONFIG_TCONJ_HPP_

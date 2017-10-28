@@ -6,7 +6,7 @@ extern "C" {
 #include "common/graph_config.hpp"
 
 using namespace std;
-using namespace ccheck;
+using namespace gmgf;
 
 int main(int argc, char* argv[]) {
 

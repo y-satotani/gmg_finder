@@ -12,7 +12,7 @@ extern "C" {
 #include "dfs/generic_finder.hpp"
 
 using namespace std;
-using namespace ccheck;
+using namespace gmgf;
 
 int main(int argc, char* argv[]) {
 

@@ -1,12 +1,12 @@
 
-#ifndef _CCHECK_DISTANCE_UPDATE_HPP_
-#define _CCHECK_DISTANCE_UPDATE_HPP_
+#ifndef _GMGF_DISTANCE_UPDATE_HPP_
+#define _GMGF_DISTANCE_UPDATE_HPP_
 
 extern "C" {
 #include <igraph.h>
 }
 
-namespace ccheck {
+namespace gmgf {
 
   void update_distance_on_insert(igraph_matrix_t* Dnext,
                                  igraph_matrix_t* Snext,
@@ -28,4 +28,4 @@ namespace ccheck {
 
 }
 
-#endif // _CCHECK_DISTANCE_UPDATE_HPP_
+#endif // _GMGF_DISTANCE_UPDATE_HPP_

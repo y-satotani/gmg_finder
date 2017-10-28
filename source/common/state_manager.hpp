@@ -1,11 +1,11 @@
 
-#ifndef _CCHECK_DFS_STATE_MANAGER_HPP_
-#define _CCHECK_DFS_STATE_MANAGER_HPP_
+#ifndef _GMGF_DFS_STATE_MANAGER_HPP_
+#define _GMGF_DFS_STATE_MANAGER_HPP_
 
 #include "graph_config.hpp"
 #include "initial_builder.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   template <typename S> class state_manager {
     /*
@@ -76,4 +76,4 @@ namespace ccheck {
   };
 }
 
-#endif // _CCHECK_DFS_STATE_MANAGER_HPP_
+#endif // _GMGF_DFS_STATE_MANAGER_HPP_

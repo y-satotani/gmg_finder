@@ -18,7 +18,7 @@ extern "C" {
 #include "dfs/generic_finder.hpp"
 
 using namespace std;
-using namespace ccheck;
+using namespace gmgf;
 
 int sspl(igraph_t* G) {
   igraph_matrix_t path;

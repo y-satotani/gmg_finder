@@ -1,7 +1,7 @@
 
 #include "initial_builder_stree_conjecture.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   vertex_t
   initial_builder_stree_conjecture::parent_of(graph_config* c, vertex_t v) {

@@ -1,9 +1,9 @@
 
 #include "common/basic_state_manager.hpp"
 
-using namespace ccheck;
+using namespace gmgf;
 
-namespace ccheck {
+namespace gmgf {
 
   bool basic_state_manager::
   can_update_degree(graph_config* config,

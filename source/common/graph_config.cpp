@@ -2,7 +2,7 @@
 #include "graph_config.hpp"
 #include <cmath>
 
-namespace ccheck {
+namespace gmgf {
 
   graph_config::graph_config(unsigned int n, unsigned int d) {
     _n = n;

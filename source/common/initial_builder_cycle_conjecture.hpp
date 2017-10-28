@@ -1,12 +1,12 @@
 
-#ifndef _CCHECK_INITIAL_BUILDER_CYCLE_CONJECTURE_
-#define _CCHECK_INITIAL_BUILDER_CYCLE_CONJECTURE_
+#ifndef _GMGF_INITIAL_BUILDER_CYCLE_CONJECTURE_
+#define _GMGF_INITIAL_BUILDER_CYCLE_CONJECTURE_
 
 #include <vector>
 #include "graph_config.hpp"
 #include "initial_builder.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   class initial_builder_cycle_conjecture : public initial_builder {
   private:
@@ -20,4 +20,4 @@ namespace ccheck {
   };
 }
 
-#endif // _CCHECK_INITIAL_BUILDER_CYCLE_CONJECTURE_
+#endif // _GMGF_INITIAL_BUILDER_CYCLE_CONJECTURE_

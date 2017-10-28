@@ -2,7 +2,7 @@
 #include "initial_builder.hpp"
 #include <cmath>
 
-namespace ccheck {
+namespace gmgf {
 
   vertex_t initial_builder::parent_of(graph_config* c, vertex_t v) {
     if(v == 0)

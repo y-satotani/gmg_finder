@@ -1,7 +1,7 @@
 #include "distance_update.hpp"
 #include <iostream>
 
-namespace ccheck {
+namespace gmgf {
 
   void update_distance_on_insert(igraph_matrix_t* Dnext,
                                  igraph_matrix_t* Snext,

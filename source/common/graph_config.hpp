@@ -1,6 +1,6 @@
 
-#ifndef _CCHECK_GRAPH_CONFIG_HPP_
-#define _CCHECK_GRAPH_CONFIG_HPP_
+#ifndef _GMGF_GRAPH_CONFIG_HPP_
+#define _GMGF_GRAPH_CONFIG_HPP_
 
 extern "C" {
 #include <igraph.h>
@@ -8,7 +8,7 @@ extern "C" {
 #include <utility>
 #include <vector>
 
-namespace ccheck {
+namespace gmgf {
 
   typedef unsigned int vertex_t;
   typedef std::pair<vertex_t, vertex_t> edge_t;
@@ -36,6 +36,6 @@ namespace ccheck {
   // the number of vertices of balanced tree (R = 0)
   unsigned int n_vert_btree(unsigned int depth, unsigned int degree);
 
-} // end of ccheck
+} // end of gmgf
 
-#endif // _CCHECK_GRAPH_CONFIG_HPP_
+#endif // _GMGF_GRAPH_CONFIG_HPP_

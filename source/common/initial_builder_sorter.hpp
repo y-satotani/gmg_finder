@@ -1,6 +1,6 @@
 
-#ifndef _CCHECK_INIT_BUILDER_SORTER_HPP_
-#define _CCHECK_INIT_BUILDER_SORTER_HPP_
+#ifndef _GMGF_INIT_BUILDER_SORTER_HPP_
+#define _GMGF_INIT_BUILDER_SORTER_HPP_
 
 extern "C" {
 #include <igraph.h>
@@ -10,7 +10,7 @@ extern "C" {
 #include "graph_config.hpp"
 #include "initial_builder.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   class initial_builder_sorter : public initial_builder {
   private:
@@ -30,6 +30,6 @@ namespace ccheck {
     igraph_t build(graph_config* c);
   };
 
-} // end of ccheck
+} // end of gmgf
 
-#endif // _CCHECK_INIT_BUILDER_SORTER_HPP_
+#endif // _GMGF_INIT_BUILDER_SORTER_HPP_

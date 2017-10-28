@@ -1,6 +1,6 @@
 
-#ifndef _CCHECK_DFS_GENERIC_FINDER_HPP_
-#define _CCHECK_DFS_GENERIC_FINDER_HPP_
+#ifndef _GMGF_DFS_GENERIC_FINDER_HPP_
+#define _GMGF_DFS_GENERIC_FINDER_HPP_
 
 extern "C" {
 #include <igraph.h>
@@ -11,13 +11,13 @@ extern "C" {
 #include "common/initial_builder.hpp"
 #include "common/state_manager.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   template <typename S> class generic_finder {
   protected:
-    ccheck::graph_config* m_config;
-    ccheck::initial_builder* m_builder;
-    ccheck::state_manager<S>* m_manager;
+    gmgf::graph_config* m_config;
+    gmgf::initial_builder* m_builder;
+    gmgf::state_manager<S>* m_manager;
     std::vector<std::pair<std::size_t, S> > m_stack;
     std::vector<edge_t> m_e_possible;
     std::vector<std::pair<std::size_t, std::size_t> > m_v_range;
@@ -99,4 +99,4 @@ namespace ccheck {
   };
 }
 
-#endif // _CCHECK_DFS_GENERIC_FINDER_HPP_
+#endif // _GMGF_DFS_GENERIC_FINDER_HPP_

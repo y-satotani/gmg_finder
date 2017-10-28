@@ -8,7 +8,7 @@ extern "C" {
 #include "common/distance_update.hpp"
 
 using namespace std;
-using namespace ccheck;
+using namespace gmgf;
 
 void igraph_complement(igraph_t* to, igraph_t* from) {
   igraph_integer_t u, v;

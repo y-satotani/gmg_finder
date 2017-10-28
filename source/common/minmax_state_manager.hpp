@@ -1,6 +1,6 @@
 
-#ifndef _CCHECK_MINMAX_STATE_MANAGER_HPP_
-#define _CCHECK_MINMAX_STATE_MANAGER_HPP_
+#ifndef _GMGF_MINMAX_STATE_MANAGER_HPP_
+#define _GMGF_MINMAX_STATE_MANAGER_HPP_
 
 extern "C" {
 #include <igraph.h>
@@ -10,7 +10,7 @@ extern "C" {
 #include "common/state_manager.hpp"
 #include "basic_state_manager.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   typedef std::pair<igraph_t, igraph_t> igraph_pair_t;
 
@@ -49,4 +49,4 @@ namespace ccheck {
 
 }
 
-#endif // _CCHECK_MINMAX_STATE_MANAGER_HPP_
+#endif // _GMGF_MINMAX_STATE_MANAGER_HPP_

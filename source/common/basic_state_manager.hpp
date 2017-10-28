@@ -1,6 +1,6 @@
 
-#ifndef _CCHECK_BASIC_STATE_MANAGER_HPP_
-#define _CCHECK_BASIC_STATE_MANAGER_HPP_
+#ifndef _GMGF_BASIC_STATE_MANAGER_HPP_
+#define _GMGF_BASIC_STATE_MANAGER_HPP_
 
 extern "C" {
 #include <igraph.h>
@@ -8,7 +8,7 @@ extern "C" {
 #include "common/graph_config.hpp"
 #include "common/state_manager.hpp"
 
-namespace ccheck {
+namespace gmgf {
 
   class basic_state_manager : public state_manager<igraph_t> {
   public:
@@ -43,4 +43,4 @@ namespace ccheck {
 
 }
 
-#endif // _CCHECK_BASIC_STATE_MANAGER_HPP_
+#endif // _GMGF_BASIC_STATE_MANAGER_HPP_

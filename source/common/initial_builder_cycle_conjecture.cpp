@@ -2,7 +2,7 @@
 #include "initial_builder_cycle_conjecture.hpp"
 #include <algorithm>
 
-namespace ccheck {
+namespace gmgf {
 
   vertex_t initial_builder_cycle_conjecture::p(graph_config* c) {
     return n_vert_btree(c->Q()-1, c->d());
