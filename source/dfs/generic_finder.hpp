@@ -53,6 +53,10 @@ namespace gmgf {
       m_extracted_nodes = 0;
     }
 
+    bool has_next() {
+      return m_stack.size() > 0;
+    }
+
     S next() {
       while(m_stack.size() > 0) {
         ++m_extracted_nodes;
