@@ -63,7 +63,7 @@ void run_finder(int* n_graph,
     igraph_t graph = manager->graph(t);
     int s = sspl(&graph);
     if(s > *sspl_max) *sspl_max = s;
-    if(s < *sspl_min) *sspl_max = s;
+    if(s < *sspl_min) *sspl_min = s;
     manager->destroy(t);
   }
 
