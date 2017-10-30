@@ -68,7 +68,7 @@ int main(int argc, char* argv[]) {
   if(argc < 6) {
     cout << "usage : " << argv[0] << " (basic|cycle|stree)"
          << " (basic|minmax) (basic|sorted)" << " n d" << endl;
-    cout << "output: n,d,Q,R,sspl_lb,bdr,mgr,srt,sspl,node,time" << endl;
+    cout << "output: n,d,Q,R,sspl_lb,bdr,mgr,srt,sspl,edge,node,time" << endl;
     return 1;
   }
 
@@ -111,7 +111,8 @@ int main(int argc, char* argv[]) {
        << config->Q() << "," << config->R() << ","
        << config->sspl_lb() << ","
        << bdr_name << "," << mgr_name << "," << srt_flag << ","
-       << sspl << "," << extracted_nodes << "," << time << endl;
+       << sspl << "," << builder->possible_edges(config).size() << ","
+       << extracted_nodes << "," << time << endl;
 
   delete builder;
   if(base) delete base;

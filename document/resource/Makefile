@@ -3,7 +3,7 @@ MAKE := make
 
 all:
 	$(MAKE) -C figure all
-	$(MAKE) -C result all
+	$(MAKE) -C table all
 
 clean:
 	rm -f $$(find . | egrep "pdf(_tex)?")

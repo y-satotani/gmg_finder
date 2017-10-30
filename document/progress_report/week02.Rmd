@@ -1,0 +1,127 @@
+---
+title: "研究進捗報告"
+author: "里谷 佳紀"
+date: "平成29年9月25日"
+documentclass: bxjsarticle
+classoption: xelatex,ja=standard,11pt
+geometry: no
+bibliography: ../resource/MyCollection.bib
+csl: ../resource/physical-review-e.csl
+output:
+  pdf_document:
+    pandoc_args:
+    - --variable=biblio-title:参考文献
+    latex_engine: xelatex
+    keep_tex: yes
+    number_sections: yes
+    fig_caption: yes
+    includes:
+      in_header: packages.tex
+  md_document:
+    variant: markdown_github
+---
+
+```{r setup, include=FALSE}
+library(captioner)
+
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(pander)
+
+library(network)
+library(sna)
+library(ggnet)
+library(igraph)
+library(intergraph)
+
+is_latex = !is.null(knitr::opts_knit$get('rmarkdown.pandoc.to')) &&
+  knitr::opts_knit$get('rmarkdown.pandoc.to') %in% c('beamer', 'latex')
+panderOptions('table.style', 'grid')
+knitr::opts_chunk$set(fig.width=6.5, fig.height=6,
+  echo=FALSE, warning=FALSE, message=FALSE
+  )
+if(is_latex) {
+  options(device = function(file, width = 6.5, height = 6, ...) {
+    cairo_pdf(tempfile(), width = width, height = height, ...)
+  })
+  knitr::opts_chunk$set(dev='cairo_pdf', dev.args=list(family='IPAexGothic'))
+}
+
+fig_num <- captioner(prefix = '図', suffix = '')
+tab_num <- captioner(prefix = '表', suffix = '')
+cap_str <- function(x) {
+  if(!is_latex) return(x)
+  else return(tail(unlist(strsplit(x, ' ')), 1))
+}
+show_table <- function(x, cap) {
+  if(is_latex) {
+    kable(x, caption = cap)
+  } else {
+    pander(x, caption = cap)
+  }
+}
+```
+
+# 研究全体の目的
+与えられた頂点数と次数をもつ正則グラフのうち，Cerfらの平均頂点間距離の下界[@Cerf1974]と一致する
+平均頂点間距離をもつグラフが存在するかを判定する方法を開発する．
+また，既存の方法[@Yamamoto2016]と比較することにより，新方法の有用性を検証する．
+
+# 前回打ち合わせ時に定めた短期目標
+1. 深さ優先探索によるグラフの発見
+2. 命題
+    a. グラフ$G$に長さ$2Q$以下の閉路が存在せず，直径が$Q+1$ならば，
+    $G$はCerfらの下界を達成する．
+    b. グラフ$G$に長さ$2Q$以下の閉路が存在しないならば，直径が$Q+1$である．
+
+の検証
+
+# 本日までの進捗状況
+```{r}
+tab_result <- cap_str(tab_num('result', '探索結果'))
+fig_cycle_diam <- cap_str(fig_num('cycle-diam', '命題の反例'))
+```
+1. プログラムが完成した．
+    + https://gist.github.com/arity-r/21ded374488645fec6c3d1de9e6d3a83 (Python)
+    + https://github.com/y-satotani/cerfcheck (C言語)
+
+    にて公開している．
+
+    さらに，いくつかの頂点数と次数の組み合わせで実験を行った．
+    結果を表`r tab_num('result', display = 'n')`に示す．
+
+2. 二番目の命題が偽になるグラフを発見した．
+  図`r fig_num('cycle-diam', display = 'n')`に示す．
+  頂点数が14で，次数が3であるこのグラフは，
+  最小の閉路長が5($>2Q$)であるが，直径は4($\neq Q+1$)である．
+  さらに，このグラフはCerfらの下界を満足しない．
+
+```{r tab:result}
+data <- read_csv('../resource/table/cmp-algo-node-lab.csv') %>%
+  filter(bdr == 'basic', mgr == 'basic') %>%
+  mutate(gmg = ifelse(sspl == sspl_lb, '$\\checkmark$', ' ')) %>%
+  select(n, d, gmg) %>%
+  spread(n, gmg, fill = 'NA')
+show_table(data, tab_result)
+```
+
+```{r fig:cycle-diam, fig.cap=fig_cycle_diam, fig.align='center', out.width='70%'}
+G = as.network(
+  read.table('../resource/graph/n14-d3-nogmg.elist')
+  )
+ggnet2(G,
+       node.color = rep('royalblue', length(G$val)),
+       label = TRUE
+       )
+```
+
+girthとdiameter
+```{r geom, echo=TRUE}
+iG = read_graph('../resource/graph/n14-d3-nogmg.elist')
+paste(girth(iG)$girth, diameter(iG))
+```
+
+# 参考文献

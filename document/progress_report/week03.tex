@@ -1,0 +1,152 @@
+\documentclass[xelatex,ja=standard,11pt]{bxjsarticle}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={研究進捗報告},
+            pdfauthor={里谷 佳紀},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{5}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+  \title{研究進捗報告}
+  \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+  \author{里谷 佳紀}
+  \preauthor{\centering\large\emph}
+  \postauthor{\par}
+  \predate{\centering\large\emph}
+  \postdate{\par}
+  \date{平成29年10月3日}
+
+\usepackage{zxjatype}
+\usepackage[ipaex,scale=.95]{zxjafont}
+\pagenumbering{gobble}
+
+\begin{document}
+\maketitle
+
+\section{研究全体の目的}
+
+与えられた頂点数と次数をもつ正則グラフのうち，Cerfらの平均頂点間距離の下界~{[}1{]}と一致する
+平均頂点間距離をもつグラフが存在するかを判定する方法を開発する．
+また，既存の方法~{[}2{]}と比較することにより，新方法の有用性を検証する．
+
+\section{前回打ち合わせ時に定めた短期目標}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \(d=3\),\(R=2\)の正則グラフにおいて，あらかじめ\(Q+1\)層の頂点ひとつを
+  \(Q\)層の頂点2個と，\(2Q\)以下の長さの閉路を持たないように隣接させたグラフから
+  探索を開始するプログラムを実装し，前回実装したプログラムとの比較をおこなう．
+\end{enumerate}
+
+\section{本日までの進捗状況}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  プログラムを実装し，比較を行った．\(n=12\)のときと，\(n=24\)のときは，両プログラムとも，
+  およそ10msで終了したため，時間での比較はできなかった．
+  \(n=48\)のときは，今回のプログラムはおよそ15時間で終了した．対して，
+  前回のプログラムは今回のミーティングまでに終了しなかった(\$\textgreater{}\(170時間)． ちなみに，プログラムの結果から，\)n=48\$のときに，
+  条件(長さ\(2Q\)以下の閉路が存在せず，直径が\(Q+1\))を満たすグラフは
+  存在しないことが分かった．
+\end{enumerate}
+
+\section{付録}
+
+頂点数24,次数3で下界となるグラフの辺リスト
+
+\begin{verbatim}
+## Error in running command python
+\end{verbatim}
+
+\begin{figure}
+
+{\centering \includegraphics[width=0.7\linewidth]{week03_files/figure-latex/fig:cycle-diam-1} 
+
+}
+
+\caption{頂点数24,次数3のグラフ}\label{fig:fig:cycle-diam}
+\end{figure}
+
+\section*{参考文献}
+\addcontentsline{toc}{section}{参考文献}
+
+\hypertarget{refs}{}
+\hypertarget{ref-Cerf1974}{}
+{[}1{]} V. G. Cerf, D. D. Cowan, R. C. Mullin, and R. G. Stanton,
+Networks \textbf{4}, 335 (1974).
+
+\hypertarget{ref-Yamamoto2016}{}
+{[}2{]} 山本康. and 高橋規., (2016).
+
+
+\end{document}

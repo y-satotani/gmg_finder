@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
     cout << "usage : " << argv[0] << " (basic|cycle|stree)"
          << " (basic|minmax) (basic|sorted)" << " n d" << endl;
     cout << "output: n,d,Q,R,sspl_lb,bdr,mgr,srt"
-         << ",n_graph,sspl_max,sspl_min,node,time" << endl;
+         << ",n_graph,sspl_max,sspl_min,edge,node,time" << endl;
     return 1;
   }
 
@@ -139,6 +139,7 @@ int main(int argc, char* argv[]) {
        << config->sspl_lb() << ","
        << bdr_name << "," << mgr_name << "," << srt_flag << ","
        << n_graph << "," << min_sspl << "," << max_sspl << ","
+       << builder->possible_edges(config).size() << ","
        << extracted_nodes << "," << time << endl;
 
   delete builder;
