@@ -24,11 +24,17 @@
 
   すべての頂点$v$について，$v$から$i$離れた頂点の数
   $c_i = \lvert\{ w\,|\,d(v,w) = i , w\in V \}\rvert$について，
-  \[ \begin{cases}
-    c_i = k(k-1)^{i-1} & 1\leq i\leq Q \\
-    c_{Q+1} = R & \\
-    c_i = 0 & Q+2\leq i \leq n-1
-  \end{cases} \]
+  \begin{equation}
+    \label{eq:gmg-verts-dist}
+    \begin{aligned}
+      c_i =
+      \begin{cases}
+        k(k-1)^{i-1} & 1\leq i\leq Q \\
+        R & i = Q+1 \\
+        0 & Q+2\leq i \leq n-1
+      \end{cases}
+    \end{aligned}
+  \end{equation}
   であること．ただし，
   \begin{align*}
     Q(n,k) &= \max\{q | n-1-\sum_{i=1}^{q}k(k-1)^{i-1} \geq 0\} \\
@@ -77,21 +83,200 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
 \begin{theorem}[Cerf et.al., 1974\,\cite{Cerf1974}]
   \label{theorem:gmg-lower-bound}
   $M(n,k)$の頂点間距離の総和は，
-  \[\sum_{(s,t)\in V\times V}d(s,t) =
-  n \left[\ \sum^{Q}_{i=1}ik(k-1)^{i-1} + QR\ \right] \]
+  \begin{equation}
+    \label{eq:gmg-lb}
+    S(n,k) = \sum_{(s,t)\in V\times V}d(s,t) =
+    n \left[\ \sum^{Q}_{i=1}ik(k-1)^{i-1} + (Q+1)R\ \right]
+  \end{equation}
   で与えられる．これは，正則グラフの頂点間距離の総和の下界である．
 \end{theorem}
 \begin{proof}
-  眠いまた今度
+  ある頂点$v$から頂点$w(\neq v)$との距離の総和を次式で表す．
+  \begin{equation}
+    \label{eq:gmg-lb-1}
+    \sum_{i=1}^{n-1}i c_i
+  \end{equation}
+  ここで，$c_i$は$v$との距離が$i$の頂点の個数とする．
+  一般化ムーアグラフの場合，$c_i$は式\ref{eq:gmg-verts-dist}のとおりである．
+  式\ref{eq:gmg-verts-dist}を式\ref{eq:gmg-lb-1}に代入すると，
+  \begin{equation}
+    \label{eq:gmg-lb-2}
+    \begin{aligned}
+      \sum_{i=1}^{n-1}ic_i
+      &=\sum_{i=1}^{Q}ic_i+(Q+1)c_{Q+1}+\sum_{i=Q+2}^{n-1}ic_i \\
+      &=\sum_{i=1}^{Q}ik(k-1)^{i-1}+(Q+1)R
+    \end{aligned}
+  \end{equation}
+  が得られる．これは一つの頂点から他のすべての頂点への距離の総和を表すので，
+  式\ref{eq:gmg-lb-2}を$n$倍すると，式\ref{eq:gmg-lb}が得られる．
+
+  次に，式\ref{eq:gmg-lb}が頂点間距離の総和の下界であることを示す．
+  一般的な$c'_i$に対して，
+  \begin{equation}
+    \label{eq:gmg-lb-3}
+    \sum_{i=1}^{n-1}i c_i \leq \sum_{i=1}^{n-1}i c'_i
+  \end{equation}
+  であることを証明する．
+  $1\leq i\leq Q$の範囲で，$c_i$は最大なので次が得られる．
+  \begin{equation}
+    \label{eq:gmg-lb-4}
+    \begin{aligned}
+      c_i - c'_i
+      \begin{cases}
+        \geq 0 & 1\leq i\leq Q \\
+        \lesseqgtr 0 & i = Q+1 \\
+        \leq 0 & Q+2\leq i\leq n-1
+      \end{cases}
+    \end{aligned}
+  \end{equation}
+  $c_{Q+1}\geq c'_{Q+1}$と$c_{Q+1}\leq c'_{Q+1}$のふたつの場合について考える．
+  \begin{enumerate}[(i)]
+  \item $c_{Q+1}\geq c'_{Q+1}$のとき
+  \end{enumerate}
+  $c_{Q+1}\geq c'_{Q+1}$ならば$c_{Q+1}-c'_{Q+1}\geq0$となり，
+  式\ref{eq:gmg-lb-4}より，
+  \begin{equation}
+    \label{eq:gmg-lb-5a}
+    \begin{aligned}
+      c_i-c'_i
+      \begin{cases}
+        \geq 0 & 1\leq i\leq Q+1 \\
+        \leq 0 & Q+2\leq i\leq n-1
+      \end{cases}
+    \end{aligned}
+  \end{equation}
+  が成り立つ．次が知られている．
+  \begin{equation}
+    \label{eq:gmg-lb-6}
+    \sum_{i=1}^{n-1}c_i = \sum_{i=1}^{n-1}c'_i = n-1
+  \end{equation}
+  式\ref{eq:gmg-lb-5a}と式\ref{eq:gmg-lb-6}より，
+  \begin{equation}
+    \label{eq:gmg-lb-7a}
+    \begin{aligned}
+      \sum_{i=1}^{Q+1}(c_i-c'_i) &= \sum_{i=1}^{Q+1}|c_i-c'_i| \\
+      \sum_{i=Q+2}^{n-1}(c_i-c'_i) &= -\sum_{i=Q+2}^{n-1}|c_i-c'_i| \\
+      \sum_{i=1}^{Q+1}|c_i-c'_i| &= \sum_{i=Q+2}^{n-1}|c_i-c'_i|
+    \end{aligned}
+  \end{equation}
+  が得られる．式\ref{eq:gmg-lb-7a}を用いて，次を考える．
+  \begin{equation}
+    \label{eq:gmg-lb-8a}
+    \sum_{i=1}^{n-1}i(c_i-c'_i)=
+    \sum_{i=1}^{Q+1}i|c_i-c'_i|-\sum_{i=Q+2}^{n-1}|c_i-c'_i|
+  \end{equation}
+  式\ref{eq:gmg-lb-8a}の第一項の上界は，次である．
+  \begin{equation}
+    \label{eq:gmg-lb-8a1}
+    \sum_{i=1}^{Q+1}i|c_i-c'_i|\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|
+  \end{equation}
+  式\ref{eq:gmg-lb-8a}の第二項の下界は，次である．
+  \begin{equation}
+    \label{eq:gmg-lb-8a2}
+    \sum_{i=Q+2}^{n-1}i|c_i-c'_i|\geq (Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i|
+  \end{equation}
+  式\ref{eq:gmg-lb-8a1}と式\ref{eq:gmg-lb-8a2}より，次が成り立つ．
+  \begin{equation}
+    \label{eq:gmg-lb-9a}
+    \begin{aligned}
+      \sum_{i=1}^{n-1}i(c_i-c'_i)
+      &\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i| \\
+      &= (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=1}^{Q+1}|c_i-c'_i| \\
+      &= -\sum_{i=1}^{Q+1}|c_i-c'_i| \\
+      &\leq 0
+    \end{aligned}
+  \end{equation}
+  ゆえに\ref{eq:gmg-lb-3}が成り立つ．
+
+  \begin{enumerate}[(i)]
+    \setcounter{enumi}{1}
+  \item $c_{Q+1}\leq c'_{Q+1}$の場合もほとんど同じである．
+  \end{enumerate}
+  $c_{Q+1}\leq c'_{Q+1}$ならば$c_{Q+1}-c'_{Q+1}\leq0$となり，
+  式\ref{eq:gmg-lb-4}より，
+  \begin{equation}
+    \label{eq:gmg-lb-5b}
+    \begin{aligned}
+      c_i-c'_i
+      \begin{cases}
+        \geq 0 & 1\leq i\leq Q \\
+        \leq 0 & Q+1\leq i\leq n-1
+      \end{cases}
+    \end{aligned}
+  \end{equation}
+  式\ref{eq:gmg-lb-5b}と式\ref{eq:gmg-lb-6}より，
+  \begin{equation}
+    \label{eq:gmg-lb-7b}
+    \begin{aligned}
+      \sum_{i=1}^{Q}(c_i-c'_i) &= \sum_{i=1}^{Q}|c_i-c'_i| \\
+      \sum_{i=Q+1}^{n-1}(c_i-c'_i) &= -\sum_{i=Q+1}^{n-1}|c_i-c'_i| \\
+      \sum_{i=1}^{Q}|c_i-c'_i| &= \sum_{i=Q+1}^{n-1}|c_i-c'_i|
+    \end{aligned}
+  \end{equation}
+  が得られる．式\ref{eq:gmg-lb-7a}を用いて，次を考える．
+  \begin{equation}
+    \label{eq:gmg-lb-8b}
+    \sum_{i=1}^{n-1}i(c_i-c'_i)=
+    \sum_{i=1}^{Q}i|c_i-c'_i|-\sum_{i=Q+1}^{n-1}|c_i-c'_i|
+  \end{equation}
+  式\ref{eq:gmg-lb-8b}の第一項の上界は，次である．
+  \begin{equation}
+    \label{eq:gmg-lb-8b1}
+    \sum_{i=1}^{Q}i|c_i-c'_i|\leq Q\sum_{i=1}^{Q}|c_i-c'_i|
+  \end{equation}
+  式\ref{eq:gmg-lb-8b}の第二項の下界は，次である．
+  \begin{equation}
+    \label{eq:gmg-lb-8b2}
+    \sum_{i=Q+1}^{n-1}i|c_i-c'_i|\geq (Q+1)\sum_{i=Q+1}^{n-1}|c_i-c'_i|
+  \end{equation}
+  式\ref{eq:gmg-lb-8b1}と式\ref{eq:gmg-lb-8b2}より，次が成り立つ．
+  \begin{equation}
+    \label{eq:gmg-lb-9b}
+    \begin{aligned}
+      \sum_{i=1}^{n-1}i(c_i-c'_i)
+      &\leq Q\sum_{i=1}^{Q}|c_i-c'_i|-(Q+1)\sum_{i=Q+1}^{n-1}|c_i-c'_i| \\
+      &= Q\sum_{i=1}^{Q}|c_i-c'_i|-(Q+1)\sum_{i=1}^{Q}|c_i-c'_i| \\
+      &= -\sum_{i=1}^{Q}|c_i-c'_i| \\
+      &\leq 0
+    \end{aligned}
+  \end{equation}
+  ゆえに\ref{eq:gmg-lb-3}が成り立つ．
 \end{proof}
 
-次の性質は，一般化ムーアグラフに存在しうる閉路の長さを定める．
+\begin{example}
+  再び$M(12,3)$について考える．
+\end{example}
+
+次の性質は，一般化ムーアグラフの構造的特徴を定める．
 後に説明する探索方法に用いる極めて重要な性質である．
 \begin{theorem}
   \label{theorem:gmg-geometric-property}
-  一般化ムーアグラフに長さ$2Q$以下の閉路は存在しない．
-
+  あるグラフが一般化ムーアグラフであることの必要十分条件は，
+  \begin{enumerate}[a)]
+  \item 長さ$2Q$以下の閉路を持たないこと
+    \label{gmg-geom-a}
+  \item 直径が$R=0$のときは$Q$,\hspace{1ex}$R>0$のときは$Q+1$であること．
+    \label{gmg-geom-b}
+  \end{enumerate}
+  の二条件を同時に満たすことである．
 \end{theorem}
 \begin{proof}
-  眠いまた今度
+  正則グラフの頂点数を$n$,次数を$k$とする．
+  条件\ref{gmg-geom-a}を満たすならば，すべての頂点$v$に対する
+  $d(v,w)=i$なる頂点$w$の数$c'_i$は，$1\leq i\leq Q$に対して
+  $c'_i=k(k-1)^{i-1}$となる．また，条件\ref{gmg-geom-b}を満たすならば，
+  $Q+2\leq i$の範囲で$c'_i=0$である．これら二つを同時に満たすとき，
+  \[ c'_{Q+1}=n-1-\sum_{i=1}^{Q}k(k-1)^{i-1}=R \]
+  を満たす．よって，ある正則グラフが条件\ref{gmg-geom-a}と
+  条件\ref{gmg-geom-b}を同時に満たすとき，それは一般化ムーアグラフである．
+
+  逆を証明する．$1\leq i\leq Q$の範囲で$c_i=k(k-1)^{i-1}$ならば，
+  ある頂点$v$を固定したとき，$d(v,w)=i<Q$を満たす頂点$w$は，
+  $d(v,x)=i+1$を満たす$k-1$個の頂点$x$と隣接する．
+  従って，一般化ムーアグラフ$M(n,k)$には，長さ$2Q$以下の閉路は存在しない．
+  また，$Q+2\leq i$(ただし，$R=0$の場合$Q+1\leq i$)の範囲で$c_i=0$なので，
+  すべての頂点$v$について，$d(v,w)\geq Q+2$\hspace{.3ex}$(Q+1)$となるような
+  頂点$w$は存在しない．従って，直径は$Q+1$\hspace{.3ex}$(Q)$である．
+  よって，$M(n,k)$は条件\ref{gmg-geom-a}と条件\ref{gmg-geom-b}を
+  同時に満たす．
 \end{proof}
