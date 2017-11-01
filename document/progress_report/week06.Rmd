@@ -1,0 +1,131 @@
+---
+title: "研究進捗報告"
+author: "里谷 佳紀"
+date: "平成29年10月24日"
+documentclass: bxjsarticle
+classoption: xelatex,ja=standard,11pt
+geometry: no
+bibliography: ../resource/MyCollection.bib
+csl: physical-review-e.csl
+output:
+  pdf_document:
+    pandoc_args:
+    - --variable=biblio-title:参考文献
+    latex_engine: xelatex
+    number_sections: yes
+    fig_caption: yes
+    includes:
+      in_header: packages.tex
+  md_document:
+    variant: markdown_github
+---
+
+```{r setup, include=FALSE}
+library(captioner)
+
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(pander)
+library(gridExtra)
+
+library(network)
+library(sna)
+library(ggnet)
+library(igraph)
+library(intergraph)
+
+is_latex = !is.null(knitr::opts_knit$get('rmarkdown.pandoc.to')) &&
+  knitr::opts_knit$get('rmarkdown.pandoc.to') %in% c('beamer', 'latex')
+panderOptions('table.style', 'grid')
+knitr::opts_chunk$set(fig.width=6.5, fig.height=6,
+  echo=FALSE, warning=FALSE, message=FALSE
+  )
+if(is_latex) {
+  options(device = function(file, width = 6.5, height = 6, ...) {
+    cairo_pdf(tempfile(), width = width, height = height, ...)
+  })
+  knitr::opts_chunk$set(dev='cairo_pdf', dev.args=list(family='IPAexGothic'))
+}
+
+fig_num <- captioner(prefix = '図', suffix = '')
+tab_num <- captioner(prefix = '表', suffix = '')
+cap_str <- function(x) {
+  if(!is_latex) return(x)
+  else return(tail(unlist(strsplit(x, ' ')), 1))
+}
+show_table <- function(x, cap) {
+  if(is_latex) {
+    kable(x, caption = cap)
+  } else {
+    pander(x, caption = cap)
+  }
+}
+```
+
+# 研究全体の目的
+深さ優先探索をベースにした，一般化ムーアグラフを発見するアルゴリズムを開発する．
+さらに，初期グラフの改良や枝刈りを導入する，更なる改良案を提案する．
+同時に，これらの改良を評価する．
+
+# 前回打ち合わせ時に定めた短期目標
+1. 展開ノード数計測の実験の続き
+2. 辺の削除に伴う最短距離の更新の実験
+3. $\sigma'_{st}=\sum_v\sigma'_{sv}\sigma'_{vt}/(d'_{st}-1)$の証明
+4. 定理とプログラムの文書化
+    a. $2Q$以下の閉路が存在しないことの定理
+    b. 基本アルゴリズム
+
+# 本日までの進捗状況
+```{r}
+fig_result <- cap_str(fig_num('result', '最初のグラフを発見するまでに要した時間とノード数'))
+fig_result_ext_nodes <- cap_str(fig_num('result-ext-nodes', '最初のグラフを出力するまでに要した展開ノード数'))
+fig_result <- cap_str(fig_num('result', 'ネットワークトポロジ別の実行時間'))
+```
+1. 現在の結果を図`r fig_num('result-ext-nodes', display = 'n')`に示す．
+  未だ計算が終わっていない組み合わせがある．
+2. ランダムネットワーク(Erdos-Rényiモデル)と
+  スケールフリーネットワーク(Barabási-Albertモデル)上で
+  実験を行った．結果を図`r fig_num('result', display = 'n')`に示す．
+  密グラフでは性能が上がり，疎グラフでは効果があまりないことが分かった．
+3. アイディアを打ち合わせ中に説明する．
+4. 完成したものがある．
+  a. 未着手
+  b. 部分的に書いた．
+
+```{r fig:result-ext-nodes, fig.cap=fig_result_ext_nodes, fig.align='center', fig.width=5, fig.height=4, out.width='70%'}
+data <- read_csv('../resource/table/cmp-algo-node-lab.csv') %>%
+  filter(bdr == 'basic' | mgr == 'basic') %>%
+  mutate(mtd = ifelse(bdr != 'basic', bdr, mgr)) %>%
+  filter(d == 3)
+gp <- ggplot(data, aes(n, node, color=mtd)) +
+  geom_point() +
+  geom_line() +
+  scale_y_log10()
+gp
+```
+
+```{r fig:result, fig.cap=fig_result, fig.align='center', fig.width=5, fig.height=5, out.width='70%'}
+data <- read_csv('../resource/table/dist-delete-mws.csv') %>%
+  rename(proposed = `time`) %>%
+  rename(igraph = `time-igraph`) %>%
+  gather(alg, `time`, c(proposed, igraph)) %>%
+  mutate(alg = as.factor(alg), `p-or-m` = as.factor(`p-or-m`)) %>%
+  group_by(n, `p-or-m`, type, alg) %>%
+  summarise(`mean_time` = mean(`time`)) %>%
+  ungroup()
+
+gp1 <- ggplot(data %>% filter(type == 'random') %>% rename(p = `p-or-m`),
+              aes(n, `mean_time`, color=p, linetype=alg)) +
+  ggtitle('ランダムグラフ') +
+  geom_point() +
+  geom_line()
+gp2 <- ggplot(data %>% filter(type == 'scale-free') %>% rename(m = `p-or-m`),
+              aes(n, `mean_time`, color=m, linetype=alg)) +
+  ggtitle('スケールフリーネットワーク') +
+  geom_point() +
+  geom_line()
+grid.arrange(gp1, gp2)
+```
