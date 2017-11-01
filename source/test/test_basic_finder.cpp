@@ -5,14 +5,14 @@ extern "C" {
 #include <iostream>
 #include <ctime>
 
-#include "common/graph_config.hpp"
-#include "common/initial_builder.hpp"
-#include "common/initial_builder_cycle_conjecture.hpp"
-#include "common/initial_builder_stree_conjecture.hpp"
+#include "gmgf/graph_config.hpp"
+#include "gmgf/initial_builder.hpp"
+#include "gmgf/initial_builder_cycle_conjecture.hpp"
+#include "gmgf/initial_builder_stree_conjecture.hpp"
 
-#include "common/basic_state_manager.hpp"
+#include "gmgf/basic_state_manager.hpp"
 
-#include "dfs/generic_finder.hpp"
+#include "gmgf/dfs_finder.hpp"
 
 using namespace std;
 using namespace gmgf;
@@ -40,7 +40,7 @@ int main(int argc, char* argv[]) {
   //initial_builder_cycle_conjecture();
   //initial_builder_stree_conjecture();
   state_manager<igraph_t>* manager = new basic_state_manager();
-  generic_finder<igraph_t>* finder = new generic_finder<igraph_t>
+  dfs_finder<igraph_t>* finder = new dfs_finder<igraph_t>
     (config, builder, manager);
 
   clock_t begin = clock();

@@ -5,7 +5,7 @@ extern "C" {
 #include <cassert>
 #include <ctime>
 #include <iostream>
-#include "common/distance_update.hpp"
+#include "gmgf/distance_update.hpp"
 
 using namespace std;
 using namespace gmgf;

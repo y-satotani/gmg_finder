@@ -1,7 +1,5 @@
 
-#include "common/minmax_state_manager.hpp"
-
-using namespace gmgf;
+#include "minmax_state_manager.hpp"
 
 namespace gmgf {
 

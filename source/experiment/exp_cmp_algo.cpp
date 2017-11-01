@@ -7,16 +7,16 @@ extern "C" {
 #include <cstdlib>
 #include <cstring>
 
-#include "common/graph_config.hpp"
-#include "common/initial_builder.hpp"
-#include "common/initial_builder_cycle_conjecture.hpp"
-#include "common/initial_builder_stree_conjecture.hpp"
-#include "common/initial_builder_sorter.hpp"
+#include "gmgf/graph_config.hpp"
+#include "gmgf/initial_builder.hpp"
+#include "gmgf/initial_builder_cycle_conjecture.hpp"
+#include "gmgf/initial_builder_stree_conjecture.hpp"
+#include "gmgf/initial_builder_sorter.hpp"
 
-#include "common/basic_state_manager.hpp"
-#include "common/minmax_state_manager.hpp"
+#include "gmgf/basic_state_manager.hpp"
+#include "gmgf/minmax_state_manager.hpp"
 
-#include "dfs/generic_finder.hpp"
+#include "gmgf/dfs_finder.hpp"
 
 using namespace std;
 using namespace gmgf;
@@ -43,7 +43,7 @@ void run_finder(int* sspl_ret,
                 state_manager<T>* manager)
 {
 
-  generic_finder<T>* finder = new generic_finder<T>(config, builder, manager);
+  dfs_finder<T>* finder = new dfs_finder<T>(config, builder, manager);
 
   clock_t begin = clock();
   T t = finder->next();

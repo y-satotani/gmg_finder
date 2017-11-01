@@ -1,7 +1,5 @@
 
-#include "common/basic_state_manager.hpp"
-
-using namespace gmgf;
+#include "basic_state_manager.hpp"
 
 namespace gmgf {
 

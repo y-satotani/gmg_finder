@@ -6,7 +6,7 @@ extern "C" {
 #include <ctime>
 #include <cstdlib>
 #include <cstring>
-#include "common/distance_update.hpp"
+#include "gmgf/distance_update.hpp"
 
 using namespace std;
 using namespace gmgf;

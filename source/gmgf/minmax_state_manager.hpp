@@ -6,8 +6,8 @@ extern "C" {
 #include <igraph.h>
 }
 #include <utility>
-#include "common/graph_config.hpp"
-#include "common/state_manager.hpp"
+#include "graph_config.hpp"
+#include "state_manager.hpp"
 #include "basic_state_manager.hpp"
 
 namespace gmgf {

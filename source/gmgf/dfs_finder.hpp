@@ -1,19 +1,19 @@
 
-#ifndef _GMGF_DFS_GENERIC_FINDER_HPP_
-#define _GMGF_DFS_GENERIC_FINDER_HPP_
+#ifndef _GMGF_DFS_FINDER_HPP_
+#define _GMGF_DFS_FINDER_HPP_
 
 extern "C" {
 #include <igraph.h>
 }
 #include <utility>
 #include <vector>
-#include "common/graph_config.hpp"
-#include "common/initial_builder.hpp"
-#include "common/state_manager.hpp"
+#include "graph_config.hpp"
+#include "initial_builder.hpp"
+#include "state_manager.hpp"
 
 namespace gmgf {
 
-  template <typename S> class generic_finder {
+  template <typename S> class dfs_finder {
   protected:
     gmgf::graph_config* m_config;
     gmgf::initial_builder* m_builder;
@@ -24,7 +24,7 @@ namespace gmgf {
     unsigned long long m_extracted_nodes;
 
   public:
-    generic_finder(graph_config* config,
+    dfs_finder(graph_config* config,
                    initial_builder* builder,
                    state_manager<S>* manager) {
       m_config = config;
@@ -35,7 +35,7 @@ namespace gmgf {
       reset();
     }
 
-    virtual ~generic_finder() {
+    virtual ~dfs_finder() {
       for(std::size_t i = 0; i < m_stack.size(); i++)
         m_manager->destroy(m_stack[i].second);
     }
@@ -103,4 +103,4 @@ namespace gmgf {
   };
 }
 
-#endif // _GMGF_DFS_GENERIC_FINDER_HPP_
+#endif // _GMGF_DFS_FINDER_HPP_

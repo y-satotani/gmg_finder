@@ -3,8 +3,8 @@ extern "C" {
 #include <igraph.h>
 }
 #include <iostream>
-#include "common/graph_config.hpp"
-#include "common/initial_builder.hpp"
+#include "gmgf/graph_config.hpp"
+#include "gmgf/initial_builder.hpp"
 
 using namespace std;
 using namespace gmgf;
