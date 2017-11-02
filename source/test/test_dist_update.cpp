@@ -37,9 +37,10 @@ void print_matrix(igraph_matrix_t* M) {
 int main(int argc, char* argv[]) {
   igraph_rng_seed(igraph_rng_default(), time(NULL));
 
-  igraph_t G;
+  igraph_t G, C;
   igraph_integer_t n = 100;
-  igraph_full(&G, n, 0, 0);
+  igraph_empty(&G, n, 0);
+  igraph_complement(&C, &G);
 
   igraph_matrix_t D, Dnew, Dtrain;
   igraph_matrix_t S, Snew, Strain;
@@ -53,12 +54,31 @@ int main(int argc, char* argv[]) {
 
   set_distance_matrix_with_path_num(&D, &S, &G);
 
+  // insert
+  while(igraph_ecount(&G) < n*(n-1)/2) {
+    igraph_integer_t eid = igraph_rng_get_integer
+      (igraph_rng_default(), 0, igraph_ecount(&C)-1);
+    igraph_integer_t u, v;
+    igraph_edge(&C, eid, &u, &v);
+    igraph_delete_edges(&C, igraph_ess_1(eid));
+    igraph_add_edge(&G, u, v);
+
+    update_distance_on_insert(&Dnew, &Snew, &D, &S, u, v);
+    set_distance_matrix_with_path_num(&Dtrain, &Strain, &G);
+    igraph_matrix_update(&D, &Dnew);
+    igraph_matrix_update(&S, &Snew);
+
+    assert(igraph_matrix_all_e(&Dnew, &Dtrain) &&
+           igraph_matrix_all_e(&Snew, &Strain));
+  }
+  // delete
   while(igraph_ecount(&G) > 0) {
     igraph_integer_t eid = igraph_rng_get_integer
       (igraph_rng_default(), 0, igraph_ecount(&G)-1);
     igraph_integer_t u, v;
     igraph_edge(&G, eid, &u, &v);
     igraph_delete_edges(&G, igraph_ess_1(eid));
+    igraph_add_edge(&C, u, v);
 
     update_distance_on_delete(&Dnew, &Snew, &D, &S, u, v);
     set_distance_matrix_with_path_num(&Dtrain, &Strain, &G);

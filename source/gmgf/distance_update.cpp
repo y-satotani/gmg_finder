@@ -3,15 +3,6 @@
 
 namespace gmgf {
 
-  void update_distance_on_insert(igraph_matrix_t* Dnext,
-                                 igraph_matrix_t* Snext,
-                                 igraph_matrix_t* D,
-                                 igraph_matrix_t* S,
-                                 igraph_integer_t u,
-                                 igraph_integer_t v) {
-
-  }
-
   void _sort_two_vertices_by_distance(igraph_integer_t* near,
                                       igraph_integer_t* far,
                                       igraph_matrix_t* D,
@@ -27,6 +18,50 @@ namespace gmgf {
     } else {
       *near = v;
       *far = u;
+    }
+  }
+
+  void update_distance_on_insert(igraph_matrix_t* Dnext,
+                                 igraph_matrix_t* Snext,
+                                 igraph_matrix_t* D,
+                                 igraph_matrix_t* S,
+                                 igraph_integer_t u,
+                                 igraph_integer_t v) {
+    int s, t;
+    igraph_integer_t a, b;
+    igraph_real_t dsa, dsb, dbt, dst;
+    igraph_real_t ssa, sbt, sst;
+    for(s = 0; s < igraph_matrix_nrow(D); s++) {
+      for(t = 0; t < igraph_matrix_nrow(D); t++) {
+        if(s > t) continue;
+        if(s == t) {
+          igraph_matrix_set(Dnext, s, s, 0);
+          igraph_matrix_set(Snext, s, s, 1);
+          continue;
+        }
+        _sort_two_vertices_by_distance(&a, &b, D, s, u, v);
+        dsa = igraph_matrix_e(D, s, a);
+        dsb = igraph_matrix_e(D, s, b);
+        dbt = igraph_matrix_e(D, b, t);
+        dst = igraph_matrix_e(D, s, t);
+        ssa = igraph_matrix_e(S, s, a);
+        sbt = igraph_matrix_e(S, b, t);
+        sst = igraph_matrix_e(S, s, t);
+
+        if(dsa < dsb && dsa + dbt + 1 < dst) {
+          dst = dsa + dbt + 1;
+          sst = (igraph_integer_t)ssa * (igraph_integer_t)sbt;
+        } else if(dsa < dsb && dsa + dbt + 1 == dst) {
+          sst = (igraph_integer_t)sst +
+            (igraph_integer_t)ssa * (igraph_integer_t)sbt;
+        } else {
+        }
+
+        igraph_matrix_set(Dnext, s, t, dst);
+        igraph_matrix_set(Dnext, t, s, dst);
+        igraph_matrix_set(Snext, s, t, sst);
+        igraph_matrix_set(Snext, t, s, sst);
+      }
     }
   }
 
@@ -67,10 +102,8 @@ namespace gmgf {
       for(t = 0; t < igraph_matrix_nrow(D); t++) {
         if(s > t) continue;
         if(s == t) {
-          igraph_matrix_set(Dnext, s, t, 0);
-          igraph_matrix_set(Dnext, t, s, 0);
-          igraph_matrix_set(Snext, s, t, 1);
-          igraph_matrix_set(Snext, t, s, 1);
+          igraph_matrix_set(Dnext, s, s, 0);
+          igraph_matrix_set(Snext, s, s, 1);
           continue;
         }
         igraph_integer_t npath = _path_num_not_contain(D, S, s, t, u, v);
