@@ -1,7 +1,7 @@
 ---
 title: "研究進捗報告"
 author: "里谷 佳紀"
-date: "平成29年9月25日"
+date: "平成29年10月31日"
 documentclass: bxjsarticle
 classoption: xelatex,ja=standard,11pt
 geometry: no
@@ -29,6 +29,7 @@ library(tidyr)
 library(ggplot2)
 library(knitr)
 library(pander)
+library(gridExtra)
 
 library(network)
 library(sna)
@@ -70,57 +71,52 @@ show_table <- function(x, cap) {
 また，既存の方法[@Yamamoto2016]と比較することにより，新方法の有用性を検証する．
 
 # 前回打ち合わせ時に定めた短期目標
-1. 深さ優先探索によるグラフの発見
-2. 命題
-    a. グラフ$G$に長さ$2Q$以下の閉路が存在せず，直径が$Q+1$ならば，
-    $G$はCerfらの下界を達成する．
-    b. グラフ$G$に長さ$2Q$以下の閉路が存在しないならば，直径が$Q+1$である．
-
-の検証
+1. 全域木予想の実験
+2. 先行研究の調査
 
 # 本日までの進捗状況
 ```{r}
-tab_result <- cap_str(tab_num('result', '探索結果'))
-fig_cycle_diam <- cap_str(fig_num('cycle-diam', '命題の反例'))
+fig_time <- cap_str(fig_num('time', '実行時間の比較'))
 ```
-1. プログラムが完成した．
-    + https://gist.github.com/arity-r/21ded374488645fec6c3d1de9e6d3a83 (Python)
-    + https://github.com/y-satotani/cerfcheck (C言語)
+1. 計算中である．計算できた頂点数と次数の組について，時間を計測した．
+  結果を図`r fig_num('time', display = 'n')`に示す．
+2. Cerfらは，平均頂点間距離の下界[@Cerf1974]と一致する
+  平均頂点間距離をもつグラフを，一般ムーアグラフ(Generalized Moore Graph)
+  と定義した[@cerf1973computer]．
+  後の成果から，ここで一般ムーアグラフに$2Q$以下の閉路が存在しないことと，
+  直径が$Q+1$($R=0$の場合は$Q$)であることが示されたと推測できる．
 
-    にて公開している．
+  McKayとStantonは，次数が3で，頂点数が48と50の一般ムーアグラフが
+  存在しないことを証明した[@mckay1979current]．
+  Stantonらは，頂点数が44の一般ムーアグラフが存在しないことを証明した
+  [@Stanton1980]．
+  しかしながら，それらの方法は場合分けを細かくするもので，一般性は低い．
 
-    さらに，いくつかの頂点数と次数の組み合わせで実験を行った．
-    結果を表`r tab_num('result', display = 'n')`に示す．
+  Sampelsは，ケイリーグラフ(Cayley Graph)から平均頂点間距離が短いグラフを
+  抜き出すことで，一般ムーアグラフを発見するアルゴリズムを開発した
+  [@Sampels2004]．
 
-2. 二番目の命題が偽になるグラフを発見した．
-  図`r fig_num('cycle-diam', display = 'n')`に示す．
-  頂点数が14で，次数が3であるこのグラフは，
-  最小の閉路長が5($>2Q$)であるが，直径は4($\neq Q+1$)である．
-  さらに，このグラフはCerfらの下界を満足しない．
+```{r fig:time, fig.cap=fig_time, fig.align='center', fig.width=5, fig.height=5, out.width='70%'}
+data <- read_csv('../resource/table/cmp-algo-time-lab.csv') %>%
+  filter(mgr == 'basic') %>%
+  mutate(mtd = bdr) %>%
+  select(n, d, mtd, time) %>%
+  group_by(n, d, mtd) %>%
+  summarise(mean_time = mean(time)) %>%
+  ungroup() %>%
+  mutate(mtd = as.factor(mtd))
 
-```{r tab:result}
-data <- read_csv('../resource/table/cmp-algo-node-lab.csv') %>%
-  filter(bdr == 'basic', mgr == 'basic') %>%
-  mutate(gmg = ifelse(sspl == sspl_lb, '$\\checkmark$', ' ')) %>%
-  select(n, d, gmg) %>%
-  spread(n, gmg, fill = 'NA')
-show_table(data, tab_result)
-```
-
-```{r fig:cycle-diam, fig.cap=fig_cycle_diam, fig.align='center', out.width='70%'}
-G = as.network(
-  read.table('../resource/graph/n14-d3-nogmg.elist')
-  )
-ggnet2(G,
-       node.color = rep('royalblue', length(G$val)),
-       label = TRUE
-       )
-```
-
-girthとdiameter
-```{r geom, echo=TRUE}
-iG = read_graph('../resource/graph/n14-d3-nogmg.elist')
-paste(girth(iG)$girth, diameter(iG))
+plot_by_degree <- function(deg) {
+  gp = ggplot(data %>% filter(d == deg),
+            aes(n, mean_time, color=mtd)) +
+    ggtitle(paste0('d = ', deg))
+    geom_point() +
+    geom_line() +
+    scale_y_log10()
+  return(gp)
+}
+gp = lapply(seq(3,4), plot_by_degree)
+grid.arrange(gp[[1]], gp[[2]])
 ```
 
 # 参考文献

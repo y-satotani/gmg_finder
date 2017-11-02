@@ -24,9 +24,9 @@
 \theoremstyle{definition}
 %\newtheorem{theorem}{定理}
 \newtheorem{conjecture}[theorem]{予想}
-\graphicspath{{../../thesis/figure/}}
+\graphicspath{{../resource/figure/}}
 \makeatletter
-\def\input@path{{../../thesis/figure/}}
+\def\input@path{{../resource/figure/}}
 \makeatother
 
 \title{一般化ムーアグラフの探索の高効率化}
@@ -46,13 +46,13 @@
   \item アプリケーションの通信のタイミングや通信先は予測は困難
   \item 単純にホップ数が小さいトポロジが有効\cite{Koibuchi2012, Singla2011}
   \item \alert{一般化ムーアグラフ}$\cdots$
-    ホップ数と平均頂点間距離が理論的に下界な正則グラフ
+    ホップ数と平均頂点間距離が理論的な下界に等しい正則グラフ
     \cite{cerf1973computer, Cerf1974}
   \item 一般化ムーアグラフを発見するアルゴリズムはいくつかある
-    \cite{Sampels2004, 2015, 2016}
+    \cite{Sampels2004, Fujita2015, Yamamoto2016}
   \item 次をすべて満たす効率的な発見方法はまだ知られていない
     \begin{itemize}
-    \item (可能な)頂点数と次数をすべて網羅
+    \item (可能な)すべての頂点数と次数に対応
     \item ランダム性がない
     \end{itemize}
   \item 全探索をベースにして効率的に一般化ムーアグラフを
@@ -63,11 +63,11 @@
 \begin{frame}{方法}
   \begin{enumerate}
   \item 与えられた頂点数と次数の初期グラフを構築しておく
-  \item 図\ref{fig:feasible-edges-example}の破線部分の辺を
+  \item 図\ref{fig:feasible-edges-example}の赤の辺を
     追加できる(できない)か求め真の場合次のグラフを生成
     \begin{itemize}
-    \item 図\ref{fig:feasible-edges-example2}では最小の閉路長が
-      $5$以上のとき追加できる
+    \item 図\ref{fig:feasible-edges-example2}では
+      最小の閉路長が$5$以上のとき追加できる
       \begin{enumerate}[a]
       \item 3-閉路ができるので追加できない
       \item 4-閉路ができるので追加できない
@@ -80,14 +80,14 @@
     \centering
     \begin{minipage}{.4\columnwidth}
       \def\svgwidth{\textwidth}
-      \input{feasible-edges-example.pdf_tex}
+      \input{feasible-edges-example-color.pdf_tex}
       \captionof{figure}{初期グラフの例と辺の候補}
       \label{fig:feasible-edges-example}
     \end{minipage}
     \hspace{1em}
     \begin{minipage}{.4\columnwidth}
       \def\svgwidth{\textwidth}
-      \input{feasible-edges-example2.pdf_tex}
+      \input{feasible-edges-example2-color.pdf_tex}
       \captionof{figure}{探索途中のグラフ}
       \label{fig:feasible-edges-example2}
     \end{minipage}
@@ -95,11 +95,38 @@
 \end{frame}
 
 \begin{frame}{現在までの成果}
-  \begin{enumerate}
-  \item いち
-  \item に
-  \item さん
-  \end{enumerate}
+  \begin{columns}
+    \begin{column}{.6\textwidth}
+      \centering
+      \includegraphics[height=.5\textheight]{example-image-a}
+      \captionof{figure}{結果 \\ {\scriptsize
+          探索開始から(もしあるならば)最初の一般化ムーアグラフを
+          発見するまでの時間
+      }}
+      \label{fig:result}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \centering
+      \begin{figure}
+        \centering
+        \def\svgwidth{\textwidth}
+        \resizebox{!}{.3\textheight}{
+          \input{initial-tree-cycle-example.pdf_tex}
+        }
+        \caption{閉路を含む初期グラフ}
+        \label{fig:initial-graph-cycle}
+      \end{figure}
+      \vspace{-2em}
+      \begin{figure}
+        \def\svgwidth{\textwidth}
+        \resizebox{!}{.3\textheight}{
+          \input{initial-spanning-tree-12-example.pdf_tex}
+        }
+        \captionof{figure}{全域木}
+        \label{fig:initial-graph-stree}
+      \end{figure}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{今後の課題}
@@ -107,10 +134,12 @@
   \item 直径の下界を利用した枝刈り
   \item 予想の証明
     \begin{conjecture}
-      hogehoge
+      一般化ムーアグラフには，図\ref{fig:initial-graph-cycle}
+      のような部分グラフが存在する．
     \end{conjecture}
     \begin{conjecture}
-      hogehoge
+      一般化ムーアグラフの全域木に，図\ref{fig:initial-graph-stree}
+      のような木が存在する．
     \end{conjecture}
   \item 同型グラフ判定を用いた列挙
   \item 一般化ムーアグラフが存在しない場合の考察
@@ -127,7 +156,7 @@
 
 \begin{frame}[allowframebreaks]{参考文献}
   \bibliographystyle{jalpha}
-  \bibliography{MyCollection}
+  \bibliography{../resource/MyCollection}
 \end{frame}
 
 \end{document}
