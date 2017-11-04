@@ -2,7 +2,7 @@ library(readr)
 library(dplyr)
 library(ggplot2)
 
-data <- read_csv('cmp-minmax-mtr.csv') %>%
+data <- read_csv('cmp-minmax-mtr-mws.csv') %>%
   filter(d == 3) %>%
   mutate(mtd = as.factor(mgr))
 

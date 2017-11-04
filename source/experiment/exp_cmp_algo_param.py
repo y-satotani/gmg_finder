@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 """
-(echo n,d,Q,R,sspl_lb,bdr,mgr,sspl,edge,node,time ;\
+(echo n,d,Q,R,sspl_lb,bdr,mgr,srt,sspl,edge,node,time ;\
  ./exp_cmp_algo_param.py |\
  xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) >\
 exp_cmp_algo_result.csv
@@ -15,10 +15,18 @@ N = {
     5: list(range(6, 9, 2)),
 }
 
+mtds = [
+    ('basic', 'basic', 'basic'),
+    ('basic', 'minmax', 'basic'),
+    ('cycle', 'basic', 'sorted'),
+    ('cycle', 'minmax', 'sorted'),
+    ('stree', 'basic', 'basic'),
+    ('stree', 'minmax', 'basic')
+]
+
 print('\n'.join([
-    '{} {} {} {}'.format(bdr, mgr, n, d)
+    '{} {} {} {} {}'.format(bdr, mgr, srt, n, d)
     for _ in range(runs)
-    for bdr in ('basic', 'cycle', 'stree')
-    for mgr in ('basic', 'minmax')
+    for bdr, mgr, srt in mtds
     for d in D for n in N[d]
 ]))

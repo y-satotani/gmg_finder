@@ -22,11 +22,11 @@
 \renewcommand{\tablename}{表}
 \renewcommand{\appendixname}{補足}
 \theoremstyle{definition}
-%\newtheorem{theorem}{定理}
-\newtheorem{conjecture}[theorem]{予想}
-\graphicspath{{../resource/figure/}}
+\newtheorem{thm}{定理}
+\newtheorem{conj}[thm]{予想}
+\graphicspath{{../resource/figure/}{../resource/table/}}
 \makeatletter
-\def\input@path{{../resource/figure/}}
+\def\input@path{{../resource/figure/}{../resource/table/}}
 \makeatother
 
 \title{一般化ムーアグラフの探索の高効率化}
@@ -55,16 +55,15 @@
     \item (可能な)すべての頂点数と次数に対応
     \item ランダム性がない
     \end{itemize}
-  \item 全探索をベースにして効率的に一般化ムーアグラフを
-    探索する方法を提案・検証することが目的
+  \item 全探索をベースにして比較的効率よく探索する方法を提案・検証
   \end{itemize}
 \end{frame}
 
 \begin{frame}{方法}
   \begin{enumerate}
   \item 与えられた頂点数と次数の初期グラフを構築しておく
-  \item 図\ref{fig:feasible-edges-example}の赤の辺を
-    追加できる(できない)か求め真の場合次のグラフを生成
+  \item 図\ref{fig:feasible-edges-example}の赤の辺から
+    逐次辺取り出して追加できる(できない)か求める
     \begin{itemize}
     \item 図\ref{fig:feasible-edges-example2}では
       最小の閉路長が$5$以上のとき追加できる
@@ -98,10 +97,11 @@
   \begin{columns}
     \begin{column}{.6\textwidth}
       \centering
-      \includegraphics[height=.5\textheight]{example-image-a}
-      \captionof{figure}{結果 \\ {\scriptsize
-          探索開始から(もしあるならば)最初の一般化ムーアグラフを
-          発見するまでの時間
+      \includegraphics[height=.5\textheight]{mid-cmp-algo-time}
+      \captionof{figure}{次数=3の結果 \\ {\scriptsize
+          探索開始から最初の一般化ムーアグラフを
+          発見するまでの時間を表す． \\
+          探索を10回行い，実行時間の平均を計算した．
       }}
       \label{fig:result}
     \end{column}
@@ -133,25 +133,60 @@
   \begin{enumerate}
   \item 直径の下界を利用した枝刈り
   \item 予想の証明
-    \begin{conjecture}
-      一般化ムーアグラフには，図\ref{fig:initial-graph-cycle}
-      のような部分グラフが存在する．
-    \end{conjecture}
-    \begin{conjecture}
+    \begin{conj}
+      一般化ムーアグラフにの部分グラフに，図\ref{fig:initial-graph-cycle}
+      に示したようなグラフが存在する．
+    \end{conj}
+    \begin{conj}
       一般化ムーアグラフの全域木に，図\ref{fig:initial-graph-stree}
-      のような木が存在する．
-    \end{conjecture}
+      に示したような木が存在する．
+    \end{conj}
   \item 同型グラフ判定を用いた列挙
   \item 一般化ムーアグラフが存在しない場合の考察
   \end{enumerate}
 \end{frame}
 
 \appendix
-\begin{frame}{実行時間の比較}
-  \begin{itemize}
-  \item foo
-  \item bar
-  \end{itemize}
+\begin{frame}{一般化ムーアグラフの条件}
+  \begin{thm}
+    正則グラフが一般化ムーアグラフであることの必要十分条件は，
+    \begin{itemize}
+    \item 長さ$2Q$以下の閉路が存在しない
+    \item 直径が$Q+1$である($Q+1$層に頂点が存在しない場合は$Q$)
+    \end{itemize}
+    を同時に満たすことである．
+  \end{thm}
+  \begin{figure}
+    \centering
+    \def\svgwith{\textwidth}
+    \resizebox{.4\textwidth}{!}{
+      \input{initial-tree-example.pdf_tex}
+    }
+    \caption{高さ$Q=2$の木}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{発見した一般化ムーアグラフの数の比較}
+  \begin{columns}
+    \begin{minipage}[t]{.5\textwidth}
+      \centering
+      \includegraphics[height=.65\textwidth]{mid-cmp-algo-full-graph}
+      \captionof{figure}{発見したグラフの数 \\ {\scriptsize
+          なお，同型なグラフは重複して数えている．
+      }}
+      \label{fig:full-graph}
+    \end{minipage}
+    \hspace{1ex}
+    \begin{minipage}[t]{.5\textwidth}
+      \centering
+      \includegraphics[height=.65\textwidth]{mid-cmp-algo-full-time}
+      \captionof{figure}{グラフ1個の発見に要した時間 \\ {\scriptsize
+          すべてのグラフの発見に要した時間を図\ref{fig:full-graph}の値で
+          割った値である．
+      }}
+      \label{fig:full-time}
+    \end{minipage}
+  \end{columns}
 \end{frame}
 
 \begin{frame}[allowframebreaks]{参考文献}

@@ -14,6 +14,7 @@ data <- read_csv('cmp-algo-node-lab.csv') %>%
 gp <- ggplot(data, aes(x = n, y = node, color = mtd)) +
   scale_y_log10() +
   geom_point() +
+  geom_line() +
   labs(x = 'n', y = 'graph')
 ggsave('cmp-algo-node.pdf', gp,
        width = 15, height = 10, units = 'cm')
