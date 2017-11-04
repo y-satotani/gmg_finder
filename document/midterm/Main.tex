@@ -10,8 +10,10 @@
 %\usetheme{Rochester}
 \setbeamertemplate{itemize items}[square]
 \setbeamertemplate{enumerate items}[square]
+\setbeamertemplate{bibliogrpahy item}[text]
 \renewcommand{\kanjifamilydefault}{\gtdefault}
 \renewcommand{\familydefault}{\sfdefault}
+\usefonttheme[onlymath]{serif}
 %\setbeamertemplate{navigation symbols}{}
 %\setbeamertemplate{footline}[frame number]
 \setbeamertemplate{caption}[numbered]
@@ -28,6 +30,7 @@
 \makeatletter
 \def\input@path{{../resource/figure/}{../resource/table/}}
 \makeatother
+\bibliographystyle{jalpha}
 
 \title{一般化ムーアグラフの探索の高効率化}
 \author{里谷 佳紀}
@@ -42,8 +45,8 @@
 \section{本編}
 \begin{frame}{背景と目的}
   \begin{itemize}
-  \item データセンタではクラスタが用いられる
-  \item アプリケーションの通信のタイミングや通信先は予測は困難
+  \item データセンタではコンピュータクラスタが用いられる
+  \item アプリケーションの通信のタイミングや通信先の予測は困難
   \item 単純にホップ数が小さいトポロジが有効\cite{Koibuchi2012, Singla2011}
   \item \alert{一般化ムーアグラフ}$\cdots$
     ホップ数と平均頂点間距離が理論的な下界に等しい正則グラフ
@@ -55,7 +58,8 @@
     \item (可能な)すべての頂点数と次数に対応
     \item ランダム性がない
     \end{itemize}
-  \item 全探索をベースにして比較的効率よく探索する方法を提案・検証
+  \item 全探索をベースにして一般化ムーアグラフの探索を比較的に効率よく
+    行う方法を提案・検証
   \end{itemize}
 \end{frame}
 
@@ -158,7 +162,7 @@
   \end{thm}
   \begin{figure}
     \centering
-    \def\svgwith{\textwidth}
+    \def\svgwith{.4\textwidth}
     \resizebox{.4\textwidth}{!}{
       \input{initial-tree-example.pdf_tex}
     }
@@ -190,7 +194,6 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{参考文献}
-  \bibliographystyle{jalpha}
   \bibliography{../resource/MyCollection}
 \end{frame}
 
