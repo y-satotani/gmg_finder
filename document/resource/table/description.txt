@@ -1,0 +1,10 @@
+mws:
+メモリ         3.9 GiB
+プロセッサ     Intel® Core™ i7-4712HQ CPU @ 2.30GHz × 4 
+グラフィック   Chromium
+ベースシステム Ubuntu 16.04.3 LTS 64 ビット
+仮想化         Oracle
+ディスク       29.4GB
+
+lab:
+
