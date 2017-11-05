@@ -4,6 +4,9 @@ MAKE := make
 all:
 	$(MAKE) -C figure all
 	$(MAKE) -C table all
+	$(MAKE) -C graph all
 
 clean:
-	rm -f $$(find . | egrep "pdf(_tex)?")
+	$(MAKE) -C figure clean
+	$(MAKE) -C table clean
+	$(MAKE) -C graph clean
