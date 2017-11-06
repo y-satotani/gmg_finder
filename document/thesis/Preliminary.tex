@@ -72,9 +72,9 @@
   \end{align*}
   となるので，定義\ref{def:generalized-moore-graph}で示した距離と頂点数の
   関係を満たす．同様に，他のすべての頂点について，上述の距離と頂点数の関係を
-  満たすので，このグラフは一般化ムーアグラフである．
+  満たす．よって，このグラフは一般化ムーアグラフである．
 \end{example}
-以下，$M(n,k)$を，頂点数$n$,次数$k$の一般化ムーアグラフと記し，
+以下，頂点数$n$,次数$k$の一般化ムーアグラフを$M(n,k)$と記し，
 $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとおりとする．
 頂点数と次数が文脈から明らかな場合は省略してそれぞれ$M,Q,R$と表す．
 
@@ -99,14 +99,12 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   ここで，$c_i$は$v$との距離が$i$の頂点の個数とする．
   一般化ムーアグラフの場合，$c_i$は式\ref{eq:gmg-verts-dist}のとおりである．
   式\ref{eq:gmg-verts-dist}を式\ref{eq:gmg-lb-1}に代入すると，
-  \begin{equation}
-    \label{eq:gmg-lb-2}
-    \begin{aligned}
+  \begin{align}
       \sum_{i=1}^{n-1}ic_i
-      &=\sum_{i=1}^{Q}ic_i+(Q+1)c_{Q+1}+\sum_{i=Q+2}^{n-1}ic_i \\
+      &=\sum_{i=1}^{Q}ic_i+(Q+1)c_{Q+1}+\sum_{i=Q+2}^{n-1}ic_i \nonumber\\
       &=\sum_{i=1}^{Q}ik(k-1)^{i-1}+(Q+1)R
-    \end{aligned}
-  \end{equation}
+      \label{eq:gmg-lb-2}
+  \end{align}
   が得られる．これは一つの頂点から他のすべての頂点への距離の総和を表すので，
   式\ref{eq:gmg-lb-2}を$n$倍すると，式\ref{eq:gmg-lb}が得られる．
 
@@ -176,17 +174,14 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
     \sum_{i=Q+2}^{n-1}i|c_i-c'_i|\geq (Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i|
   \end{equation}
   式\ref{eq:gmg-lb-8a1}と式\ref{eq:gmg-lb-8a2}より，次が成り立つ．
-  \begin{equation}
-    \label{eq:gmg-lb-9a}
-    \begin{aligned}
-      \sum_{i=1}^{n-1}i(c_i-c'_i)
-      &\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i| \\
-      &= (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=1}^{Q+1}|c_i-c'_i| \\
-      &= -\sum_{i=1}^{Q+1}|c_i-c'_i| \\
-      &\leq 0
-    \end{aligned}
-  \end{equation}
-  ゆえに\ref{eq:gmg-lb-3}が成り立つ．
+  \begin{align*}
+    \sum_{i=1}^{n-1}i(c_i-c'_i)
+    &\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i| \\
+    &= (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=1}^{Q+1}|c_i-c'_i| \\
+    &= -\sum_{i=1}^{Q+1}|c_i-c'_i| \\
+    &\leq 0
+  \end{align*}
+  ゆえに式\ref{eq:gmg-lb-3}が成り立つ．
 
   \begin{enumerate}[(i)]
     \setcounter{enumi}{1}
@@ -230,28 +225,30 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
     \sum_{i=Q+1}^{n-1}i|c_i-c'_i|\geq (Q+1)\sum_{i=Q+1}^{n-1}|c_i-c'_i|
   \end{equation}
   式\ref{eq:gmg-lb-8b1}と式\ref{eq:gmg-lb-8b2}より，次が成り立つ．
-  \begin{equation}
-    \label{eq:gmg-lb-9b}
-    \begin{aligned}
-      \sum_{i=1}^{n-1}i(c_i-c'_i)
-      &\leq Q\sum_{i=1}^{Q}|c_i-c'_i|-(Q+1)\sum_{i=Q+1}^{n-1}|c_i-c'_i| \\
-      &= Q\sum_{i=1}^{Q}|c_i-c'_i|-(Q+1)\sum_{i=1}^{Q}|c_i-c'_i| \\
-      &= -\sum_{i=1}^{Q}|c_i-c'_i| \\
-      &\leq 0
-    \end{aligned}
-  \end{equation}
-  ゆえに\ref{eq:gmg-lb-3}が成り立つ．
+  \begin{align*}
+    \sum_{i=1}^{n-1}i(c_i-c'_i)
+    &\leq Q\sum_{i=1}^{Q}|c_i-c'_i|-(Q+1)\sum_{i=Q+1}^{n-1}|c_i-c'_i| \\
+    &= Q\sum_{i=1}^{Q}|c_i-c'_i|-(Q+1)\sum_{i=1}^{Q}|c_i-c'_i| \\
+    &= -\sum_{i=1}^{Q}|c_i-c'_i| \\
+    &\leq 0
+  \end{align*}
+  ゆえに式\ref{eq:gmg-lb-3}が成り立つ．
 \end{proof}
 
 \begin{example}
-  再び$M(12,3)$について考える．
+  再び$M(12,3)$について考える．$M(12,3)$の頂点間距離の総和は，
+  式\ref{eq:gmg-lb}より，
+  \[ 12\left[\sum_{i=1}^2i\cdot3\cdot(3-1)^{i-1}+(2+1)\cdot2\right]=
+  12(3+12+6)=252\]
+  である．ちなみに，図\ref{fig:moore-graph-example}に示したグラフの
+  頂点間距離の総和を求めると，同じく252である．
 \end{example}
 
 次の性質は，一般化ムーアグラフの構造的特徴を定める．
 後に説明する探索方法に用いる極めて重要な性質である．
 \begin{theorem}
   \label{theorem:gmg-geometric-property}
-  あるグラフが一般化ムーアグラフであることの必要十分条件は，
+  ある正則グラフが一般化ムーアグラフであることの必要十分条件は，
   \begin{enumerate}[a)]
   \item 長さ$2Q$以下の閉路を持たないこと
     \label{gmg-geom-a}
@@ -268,10 +265,10 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   $Q+2\leq i$の範囲で$c'_i=0$である．これら二つを同時に満たすとき，
   \[ c'_{Q+1}=n-1-\sum_{i=1}^{Q}k(k-1)^{i-1}=R \]
   を満たす．よって，ある正則グラフが条件\ref{gmg-geom-a}と
-  条件\ref{gmg-geom-b}を同時に満たすとき，それは一般化ムーアグラフである．
+  条件\ref{gmg-geom-b}を同時に満たすとき，それは$M(n,k)$である．
 
   逆を証明する．$1\leq i\leq Q$の範囲で$c_i=k(k-1)^{i-1}$ならば，
-  ある頂点$v$を固定したとき，$d(v,w)=i<Q$を満たす頂点$w$は，
+  すべての頂点$v$について，$d(v,w)=i<Q$を満たす頂点$w$は，
   $d(v,x)=i+1$を満たす$k-1$個の頂点$x$と隣接する．
   従って，一般化ムーアグラフ$M(n,k)$には，長さ$2Q$以下の閉路は存在しない．
   また，$Q+2\leq i$(ただし，$R=0$の場合$Q+1\leq i$)の範囲で$c_i=0$なので，
@@ -280,3 +277,27 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   よって，$M(n,k)$は条件\ref{gmg-geom-a}と条件\ref{gmg-geom-b}を
   同時に満たす．
 \end{proof}
+\begin{example}
+  もう一度$M(12,3)$について考える．図\ref{fig:moore-graph-example}のグラフを
+  \verb|igraph|ライブラリで解析する．図\ref{fig:moore-graph-example}の
+  データとして，ファイル\verb|n12-d3-example.elist|に
+  \begin{multicols}{4}
+    \verbatiminput{n12-d3-example.elist}
+  \end{multicols}
+  が格納されているとする．ただし，辺のリストを4列で表しているが
+  実際は1列である．プログラム
+  \begin{minted}{python}
+    from __future__ import print_function
+    import igraph as ig
+    G = ig.read('n12-d3-example.elist', 'edgelist') # データ読み込み
+    print('diameter: ', G.diameter())               # 直径
+    print('girth: ', G.girth())                     # 最小の閉路長
+  \end{minted}
+  を\verb|python|で実行すると，次が得られる．
+  \begin{verbatim}
+    diameter: 3
+    girth: 5
+  \end{verbatim}
+  $Q=2,\,R=2$なので，このグラフは
+  \ref{theorem:gmg-geometric-property}の二条件を満たす．
+\end{example}

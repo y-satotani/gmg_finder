@@ -6,6 +6,8 @@ PNG := $(patsubst %.elist,%.png,$(shell ls | egrep "\.elist$$"))
 
 all: $(SVG) $(PDF) $(PNG)
 
+n12-d3-example.svg: n12-d3-example.elist
+	./elist2svg.py -i $< -o $@
 n14-d3-nogmg.svg: n14-d3-nogmg.elist
 	./elist2svg.py -i $< -o $@
 n24-d3-cycle.svg: n24-d3-cycle.elist

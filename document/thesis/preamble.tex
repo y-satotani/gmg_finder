@@ -1,9 +1,9 @@
 
 \renewcommand{\thesubsection}{(\alph{subsection})}
 
-\graphicspath{{../resource/figure/}}
+\graphicspath{{../resource/figure/}{../resource/table/}}
 \makeatletter
-\def\input@path{{../resource/figure/}}
+\def\input@path{{../resource/figure/}{../resource/graph/}}
 \makeatother
 
 % adding new symbol (vrectangle and vrectangleblack)
@@ -59,6 +59,9 @@
 \renewcommand{\ALG@name}{アルゴリズム}
 \@addtoreset{algorithm}{chapter}
 \makeatother
+
+% minted preference
+\usemintedstyle{friendly}
 
 % bibtex preference
 \renewcommand{\bibname}{参考文献}
