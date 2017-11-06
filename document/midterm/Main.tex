@@ -1,43 +1,4 @@
-\documentclass[dvipdfmx]{beamer}
-\usepackage{amsmath,amsthm,amssymb}
-\usepackage{graphicx}
-\usepackage{subfig}
-\usepackage{bxdpx-beamer}
-\usepackage{pxjahyper}
-\usepackage{appendixnumberbeamer}
 
-\usetheme{Madrid}
-%\usetheme{Rochester}
-\setbeamertemplate{itemize items}[square]
-\setbeamertemplate{enumerate items}[square]
-\setbeamertemplate{bibliogrpahy item}[text]
-\renewcommand{\kanjifamilydefault}{\gtdefault}
-\renewcommand{\familydefault}{\sfdefault}
-\usefonttheme[onlymath]{serif}
-%\setbeamertemplate{navigation symbols}{}
-%\setbeamertemplate{footline}[frame number]
-\setbeamertemplate{caption}[numbered]
-\setbeamertemplate{caption label separator}[space]
-\setbeamertemplate{bibliography item}[text]
-\setbeamertemplate{theorems}[numbered]
-\renewcommand{\figurename}{図}
-\renewcommand{\tablename}{表}
-\renewcommand{\appendixname}{補足}
-\theoremstyle{definition}
-\newtheorem{thm}{定理}
-\newtheorem{conj}[thm]{予想}
-\graphicspath{{../resource/figure/}{../resource/table/}}
-\makeatletter
-\def\input@path{{../resource/figure/}{../resource/table/}}
-\makeatother
-\bibliographystyle{jalpha}
-
-\title{一般化ムーアグラフの探索の高効率化}
-\author{里谷 佳紀}
-\institute{高橋研究室}
-\date[特別研究中間発表会]{特別研究中間発表会 \\ 2017年11月15日}
-
-\begin{document}
 \begin{frame}
   \maketitle
 \end{frame}
@@ -159,7 +120,7 @@
 \end{frame}
 
 \appendix
-\begin{frame}{一般化ムーアグラフの条件}
+\begin{frame}<handout:0>{一般化ムーアグラフの条件}
   \begin{thm}
     正則グラフが一般化ムーアグラフであることの必要十分条件は，
     \begin{itemize}
@@ -178,7 +139,7 @@
   \end{figure}
 \end{frame}
 
-\begin{frame}{発見した一般化ムーアグラフの数の比較}
+\begin{frame}<handout:0>{発見した一般化ムーアグラフの数の比較}
   \begin{columns}
     \begin{minipage}[t]{.5\textwidth}
       \centering
@@ -204,6 +165,4 @@
 \begin{frame}[allowframebreaks]{参考文献}
   \bibliography{../resource/MyCollection}
 \end{frame}
-
-\end{document}
 
