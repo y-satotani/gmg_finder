@@ -6,42 +6,47 @@
 \section{本編}
 \begin{frame}{背景と目的}
   \begin{itemize}
-  \item データセンタではコンピュータクラスタが用いられる
-  \item アプリケーションの通信のタイミングや通信先の予測は困難
-  \item 単純にホップ数が小さいトポロジが有効\cite{Koibuchi2012, Singla2011}
-  \item \alert{一般化ムーアグラフ}$\cdots$
-    ホップ数と平均頂点間距離が理論的な下界に等しい正則グラフ
-    \cite{cerf1973computer, Cerf1974}
-  \item 一般化ムーアグラフを発見するアルゴリズムはいくつかある
-    \cite{Sampels2004, Fujita2015, Yamamoto2016}
-  \item 次をすべて満たす効率的な発見方法はまだ知られていない
+  \item マルチホップ通信$\cdots$通信のタイミングや通信先の予測は困難
+  \item 単純に平均頂点間距離が小さいトポロジが有効
+    \cite{Koibuchi2012, Singla2011}
+  \item \alert{一般化ムーアグラフ}
     \begin{itemize}
-    \item (可能な)すべての頂点数と次数に対応
-    \item ランダム性がない
+    \item 平均頂点間距離が理論的な下界に等しい正則グラフ
+      \cite{cerf1973computer, Cerf1974}
     \end{itemize}
+  \item 発見する方法はいくつかある
+    \cite{Fujita2015, Yamamoto2016}
+  \item グラフの性質を利用した探索法は知られていない
   \end{itemize}
-  \begin{block}{}
-    全探索をベースにして一般化ムーアグラフの探索を比較的に効率よく
-    行う方法を提案・検証
-  \end{block}
+  \begin{columns}[T]
+    \begin{column}{.4\textwidth}
+      \begin{block}{}
+        全探索をベースにして比較的に効率よく探索する方法を提案・検証
+      \end{block}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \begin{figure}
+        \includegraphics[width=.8\linewidth]{gmg-example-bignode}
+        \caption{一般化ムーアグラフの例}
+      \end{figure}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{方法}
   \begin{enumerate}
   \item 与えられた頂点数と次数の初期グラフを構築しておく
   \item 図\ref{fig:feasible-edges-example}の赤の辺から
-    逐次辺取り出して追加できる(できない)か求める
+    逐次辺取り出して追加できるか求める
     \begin{itemize}
     \item 図\ref{fig:feasible-edges-example2}では
-      最小の閉路長が$5$以上のとき追加できる
-      \begin{enumerate}[a]
-      \item 3-閉路ができるので追加できない
-      \item 4-閉路ができるので追加できない
-      \item 最小の閉路長は6なので追加できる
-      \end{enumerate}
+      最小の閉路長が$5$以上のとき追加可能
+    \item $a$,$b$,$c$のうち$c$のみが追加可能
     \end{itemize}
-    \item 初期グラフを変えることで探索を高効率化
   \end{enumerate}
+  \begin{itemize}
+  \item 初期グラフを変えることで探索を高効率化
+  \end{itemize}
   \begin{figure}
     \centering
     \begin{minipage}{.4\columnwidth}
@@ -64,19 +69,13 @@
   \begin{columns}
     \begin{column}{.6\textwidth}
       \centering
+      \begin{itemize}
+      \item 全域木からの探索が効率的
+      \end{itemize}
       \includegraphics[height=.5\textheight]{mid-cmp-algo-time}
       \captionof{figure}{次数=3の結果 \\ {\scriptsize
           探索開始から最初の一般化ムーアグラフを発見するまでの時間を表す．
-          探索を10回行い，実行時間の平均を計算した． \\
-          実行環境は以下のとおり． \\ {\tiny
-            \begin{tabular}{|r|l|}
-              \hline
-              メモリ         & 3.9 GiB \\ \hline
-              プロセッサ     & Intel® Core™ i7-4712HQ CPU @ 2.30GHz × 4 \\ \hline
-              ベースシステム & Ubuntu 16.04.3 LTS 64 ビット \\ \hline
-              仮想化         & Oracle \\ \hline
-            \end{tabular}
-          }
+          探索を10回行い，実行時間の平均を計算した．
       }}
       \label{fig:result}
     \end{column}
@@ -105,20 +104,18 @@
 \end{frame}
 
 \begin{frame}{今後の課題}
-  \begin{enumerate}
-  \item 直径の下界を利用した枝刈り
+  \begin{itemize}
+  \item より効率的な探索方法の提案
   \item 予想の証明
-    \begin{conj}
-      一般化ムーアグラフの部分グラフに，図\ref{fig:initial-graph-cycle}
+    \begin{itemize}
+    \item 一般化ムーアグラフの部分グラフに，図\ref{fig:initial-graph-cycle}
       に示したようなグラフが存在する．
-    \end{conj}
-    \begin{conj}
-      一般化ムーアグラフの全域木に，図\ref{fig:initial-graph-stree}
+    \item 一般化ムーアグラフの全域木に，図\ref{fig:initial-graph-stree}
       に示したような木が存在する．
-    \end{conj}
+    \end{itemize}
   \item 同型グラフ判定を用いた列挙
   \item 一般化ムーアグラフが存在しない場合の考察
-  \end{enumerate}
+  \end{itemize}
 \end{frame}
 
 \appendix
