@@ -1,30 +1,31 @@
 
-#include "initial_builder_sorter.hpp"
+#include "sorted_graph_initr.hpp"
 #include <algorithm>
 
 namespace gmgf {
 
-  initial_builder_sorter::initial_builder_sorter(initial_builder* builder) {
+  sorted_graph_initr::sorted_graph_initr(graph_initr* builder)
+    : graph_initr(builder->get_config()) {
     m_builder = builder;
   }
 
-  vertex_t initial_builder_sorter::parent_of(graph_config* c, vertex_t v) {
-    return m_builder->parent_of(c, v);
+  vertex_t sorted_graph_initr::parent_of(vertex_t v) {
+    return m_builder->parent_of(v);
   }
 
   std::vector<vertex_t>
-  initial_builder_sorter::initial_vertices(graph_config* c) {
-    return m_builder->initial_vertices(c);
+  sorted_graph_initr::initial_vertices() {
+    return m_builder->initial_vertices();
   }
 
   std::vector<vertex_t>
-  initial_builder_sorter::possible_vertices(graph_config* c) {
-    return m_builder->possible_vertices(c);
+  sorted_graph_initr::possible_vertices() {
+    return m_builder->possible_vertices();
   }
 
   std::vector<edge_t>
-  initial_builder_sorter::initial_edges(graph_config* c) {
-    return m_builder->initial_edges(c);
+  sorted_graph_initr::initial_edges() {
+    return m_builder->initial_edges();
   }
 
   vertex_t _find_least_vertex
@@ -50,9 +51,9 @@ namespace gmgf {
   }
 
   std::vector<edge_t>
-  initial_builder_sorter::possible_edges(graph_config* c) {
-    std::vector<vertex_t> orig_v = m_builder->possible_vertices(c);
-    std::vector<edge_t> orig_e = m_builder->possible_edges(c);
+  sorted_graph_initr::possible_edges() {
+    std::vector<vertex_t> orig_v = m_builder->possible_vertices();
+    std::vector<edge_t> orig_e = m_builder->possible_edges();
     std::vector<edge_t> edges;
     while(orig_e.size() > 0) {
       vertex_t v = _find_least_vertex(orig_v, orig_e);

@@ -6,11 +6,16 @@ extern "C" {
 #include <ctime>
 
 #include "gmgf/graph_config.hpp"
-#include "gmgf/initial_builder.hpp"
-#include "gmgf/initial_builder_cycle_conjecture.hpp"
-#include "gmgf/initial_builder_stree_conjecture.hpp"
 
-#include "gmgf/basic_state_manager.hpp"
+#include "gmgf/graph_initr.hpp"
+#include "gmgf/basic_graph_initr.hpp"
+#include "gmgf/cycle_graph_initr.hpp"
+#include "gmgf/stree_graph_initr.hpp"
+
+#include "gmgf/state_initr.hpp"
+#include "gmgf/basic_state_initr.hpp"
+#include "gmgf/minmax_state_initr.hpp"
+#include "gmgf/mmmtr_state_initr.hpp"
 
 #include "gmgf/dfs_finder.hpp"
 
@@ -34,14 +39,16 @@ int main(int argc, char* argv[]) {
 
   // testing specific graph configuration
   graph_config* config = new graph_config(14, 3);
+  graph_initr* ginitr =
+    new basic_graph_initr(config);
+    //new cycle_graph_initr(config);
+    //new stree_graph_initr(config);
 
-  initial_builder* builder = new
-    initial_builder();
-  //initial_builder_cycle_conjecture();
-  //initial_builder_stree_conjecture();
-  state_manager<igraph_t>* manager = new basic_state_manager();
-  dfs_finder<igraph_t>* finder = new dfs_finder<igraph_t>
-    (config, builder, manager);
+  state_initr* sinitr =
+    new basic_state_initr();
+    //new minmax_state_initr();
+    //new mmmtr_state_initr();
+  dfs_finder* finder = new dfs_finder(ginitr, sinitr);
 
   clock_t begin = clock();
   igraph_t graph = finder->next();
@@ -55,8 +62,8 @@ int main(int argc, char* argv[]) {
 
   igraph_destroy(&graph);
   delete finder;
-  delete manager;
-  delete builder;
+  delete sinitr;
+  delete ginitr;
   delete config;
 
   return 0;

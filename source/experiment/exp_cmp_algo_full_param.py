@@ -2,18 +2,15 @@
 from __future__ import print_function
 
 """
-(echo n,d,Q,R,sspl_lb,bdr,mgr,srt,n_graph,sspl_max,sspl_min,edge,node,time ;\
+(echo n,d,Q,R,sspl_lb,bdr,srt,mgr,n_graph,sspl_max,sspl_min,edge,node,time ;\
  ./exp_cmp_algo_full_param.py |\
  xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo_full.out) >\
-exp_cmp_algo_full_result.csv
+cmp-algo-full.csv
 """
 runs = 1
-D = (3,)
-N = {
-    3: list(range(4, 17, 2)),
-    #4: list(range(5, 11)),
-    #5: list(range(6, 9, 2)),
-}
+d = 3
+#N = list(range(4, 17, 2))
+N = list(range(4, 11, 2))
 
 mtd = [
     ('basic', 'basic', 'basic'),
@@ -21,9 +18,16 @@ mtd = [
     ('stree', 'basic', 'basic'),
 ]
 
+does_sort = lambda g: g == 'cycle'
+mtds = [
+    (g, 'sorted' if does_sort(g) else 'basic', s)
+    for g in ('basic', 'cycle', 'stree')
+    for s in ('basic', 'matrix', 'minmax')
+]
+
 print('\n'.join([
-    '{} {} {} {} {}'.format(bdr, mgr, srt, n, d)
+    '{} {} {} {} {}'.format(bdr, srt, mgr, n, d)
     for _ in range(runs)
-    for bdr, mgr, srt in mtd
-    for d in D for n in N[d]
+    for bdr, srt, mgr in mtds
+    for n in N
 ]))

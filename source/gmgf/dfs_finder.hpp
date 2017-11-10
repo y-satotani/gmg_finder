@@ -8,97 +8,28 @@ extern "C" {
 #include <utility>
 #include <vector>
 #include "graph_config.hpp"
-#include "initial_builder.hpp"
-#include "state_manager.hpp"
+#include "graph_initr.hpp"
+#include "state_initr.hpp"
+#include "state.hpp"
 
 namespace gmgf {
 
-  template <typename S> class dfs_finder {
+  class dfs_finder {
   protected:
-    gmgf::graph_config* m_config;
-    gmgf::initial_builder* m_builder;
-    gmgf::state_manager<S>* m_manager;
-    std::vector<std::pair<std::size_t, S> > m_stack;
+    state_initr* m_sinitr;
+    graph_initr* m_ginitr;
+    std::vector<std::pair<std::size_t, state*> > m_stack;
     std::vector<edge_t> m_e_possible;
     std::vector<std::pair<std::size_t, std::size_t> > m_v_range;
     unsigned long long m_extracted_nodes;
 
   public:
-    dfs_finder(graph_config* config,
-                   initial_builder* builder,
-                   state_manager<S>* manager) {
-      m_config = config;
-      m_builder = builder;
-      m_manager = manager;
-      m_e_possible = m_builder->possible_edges(m_config);
-      m_v_range = m_builder->vertex_frontier(m_config);
-      reset();
-    }
+    dfs_finder(graph_initr* ginitr, state_initr* sinitr);
+    virtual ~dfs_finder();
 
-    virtual ~dfs_finder() {
-      for(std::size_t i = 0; i < m_stack.size(); i++)
-        m_manager->destroy(m_stack[i].second);
-    }
-
-    unsigned long long extracted_nodes() {
-      return m_extracted_nodes;
-    }
-
-    void reset() {
-      for(std::size_t i = 0; i < m_stack.size(); i++)
-        m_manager->destroy(m_stack[i].second);
-      m_stack.clear();
-      m_stack.push_back(std::pair<std::size_t, S>
-                        (0, m_manager->initial(m_config, m_builder)));
-      m_extracted_nodes = 0;
-    }
-
-    bool has_next() {
-      return m_stack.size() > 0;
-    }
-
-    S next() {
-      while(m_stack.size() > 0) {
-        ++m_extracted_nodes;
-
-        std::pair<std::size_t, S> node = m_stack.back();
-        std::size_t ei = node.first;
-        edge_t e = m_e_possible[ei];
-        S s = node.second;
-        m_stack.pop_back();
-
-        if(ei == m_e_possible.size()) {
-          if(m_manager->can_accept(m_config, s)) {
-            return s;
-          } else {
-            m_manager->destroy(s);
-            continue;
-          }
-        }
-
-        std::vector<vertex_t> enter;
-        std::vector<vertex_t> exit;
-        if(m_v_range[m_e_possible[ei].first].first == ei)
-          enter.push_back(m_e_possible[ei].first);
-        if(m_v_range[m_e_possible[ei].second].first == ei)
-          enter.push_back(m_e_possible[ei].second);
-        if(m_v_range[m_e_possible[ei].first].second == ei)
-          exit.push_back(m_e_possible[ei].first);
-        if(m_v_range[m_e_possible[ei].second].second == ei)
-          exit.push_back(m_e_possible[ei].second);
-
-        for(int add = 0; add <= 1; add++) {
-          if(m_manager->can_update
-             (m_config, s, e, (bool)add, enter, exit)) {
-            S t = m_manager->next(s, e, (bool)add);
-            m_stack.push_back(std::pair<std::size_t, S>(ei+1, t));
-          }
-        }
-
-        m_manager->destroy(s);
-      }
-      return m_manager->failure();
-    }
+    unsigned long long extracted_nodes();
+    void reset();
+    igraph_t next();
 
   };
 }
