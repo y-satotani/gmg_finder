@@ -5,7 +5,7 @@ date: "平成29年9月25日"
 documentclass: bxjsarticle
 classoption: xelatex,ja=standard,11pt
 geometry: no
-bibliography: ../resource/MyCollection.bib
+bibliography: ../res/MyCollection.bib
 csl: physical-review-e.csl
 output:
   pdf_document:
@@ -99,7 +99,7 @@ fig_cycle_diam <- cap_str(fig_num('cycle-diam', '命題の反例'))
   さらに，このグラフはCerfらの下界を満足しない．
 
 ```{r tab:result}
-data <- read_csv('../resource/table/cmp-algo-node-lab.csv') %>%
+data <- read_csv('../res/table/cmp-algo-node-lab.csv') %>%
   filter(bdr == 'basic', mgr == 'basic') %>%
   mutate(gmg = ifelse(sspl == sspl_lb, '$\\checkmark$', ' ')) %>%
   select(n, d, gmg) %>%
@@ -109,7 +109,7 @@ show_table(data, tab_result)
 
 ```{r fig:cycle-diam, fig.cap=fig_cycle_diam, fig.align='center', out.width='70%'}
 G = as.network(
-  read.table('../resource/graph/n14-d3-nogmg.elist')
+  read.table('../res/graph/n14-d3-nogmg.elist')
   )
 ggnet2(G,
        node.color = rep('royalblue', length(G$val)),
@@ -119,7 +119,7 @@ ggnet2(G,
 
 girthとdiameter
 ```{r geom, echo=TRUE}
-iG = read_graph('../resource/graph/n14-d3-nogmg.elist')
+iG = read_graph('../res/graph/n14-d3-nogmg.elist')
 paste(girth(iG)$girth, diameter(iG))
 ```
 
