@@ -1,0 +1,9 @@
+PROJECT_NAME     = gmg_finder
+INPUT            = ../src/README.md ../src/gmgf ../src/gmgf.hpp
+FILE_PATTERNS    = *.cpp *.hpp
+OUTPUT_DIRECTORY = .
+OUTPUT_LANGUAGE  = Japanese-en
+USE_MDFILE_AS_MAINPAGE = ../src/README.md
+GENERATE_HTML    = YES
+HTML_OUTPUT      = src
+GENERATE_LATEX   = NO
