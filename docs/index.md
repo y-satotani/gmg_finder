@@ -5,4 +5,4 @@ Find generalized Moore graph.
 [リンク](src/index.html)
 
 # Resource
-[リンク]()
+[リンク](res/README.md)
