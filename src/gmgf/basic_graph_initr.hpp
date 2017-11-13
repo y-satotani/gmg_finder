@@ -7,7 +7,6 @@ extern "C" {
 }
 #include <utility>
 #include <vector>
-#include "graph_config.hpp"
 #include "graph_initr.hpp"
 
 namespace gmgf {

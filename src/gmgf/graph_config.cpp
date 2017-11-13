@@ -1,4 +1,4 @@
-
+/** \file graph_config.cpp */
 #include "graph_config.hpp"
 #include <cmath>
 

@@ -3,7 +3,6 @@
 #define _GMGF_CYCLE_GRAPH_INTIIALIZER_HPP_
 
 #include <vector>
-#include "graph_config.hpp"
 #include "basic_graph_initr.hpp"
 
 namespace gmgf {

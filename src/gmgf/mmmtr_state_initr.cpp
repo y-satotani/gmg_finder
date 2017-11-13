@@ -1,5 +1,6 @@
 
 #include "mmmtr_state_initr.hpp"
+#include "mmmtr_state.hpp"
 #include "distance_update.hpp"
 
 namespace gmgf {

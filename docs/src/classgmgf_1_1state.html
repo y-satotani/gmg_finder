@@ -63,6 +63,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
       <li><a href="inherits.html"><span>Class&#160;Hierarchy</span></a></li>
+      <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
 <!-- window showing the filter options -->
@@ -108,7 +109,7 @@ Collaboration diagram for gmgf::state:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgmgf_1_1state__coll__graph.png" border="0" usemap="#gmgf_1_1state_coll__map" alt="Collaboration graph"/></div>
 <map name="gmgf_1_1state_coll__map" id="gmgf_1_1state_coll__map">
-<area shape="rect" id="node2" href="classgmgf_1_1graph__config.html" title="gmgf::graph_config" alt="" coords="5,5,139,32"/>
+<area shape="rect" id="node2" href="classgmgf_1_1graph__config.html" title="一般化ムーアグラフに関する基礎的な量を計算する． " alt="" coords="5,5,139,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -118,31 +119,31 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><b>state</b> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config)</td></tr>
 <tr class="separator:a32b9f684e48216ebf48a9c3813bbb4d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acebb9b17376d3d0e892c2c3c9854fcf7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acebb9b17376d3d0e892c2c3c9854fcf7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
 <tr class="separator:acebb9b17376d3d0e892c2c3c9854fcf7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a27deee9c61de6e4b5bd505e38e96b6bb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27deee9c61de6e4b5bd505e38e96b6bb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)</td></tr>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
 <tr class="separator:a27deee9c61de6e4b5bd505e38e96b6bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad661fd223d414e7eecedb0a0b0fc3ff1"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad661fd223d414e7eecedb0a0b0fc3ff1"></a>
 bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final</b> ()</td></tr>
 <tr class="separator:ad661fd223d414e7eecedb0a0b0fc3ff1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaae00d5a7c42afda8323b144077c618a"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aaae00d5a7c42afda8323b144077c618a"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_degree</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_degree</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)=0</td></tr>
 <tr class="separator:aaae00d5a7c42afda8323b144077c618a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad761741e4515d09cbc0127867e2f179d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad761741e4515d09cbc0127867e2f179d"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_degree</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_degree</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)=0</td></tr>
 <tr class="separator:ad761741e4515d09cbc0127867e2f179d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1d83500fa67e2f79fdf668c1b1ee58b5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1d83500fa67e2f79fdf668c1b1ee58b5"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_cycle</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_cycle</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)=0</td></tr>
 <tr class="separator:a1d83500fa67e2f79fdf668c1b1ee58b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab54a5a9983e2a3416bf3c358c3f53ad2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab54a5a9983e2a3416bf3c358c3f53ad2"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_cycle</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_cycle</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)=0</td></tr>
 <tr class="separator:ab54a5a9983e2a3416bf3c358c3f53ad2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb5685919af701953deabb1afb1444d0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="abb5685919af701953deabb1afb1444d0"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_diameter</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_diameter</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)=0</td></tr>
 <tr class="separator:abb5685919af701953deabb1afb1444d0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a092285079af236b65d8f47b28fae3b35"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a092285079af236b65d8f47b28fae3b35"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_diameter</b> (edge_t e, std::vector&lt; vertex_t &gt; enter, std::vector&lt; vertex_t &gt; exit)=0</td></tr>
+virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_diameter</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)=0</td></tr>
 <tr class="separator:a092285079af236b65d8f47b28fae3b35"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a810fe6ee8c0af4e25595ba1aadd713cb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a810fe6ee8c0af4e25595ba1aadd713cb"></a>
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final_degree</b> ()=0</td></tr>
@@ -154,10 +155,10 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final_cycl
 virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final_diameter</b> ()=0</td></tr>
 <tr class="separator:a50309fa7f33e8225a5ef4bd3f615efc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aba8ef9adb5fe825edb7efc25883fb12c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aba8ef9adb5fe825edb7efc25883fb12c"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>add_edge</b> (edge_t e)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>add_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e)=0</td></tr>
 <tr class="separator:aba8ef9adb5fe825edb7efc25883fb12c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5b72a6ce57b71da8068c77660e045987"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5b72a6ce57b71da8068c77660e045987"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>noadd_edge</b> (edge_t e)=0</td></tr>
+virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>noadd_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e)=0</td></tr>
 <tr class="separator:a5b72a6ce57b71da8068c77660e045987"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae37b26e9af500d882a6377e84cd4f685"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae37b26e9af500d882a6377e84cd4f685"></a>
 virtual <a class="el" href="classgmgf_1_1state.html">state</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()=0</td></tr>
@@ -173,8 +174,8 @@ Protected Attributes</h2></td></tr>
 <tr class="separator:a2f1730174c59f4ed1a3b1f25711adcc7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>/home/ysatotani/cerfcheck/src/gmgf/<a class="el" href="state_8hpp_source.html">state.hpp</a></li>
-<li>/home/ysatotani/cerfcheck/src/gmgf/state.cpp</li>
+<li>gmgf/<a class="el" href="state_8hpp_source.html">state.hpp</a></li>
+<li>gmgf/state.cpp</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

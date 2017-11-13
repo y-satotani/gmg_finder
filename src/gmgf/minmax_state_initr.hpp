@@ -6,9 +6,7 @@ extern "C" {
 #include <igraph.h>
 }
 #include <utility>
-#include "graph_config.hpp"
 #include "state_initr.hpp"
-#include "minmax_state.hpp"
 
 namespace gmgf {
 

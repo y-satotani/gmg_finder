@@ -1,5 +1,6 @@
 
 #include "basic_state_initr.hpp"
+#include "basic_state.hpp"
 
 namespace gmgf {
 

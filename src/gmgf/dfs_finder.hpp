@@ -1,4 +1,6 @@
-
+/** \file dfs_finder.hpp
+ * \brief 深さ優先探索により一般化ムーアグラフを探索する．
+ */
 #ifndef _GMGF_DFS_FINDER_HPP_
 #define _GMGF_DFS_FINDER_HPP_
 
@@ -7,10 +9,8 @@ extern "C" {
 }
 #include <utility>
 #include <vector>
-#include "graph_config.hpp"
 #include "graph_initr.hpp"
 #include "state_initr.hpp"
-#include "state.hpp"
 
 namespace gmgf {
 

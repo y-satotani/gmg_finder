@@ -3,9 +3,6 @@
 #define _GMGF_BASIC_STATE_BUILDER_HPP_
 
 #include "state_initr.hpp"
-#include "state.hpp"
-#include "basic_state.hpp"
-#include "basic_graph_initr.hpp"
 
 namespace gmgf {
 

@@ -1,5 +1,6 @@
 
 #include "minmax_state_initr.hpp"
+#include "minmax_state.hpp"
 
 namespace gmgf {
 

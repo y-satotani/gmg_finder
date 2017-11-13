@@ -6,13 +6,11 @@ extern "C" {
 #include <igraph.h>
 }
 #include <utility>
-#include "graph_config.hpp"
-#include "mmmtr_state.hpp"
-#include "basic_state_initr.hpp"
+#include "state_initr.hpp"
 
 namespace gmgf {
 
-  class mmmtr_state_initr : public basic_state_initr {
+  class mmmtr_state_initr : public state_initr {
   public:
     virtual ~mmmtr_state_initr() {};
     virtual state* initial(graph_initr* ginitr);

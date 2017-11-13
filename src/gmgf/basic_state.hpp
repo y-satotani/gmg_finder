@@ -5,7 +5,6 @@
 extern "C" {
 #include <igraph.h>
 }
-#include "graph_config.hpp"
 #include "state.hpp"
 
 namespace gmgf {

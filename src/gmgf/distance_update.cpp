@@ -1,5 +1,7 @@
+/** \file distance_update.cpp
+ * \brief 辺の挿入・削除に伴う頂点間距離の更新を行う．
+ */
 #include "distance_update.hpp"
-#include <iostream>
 
 namespace gmgf {
 
