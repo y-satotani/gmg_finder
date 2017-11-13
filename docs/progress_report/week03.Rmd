@@ -5,7 +5,7 @@ date: "平成29年10月3日"
 documentclass: bxjsarticle
 classoption: xelatex,ja=standard,11pt
 geometry: no
-bibliography: ../resource/MyCollection.bib
+bibliography: ../res/MyCollection.bib
 csl: physical-review-e.csl
 output:
   md_document:
@@ -91,7 +91,7 @@ $n=48$のときは，今回のプログラムはおよそ15時間で終了した
 ```{python, error=TRUE}
 from __future__ import division
 from sys import stdout
-with open('../resource/graph/n24-d3-cycle.elist') as f:
+with open('../res/graph/n24-d3-cycle.elist') as f:
   edges = [tuple(map(int, l.split())) for l in f.read().splitlines()]
   ncol = 4
   nrow = (len(edges)-1) // ncol + 1
@@ -107,7 +107,7 @@ with open('../resource/graph/n24-d3-cycle.elist') as f:
 
 ```{r fig:cycle-diam, fig.cap=fig_cycle_diam, fig.align='center', out.width='70%'}
 G = as.network(
-  read.table('../resource/graph/n24-d3-cycle.elist')
+  read.table('../res/graph/n24-d3-cycle.elist')
   )
 ggnet2(G,
        node.color = rep('royalblue', length(G$val)),

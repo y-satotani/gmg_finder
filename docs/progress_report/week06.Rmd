@@ -5,7 +5,7 @@ date: "平成29年10月24日"
 documentclass: bxjsarticle
 classoption: xelatex,ja=standard,11pt
 geometry: no
-bibliography: ../resource/MyCollection.bib
+bibliography: ../res/MyCollection.bib
 csl: physical-review-e.csl
 output:
   pdf_document:
@@ -96,7 +96,7 @@ fig_result <- cap_str(fig_num('result', 'ネットワークトポロジ別の実
   b. 部分的に書いた．
 
 ```{r fig:result-ext-nodes, fig.cap=fig_result_ext_nodes, fig.align='center', fig.width=5, fig.height=4, out.width='70%'}
-data <- read_csv('../resource/table/cmp-algo-node-lab.csv') %>%
+data <- read_csv('../res/table/cmp-algo-node-lab.csv') %>%
   filter(bdr == 'basic' | mgr == 'basic') %>%
   mutate(mtd = ifelse(bdr != 'basic', bdr, mgr)) %>%
   filter(d == 3)
@@ -108,7 +108,7 @@ gp
 ```
 
 ```{r fig:result, fig.cap=fig_result, fig.align='center', fig.width=5, fig.height=5, out.width='70%'}
-data <- read_csv('../resource/table/dist-delete-mws.csv') %>%
+data <- read_csv('../res/table/dist-delete-mws.csv') %>%
   rename(proposed = `time`) %>%
   rename(igraph = `time-igraph`) %>%
   gather(alg, `time`, c(proposed, igraph)) %>%
