@@ -29,24 +29,9 @@ namespace gmgf {
     igraph_matrix_destroy(&s_max);
   }
 
-  bool mmmtr_state::can_add_edge_degree
-  (edge_t e, std::vector<vertex_t> enter, std::vector<vertex_t> exit) {
-    return basic_state::can_add_edge_degree(e, enter, exit);
-  }
-
-  bool mmmtr_state::can_noadd_edge_degree
-  (edge_t e, std::vector<vertex_t> enter, std::vector<vertex_t> exit) {
-    return basic_state::can_noadd_edge_degree(e, enter, exit);
-  }
-
   bool mmmtr_state::can_add_edge_cycle
   (edge_t e, std::vector<vertex_t> enter, std::vector<vertex_t> exit) {
     return igraph_matrix_e(&d_min, e.first, e.second) >= 2*m_config->Q();
-  }
-
-  bool mmmtr_state::can_noadd_edge_cycle
-  (edge_t e, std::vector<vertex_t> enter, std::vector<vertex_t> exit) {
-    return true;
   }
 
   bool mmmtr_state::can_add_edge_diameter
@@ -74,14 +59,6 @@ namespace gmgf {
       return diam <= m_config->Q();
     else
       return diam <= m_config->Q() + 1;
-  }
-
-  bool mmmtr_state::is_final_degree() {
-    return basic_state::is_final_degree();
-  }
-
-  bool mmmtr_state::is_final_cycle() {
-    return basic_state::is_final_cycle();
   }
 
   bool mmmtr_state::is_final_diameter() {
@@ -116,10 +93,6 @@ namespace gmgf {
 
   state* mmmtr_state::copy() {
     return new mmmtr_state(*this);
-  }
-
-  igraph_t mmmtr_state::make_graph() {
-    return basic_state::make_graph();
   }
 
 }

@@ -12,7 +12,9 @@ namespace gmgf {
   /**
    * \brief 辺の挿入に伴う頂点間距離の更新を行う．
    *
-   * 詳しい説明．
+   * DnextとSnextは結果を格納するためのポインタである．
+   * 呼び出しの前に igraph_matrix_init 関数で
+   * 初期化されている必要がある．
    * \param Dnext 更新後の頂点間距離行列
    * \param Snext 更新後の最短経路数行列
    * \param D 更新前の頂点間距離行列
@@ -29,8 +31,10 @@ namespace gmgf {
   /**
    * \brief 辺の削除に伴う頂点間距離の更新を行う．
    *
-   * 詳しい説明．
-   * \output Dnext 更新後の頂点間距離行列
+   * DnextとSnextは結果を格納するためのポインタである．
+   * 呼び出しの前に igraph_matrix_init 関数で
+   * 初期化されている必要がある．
+   * \param Dnext 更新後の頂点間距離行列
    * \param Snext 更新後の最短経路数行列
    * \param D 更新前の頂点間距離行列
    * \param S 更新前の最短経路数行列
@@ -48,7 +52,9 @@ namespace gmgf {
   /**
    * \brief グラフの頂点間距離と最短経路数を計算する．
    *
-   * 詳しい説明．
+   * DとSは結果を格納するためのポインタである．
+   * 呼び出しの前に igraph_matrix_init 関数で
+   * 初期化されている必要がある．
    * \param D 頂点間距離
    * \param S 最短経路数
    * \param G グラフ

@@ -14,8 +14,6 @@ namespace gmgf {
   public:
     /**
      * \brief デストラクタ
-     *
-     * このとき，初期化時に渡したグラフ初期化子は破棄されない．
      */
     virtual ~state_initr() {};
 

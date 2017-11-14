@@ -10,8 +10,9 @@ STRIP_FROM_PATH        = ../src/
 SORT_MEMBER_DOCS       = NO
 SORT_MEMBERS_CTORS_1ST = YES
 USE_MATHJAX            = YES
-MAX_DOT_GRAPH_DEPTH    = 1
+MAX_DOT_GRAPH_DEPTH    = 2
 DOT_IMAGE_FORMAT       = svg
+IMAGE_PATH             = res/figure res/graph
 
 OUTPUT_DIRECTORY       = .
 OUTPUT_LANGUAGE        = Japanese-en

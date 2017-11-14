@@ -19,34 +19,6 @@ namespace gmgf {
     igraph_destroy(&H);
   }
 
-  bool minmax_state::can_add_edge_degree
-  (edge_t e,
-   std::vector<vertex_t> enter,
-   std::vector<vertex_t> exit) {
-    return basic_state::can_add_edge_degree(e, enter, exit);
-  }
-
-  bool minmax_state::can_noadd_edge_degree
-  (edge_t e,
-   std::vector<vertex_t> enter,
-   std::vector<vertex_t> exit) {
-    return basic_state::can_noadd_edge_degree(e, enter, exit);
-  }
-
-  bool minmax_state::can_add_edge_cycle
-  (edge_t e,
-   std::vector<vertex_t> enter,
-   std::vector<vertex_t> exit) {
-    return basic_state::can_add_edge_cycle(e, enter, exit);
-  }
-
-  bool minmax_state::can_noadd_edge_cycle
-  (edge_t e,
-   std::vector<vertex_t> enter,
-   std::vector<vertex_t> exit) {
-    return basic_state::can_noadd_edge_cycle(e, enter, exit);
-  }
-
   bool minmax_state::can_add_edge_diameter
   (edge_t e,
    std::vector<vertex_t> enter,
@@ -83,22 +55,6 @@ namespace gmgf {
       return (unsigned int) diam <= m_config->Q() + 1;
   }
 
-  bool minmax_state::is_final_degree() {
-    return basic_state::is_final_degree();
-  }
-
-  bool minmax_state::is_final_cycle() {
-    return basic_state::is_final_cycle();
-  }
-
-  bool minmax_state::is_final_diameter() {
-    return basic_state::is_final_diameter();
-  }
-
-  void minmax_state::add_edge(edge_t e) {
-    igraph_add_edge(&G, e.first, e.second);
-  }
-
   void minmax_state::noadd_edge(edge_t e) {
     igraph_es_t es;
     igraph_es_pairs_small(&es, IGRAPH_UNDIRECTED,
@@ -109,10 +65,6 @@ namespace gmgf {
 
   state* minmax_state::copy() {
     return new minmax_state(*this);
-  }
-
-  igraph_t minmax_state::make_graph() {
-    return basic_state::make_graph();
   }
 
 }

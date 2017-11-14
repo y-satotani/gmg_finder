@@ -20,7 +20,7 @@ namespace gmgf {
   }
 
   vertex_t cycle_graph_initr::r() {
-    return m_config->n() - 2;
+    return m_config->n() - m_config->R();
   }
 
   std::vector<edge_t>
