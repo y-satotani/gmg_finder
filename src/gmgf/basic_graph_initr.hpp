@@ -11,6 +11,13 @@ extern "C" {
 
 namespace gmgf {
 
+  /**
+   * \brief 基本的なグラフ初期化子．
+   *
+   * このグラフ初期化子で構築される初期グラフは，次の特徴を持つ．
+   * - 頂点番号0の頂点は，\{1,\ldots,d\}の\f$d\f$個の頂点と隣接する．
+   * - 頂点番号
+   */
   class basic_graph_initr : public graph_initr {
   public:
     basic_graph_initr(graph_config* config);

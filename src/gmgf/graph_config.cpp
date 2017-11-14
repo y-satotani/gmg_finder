@@ -33,10 +33,10 @@ namespace gmgf {
     return _n - n_vert_btree(k() - 1, _d);
   }
 
-  std::size_t graph_config::sspl_lb() {
-    std::size_t sspl = 0;
+  unsigned int graph_config::sspl_lb() {
+    unsigned int sspl = 0;
     for(std::size_t j = 1; j < k(); j++)
-      sspl += j * _d * (std::size_t)pow(_d - 1, j - 1);
+      sspl += j * _d * (unsigned int)pow(_d - 1, j - 1);
     sspl = n() * (sspl + k() * R());
     return sspl;
   }

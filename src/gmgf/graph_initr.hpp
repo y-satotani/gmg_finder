@@ -39,22 +39,6 @@ namespace gmgf {
      */
     graph_config* get_config();
 
-#if 0
-    virtual vertex_t parent_of(vertex_t v) = 0;
-
-    /**
-     * \brief 初期グラフに含まれる辺と接する頂点のリストを求める．
-     * \return 頂点リスト
-     */
-    virtual std::vector<vertex_t> initial_vertices() = 0;
-
-    /**
-     * \brief 探索の候補となる辺と接する頂点のリストを求める．
-     * \return 頂点リスト
-     */
-    virtual std::vector<vertex_t> possible_vertices() = 0;
-#endif
-
     /**
      * \brief 初期グラフに含まれる辺のリストを求める．
      * \return 辺リスト

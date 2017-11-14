@@ -19,7 +19,8 @@ namespace gmgf {
   /**
    * \brief 一般化ムーアグラフに関する基礎的な量を計算する．
    *
-   * 頂点数などなど
+   * 頂点に関する量やムーアグラフと比べたときの頂点数の差，
+   * 一般化ムーアグラフの頂点間距離の総和を計算する．
    */
   class graph_config {
   private:
@@ -32,7 +33,7 @@ namespace gmgf {
      * \param d 次数
      */
     graph_config(unsigned int n, unsigned int d);
-    virtual ~graph_config() {}
+
     /** \brief 設定した頂点数を返す． \return 頂点数 */
     unsigned int n();
 
@@ -40,41 +41,56 @@ namespace gmgf {
     unsigned int d();
 
     /**
-     * \brief 一般化ムーアグラフの直径を計算する．
+     * \brief 一般化ムーアグラフの直径に関する量を計算する．
      *
      * 次の式で計算される．
-     * \f[ k = 1 \f]
-     * \return 直径
+     * \f[ k = \max\{l | n-1-\sum_{i=1}^{l-1}d(d-1)^{i-1} \geq 0\} \f]
+     * \return \f$k\f$
      */
     unsigned int k();
 
     /**
-     * \brief 一般化ムーアグラフの直径を計算する．
+     * \brief 一般化ムーアグラフの直径に関する量を計算する．
      *
      * 次の式で計算される．
-     * \return 直径
+     * \f[ Q = \max\{q | n-1-\sum_{i=1}^{q}d(d-1)^{i-1} \geq 0\} \f]
+     * \return \f$Q\f$
      */
     unsigned int Q();
 
     /**
-     * \brief 一般化ムーアグラフのパラメータ
+     * \brief ムーアグラフの頂点数との比較に関する量を計算する．
      *
-     * \return パラメータ
+     * 次の式で計算される．
+     * \f[ R = n - 1 - \sum_{i=1}^{Q(n,d)}d(d-1)^{i-1} \f]
+     * \return \f$R\f$
      */
     unsigned int R();
 
     /**
      * \brief 頂点間距離の総和の下界を計算する．
      *
-     * \f[ S = \sum_{(s,t)\in V\times V} \f]
+     * 一般化ムーアグラフの頂点間距離の総和を次の式で計算する．
+     * \f[ S = n\left[\sum^{Q}_{i=1}id(d-1)^{i-1}+(Q+1)R\right] \f]
+     *
+     * なお，平均頂点間距離を計算したい場合は，
+     * \f[ P = \frac{S}{n(n-1)} \f]
+     * とすればよい．
+     * \return 頂点間距離の総和の下界
      */
-    std::size_t sspl_lb();
+    unsigned int sspl_lb();
   };
 
   /**
-   * \brief 木における頂点の深さを求める．
+   * \brief 次数dの平衡木における頂点vの深さを求める．
    *
-   * 根は0と数える．
+   * 次の式で計算される．
+   * \f{align*}{
+   *   & 0 &\:& v = 0 \\
+   *   & \mbox{log}_{d-1}{\left(\frac{(v-1)(d-2)}{d}+1\right)}
+   *     + 1 &\:& v > 0
+   * \f}
+   *
    * \param vid 頂点番号
    * \param degree 次数
    * \return 頂点の深さ
@@ -82,7 +98,15 @@ namespace gmgf {
   unsigned int tree_depth(int vid, unsigned int degree);
 
   /**
-   * \brief 木の頂点数を求める．
+   * \brief 深さと次数から平衡木の頂点数を求める．
+   *
+   * 次の式で計算される．
+   * \f{align*}{
+   *   & 1 &\:& \mbox{dep} = 0 \\
+   *   & \mbox{deg}+1 &\:& \mbox{dep} = 1 \\
+   *   & \frac{\mbox{deg}\left((\mbox{deg}-1)^{\mbox{dep}}-1\right)}
+   *     {\mbox{deg}-2}+1 &\:& \mbox{dep} > 1
+   * \f}
    * \param depth 木の深さ(0:根のみ)
    * \param degree 次数
    * \return 頂点数

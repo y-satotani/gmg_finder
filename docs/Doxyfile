@@ -2,12 +2,17 @@ PROJECT_NAME           = gmg_finder
 INPUT                  = ../src/README.md ../src/gmgf
 USE_MDFILE_AS_MAINPAGE = ../src/README.md
 FILE_PATTERNS          = *.cpp *.hpp
+
 EXTRACT_ALL            = YES
 EXTRACT_PRIVATE        = NO
 FULL_PATH_NAMES        = YES
 STRIP_FROM_PATH        = ../src/
 SORT_MEMBER_DOCS       = NO
 SORT_MEMBERS_CTORS_1ST = YES
+USE_MATHJAX            = YES
+MAX_DOT_GRAPH_DEPTH    = 1
+DOT_IMAGE_FORMAT       = svg
+
 OUTPUT_DIRECTORY       = .
 OUTPUT_LANGUAGE        = Japanese-en
 GENERATE_HTML          = YES

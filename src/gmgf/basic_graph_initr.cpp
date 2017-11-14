@@ -2,7 +2,6 @@
 #include "basic_graph_initr.hpp"
 
 #include <cmath>
-#include "graph_config.hpp"
 
 namespace gmgf {
 
