@@ -1,12 +1,15 @@
 
 #ifndef _GMGF_CYCLE_GRAPH_INITIALIZER_HPP_
-#define _GMGF_CYCLE_GRAPH_INTIIALIZER_HPP_
+#define _GMGF_CYCLE_GRAPH_INITIALIZER_HPP_
 
 #include <vector>
 #include "basic_graph_initr.hpp"
 
 namespace gmgf {
 
+  /**
+   * \brief 閉路を含む初期グラフを与えるグラフ初期化子
+   */
   class cycle_graph_initr : public basic_graph_initr {
   private:
     vertex_t p();

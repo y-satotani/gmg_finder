@@ -1,5 +1,6 @@
 
 #include "sorted_graph_initr.hpp"
+#include <set>
 #include <algorithm>
 
 namespace gmgf {
@@ -9,25 +10,12 @@ namespace gmgf {
     m_builder = builder;
   }
 
-  vertex_t sorted_graph_initr::parent_of(vertex_t v) {
-    return m_builder->parent_of(v);
-  }
-
-  std::vector<vertex_t>
-  sorted_graph_initr::initial_vertices() {
-    return m_builder->initial_vertices();
-  }
-
-  std::vector<vertex_t>
-  sorted_graph_initr::possible_vertices() {
-    return m_builder->possible_vertices();
-  }
-
   std::vector<edge_t>
   sorted_graph_initr::initial_edges() {
     return m_builder->initial_edges();
   }
 
+  /** \private */
   vertex_t _find_least_vertex
   (std::vector<vertex_t> vertices, std::vector<edge_t> edges) {
     vertex_t min_v = vertices[0];
@@ -52,9 +40,18 @@ namespace gmgf {
 
   std::vector<edge_t>
   sorted_graph_initr::possible_edges() {
-    std::vector<vertex_t> orig_v = m_builder->possible_vertices();
     std::vector<edge_t> orig_e = m_builder->possible_edges();
     std::vector<edge_t> edges;
+
+    std::set<vertex_t> orig_v_set;
+    std::for_each(orig_e.begin(), orig_e.end(),
+                  [&orig_v_set](edge_t e) {
+                    orig_v_set.insert(e.first);
+                    orig_v_set.insert(e.second);
+                  });
+    std::vector<vertex_t> orig_v;
+    std::copy(orig_v_set.begin(), orig_v_set.end(), std::back_inserter(orig_v));
+
     while(orig_e.size() > 0) {
       vertex_t v = _find_least_vertex(orig_v, orig_e);
       orig_v.erase(std::remove

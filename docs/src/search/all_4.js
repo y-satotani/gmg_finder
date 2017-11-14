@@ -1,9 +1,5 @@
 var searchData=
 [
-  ['graph_5fconfig',['graph_config',['../classgmgf_1_1graph__config.html',1,'gmgf']]],
-  ['graph_5fconfig',['graph_config',['../classgmgf_1_1graph__config.html#ae1e15eadd6b2bbc7eb26aae8b6e945e1',1,'gmgf::graph_config']]],
-  ['graph_5fconfig_2ecpp',['graph_config.cpp',['../graph__config_8cpp.html',1,'']]],
-  ['graph_5fconfig_2ehpp',['graph_config.hpp',['../graph__config_8hpp.html',1,'']]],
-  ['graph_5finitr',['graph_initr',['../classgmgf_1_1graph__initr.html',1,'gmgf']]],
-  ['gmg_5ffinder_20source',['gmg_finder source',['../index.html',1,'']]]
+  ['edge_5ft',['edge_t',['../namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3',1,'gmgf']]],
+  ['extracted_5fnodes',['extracted_nodes',['../classgmgf_1_1dfs__finder.html#a56c1cb29534613091cfde4a3aa66eca4',1,'gmgf::dfs_finder']]]
 ];

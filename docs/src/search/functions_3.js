@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['n',['n',['../classgmgf_1_1graph__config.html#a77289e4829029d780cf98ff40e79ec7e',1,'gmgf::graph_config']]],
-  ['n_5fvert_5fbtree',['n_vert_btree',['../graph__config_8cpp.html#adea883ff834e8876c8c41df391c235f9',1,'gmgf']]]
+  ['d',['d',['../classgmgf_1_1graph__config.html#a78a6671bce5508cfa69b94a4f2d79771',1,'gmgf::graph_config']]],
+  ['dfs_5ffinder',['dfs_finder',['../classgmgf_1_1dfs__finder.html#ae3e49f453accfad40abddbab48a2d11c',1,'gmgf::dfs_finder']]]
 ];

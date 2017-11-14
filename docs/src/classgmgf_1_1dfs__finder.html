@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -82,68 +83,154 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>gmgf</b></li><li class="navelem"><a class="el" href="classgmgf_1_1dfs__finder.html">dfs_finder</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacegmgf.html">gmgf</a></li><li class="navelem"><a class="el" href="classgmgf_1_1dfs__finder.html">dfs_finder</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classgmgf_1_1dfs__finder-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">gmgf::dfs_finder Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="dynheader">
-Collaboration diagram for gmgf::dfs_finder:</div>
-<div class="dyncontent">
-<div class="center"><img src="classgmgf_1_1dfs__finder__coll__graph.png" border="0" usemap="#gmgf_1_1dfs__finder_coll__map" alt="Collaboration graph"/></div>
-<map name="gmgf_1_1dfs__finder_coll__map" id="gmgf_1_1dfs__finder_coll__map">
-<area shape="rect" id="node2" href="classgmgf_1_1state__initr.html" title="gmgf::state_initr" alt="" coords="5,95,121,121"/>
-<area shape="rect" id="node3" href="classgmgf_1_1graph__initr.html" title="gmgf::graph_initr" alt="" coords="145,95,264,121"/>
-<area shape="rect" id="node4" href="classgmgf_1_1graph__config.html" title="一般化ムーアグラフに関する基礎的な量を計算する． " alt="" coords="138,5,271,32"/>
-</map>
-<center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
+
+<p>深さ優先探索により一般化ムーアグラフを探索する．  
+ <a href="classgmgf_1_1dfs__finder.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="dfs__finder_8hpp_source.html">dfs_finder.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ae3e49f453accfad40abddbab48a2d11c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae3e49f453accfad40abddbab48a2d11c"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>dfs_finder</b> (<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *ginitr, <a class="el" href="classgmgf_1_1state__initr.html">state_initr</a> *sinitr)</td></tr>
+<tr class="memitem:ae3e49f453accfad40abddbab48a2d11c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1dfs__finder.html#ae3e49f453accfad40abddbab48a2d11c">dfs_finder</a> (<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *ginitr, <a class="el" href="classgmgf_1_1state__initr.html">state_initr</a> *sinitr)</td></tr>
+<tr class="memdesc:ae3e49f453accfad40abddbab48a2d11c"><td class="mdescLeft">&#160;</td><td class="mdescRight">グラフ初期化子と状態初期化子の組で初期化する．  <a href="#ae3e49f453accfad40abddbab48a2d11c">More...</a><br /></td></tr>
 <tr class="separator:ae3e49f453accfad40abddbab48a2d11c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56c1cb29534613091cfde4a3aa66eca4"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a56c1cb29534613091cfde4a3aa66eca4"></a>
-unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><b>extracted_nodes</b> ()</td></tr>
+<tr class="memitem:abe03efc11c358f4d604ae0ba1fa04cbd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1dfs__finder.html#abe03efc11c358f4d604ae0ba1fa04cbd">~dfs_finder</a> ()</td></tr>
+<tr class="memdesc:abe03efc11c358f4d604ae0ba1fa04cbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ．  <a href="#abe03efc11c358f4d604ae0ba1fa04cbd">More...</a><br /></td></tr>
+<tr class="separator:abe03efc11c358f4d604ae0ba1fa04cbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56c1cb29534613091cfde4a3aa66eca4"><td class="memItemLeft" align="right" valign="top">unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1dfs__finder.html#a56c1cb29534613091cfde4a3aa66eca4">extracted_nodes</a> ()</td></tr>
+<tr class="memdesc:a56c1cb29534613091cfde4a3aa66eca4"><td class="mdescLeft">&#160;</td><td class="mdescRight">呼び出されるまでに展開された状態数を返す．  <a href="#a56c1cb29534613091cfde4a3aa66eca4">More...</a><br /></td></tr>
 <tr class="separator:a56c1cb29534613091cfde4a3aa66eca4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae958eb998f5f4343dbbcea2d590a04b2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae958eb998f5f4343dbbcea2d590a04b2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>reset</b> ()</td></tr>
+<tr class="memitem:ae958eb998f5f4343dbbcea2d590a04b2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1dfs__finder.html#ae958eb998f5f4343dbbcea2d590a04b2">reset</a> ()</td></tr>
+<tr class="memdesc:ae958eb998f5f4343dbbcea2d590a04b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期化時の状態に戻す．  <a href="#ae958eb998f5f4343dbbcea2d590a04b2">More...</a><br /></td></tr>
 <tr class="separator:ae958eb998f5f4343dbbcea2d590a04b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a163062222500bc5206bd67c2562eec71"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a163062222500bc5206bd67c2562eec71"></a>
-igraph_t&#160;</td><td class="memItemRight" valign="bottom"><b>next</b> ()</td></tr>
+<tr class="memitem:a163062222500bc5206bd67c2562eec71"><td class="memItemLeft" align="right" valign="top">igraph_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1dfs__finder.html#a163062222500bc5206bd67c2562eec71">next</a> ()</td></tr>
+<tr class="memdesc:a163062222500bc5206bd67c2562eec71"><td class="mdescLeft">&#160;</td><td class="mdescRight">次の一般化ムーアグラフを探索する．  <a href="#a163062222500bc5206bd67c2562eec71">More...</a><br /></td></tr>
 <tr class="separator:a163062222500bc5206bd67c2562eec71"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
-Protected Attributes</h2></td></tr>
-<tr class="memitem:a0270572bc06e65e6b9a29cef7ce74fe9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0270572bc06e65e6b9a29cef7ce74fe9"></a>
-<a class="el" href="classgmgf_1_1state__initr.html">state_initr</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_sinitr</b></td></tr>
-<tr class="separator:a0270572bc06e65e6b9a29cef7ce74fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab893d8f2cee9f074b7f50d2465f076a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ab893d8f2cee9f074b7f50d2465f076a8"></a>
-<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_ginitr</b></td></tr>
-<tr class="separator:ab893d8f2cee9f074b7f50d2465f076a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa125a684025165426107f8db03486c17"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa125a684025165426107f8db03486c17"></a>
-std::vector&lt; std::pair&lt; std::size_t, <a class="el" href="classgmgf_1_1state.html">state</a> * &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_stack</b></td></tr>
-<tr class="separator:aa125a684025165426107f8db03486c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5fccfdde5fd9a1f5c534a88af1f05e14"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5fccfdde5fd9a1f5c534a88af1f05e14"></a>
-std::vector&lt; <a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_e_possible</b></td></tr>
-<tr class="separator:a5fccfdde5fd9a1f5c534a88af1f05e14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4c565cdac3c216ff30e6fd3c4973d9a8"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4c565cdac3c216ff30e6fd3c4973d9a8"></a>
-std::vector&lt; std::pair&lt; std::size_t, std::size_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>m_v_range</b></td></tr>
-<tr class="separator:a4c565cdac3c216ff30e6fd3c4973d9a8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9e6197a4e8ddd3404a25ed4c523c6ad5"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9e6197a4e8ddd3404a25ed4c523c6ad5"></a>
-unsigned long long&#160;</td><td class="memItemRight" valign="bottom"><b>m_extracted_nodes</b></td></tr>
-<tr class="separator:a9e6197a4e8ddd3404a25ed4c523c6ad5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>深さ優先探索により一般化ムーアグラフを探索する． </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="ae3e49f453accfad40abddbab48a2d11c"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gmgf::dfs_finder::dfs_finder </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *&#160;</td>
+          <td class="paramname"><em>ginitr</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classgmgf_1_1state__initr.html">state_initr</a> *&#160;</td>
+          <td class="paramname"><em>sinitr</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>グラフ初期化子と状態初期化子の組で初期化する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ginitr</td><td>グラフ初期化子 </td></tr>
+    <tr><td class="paramname">sinitr</td><td>状態初期化子 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="abe03efc11c358f4d604ae0ba1fa04cbd"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gmgf::dfs_finder::~dfs_finder </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>デストラクタ． </p>
+<p>このとき，初期化時に渡したグラフ初期化子と状態初期化子は 破棄されない． </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a56c1cb29534613091cfde4a3aa66eca4"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">unsigned long long gmgf::dfs_finder::extracted_nodes </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>呼び出されるまでに展開された状態数を返す． </p>
+<dl class="section return"><dt>Returns</dt><dd>展開状態数 </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="ae958eb998f5f4343dbbcea2d590a04b2"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gmgf::dfs_finder::reset </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>初期化時の状態に戻す． </p>
+
+</div>
+</div>
+<a class="anchor" id="a163062222500bc5206bd67c2562eec71"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">igraph_t gmgf::dfs_finder::next </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>次の一般化ムーアグラフを探索する． </p>
+<dl class="section return"><dt>Returns</dt><dd>一般化ムーアグラフ (もし存在しなければ，頂点数0のグラフを返す．) </dd></dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>gmgf/<a class="el" href="dfs__finder_8hpp_source.html">dfs_finder.hpp</a></li>
-<li>gmgf/dfs_finder.cpp</li>
+<li>gmgf/<a class="el" href="dfs__finder_8cpp.html">dfs_finder.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

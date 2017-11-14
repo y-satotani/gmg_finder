@@ -10,8 +10,6 @@ extern "C" {
 
 namespace gmgf {
 
-  typedef std::pair<igraph_t, igraph_t> igraph_pair_t;
-
   class minmax_state : public basic_state {
   protected:
     igraph_t H;

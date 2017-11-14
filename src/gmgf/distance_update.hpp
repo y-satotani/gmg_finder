@@ -1,8 +1,5 @@
-/** \file distance_update.hpp
- * \brief 辺の挿入・削除に伴う頂点間距離の更新を行う．
- *
- * 詳しい説明．
- */
+/** \file distance_update.hpp */
+
 #ifndef _GMGF_DISTANCE_UPDATE_HPP_
 #define _GMGF_DISTANCE_UPDATE_HPP_
 

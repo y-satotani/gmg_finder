@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['tree_5fdepth',['tree_depth',['../graph__config_8cpp.html#aaaca26a21d258a0623cf5544d022f705',1,'gmgf']]]
+  ['k',['k',['../classgmgf_1_1graph__config.html#ad8a5c8b4acd8c0e5c05e808023cfeb7a',1,'gmgf::graph_config']]]
 ];

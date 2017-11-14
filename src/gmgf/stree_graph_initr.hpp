@@ -3,15 +3,16 @@
 #define _GMGF_STREE_GRAPH_INITIALIZER_HPP_
 
 #include <vector>
-#include "basic_graph_initr.hpp"
+#include "graph_initr.hpp"
 
 namespace gmgf {
 
-  class stree_graph_initr : public basic_graph_initr {
-  public:
+  class stree_graph_initr : public graph_initr {
+  private:
     vertex_t parent_of(vertex_t v);
     std::vector<vertex_t> initial_vertices();
     std::vector<vertex_t> possible_vertices();
+
   public:
     stree_graph_initr(graph_config* config);
     virtual ~stree_graph_initr() {}

@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -82,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>gmgf</b></li><li class="navelem"><a class="el" href="classgmgf_1_1sorted__graph__initr.html">sorted_graph_initr</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacegmgf.html">gmgf</a></li><li class="navelem"><a class="el" href="classgmgf_1_1sorted__graph__initr.html">sorted_graph_initr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -93,12 +94,17 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">gmgf::sorted_graph_initr Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>あるグラフ初期化子の候補辺リストをソートして返すグラフ初期化子．  
+ <a href="classgmgf_1_1sorted__graph__initr.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="sorted__graph__initr_8hpp_source.html">sorted_graph_initr.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gmgf::sorted_graph_initr:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgmgf_1_1sorted__graph__initr__inherit__graph.png" border="0" usemap="#gmgf_1_1sorted__graph__initr_inherit__map" alt="Inheritance graph"/></div>
 <map name="gmgf_1_1sorted__graph__initr_inherit__map" id="gmgf_1_1sorted__graph__initr_inherit__map">
-<area shape="rect" id="node2" href="classgmgf_1_1graph__initr.html" title="gmgf::graph_initr" alt="" coords="13,5,132,32"/>
+<area shape="rect" id="node2" href="classgmgf_1_1graph__initr.html" title="探索の初期グラフを生成するグラフ初期化子． " alt="" coords="13,5,132,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -106,55 +112,164 @@ Collaboration diagram for gmgf::sorted_graph_initr:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgmgf_1_1sorted__graph__initr__coll__graph.png" border="0" usemap="#gmgf_1_1sorted__graph__initr_coll__map" alt="Collaboration graph"/></div>
 <map name="gmgf_1_1sorted__graph__initr_coll__map" id="gmgf_1_1sorted__graph__initr_coll__map">
-<area shape="rect" id="node2" href="classgmgf_1_1graph__initr.html" title="gmgf::graph_initr" alt="" coords="13,95,132,121"/>
+<area shape="rect" id="node2" href="classgmgf_1_1graph__initr.html" title="探索の初期グラフを生成するグラフ初期化子． " alt="" coords="13,95,132,121"/>
 <area shape="rect" id="node3" href="classgmgf_1_1graph__config.html" title="一般化ムーアグラフに関する基礎的な量を計算する． " alt="" coords="6,5,139,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4d96f40b8fb8d5411f7d6e31f7855840"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4d96f40b8fb8d5411f7d6e31f7855840"></a>
-virtual <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a>&#160;</td><td class="memItemRight" valign="bottom"><b>parent_of</b> (<a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> v)</td></tr>
-<tr class="separator:a4d96f40b8fb8d5411f7d6e31f7855840"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a39a6cd277c75dab67415f7ef86d91b0e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a39a6cd277c75dab67415f7ef86d91b0e"></a>
-virtual std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>initial_vertices</b> ()</td></tr>
-<tr class="separator:a39a6cd277c75dab67415f7ef86d91b0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a900b6cc0aa43e70890e8b27e399f994b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a900b6cc0aa43e70890e8b27e399f994b"></a>
-virtual std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>possible_vertices</b> ()</td></tr>
-<tr class="separator:a900b6cc0aa43e70890e8b27e399f994b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48faf82b3aec077df66fe32128eced6d"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a48faf82b3aec077df66fe32128eced6d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>sorted_graph_initr</b> (<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *builder)</td></tr>
+<tr class="memitem:a48faf82b3aec077df66fe32128eced6d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1sorted__graph__initr.html#a48faf82b3aec077df66fe32128eced6d">sorted_graph_initr</a> (<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *builder)</td></tr>
+<tr class="memdesc:a48faf82b3aec077df66fe32128eced6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ．  <a href="#a48faf82b3aec077df66fe32128eced6d">More...</a><br /></td></tr>
 <tr class="separator:a48faf82b3aec077df66fe32128eced6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa13c49159ecefcab9ee3486fad232076"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa13c49159ecefcab9ee3486fad232076"></a>
-virtual std::vector&lt; <a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>initial_edges</b> ()</td></tr>
+<tr class="memitem:a9d4b74c52378ef4aa359d3580565542e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1sorted__graph__initr.html#a9d4b74c52378ef4aa359d3580565542e">~sorted_graph_initr</a> ()</td></tr>
+<tr class="separator:a9d4b74c52378ef4aa359d3580565542e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa13c49159ecefcab9ee3486fad232076"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1sorted__graph__initr.html#aa13c49159ecefcab9ee3486fad232076">initial_edges</a> ()</td></tr>
+<tr class="memdesc:aa13c49159ecefcab9ee3486fad232076"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期グラフに含まれる辺のリストを求める．  <a href="#aa13c49159ecefcab9ee3486fad232076">More...</a><br /></td></tr>
 <tr class="separator:aa13c49159ecefcab9ee3486fad232076"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a041182703b533d1e6916c0ab1edc02f0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a041182703b533d1e6916c0ab1edc02f0"></a>
-virtual std::vector&lt; <a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>possible_edges</b> ()</td></tr>
+<tr class="memitem:a041182703b533d1e6916c0ab1edc02f0"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1sorted__graph__initr.html#a041182703b533d1e6916c0ab1edc02f0">possible_edges</a> ()</td></tr>
+<tr class="memdesc:a041182703b533d1e6916c0ab1edc02f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">探索の候補となる辺のリストを求める．  <a href="#a041182703b533d1e6916c0ab1edc02f0">More...</a><br /></td></tr>
 <tr class="separator:a041182703b533d1e6916c0ab1edc02f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgmgf_1_1graph__initr"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgmgf_1_1graph__initr')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgmgf_1_1graph__initr.html">gmgf::graph_initr</a></td></tr>
-<tr class="memitem:aac43d624f6195fc363b90b72a2e5afd4 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aac43d624f6195fc363b90b72a2e5afd4"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>graph_initr</b> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config)</td></tr>
+<tr class="memitem:aac43d624f6195fc363b90b72a2e5afd4 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1graph__initr.html#aac43d624f6195fc363b90b72a2e5afd4">graph_initr</a> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config)</td></tr>
+<tr class="memdesc:aac43d624f6195fc363b90b72a2e5afd4 inherit pub_methods_classgmgf_1_1graph__initr"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ．  <a href="#aac43d624f6195fc363b90b72a2e5afd4">More...</a><br /></td></tr>
 <tr class="separator:aac43d624f6195fc363b90b72a2e5afd4 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af0dc3b48c08b30f2e5b5c30396f4a866 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af0dc3b48c08b30f2e5b5c30396f4a866"></a>
-<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>get_config</b> ()</td></tr>
+<tr class="memitem:abd1af048d514fd2f134f0f3478d0853f inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1graph__initr.html#abd1af048d514fd2f134f0f3478d0853f">~graph_initr</a> ()</td></tr>
+<tr class="memdesc:abd1af048d514fd2f134f0f3478d0853f inherit pub_methods_classgmgf_1_1graph__initr"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ．  <a href="#abd1af048d514fd2f134f0f3478d0853f">More...</a><br /></td></tr>
+<tr class="separator:abd1af048d514fd2f134f0f3478d0853f inherit pub_methods_classgmgf_1_1graph__initr"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0dc3b48c08b30f2e5b5c30396f4a866 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1graph__initr.html#af0dc3b48c08b30f2e5b5c30396f4a866">get_config</a> ()</td></tr>
+<tr class="memdesc:af0dc3b48c08b30f2e5b5c30396f4a866 inherit pub_methods_classgmgf_1_1graph__initr"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成する初期グラフの設定を返す．  <a href="#af0dc3b48c08b30f2e5b5c30396f4a866">More...</a><br /></td></tr>
 <tr class="separator:af0dc3b48c08b30f2e5b5c30396f4a866 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae32fb669284f46e1565a7c26e6b0c122 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae32fb669284f46e1565a7c26e6b0c122"></a>
-virtual std::vector&lt; std::pair&lt; std::size_t, std::size_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>vertex_frontier</b> ()</td></tr>
+<tr class="memitem:ae32fb669284f46e1565a7c26e6b0c122 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::pair&lt; std::size_t, std::size_t &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1graph__initr.html#ae32fb669284f46e1565a7c26e6b0c122">vertex_frontier</a> ()</td></tr>
+<tr class="memdesc:ae32fb669284f46e1565a7c26e6b0c122 inherit pub_methods_classgmgf_1_1graph__initr"><td class="mdescLeft">&#160;</td><td class="mdescRight">フロンティアを計算する．  <a href="#ae32fb669284f46e1565a7c26e6b0c122">More...</a><br /></td></tr>
 <tr class="separator:ae32fb669284f46e1565a7c26e6b0c122 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8da02cf435f18daaf1ba9f0fb7c974f6 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8da02cf435f18daaf1ba9f0fb7c974f6"></a>
-virtual igraph_t&#160;</td><td class="memItemRight" valign="bottom"><b>build</b> ()</td></tr>
+<tr class="memitem:a8da02cf435f18daaf1ba9f0fb7c974f6 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top">igraph_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1graph__initr.html#a8da02cf435f18daaf1ba9f0fb7c974f6">build</a> ()</td></tr>
+<tr class="memdesc:a8da02cf435f18daaf1ba9f0fb7c974f6 inherit pub_methods_classgmgf_1_1graph__initr"><td class="mdescLeft">&#160;</td><td class="mdescRight">初期グラフに含まれる辺のリストから，初期グラフを構築する．  <a href="#a8da02cf435f18daaf1ba9f0fb7c974f6">More...</a><br /></td></tr>
 <tr class="separator:a8da02cf435f18daaf1ba9f0fb7c974f6 inherit pub_methods_classgmgf_1_1graph__initr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="inherited"></a>
 Additional Inherited Members</h2></td></tr>
 <tr class="inherit_header pro_attribs_classgmgf_1_1graph__initr"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classgmgf_1_1graph__initr')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classgmgf_1_1graph__initr.html">gmgf::graph_initr</a></td></tr>
-<tr class="memitem:a5ff4edeed63f2f940d386b16fafedd30 inherit pro_attribs_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a5ff4edeed63f2f940d386b16fafedd30"></a>
-<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_config</b></td></tr>
+<tr class="memitem:a5ff4edeed63f2f940d386b16fafedd30 inherit pro_attribs_classgmgf_1_1graph__initr"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1graph__initr.html#a5ff4edeed63f2f940d386b16fafedd30">m_config</a></td></tr>
+<tr class="memdesc:a5ff4edeed63f2f940d386b16fafedd30 inherit pro_attribs_classgmgf_1_1graph__initr"><td class="mdescLeft">&#160;</td><td class="mdescRight">生成する初期グラフの設定  <a href="#a5ff4edeed63f2f940d386b16fafedd30">More...</a><br /></td></tr>
 <tr class="separator:a5ff4edeed63f2f940d386b16fafedd30 inherit pro_attribs_classgmgf_1_1graph__initr"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>あるグラフ初期化子の候補辺リストをソートして返すグラフ初期化子． </p>
+<p>あるグラフ初期化子に対して，その候補辺リストを次の規則で並べ替える．</p><ol type="1">
+<li>各頂点 <img class="formulaInl" alt="$v$" src="form_3.png"/>に対して，候補辺リストにおける出現回数を求める．</li>
+<li>出現回数がもっとも小さい頂点と接続する辺を取り出し， 新たな候補辺リストに加える．</li>
+<li>元の候補辺リストが空になるまで繰り返す． </li>
+</ol>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a48faf82b3aec077df66fe32128eced6d"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gmgf::sorted_graph_initr::sorted_graph_initr </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *&#160;</td>
+          <td class="paramname"><em>builder</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>コンストラクタ． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">builder</td><td>ソート対象のグラフ初期化子 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a9d4b74c52378ef4aa359d3580565542e"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual gmgf::sorted_graph_initr::~sorted_graph_initr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>デストラクタ． このとき，初期化時に渡したグラフ初期化子は破棄されない．　 </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="aa13c49159ecefcab9ee3486fad232076"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt; gmgf::sorted_graph_initr::initial_edges </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>初期グラフに含まれる辺のリストを求める． </p>
+<dl class="section return"><dt>Returns</dt><dd>辺リスト </dd></dl>
+
+<p>Implements <a class="el" href="classgmgf_1_1graph__initr.html#ae779b47d1734f32d3554ca0c1a88d77e">gmgf::graph_initr</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a041182703b533d1e6916c0ab1edc02f0"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; <a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> &gt; gmgf::sorted_graph_initr::possible_edges </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>探索の候補となる辺のリストを求める． </p>
+<dl class="section return"><dt>Returns</dt><dd>辺リスト </dd></dl>
+
+<p>Implements <a class="el" href="classgmgf_1_1graph__initr.html#a72b2121c2c3142dfe15dbfe5830affd2">gmgf::graph_initr</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>gmgf/<a class="el" href="sorted__graph__initr_8hpp_source.html">sorted_graph_initr.hpp</a></li>
-<li>gmgf/sorted_graph_initr.cpp</li>
+<li>gmgf/<a class="el" href="sorted__graph__initr_8cpp.html">sorted_graph_initr.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

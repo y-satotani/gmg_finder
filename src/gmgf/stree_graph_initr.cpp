@@ -4,7 +4,7 @@
 namespace gmgf {
 
   stree_graph_initr::stree_graph_initr(graph_config* config)
-    : basic_graph_initr(config) {
+    : graph_initr(config) {
   }
 
   vertex_t stree_graph_initr::parent_of(vertex_t v) {

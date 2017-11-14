@@ -1,10 +1,9 @@
-/** \file distance_update.cpp
- * \brief 辺の挿入・削除に伴う頂点間距離の更新を行う．
- */
+
 #include "distance_update.hpp"
 
 namespace gmgf {
 
+  /** \private */
   void _sort_two_vertices_by_distance(igraph_integer_t* near,
                                       igraph_integer_t* far,
                                       igraph_matrix_t* D,
@@ -67,6 +66,7 @@ namespace gmgf {
     }
   }
 
+  /** \private */
   igraph_integer_t _path_num_not_contain(igraph_matrix_t* D,
                                          igraph_matrix_t* S,
                                          igraph_integer_t s,

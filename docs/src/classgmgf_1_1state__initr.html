@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -82,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>gmgf</b></li><li class="navelem"><a class="el" href="classgmgf_1_1state__initr.html">state_initr</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacegmgf.html">gmgf</a></li><li class="navelem"><a class="el" href="classgmgf_1_1state__initr.html">state_initr</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -93,6 +94,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">gmgf::state_initr Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>探索の初期状態を与える状態初期化子  
+ <a href="classgmgf_1_1state__initr.html#details">More...</a></p>
+
+<p><code>#include &lt;<a class="el" href="state__initr_8hpp_source.html">state_initr.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gmgf::state_initr:</div>
 <div class="dyncontent">
@@ -106,10 +112,78 @@ Inheritance diagram for gmgf::state_initr:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a503e046de3f322a3c57523f4096a1d3b"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a503e046de3f322a3c57523f4096a1d3b"></a>
-virtual <a class="el" href="classgmgf_1_1state.html">state</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>initial</b> (<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *ginitr)=0</td></tr>
+<tr class="memitem:a8f32cf272fc3fb37b351539f87ed281f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state__initr.html#a8f32cf272fc3fb37b351539f87ed281f">~state_initr</a> ()</td></tr>
+<tr class="memdesc:a8f32cf272fc3fb37b351539f87ed281f"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <a href="#a8f32cf272fc3fb37b351539f87ed281f">More...</a><br /></td></tr>
+<tr class="separator:a8f32cf272fc3fb37b351539f87ed281f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a503e046de3f322a3c57523f4096a1d3b"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgmgf_1_1state.html">state</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state__initr.html#a503e046de3f322a3c57523f4096a1d3b">initial</a> (<a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *ginitr)=0</td></tr>
+<tr class="memdesc:a503e046de3f322a3c57523f4096a1d3b"><td class="mdescLeft">&#160;</td><td class="mdescRight">グラフ初期化子から，そのグラフの初期状態を生成する．  <a href="#a503e046de3f322a3c57523f4096a1d3b">More...</a><br /></td></tr>
 <tr class="separator:a503e046de3f322a3c57523f4096a1d3b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>探索の初期状態を与える状態初期化子 </p>
+</div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a8f32cf272fc3fb37b351539f87ed281f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual gmgf::state_initr::~state_initr </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>デストラクタ </p>
+<p>このとき，初期化時に渡したグラフ初期化子は破棄されない． </p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a503e046de3f322a3c57523f4096a1d3b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual <a class="el" href="classgmgf_1_1state.html">state</a>* gmgf::state_initr::initial </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgmgf_1_1graph__initr.html">graph_initr</a> *&#160;</td>
+          <td class="paramname"><em>ginitr</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>グラフ初期化子から，そのグラフの初期状態を生成する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">ginitr</td><td>グラフ初期化子 </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>初期状態 </dd></dl>
+
+<p>Implemented in <a class="el" href="classgmgf_1_1minmax__state__initr.html#a38890cdfa3e54792d99519bd10300f1c">gmgf::minmax_state_initr</a>, <a class="el" href="classgmgf_1_1mmmtr__state__initr.html#ae5cad4734ea8afc3b5139d3ff2e1af2c">gmgf::mmmtr_state_initr</a>, and <a class="el" href="classgmgf_1_1basic__state__initr.html#a4ab1f7bde11e41a094c45969c3e75094">gmgf::basic_state_initr</a>.</p>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
 <li>gmgf/<a class="el" href="state__initr_8hpp_source.html">state_initr.hpp</a></li>
 </ul>

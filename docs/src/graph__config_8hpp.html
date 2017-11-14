@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -85,15 +86,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a> &#124;
 <a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">graph_config.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-
-<p>一般化ムーアグラフに関する基礎的な量を計算する．  
-<a href="#details">More...</a></p>
 <div class="textblock"><code>#include &lt;igraph.h&gt;</code><br />
 <code>#include &lt;utility&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
@@ -107,21 +106,35 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="graph__config_8hpp__dep__incl.png" border="0" usemap="#gmgf_2graph__config_8hppdep" alt=""/></div>
 <map name="gmgf_2graph__config_8hppdep" id="gmgf_2graph__config_8hppdep">
-<area shape="rect" id="node2" href="graph__initr_8hpp_source.html" title="gmgf/graph_initr.hpp" alt="" coords="537,80,677,107"/>
-<area shape="rect" id="node12" href="state_8hpp_source.html" title="gmgf/state.hpp" alt="" coords="736,80,845,107"/>
-<area shape="rect" id="node16" href="graph__config_8cpp.html" title="gmgf/graph_config.cpp" alt="" coords="869,80,1024,107"/>
-<area shape="rect" id="node3" href="basic__graph__initr_8hpp_source.html" title="gmgf/basic_graph_initr.hpp" alt="" coords="207,155,385,181"/>
-<area shape="rect" id="node6" href="state__initr_8hpp_source.html" title="gmgf/state_initr.hpp" alt="" coords="722,155,859,181"/>
-<area shape="rect" id="node8" href="dfs__finder_8hpp.html" title="深さ優先探索により一般化ムーアグラフを探索する． " alt="" coords="409,229,546,256"/>
-<area shape="rect" id="node11" href="sorted__graph__initr_8hpp_source.html" title="gmgf/sorted_graph_initr.hpp" alt="" coords="515,155,698,181"/>
-<area shape="rect" id="node4" href="cycle__graph__initr_8hpp_source.html" title="gmgf/cycle_graph_initr.hpp" alt="" coords="5,229,184,256"/>
-<area shape="rect" id="node5" href="stree__graph__initr_8hpp_source.html" title="gmgf/stree_graph_initr.hpp" alt="" coords="208,229,384,256"/>
-<area shape="rect" id="node7" href="basic__state__initr_8hpp_source.html" title="gmgf/basic_state_initr.hpp" alt="" coords="570,229,745,256"/>
-<area shape="rect" id="node9" href="minmax__state__initr_8hpp_source.html" title="gmgf/minmax_state_initr.hpp" alt="" coords="769,229,959,256"/>
-<area shape="rect" id="node10" href="mmmtr__state__initr_8hpp_source.html" title="gmgf/mmmtr_state_initr.hpp" alt="" coords="983,229,1169,256"/>
-<area shape="rect" id="node13" href="basic__state_8hpp_source.html" title="gmgf/basic_state.hpp" alt="" coords="1201,155,1348,181"/>
-<area shape="rect" id="node14" href="minmax__state_8hpp_source.html" title="gmgf/minmax_state.hpp" alt="" coords="1193,229,1356,256"/>
-<area shape="rect" id="node15" href="mmmtr__state_8hpp_source.html" title="gmgf/mmmtr_state.hpp" alt="" coords="1380,229,1537,256"/>
+<area shape="rect" id="node2" href="graph__initr_8hpp.html" title="gmgf/graph_initr.hpp" alt="" coords="1563,80,1703,107"/>
+<area shape="rect" id="node4" href="basic__graph__initr_8cpp.html" title="gmgf/basic_graph_initr.cpp" alt="" coords="2152,229,2331,256"/>
+<area shape="rect" id="node22" href="state_8hpp.html" title="gmgf/state.hpp" alt="" coords="819,80,928,107"/>
+<area shape="rect" id="node30" href="graph__config_8cpp.html" title="gmgf/graph_config.cpp" alt="" coords="2203,80,2357,107"/>
+<area shape="rect" id="node3" href="basic__graph__initr_8hpp.html" title="gmgf/basic_graph_initr.hpp" alt="" coords="1949,155,2128,181"/>
+<area shape="rect" id="node7" href="state__initr_8hpp.html" title="gmgf/state_initr.hpp" alt="" coords="1021,155,1158,181"/>
+<area shape="rect" id="node10" href="dfs__finder_8hpp.html" title="gmgf/dfs_finder.hpp" alt="" coords="1381,229,1518,256"/>
+<area shape="rect" id="node17" href="graph__initr_8cpp.html" title="gmgf/graph_initr.cpp" alt="" coords="1378,155,1518,181"/>
+<area shape="rect" id="node18" href="sorted__graph__initr_8hpp.html" title="gmgf/sorted_graph_initr.hpp" alt="" coords="1542,155,1725,181"/>
+<area shape="rect" id="node20" href="stree__graph__initr_8hpp.html" title="gmgf/stree_graph_initr.hpp" alt="" coords="1749,155,1925,181"/>
+<area shape="rect" id="node5" href="cycle__graph__initr_8hpp.html" title="gmgf/cycle_graph_initr.hpp" alt="" coords="1949,229,2128,256"/>
+<area shape="rect" id="node6" href="cycle__graph__initr_8cpp.html" title="gmgf/cycle_graph_initr.cpp" alt="" coords="1949,304,2128,331"/>
+<area shape="rect" id="node8" href="basic__state__initr_8hpp.html" title="gmgf/basic_state_initr.hpp" alt="" coords="1182,229,1357,256"/>
+<area shape="rect" id="node12" href="minmax__state__initr_8hpp.html" title="gmgf/minmax_state_initr.hpp" alt="" coords="363,229,554,256"/>
+<area shape="rect" id="node14" href="mmmtr__state__initr_8hpp.html" title="gmgf/mmmtr_state_initr.hpp" alt="" coords="811,229,997,256"/>
+<area shape="rect" id="node16" href="state__initr_8cpp.html" title="gmgf/state_initr.cpp" alt="" coords="1021,229,1158,256"/>
+<area shape="rect" id="node9" href="basic__state__initr_8cpp.html" title="gmgf/basic_state_initr.cpp" alt="" coords="1089,304,1263,331"/>
+<area shape="rect" id="node11" href="dfs__finder_8cpp.html" title="gmgf/dfs_finder.cpp" alt="" coords="1381,304,1518,331"/>
+<area shape="rect" id="node13" href="minmax__state__initr_8cpp.html" title="gmgf/minmax_state_initr.cpp" alt="" coords="278,304,469,331"/>
+<area shape="rect" id="node15" href="mmmtr__state__initr_8cpp.html" title="gmgf/mmmtr_state_initr.cpp" alt="" coords="786,304,971,331"/>
+<area shape="rect" id="node19" href="sorted__graph__initr_8cpp.html" title="gmgf/sorted_graph_initr.cpp" alt="" coords="1542,229,1725,256"/>
+<area shape="rect" id="node21" href="stree__graph__initr_8cpp.html" title="gmgf/stree_graph_initr.cpp" alt="" coords="1749,229,1925,256"/>
+<area shape="rect" id="node23" href="basic__state_8hpp.html" title="gmgf/basic_state.hpp" alt="" coords="641,155,788,181"/>
+<area shape="rect" id="node29" href="state_8cpp.html" title="gmgf/state.cpp" alt="" coords="508,155,617,181"/>
+<area shape="rect" id="node24" href="basic__state_8cpp.html" title="gmgf/basic_state.cpp" alt="" coords="192,229,339,256"/>
+<area shape="rect" id="node25" href="minmax__state_8hpp.html" title="gmgf/minmax_state.hpp" alt="" coords="5,229,168,256"/>
+<area shape="rect" id="node27" href="mmmtr__state_8hpp.html" title="gmgf/mmmtr_state.hpp" alt="" coords="579,229,736,256"/>
+<area shape="rect" id="node26" href="minmax__state_8cpp.html" title="gmgf/minmax_state.cpp" alt="" coords="5,304,168,331"/>
+<area shape="rect" id="node28" href="mmmtr__state_8cpp.html" title="gmgf/mmmtr_state.cpp" alt="" coords="579,304,736,331"/>
 </map>
 </div>
 </div>
@@ -133,101 +146,29 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">一般化ムーアグラフに関する基礎的な量を計算する．  <a href="classgmgf_1_1graph__config.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:namespacegmgf"><td class="memItemLeft" align="right" valign="top"> &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegmgf.html">gmgf</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a38f221d24d3e4ac2d968aaa7f12b6dec"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a38f221d24d3e4ac2d968aaa7f12b6dec"></a>
-typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">gmgf::vertex_t</a></td></tr>
-<tr class="memdesc:a38f221d24d3e4ac2d968aaa7f12b6dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点タイプ <br /></td></tr>
+<tr class="memitem:a38f221d24d3e4ac2d968aaa7f12b6dec"><td class="memItemLeft" align="right" valign="top">typedef unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">gmgf::vertex_t</a></td></tr>
+<tr class="memdesc:a38f221d24d3e4ac2d968aaa7f12b6dec"><td class="mdescLeft">&#160;</td><td class="mdescRight">頂点タイプ  <a href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">More...</a><br /></td></tr>
 <tr class="separator:a38f221d24d3e4ac2d968aaa7f12b6dec"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0bfd43404fac801dc838441678cb1fa3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0bfd43404fac801dc838441678cb1fa3"></a>
-typedef std::pair&lt; vertex_t, vertex_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">gmgf::edge_t</a></td></tr>
-<tr class="memdesc:a0bfd43404fac801dc838441678cb1fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">辺タイプ <br /></td></tr>
+<tr class="memitem:a0bfd43404fac801dc838441678cb1fa3"><td class="memItemLeft" align="right" valign="top">typedef std::pair&lt; vertex_t, vertex_t &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">gmgf::edge_t</a></td></tr>
+<tr class="memdesc:a0bfd43404fac801dc838441678cb1fa3"><td class="mdescLeft">&#160;</td><td class="mdescRight">辺タイプ  <a href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">More...</a><br /></td></tr>
 <tr class="separator:a0bfd43404fac801dc838441678cb1fa3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:aaaca26a21d258a0623cf5544d022f705"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph__config_8cpp.html#aaaca26a21d258a0623cf5544d022f705">gmgf::tree_depth</a> (int vid, unsigned int degree)</td></tr>
-<tr class="memdesc:aaaca26a21d258a0623cf5544d022f705"><td class="mdescLeft">&#160;</td><td class="mdescRight">木における頂点の深さを求める．  <a href="graph__config_8cpp.html#aaaca26a21d258a0623cf5544d022f705">More...</a><br /></td></tr>
+<tr class="memitem:aaaca26a21d258a0623cf5544d022f705"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegmgf.html#aaaca26a21d258a0623cf5544d022f705">gmgf::tree_depth</a> (int vid, unsigned int degree)</td></tr>
+<tr class="memdesc:aaaca26a21d258a0623cf5544d022f705"><td class="mdescLeft">&#160;</td><td class="mdescRight">木における頂点の深さを求める．  <a href="namespacegmgf.html#aaaca26a21d258a0623cf5544d022f705">More...</a><br /></td></tr>
 <tr class="separator:aaaca26a21d258a0623cf5544d022f705"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:adea883ff834e8876c8c41df391c235f9"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="graph__config_8cpp.html#adea883ff834e8876c8c41df391c235f9">gmgf::n_vert_btree</a> (unsigned int depth, unsigned int degree)</td></tr>
-<tr class="memdesc:adea883ff834e8876c8c41df391c235f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">木の頂点数を求める．  <a href="graph__config_8cpp.html#adea883ff834e8876c8c41df391c235f9">More...</a><br /></td></tr>
+<tr class="memitem:adea883ff834e8876c8c41df391c235f9"><td class="memItemLeft" align="right" valign="top">unsigned int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacegmgf.html#adea883ff834e8876c8c41df391c235f9">gmgf::n_vert_btree</a> (unsigned int depth, unsigned int degree)</td></tr>
+<tr class="memdesc:adea883ff834e8876c8c41df391c235f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">木の頂点数を求める．  <a href="namespacegmgf.html#adea883ff834e8876c8c41df391c235f9">More...</a><br /></td></tr>
 <tr class="separator:adea883ff834e8876c8c41df391c235f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>一般化ムーアグラフに関する基礎的な量を計算する． </p>
-</div><h2 class="groupheader">Function Documentation</h2>
-<a class="anchor" id="file_adea883ff834e8876c8c41df391c235f9"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int gmgf::n_vert_btree </td>
-          <td>(</td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>depth</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>degree</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>木の頂点数を求める． </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">depth</td><td>木の深さ(0:根のみ) </td></tr>
-    <tr><td class="paramname">degree</td><td>次数 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>頂点数 </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="file_aaaca26a21d258a0623cf5544d022f705"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">unsigned int gmgf::tree_depth </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>vid</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">unsigned int&#160;</td>
-          <td class="paramname"><em>degree</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>木における頂点の深さを求める． </p>
-<p>根は0と数える． </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">vid</td><td>頂点番号 </td></tr>
-    <tr><td class="paramname">degree</td><td>次数 </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>頂点の深さ </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

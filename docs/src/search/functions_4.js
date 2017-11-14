@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['q',['Q',['../classgmgf_1_1graph__config.html#afbb13b5b06164de9436acb4cdcb6fe87',1,'gmgf::graph_config']]]
+  ['extracted_5fnodes',['extracted_nodes',['../classgmgf_1_1dfs__finder.html#a56c1cb29534613091cfde4a3aa66eca4',1,'gmgf::dfs_finder']]]
 ];

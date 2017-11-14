@@ -1,6 +1,5 @@
-/** \file graph_config.hpp
- * \brief 一般化ムーアグラフに関する基礎的な量を計算する．
- */
+/** \file graph_config.hpp */
+
 #ifndef _GMGF_GRAPH_CONFIG_HPP_
 #define _GMGF_GRAPH_CONFIG_HPP_
 
@@ -84,7 +83,6 @@ namespace gmgf {
 
   /**
    * \brief 木の頂点数を求める．
-   *
    * \param depth 木の深さ(0:根のみ)
    * \param degree 次数
    * \return 頂点数

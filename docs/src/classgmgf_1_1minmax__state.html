@@ -38,6 +38,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
       <li>
@@ -82,7 +83,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><b>gmgf</b></li><li class="navelem"><a class="el" href="classgmgf_1_1minmax__state.html">minmax_state</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespacegmgf.html">gmgf</a></li><li class="navelem"><a class="el" href="classgmgf_1_1minmax__state.html">minmax_state</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div class="header">
@@ -94,13 +95,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="title">gmgf::minmax_state Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p><code>#include &lt;<a class="el" href="minmax__state_8hpp_source.html">minmax_state.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Inheritance diagram for gmgf::minmax_state:</div>
 <div class="dyncontent">
 <div class="center"><img src="classgmgf_1_1minmax__state__inherit__graph.png" border="0" usemap="#gmgf_1_1minmax__state_inherit__map" alt="Inheritance graph"/></div>
 <map name="gmgf_1_1minmax__state_inherit__map" id="gmgf_1_1minmax__state_inherit__map">
 <area shape="rect" id="node2" href="classgmgf_1_1basic__state.html" title="gmgf::basic_state" alt="" coords="13,80,139,107"/>
-<area shape="rect" id="node3" href="classgmgf_1_1state.html" title="gmgf::state" alt="" coords="32,5,120,32"/>
+<area shape="rect" id="node3" href="classgmgf_1_1state.html" title="各種探索における状態． " alt="" coords="32,5,120,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <div class="dynheader">
@@ -109,96 +112,717 @@ Collaboration diagram for gmgf::minmax_state:</div>
 <div class="center"><img src="classgmgf_1_1minmax__state__coll__graph.png" border="0" usemap="#gmgf_1_1minmax__state_coll__map" alt="Collaboration graph"/></div>
 <map name="gmgf_1_1minmax__state_coll__map" id="gmgf_1_1minmax__state_coll__map">
 <area shape="rect" id="node2" href="classgmgf_1_1basic__state.html" title="gmgf::basic_state" alt="" coords="13,171,139,197"/>
-<area shape="rect" id="node3" href="classgmgf_1_1state.html" title="gmgf::state" alt="" coords="32,95,120,121"/>
+<area shape="rect" id="node3" href="classgmgf_1_1state.html" title="各種探索における状態． " alt="" coords="32,95,120,121"/>
 <area shape="rect" id="node4" href="classgmgf_1_1graph__config.html" title="一般化ムーアグラフに関する基礎的な量を計算する． " alt="" coords="9,5,143,32"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4155f55201add3edf2b99a1c25cbbef7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4155f55201add3edf2b99a1c25cbbef7"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>minmax_state</b> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config, igraph_t G, igraph_t H)</td></tr>
+<tr class="memitem:a4155f55201add3edf2b99a1c25cbbef7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a4155f55201add3edf2b99a1c25cbbef7">minmax_state</a> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config, igraph_t <a class="el" href="classgmgf_1_1basic__state.html#a9375a2db458502103fc3e8a13682ab65">G</a>, igraph_t <a class="el" href="classgmgf_1_1minmax__state.html#af46232fd48b5c81fb7af638f979961f9">H</a>)</td></tr>
 <tr class="separator:a4155f55201add3edf2b99a1c25cbbef7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8eab828a3172b4f0470d28751b8ad3b0"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8eab828a3172b4f0470d28751b8ad3b0"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>minmax_state</b> (const <a class="el" href="classgmgf_1_1minmax__state.html">minmax_state</a> &amp;s)</td></tr>
+<tr class="memitem:a8eab828a3172b4f0470d28751b8ad3b0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a8eab828a3172b4f0470d28751b8ad3b0">minmax_state</a> (const <a class="el" href="classgmgf_1_1minmax__state.html">minmax_state</a> &amp;s)</td></tr>
 <tr class="separator:a8eab828a3172b4f0470d28751b8ad3b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a91ad7037f96cdc797914c1d47d5f9f7c"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a91ad7037f96cdc797914c1d47d5f9f7c"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_degree</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:a86e60d52baabc26f39e38605fc009b8f"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a86e60d52baabc26f39e38605fc009b8f">~minmax_state</a> ()</td></tr>
+<tr class="separator:a86e60d52baabc26f39e38605fc009b8f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a91ad7037f96cdc797914c1d47d5f9f7c"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a91ad7037f96cdc797914c1d47d5f9f7c">can_add_edge_degree</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:a91ad7037f96cdc797914c1d47d5f9f7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">次数の制約から，状態に辺を追加できるか判定する．  <a href="#a91ad7037f96cdc797914c1d47d5f9f7c">More...</a><br /></td></tr>
 <tr class="separator:a91ad7037f96cdc797914c1d47d5f9f7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afdb30b81de0ace123d61593dca3310f7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="afdb30b81de0ace123d61593dca3310f7"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_degree</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:afdb30b81de0ace123d61593dca3310f7"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#afdb30b81de0ace123d61593dca3310f7">can_noadd_edge_degree</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:afdb30b81de0ace123d61593dca3310f7"><td class="mdescLeft">&#160;</td><td class="mdescRight">次数の制約から，状態に辺を追加しなくてよいか判定する．  <a href="#afdb30b81de0ace123d61593dca3310f7">More...</a><br /></td></tr>
 <tr class="separator:afdb30b81de0ace123d61593dca3310f7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a010d7f7fde30eca01750e0c34105f316"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a010d7f7fde30eca01750e0c34105f316"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_cycle</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:a010d7f7fde30eca01750e0c34105f316"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a010d7f7fde30eca01750e0c34105f316">can_add_edge_cycle</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:a010d7f7fde30eca01750e0c34105f316"><td class="mdescLeft">&#160;</td><td class="mdescRight">閉路長の制約から，状態に辺を追加できるか判定する．  <a href="#a010d7f7fde30eca01750e0c34105f316">More...</a><br /></td></tr>
 <tr class="separator:a010d7f7fde30eca01750e0c34105f316"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aad36da43aa586673fb4b1d8f1fa14ea2"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aad36da43aa586673fb4b1d8f1fa14ea2"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_cycle</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:aad36da43aa586673fb4b1d8f1fa14ea2"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#aad36da43aa586673fb4b1d8f1fa14ea2">can_noadd_edge_cycle</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:aad36da43aa586673fb4b1d8f1fa14ea2"><td class="mdescLeft">&#160;</td><td class="mdescRight">閉路長の制約から，状態に辺を追加しなくてよいか判定する．  <a href="#aad36da43aa586673fb4b1d8f1fa14ea2">More...</a><br /></td></tr>
 <tr class="separator:aad36da43aa586673fb4b1d8f1fa14ea2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ef12b256580e4c2926c687478a96310"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ef12b256580e4c2926c687478a96310"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge_diameter</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:a3ef12b256580e4c2926c687478a96310"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a3ef12b256580e4c2926c687478a96310">can_add_edge_diameter</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:a3ef12b256580e4c2926c687478a96310"><td class="mdescLeft">&#160;</td><td class="mdescRight">直径の制約から，状態に辺を追加できるか判定する．  <a href="#a3ef12b256580e4c2926c687478a96310">More...</a><br /></td></tr>
 <tr class="separator:a3ef12b256580e4c2926c687478a96310"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a09bb4dcc79f636ae4b898ba7dd69a1d3"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a09bb4dcc79f636ae4b898ba7dd69a1d3"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge_diameter</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:a09bb4dcc79f636ae4b898ba7dd69a1d3"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a09bb4dcc79f636ae4b898ba7dd69a1d3">can_noadd_edge_diameter</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:a09bb4dcc79f636ae4b898ba7dd69a1d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">直径の制約から，状態に辺を追加しなくてよいか判定する．  <a href="#a09bb4dcc79f636ae4b898ba7dd69a1d3">More...</a><br /></td></tr>
 <tr class="separator:a09bb4dcc79f636ae4b898ba7dd69a1d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac5d18a031ca30d29ce959233caf98050"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ac5d18a031ca30d29ce959233caf98050"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final_degree</b> ()</td></tr>
+<tr class="memitem:ac5d18a031ca30d29ce959233caf98050"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#ac5d18a031ca30d29ce959233caf98050">is_final_degree</a> ()</td></tr>
+<tr class="memdesc:ac5d18a031ca30d29ce959233caf98050"><td class="mdescLeft">&#160;</td><td class="mdescRight">次数の制約から，状態が最終状態か判定する．  <a href="#ac5d18a031ca30d29ce959233caf98050">More...</a><br /></td></tr>
 <tr class="separator:ac5d18a031ca30d29ce959233caf98050"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6e039d18d4b5fa643ce944c0195f46fc"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6e039d18d4b5fa643ce944c0195f46fc"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final_cycle</b> ()</td></tr>
+<tr class="memitem:a6e039d18d4b5fa643ce944c0195f46fc"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a6e039d18d4b5fa643ce944c0195f46fc">is_final_cycle</a> ()</td></tr>
+<tr class="memdesc:a6e039d18d4b5fa643ce944c0195f46fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">閉路長の制約から，状態が最終状態か判定する．  <a href="#a6e039d18d4b5fa643ce944c0195f46fc">More...</a><br /></td></tr>
 <tr class="separator:a6e039d18d4b5fa643ce944c0195f46fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ac6f383d4c0e160c08df6addc023df9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3ac6f383d4c0e160c08df6addc023df9"></a>
-virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final_diameter</b> ()</td></tr>
+<tr class="memitem:a3ac6f383d4c0e160c08df6addc023df9"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a3ac6f383d4c0e160c08df6addc023df9">is_final_diameter</a> ()</td></tr>
+<tr class="memdesc:a3ac6f383d4c0e160c08df6addc023df9"><td class="mdescLeft">&#160;</td><td class="mdescRight">直径の制約から，状態が最終状態か判定する．  <a href="#a3ac6f383d4c0e160c08df6addc023df9">More...</a><br /></td></tr>
 <tr class="separator:a3ac6f383d4c0e160c08df6addc023df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1831f24f61f5386763601d15d7442430"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1831f24f61f5386763601d15d7442430"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>add_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e)</td></tr>
+<tr class="memitem:a1831f24f61f5386763601d15d7442430"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a1831f24f61f5386763601d15d7442430">add_edge</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e)</td></tr>
+<tr class="memdesc:a1831f24f61f5386763601d15d7442430"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態に辺を追加する．  <a href="#a1831f24f61f5386763601d15d7442430">More...</a><br /></td></tr>
 <tr class="separator:a1831f24f61f5386763601d15d7442430"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1fb55876609f2986ac6ae753fda81404"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a1fb55876609f2986ac6ae753fda81404"></a>
-virtual void&#160;</td><td class="memItemRight" valign="bottom"><b>noadd_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e)</td></tr>
+<tr class="memitem:a1fb55876609f2986ac6ae753fda81404"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a1fb55876609f2986ac6ae753fda81404">noadd_edge</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e)</td></tr>
+<tr class="memdesc:a1fb55876609f2986ac6ae753fda81404"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態に辺を追加しない  <a href="#a1fb55876609f2986ac6ae753fda81404">More...</a><br /></td></tr>
 <tr class="separator:a1fb55876609f2986ac6ae753fda81404"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8ef4145d61426f3052da630288cdcb28"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a8ef4145d61426f3052da630288cdcb28"></a>
-virtual <a class="el" href="classgmgf_1_1state.html">state</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>copy</b> ()</td></tr>
+<tr class="memitem:a8ef4145d61426f3052da630288cdcb28"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classgmgf_1_1state.html">state</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a8ef4145d61426f3052da630288cdcb28">copy</a> ()</td></tr>
+<tr class="memdesc:a8ef4145d61426f3052da630288cdcb28"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態を複製する．  <a href="#a8ef4145d61426f3052da630288cdcb28">More...</a><br /></td></tr>
 <tr class="separator:a8ef4145d61426f3052da630288cdcb28"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9384cb131d41435ba74ea4caf14a22ae"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9384cb131d41435ba74ea4caf14a22ae"></a>
-virtual igraph_t&#160;</td><td class="memItemRight" valign="bottom"><b>make_graph</b> ()</td></tr>
+<tr class="memitem:a9384cb131d41435ba74ea4caf14a22ae"><td class="memItemLeft" align="right" valign="top">virtual igraph_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#a9384cb131d41435ba74ea4caf14a22ae">make_graph</a> ()</td></tr>
+<tr class="memdesc:a9384cb131d41435ba74ea4caf14a22ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態が保持しているグラフを構築する．  <a href="#a9384cb131d41435ba74ea4caf14a22ae">More...</a><br /></td></tr>
 <tr class="separator:a9384cb131d41435ba74ea4caf14a22ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgmgf_1_1basic__state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgmgf_1_1basic__state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgmgf_1_1basic__state.html">gmgf::basic_state</a></td></tr>
-<tr class="memitem:aa010fbb126187daaeaae02170f154b40 inherit pub_methods_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa010fbb126187daaeaae02170f154b40"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>basic_state</b> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config, igraph_t G)</td></tr>
+<tr class="memitem:aa010fbb126187daaeaae02170f154b40 inherit pub_methods_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1basic__state.html#aa010fbb126187daaeaae02170f154b40">basic_state</a> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config, igraph_t <a class="el" href="classgmgf_1_1basic__state.html#a9375a2db458502103fc3e8a13682ab65">G</a>)</td></tr>
 <tr class="separator:aa010fbb126187daaeaae02170f154b40 inherit pub_methods_classgmgf_1_1basic__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4895f56e09b2bf48c47091c44bbc0d06 inherit pub_methods_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4895f56e09b2bf48c47091c44bbc0d06"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>basic_state</b> (const <a class="el" href="classgmgf_1_1basic__state.html">basic_state</a> &amp;s)</td></tr>
+<tr class="memitem:a4895f56e09b2bf48c47091c44bbc0d06 inherit pub_methods_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1basic__state.html#a4895f56e09b2bf48c47091c44bbc0d06">basic_state</a> (const <a class="el" href="classgmgf_1_1basic__state.html">basic_state</a> &amp;s)</td></tr>
 <tr class="separator:a4895f56e09b2bf48c47091c44bbc0d06 inherit pub_methods_classgmgf_1_1basic__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aedaf6571a56b5c314684aaafc27cfc82 inherit pub_methods_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1basic__state.html#aedaf6571a56b5c314684aaafc27cfc82">~basic_state</a> ()</td></tr>
+<tr class="separator:aedaf6571a56b5c314684aaafc27cfc82 inherit pub_methods_classgmgf_1_1basic__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classgmgf_1_1state"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classgmgf_1_1state')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classgmgf_1_1state.html">gmgf::state</a></td></tr>
-<tr class="memitem:a32b9f684e48216ebf48a9c3813bbb4d6 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a32b9f684e48216ebf48a9c3813bbb4d6"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>state</b> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config)</td></tr>
+<tr class="memitem:a32b9f684e48216ebf48a9c3813bbb4d6 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state.html#a32b9f684e48216ebf48a9c3813bbb4d6">state</a> (<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *config)</td></tr>
+<tr class="memdesc:a32b9f684e48216ebf48a9c3813bbb4d6 inherit pub_methods_classgmgf_1_1state"><td class="mdescLeft">&#160;</td><td class="mdescRight">コンストラクタ．  <a href="#a32b9f684e48216ebf48a9c3813bbb4d6">More...</a><br /></td></tr>
 <tr class="separator:a32b9f684e48216ebf48a9c3813bbb4d6 inherit pub_methods_classgmgf_1_1state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebb9b17376d3d0e892c2c3c9854fcf7 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="acebb9b17376d3d0e892c2c3c9854fcf7"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_add_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:aea301e2b5dd2d4914a6e156de0864384 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state.html#aea301e2b5dd2d4914a6e156de0864384">~state</a> ()</td></tr>
+<tr class="memdesc:aea301e2b5dd2d4914a6e156de0864384 inherit pub_methods_classgmgf_1_1state"><td class="mdescLeft">&#160;</td><td class="mdescRight">デストラクタ  <a href="#aea301e2b5dd2d4914a6e156de0864384">More...</a><br /></td></tr>
+<tr class="separator:aea301e2b5dd2d4914a6e156de0864384 inherit pub_methods_classgmgf_1_1state"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acebb9b17376d3d0e892c2c3c9854fcf7 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state.html#acebb9b17376d3d0e892c2c3c9854fcf7">can_add_edge</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:acebb9b17376d3d0e892c2c3c9854fcf7 inherit pub_methods_classgmgf_1_1state"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態に辺を追加できるか判定する．  <a href="#acebb9b17376d3d0e892c2c3c9854fcf7">More...</a><br /></td></tr>
 <tr class="separator:acebb9b17376d3d0e892c2c3c9854fcf7 inherit pub_methods_classgmgf_1_1state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a27deee9c61de6e4b5bd505e38e96b6bb inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a27deee9c61de6e4b5bd505e38e96b6bb"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>can_noadd_edge</b> (<a class="el" href="graph__config_8hpp.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="graph__config_8hpp.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memitem:a27deee9c61de6e4b5bd505e38e96b6bb inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state.html#a27deee9c61de6e4b5bd505e38e96b6bb">can_noadd_edge</a> (<a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a> e, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; enter, std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt; exit)</td></tr>
+<tr class="memdesc:a27deee9c61de6e4b5bd505e38e96b6bb inherit pub_methods_classgmgf_1_1state"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態に辺を追加しなくてよいか判定する．  <a href="#a27deee9c61de6e4b5bd505e38e96b6bb">More...</a><br /></td></tr>
 <tr class="separator:a27deee9c61de6e4b5bd505e38e96b6bb inherit pub_methods_classgmgf_1_1state"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad661fd223d414e7eecedb0a0b0fc3ff1 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad661fd223d414e7eecedb0a0b0fc3ff1"></a>
-bool&#160;</td><td class="memItemRight" valign="bottom"><b>is_final</b> ()</td></tr>
+<tr class="memitem:ad661fd223d414e7eecedb0a0b0fc3ff1 inherit pub_methods_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state.html#ad661fd223d414e7eecedb0a0b0fc3ff1">is_final</a> ()</td></tr>
+<tr class="memdesc:ad661fd223d414e7eecedb0a0b0fc3ff1 inherit pub_methods_classgmgf_1_1state"><td class="mdescLeft">&#160;</td><td class="mdescRight">状態が最終状態か判定する．  <a href="#ad661fd223d414e7eecedb0a0b0fc3ff1">More...</a><br /></td></tr>
 <tr class="separator:ad661fd223d414e7eecedb0a0b0fc3ff1 inherit pub_methods_classgmgf_1_1state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
-<tr class="memitem:af46232fd48b5c81fb7af638f979961f9"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af46232fd48b5c81fb7af638f979961f9"></a>
-igraph_t&#160;</td><td class="memItemRight" valign="bottom"><b>H</b></td></tr>
+<tr class="memitem:af46232fd48b5c81fb7af638f979961f9"><td class="memItemLeft" align="right" valign="top">igraph_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1minmax__state.html#af46232fd48b5c81fb7af638f979961f9">H</a></td></tr>
 <tr class="separator:af46232fd48b5c81fb7af638f979961f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classgmgf_1_1basic__state"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classgmgf_1_1basic__state')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classgmgf_1_1basic__state.html">gmgf::basic_state</a></td></tr>
-<tr class="memitem:a9375a2db458502103fc3e8a13682ab65 inherit pro_attribs_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a9375a2db458502103fc3e8a13682ab65"></a>
-igraph_t&#160;</td><td class="memItemRight" valign="bottom"><b>G</b></td></tr>
+<tr class="memitem:a9375a2db458502103fc3e8a13682ab65 inherit pro_attribs_classgmgf_1_1basic__state"><td class="memItemLeft" align="right" valign="top">igraph_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1basic__state.html#a9375a2db458502103fc3e8a13682ab65">G</a></td></tr>
 <tr class="separator:a9375a2db458502103fc3e8a13682ab65 inherit pro_attribs_classgmgf_1_1basic__state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classgmgf_1_1state"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classgmgf_1_1state')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classgmgf_1_1state.html">gmgf::state</a></td></tr>
-<tr class="memitem:a2f1730174c59f4ed1a3b1f25711adcc7 inherit pro_attribs_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a2f1730174c59f4ed1a3b1f25711adcc7"></a>
-<a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td><td class="memItemRight" valign="bottom"><b>m_config</b></td></tr>
+<tr class="memitem:a2f1730174c59f4ed1a3b1f25711adcc7 inherit pro_attribs_classgmgf_1_1state"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classgmgf_1_1state.html#a2f1730174c59f4ed1a3b1f25711adcc7">m_config</a></td></tr>
+<tr class="memdesc:a2f1730174c59f4ed1a3b1f25711adcc7 inherit pro_attribs_classgmgf_1_1state"><td class="mdescLeft">&#160;</td><td class="mdescRight">探索対象のグラフの設定  <a href="#a2f1730174c59f4ed1a3b1f25711adcc7">More...</a><br /></td></tr>
 <tr class="separator:a2f1730174c59f4ed1a3b1f25711adcc7 inherit pro_attribs_classgmgf_1_1state"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a class="anchor" id="a4155f55201add3edf2b99a1c25cbbef7"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gmgf::minmax_state::minmax_state </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classgmgf_1_1graph__config.html">graph_config</a> *&#160;</td>
+          <td class="paramname"><em>config</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">igraph_t&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">igraph_t&#160;</td>
+          <td class="paramname"><em>H</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a8eab828a3172b4f0470d28751b8ad3b0"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">gmgf::minmax_state::minmax_state </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classgmgf_1_1minmax__state.html">minmax_state</a> &amp;&#160;</td>
+          <td class="paramname"><em>s</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a class="anchor" id="a86e60d52baabc26f39e38605fc009b8f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">gmgf::minmax_state::~minmax_state </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a class="anchor" id="a91ad7037f96cdc797914c1d47d5f9f7c"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::can_add_edge_degree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>enter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>exit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>次数の制約から，状態に辺を追加できるか判定する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+    <tr><td class="paramname">enter</td><td>フロンティアに入る頂点リスト </td></tr>
+    <tr><td class="paramname">exit</td><td>フロンティアから出る頂点リスト </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>次数の制約から追加できるなら真，できないなら偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a79a560649b49f909e335d3303370d80b">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afdb30b81de0ace123d61593dca3310f7"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::can_noadd_edge_degree </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>enter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>exit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>次数の制約から，状態に辺を追加しなくてよいか判定する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+    <tr><td class="paramname">enter</td><td>フロンティアに入る頂点リスト </td></tr>
+    <tr><td class="paramname">exit</td><td>フロンティアから出る頂点リスト </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>次数の制約から追加しなくてよいなら真，そうでなければ偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a368e84a723dfeda950c6dba6e50ceeb3">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a010d7f7fde30eca01750e0c34105f316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::can_add_edge_cycle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>enter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>exit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>閉路長の制約から，状態に辺を追加できるか判定する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+    <tr><td class="paramname">enter</td><td>フロンティアに入る頂点リスト </td></tr>
+    <tr><td class="paramname">exit</td><td>フロンティアから出る頂点リスト </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>閉路長の制約から追加できるなら真，できないなら偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a1224b06f1ea346d8390ff2c7b4a560b1">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aad36da43aa586673fb4b1d8f1fa14ea2"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::can_noadd_edge_cycle </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>enter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>exit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>閉路長の制約から，状態に辺を追加しなくてよいか判定する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+    <tr><td class="paramname">enter</td><td>フロンティアに入る頂点リスト </td></tr>
+    <tr><td class="paramname">exit</td><td>フロンティアから出る頂点リスト </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>閉路長の制約から追加しなくてよいなら真，そうでなければ偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a9951a55fc6a28c1e9c0e286ccd1b2a51">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3ef12b256580e4c2926c687478a96310"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::can_add_edge_diameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>enter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>exit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>直径の制約から，状態に辺を追加できるか判定する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+    <tr><td class="paramname">enter</td><td>フロンティアに入る頂点リスト </td></tr>
+    <tr><td class="paramname">exit</td><td>フロンティアから出る頂点リスト </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>直径の制約から追加できるなら真，できないなら偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a4987d0f3e09c9b0a2e1038d05d284d8f">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a09bb4dcc79f636ae4b898ba7dd69a1d3"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::can_noadd_edge_diameter </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>enter</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; <a class="el" href="namespacegmgf.html#a38f221d24d3e4ac2d968aaa7f12b6dec">vertex_t</a> &gt;&#160;</td>
+          <td class="paramname"><em>exit</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>直径の制約から，状態に辺を追加しなくてよいか判定する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+    <tr><td class="paramname">enter</td><td>フロンティアに入る頂点リスト </td></tr>
+    <tr><td class="paramname">exit</td><td>フロンティアから出る頂点リスト </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>直径の制約から追加しなくてよいなら真，そうでなければ偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#aa4bfc2daeef5ac061599c8fe1ee33267">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac5d18a031ca30d29ce959233caf98050"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::is_final_degree </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>次数の制約から，状態が最終状態か判定する． </p>
+<dl class="section return"><dt>Returns</dt><dd>次数の制約から最終状態なら真，そうでないなら偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a3ba50e0948451e2aefd81baef9e29a38">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6e039d18d4b5fa643ce944c0195f46fc"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::is_final_cycle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>閉路長の制約から，状態が最終状態か判定する． </p>
+<dl class="section return"><dt>Returns</dt><dd>閉路長の制約から最終状態なら真，そうでないなら偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#abfe2e64d209002429db79f08cebadf4e">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3ac6f383d4c0e160c08df6addc023df9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool gmgf::minmax_state::is_final_diameter </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>直径の制約から，状態が最終状態か判定する． </p>
+<dl class="section return"><dt>Returns</dt><dd>直径の制約から最終状態なら真，そうでないなら偽 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#abf73d93bcaef6e8e6fae5bafdcb3473e">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1831f24f61f5386763601d15d7442430"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gmgf::minmax_state::add_edge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>状態に辺を追加する． </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#ad7849dda1383c0e3796c2fac3c48294e">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1fb55876609f2986ac6ae753fda81404"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void gmgf::minmax_state::noadd_edge </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="namespacegmgf.html#a0bfd43404fac801dc838441678cb1fa3">edge_t</a>&#160;</td>
+          <td class="paramname"><em>e</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>状態に辺を追加しない </p>
+<p>基本的には何もしないが，状態が最大グラフを持つ場合は 最大グラフから辺を削除する． </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">e</td><td>辺 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a044c80dd343847bbc11296d08a1c86f6">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8ef4145d61426f3052da630288cdcb28"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classgmgf_1_1state.html">state</a> * gmgf::minmax_state::copy </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>状態を複製する． </p>
+<dl class="section return"><dt>Returns</dt><dd>状態の複製 </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a0b6c358e55bc013922c215f0de66f143">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9384cb131d41435ba74ea4caf14a22ae"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">igraph_t gmgf::minmax_state::make_graph </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>状態が保持しているグラフを構築する． </p>
+<dl class="section return"><dt>Returns</dt><dd>グラフ 使用後は，igraph_destroy関数で破棄しなければならない． </dd></dl>
+
+<p>Reimplemented from <a class="el" href="classgmgf_1_1basic__state.html#a81f85d9c0c7734952e20f0245e86b7c2">gmgf::basic_state</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a class="anchor" id="af46232fd48b5c81fb7af638f979961f9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">igraph_t gmgf::minmax_state::H</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li>gmgf/<a class="el" href="minmax__state_8hpp_source.html">minmax_state.hpp</a></li>
-<li>gmgf/minmax_state.cpp</li>
+<li>gmgf/<a class="el" href="minmax__state_8cpp.html">minmax_state.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->
