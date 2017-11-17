@@ -7,7 +7,20 @@
 
 \section{長さ$2Q+2$の閉路をもつ初期グラフ}
 \label{sect:initial-graph-cycle}
+長さ$2Q+2$の閉路を持つ初期グラフ$G_I$を次の手順で構築する．
+ただし，$R(n,k)>0$を満たす$n,k$とする．
+\begin{enumerate}
+\item \ref{sect:apply-to-gmg}節で示した初期グラフを構築し，$G'_I$とする．
+\item 次の3つの頂点$p,q,r$に対して，$G_I=G'_I\cup\{(p,r),(q,r)\}$とする．
+  \begin{itemize}
+  \item $p=n_{k,\hat{Q}-2}+1$
+  \item $q=n_{k,\hat{Q}-2}+1+(k-1)^{\hat{Q}-2}$
+  \item $r=n-R+1$
+  \end{itemize}
+\end{enumerate}
+
 \begin{example}
+  \label{ex:initial-graph-cycle}
   前述の手順に従って構築した，頂点数12,次数3の初期グラフを
   図\ref{fig:initial-graph-cycle-example}に示す．
   \begin{figure}
@@ -18,29 +31,76 @@
   \end{figure}
 \end{example}
 
+長さ$2Q+2$を含むグラフを初期グラフとすることの妥当性はまだ証明されていない．
+(すでに証明されているかもしれない)
+\begin{conjecture}
+  一般化ムーアグラフ$M(n,k)$には，長さ$2Q+2$の閉路が少なくとも一つ存在する．
+  ただし，$n>k+1$かつ，$R(n,k)>0$とする．
+\end{conjecture}
+
+\subsection*{候補辺の並べ替え}
+長さ$2Q+2$の閉路を含む初期グラフから得られる候補辺は，頂点$v$に対する
+$i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであることの判定が遅くなり
+探索が効率よく行えない．そこで，グラフの候補辺を次の手順で並べ替える．
+並べ替え前の候補辺を$E$，並べ替え後の候補辺を$E'$とする．
+\begin{enumerate}
+\item 各頂点$v$について，$E$での出現回数を求める．これを$n_v$とする．
+\item $w=\mathrm{argmin}_{v}(n_v)$の頂点$w$に対して，
+  \begin{enumerate}
+  \item $E'$の末尾に$E$中の$v$と接する辺集合を挿入する．
+  \item 挿入した内容を$E$から削除する．
+  \end{enumerate}
+\item 上記を$E$が空になるまで繰り返す．
+\end{enumerate}
+
 \section{全域木}
 \label{sect:initial-spanning-tree}
-\begin{conjecture}[全域木予想]
+初期グラフとしての全域木を与える．次の手順で構築する．
+\begin{enumerate}
+\item 頂点$v\in\{2,\ldots,k+1\}$と頂点$1$とを隣接させる．
+\item 頂点$v\in\{k+2,\ldots,n\}$に対して，次の式で求められる頂点$w$と
+  隣接させる．
+  \[ w=(v-n_{k,\hat{Q}(v)-1}-1)\mod(k(k-1)^{\hat{Q}(v)-2})+1+n_{k,\hat{Q}-1} \]
+\end{enumerate}
+このような全域木から探索することの妥当性は証明されていない．
+\begin{conjecture}
   \label{conj:spanning-tree}
-  一般化ムーアグラフの誘導グラフには，次のような全域木が存在する．
+  一般化ムーアグラフ$M(n,k)$の全域木に，次の手順で構築した木が存在する．
+  \begin{enumerate}
+  \item 頂点$v\in\{2,\ldots,k+1\}$と頂点$1$とを隣接させる．
+  \item 頂点$v\in\{k+2,\ldots,n\}$に対して，次の式で求められる頂点$w$と
+    隣接させる．
+    \[w=(v-n_{k,\hat{Q}(v)-1}-1)\mod(k(k-1)^{\hat{Q}(v)-2})+1+n_{k,\hat{Q}-1}\]
+  \end{enumerate}
 \end{conjecture}
+
+また，条件を緩めて次のことも予想される．
+\begin{conjecture}
+  \label{conj:spanning-tree-2}
+  一般化ムーアグラフ$M(n,k)$の全域木に，次の性質を満たす木が存在する．
+  \begin{itemize}
+  \item ある頂点からの距離が$Q$である頂点集合$V$について，
+    $\max(d(v)\,|\,v\in V)-\min(d(v)\,|\,v\in V)\leq 1$
+  \end{itemize}
+\end{conjecture}
+
 \begin{example}
-  予想\ref{conj:spanning-tree}に従っていくつかの全域木を構築する．
+  先に述べた手順に従っていくつかの全域木を構築する．
   構築した初期グラフを図\ref{fig:initial-spanning-tree-example}に示す．
+  \begin{figure}
+    \centering
+    \subfloat[頂点数$12$,次数$3$の全域木]{
+      \includegraphics[width=.4\linewidth]
+                      {initial-spanning-tree-12-example.pdf}
+    }\hfill
+    \subfloat[頂点数$18$,次数$3$の全域木]{
+      \includegraphics[width=.45\linewidth]
+                      {initial-spanning-tree-18-example.pdf}
+    }
+    \caption{全域木の例}
+    \label{fig:initial-spanning-tree-example}
+  \end{figure}
 \end{example}
-\begin{figure}
-  \centering
-  \subfloat[頂点数$12$,次数$3$の全域木]{
-    \includegraphics[width=.4\linewidth]
-                    {initial-spanning-tree-12-example.pdf}
-  }\hfill
-  \subfloat[頂点数$18$,次数$3$の全域木]{
-    \includegraphics[width=.45\linewidth]
-                    {initial-spanning-tree-18-example.pdf}
-  }
-  \caption{全域木の例}
-  \label{fig:initial-spanning-tree-example}
-\end{figure}
 
 \section{実験}
 \label{sect:exp-reduce-by-initial}
