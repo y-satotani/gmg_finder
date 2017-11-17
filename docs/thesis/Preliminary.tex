@@ -81,7 +81,7 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
 一般化ムーアグラフの頂点間距離の総和を求め，これが正則グラフの頂点間距離の総和の
 下界であることを示す．
 \begin{theorem}[Cerf et.al., 1974\,\cite{Cerf1974}]
-  \label{theorem:gmg-lower-bound}
+  \label{thm:gmg-lower-bound}
   $M(n,k)$の頂点間距離の総和は，
   \begin{equation}
     \label{eq:gmg-lb}
@@ -247,7 +247,7 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
 次の性質は，一般化ムーアグラフの構造的特徴を定める．
 後に説明する探索方法に用いる極めて重要な性質である．
 \begin{theorem}
-  \label{theorem:gmg-geometric-property}
+  \label{thm:gmg-geometric-property}
   ある正則グラフが一般化ムーアグラフであることの必要十分条件は，
   \begin{enumerate}[a]
   \item 長さ$2Q$以下の閉路を持たないこと
@@ -299,5 +299,73 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
     girth: 5
   \end{verbatim}
   $Q=2,\,R=2$なので，このグラフは
-  \ref{theorem:gmg-geometric-property}の二条件を満たす．
+  定理\ref{thm:gmg-geometric-property}の二条件を満たす．
 \end{example}
+
+最後に，一般化ムーアグラフの直径の式を与える．その前に，
+定義\ref{def:generalized-moore-graph}の$Q$の式を変形する．
+\begin{lemma}
+  \label{lem:gmg-q}
+  \begin{equation}
+    Q(n,k) = \left\lfloor
+    \log_{k-1}\left(1+\frac{(n-1)(k-2)}{k}\right)\right\rfloor
+  \end{equation}
+\end{lemma}
+\begin{proof}
+  式\ref{eq:gmg-lb-6}より，
+  \begin{align}
+    n &= 1 + \sum_{i=1}^Qk\cdot(k-1)^{i-1} + R \nonumber\\
+    &= 1 + \frac{k\left((k-1)^{Q}-1\right)}{k-2} + R
+    \label{eq:gmg-q-1}
+  \end{align}
+  とできる．さらに変形して，
+  \begin{align}
+    (k-1)^Q &= 1+\frac{(n-R-1)(k-2)}{k} \nonumber\\
+    Q &= \log_{k-1}\left(1+\frac{(n-R-1)(k-2)}{k}\right)
+    \label{eq:gmg-q-2}
+  \end{align}
+  となる．ここで，式\ref{eq:gmg-q-2}の$R$を除去するために，
+  次の関数$f$を考える．
+  \begin{equation}
+    \label{eq:gmg-q-3}
+    f(n,k) = \log_{k-1}\left(1+\frac{(n-1)(k-2)}{k}\right)
+  \end{equation}
+  $f(n',k)=Q'$を満たす$n'$は，式\ref{eq:gmg-q-3}より，
+  \[ n'=1+\sum_{i=1}^{Q'}k(k-1)^{i-1} \]
+  である．同様に，$f(n'',k)=Q'+1$を満たす$n''$は，同様に，
+  \[ n''=1+\sum_{i=1}^{Q'+1}k(k-1)^{i-1} = n''+k(k-1)^{Q'} \]
+  である．
+  $0\leq R' < k(k-1)^{Q'}$なる$R'$について，$f(n'+R',k)$の値は，
+  $\log_{k-1}$が単調増加関数であることに注意すると，
+  \[ f(n',k) \leq f(n'+R',k) < f(n'',k) \]
+  と範囲を定められる．ここで，$f(n',k)=Q'$，$f(n'',k)=Q'+1$なので，
+  \begin{equation}
+    \label{eq:gmg-q-4}
+    Q' \leq f(n'+R',k) < Q'+1
+  \end{equation}
+  と書ける．よって，床関数を導入して，
+  \[ Q(n,k) = \left\lfloor f(n,k)\right\rfloor
+  = \left\lfloor\log_{k-1}\left(1+\frac{(n-1)(k-2)}{k}\right)\right\rfloor \]
+  が成り立つ．
+\end{proof}
+
+\begin{theorem}
+  \label{thm:gmg-diam}
+  一般化ムーアグラフ$M(n,k)$の直径は，次で与えられる$\hat{Q}(n,k)$に等しい．
+  \begin{equation}
+    \hat{Q}(n,k)=
+    \left\lceil\log_{k-1}\left(1+\frac{(n-1)(k-2)}{k}\right)\right\rceil
+  \end{equation}
+\end{theorem}
+\begin{proof}
+  式\ref{eq:gmg-q-4}より，$R=0$のとき，
+  $\hat{Q}(n,k)=\lceil f(n,k)\rceil=Q(n,k)$が成り立つ．
+  また，$0<R<k(k-1)^{Q(n,k)}$のとき，
+  $\hat{Q}(n,k)=\lceil f(n,k)\rceil=Q(n,k)+1$となる．
+  これら二つが成り立つので，定理\ref{thm:gmg-geometric-property}より，
+  $\hat{Q}(n,k)$は一般化ムーアグラフ$M(n,k)$の直径の値と一致する．
+\end{proof}
+$\hat{Q}(v,k)$は，頂点$2$から順番に，頂点$1$から遠くなるように頂点を
+配置した際の，頂点$1$と頂点$v$の距離$d(1,v)$の意味もある．
+以降，$\hat{Q}(n,k)$について，文脈から$k$が明らかな場合は$\hat{Q}(n)$
+と省略する．同じく，$n$と$k$が明らかな場合は，$\hat{Q}$と省略する．

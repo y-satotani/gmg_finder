@@ -19,199 +19,247 @@
 
 \subsection{初期グラフと辺の候補}
 \label{subsect:initial-graph}
-探索の初期状態のグラフを与える．以下，頂点集合を$V=\{1,\ldots,n\}$とする．
-根からの距離が$i$である頂点の集合を，第$i$層と定義する．(準備でいいかも)
-頂点$1$を根とし，葉を除く頂点の次数が$k$である木を構築する．
-(これも定義でいいかも)
-
+探索の初期状態となる\textbf{初期グラフ}を定義し，候補となる辺を求める．まず，
+初期グラフを構築する前に次を定義する．
 \begin{definition}
-  いくつかの関数を与える．$\mathrm{TreeDepth}(v)$は，次数$k$の平衡木に
-  おいて，頂点$v$がどの層に位置するのかを求める．その中身は，次式である．
-  \[ \mathrm{TreeDepth}(v) = \begin{cases}
-    0 & v = 1 \\
-    \log_{k-1}{(\frac{(v-1)(k-2)}{k}+1)} + 1 & v > 1
-  \end{cases} \]
-  $\mathrm{NVertBTree}(l)$は，深さ$l$，次数$k$の
-  平衡木の頂点数を計算する．その中身は，次式で与えられる．
-  \[ \mathrm{NVertBTree}(l) = \begin{cases}
-    1 & l = 0 \\
-    k + 1 & l = 1 \\
-    \frac{k(k-1)^l-1}{k-2} + 1 & l > 1
-  \end{cases} \]
-  $\mathrm{Parent}$関数は，次数$k$の平衡木において，頂点$v$の親の頂点番号を
-  求める．次式で与えられる．
-  \begin{align*}
-    \mathrm{Parent}(v)=&\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-2) +\\
-    &\frac{v-\mathrm{NVertBTree}(\mathrm{TreeDepth}(v)-1)}{k-1}
-  \end{align*}
+  \textbf{ムーアバウンド}(\textbf{Moore bound})とは，
+  次数が$k$,直径が$D$の正則グラフの頂点数の上界で，次式で定義される．
+  \begin{equation}
+    n_{k,D} = 1 + \sum_{i=1}^Dk(k-1)^{i-1}
+  \end{equation}
 \end{definition}
+これは，$R=0$,$Q=D$かつ，次数が一致する一般化ムーアグラフの頂点数に等しい．
 
-必要な関数が定義できたので，次の操作で初期グラフ$T$を構築する．
-$v=\{2,\ldots,\mathrm{NVertBTree}(Q)\}$に対して，$\mathrm{Parent}(v)$と
-$v$を隣接させる．こうすることで，頂点数$n-R$，次数$k$の平衡木を構築できる．
+探索の初期状態となる初期グラフを次の手順で作成する．
+\begin{enumerate}
+\item 頂点$v\in\{2,\ldots,k+1\}$と，頂点$1$とを隣接させる．
+\item 頂点$v\in\{k+2,\ldots,n-R+1\}$と，次の式で求められる頂点番号の
+  頂点$w$とを隣接させる．
+  \[ w=\left\lceil\frac{v-n_{k,\hat{Q}(v)-1}}{k-1}\right\rceil
+  +n_{k,\hat{Q}(v)-2}\]
+\end{enumerate}
 このとき，残りの$R$個の頂点は孤立点であることに注意する．
 
-\begin{example}
-  頂点数12,次数3の初期グラフ$T$を考える．
-  図\ref{fig:initial-tree-example}に頂点数12,次数3の初期グラフを示す．
-  \begin{figure}
-    \centering
-    \def\svgwidth{.5\columnwidth}
-    \input{initial-tree-example.pdf_tex}
-    \caption{頂点数12,次数3の初期グラフ}
-    \label{fig:initial-tree-example}
-  \end{figure}
-\end{example}
-
-\subsection{可能な辺の追加/無追加}
-\label{subsect:feasible-edge-(no)-addition}
-初期グラフ$T$を構築した後，$T$上での次数が$k$未満の頂点同士を
-接続させる辺の列を考える．そのような辺の列は次で与えられる．
-\[ \bar{E} = \bar{e}_i = \{(v_i,w_i)\,|
-\,d_T(v_i)<k,d_T(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\} \]
-探索では，$\bar{e}_1,\ldots,\bar{e}_m$と順番に辺を取り出し，
+初期グラフ$G_I$を構築した後，$G_I$上での次数が$k$未満の頂点同士を
+隣接させる，次の辺の列を考える．
+\[ E = \{e_i\} = \{(v_i,w_i)\,|\,
+d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}
+\setminus E(G_I) \]
+探索では，$e_1,\ldots,e_m\in E$と順番に辺を取り出し，
 グラフに追加する/しないを判定して新たなグラフを作ることを繰り返す．
 
-グラフ$G$と辺$\bar{e}_i$が与えられたとき，辺$\bar{e}_i$を追加した後のグラフ，
-追加しない後のグラフが定理\ref{theorem:gmg-geometric-property}を満たすか
-判定する方法を与える．そのため，いくつかの関数を導入する．
-\begin{definition}
-  頂点$v$に対して，それと接する辺$\bar{e}_i$の$i$の
-  最小値$\mathrm{Enter(v)}$と最大値$\mathrm{Exit}(v)$を考える．
-  $\mathrm{Enter}(v)$は探索中，初めて$v$と接する辺の番号を，
-  $\mathrm{Exit}(v)$は探索中に最後に$v$と接する辺の番号をそれぞれ表す．
-  $\mathrm{Enter}(v)$と$\mathrm{Exit}(v)$の具体的な式は，次で与えられる．
-  \begin{align*}
-    \mathrm{Enter}(v) &= \min(i\,|\,\{v,w\}=\bar{e}_i) \\
-    \mathrm{Exit}(v) &= \max(i\,|\,\{v,w\}=\bar{e}_i)
-  \end{align*}
-\end{definition}
-
-以上を踏まえて，辺$\bar{e}_i$を追加した後のグラフ，しない後のグラフが
-定理\ref{theorem:gmg-geometric-property}を満たすか判定する条件を述べる．
-辺を$\bar{e}_i=\{v,w\}$，追加前のグラフを$G$，
-追加した(しない)後のグラフを$H$とする．
-\begin{enumerate}
-\item 次数条件
-  \label{item:degree-constraint}
-  \begin{enumerate}
-  \item $d_H(v)\leq k$かつ$d_H(w)\leq k$
-  \item $\mathrm{Exit}(x)=i$なる$x\in\bar{e}_i$について，$d_H(x)=k$
-  \end{enumerate}
-\item 閉路条件
-  \label{item:cycle-constraint}
-  \begin{enumerate}
-  \item 追加するならば，$d_G(v,w)\geq2Q$\\
-    この条件を満たすとき，$\bar{e}_i$によってできる閉路の最小の長さは$2Q+1$
-    となり，定理\ref{theorem:gmg-geometric-property}を満たす．
-  \end{enumerate}
-\end{enumerate}
-以上の条件をすべて満たしたときのみ，次の辺$\bar{e}_{i+1}$に対して同じ判定が
-行われる．これを繰り返して，最後の辺$\bar{e}_{|\bar{E}|}$を追加するとき，
-次の条件も加える．
-\begin{enumerate}\setcounter{enumi}{2}
-\item 直径条件
-  \label{item:diameter-constraint}
-  \begin{enumerate}
-  \item $H$の直径は，$R>0$のとき$Q+1$，$R=0$のとき$Q$
-  \end{enumerate}
-\end{enumerate}
-
 \begin{example}
-  再び頂点数12,次数3の場合について考える．
-  図\ref{fig:feasible-edges-example}に頂点数12,次数3の辺の候補を示す．
-  いくつかの辺を追加した後のグラフを図\ref{fig:feasible-edges-example2}に
-  示す．
-  図\ref{fig:feasible-edges-example2}に示した辺
-  $a=\{9,10\},b=\{9,11\},c=\{9,12\}$について考える．
-  辺$a$を追加すると，$d(9,10)=2$のため長さ3の閉路$4\,9\,10$ができてしまい，
-  一般化ムーアグラフの条件を満たさなくなる．そのため，辺$a$は追加せず
-  次の辺に進む．
-  辺$b$についても同様で，長さ4の閉路ができてしまうため，辺を追加しない．
-  辺$c$は，$d(9,12)=5$なので長さ6の閉路が複数できる．これは，
-  $6>2Q$なので，辺を追加できる．
+  図\ref{fig:initial-tree-example}に頂点数12,次数3の初期グラフを示す．
+  あわせて，図\ref{fig:feasible-edges-example}にその候補辺を示す．
   \begin{figure}
     \centering
+    \begin{minipage}{.4\columnwidth}
+      \def\svgwidth{\textwidth}
+      \input{initial-tree-example.pdf_tex}
+      \captionof{figure}{頂点数12,次数3の初期グラフ}
+      \label{fig:initial-tree-example}
+    \end{minipage}
+    \hfill
     \begin{minipage}{.4\columnwidth}
       \def\svgwidth{\textwidth}
       \input{feasible-edges-example.pdf_tex}
       \captionof{figure}{頂点数12,次数3の辺の候補}
       \label{fig:feasible-edges-example}
     \end{minipage}
-    \hfill
-    \begin{minipage}{.4\columnwidth}
-      \def\svgwidth{\textwidth}
-      \input{feasible-edges-example2.pdf_tex}
-      \captionof{figure}{探索途中のグラフ}
-      \label{fig:feasible-edges-example2}
-    \end{minipage}
   \end{figure}
 \end{example}
 
-最後の辺に対する条件がすべて真のとき，アルゴリズムは一般化ムーアグラフを出力する．
-判定するグラフがなくなったとき，アルゴリズムは一般化ムーアグラフが存在しない
-ことを出力する．
+\subsection{可能な辺の追加/無追加}
+\label{subsect:feasible-edge-(no)-addition}
+探索途中の状態(本章では，グラフ$G$)と辺$e_i$が与えられたとき，
+辺$e_i$を追加した後のグラフおよび追加しない後のグラフが
+定理\ref{thm:gmg-geometric-property}を満たすか
+判定する方法を与える．はじめに，いくつかの記号を導入する．
+\begin{definition}
+  頂点$v$に対して，それと接する辺$e_i$の$i$の
+  最小値$i_{<v}$と最大値$i_{v>}$を考える．
+  $i_{<v}$は探索中，初めて$v$と接する辺の番号を，
+  $i_{v>}$は探索中に最後に$v$と接する辺の番号をそれぞれ表す．
+  $i_{<v}$と$i_{v>}$の具体的な式は，次で与えられる．
+  \begin{equation}
+    \label{eq:frontier}
+    \begin{aligned}
+    i_{<v} &= \min(i\,|\,\{v,w\}=e_i) \\
+    i_{v>} &= \max(i\,|\,\{v,w\}=e_i)
+    \end{aligned}
+  \end{equation}
+\end{definition}
+
+以上を踏まえて，辺$e_i$を追加した後のグラフと追加しない後のグラフが
+定理\ref{thm:gmg-geometric-property}を満たすか判定する条件を述べる．
+辺を$e_i=\{v,w\}$，元のグラフを$G$，操作後のグラフを$H$とする．
+\begin{enumerate}
+\item 追加する場合
+  \begin{enumerate}
+  \item 次数条件$\cdots$ $d_G(v)<k$かつ$d_G(w)<k$かつ，
+    $i_{x>}=i$なる$x\in e_i$について，$d_H(x)=k$
+  \item 閉路条件$\cdots$ $d_G(v,w)\geq2Q$\\
+    (この条件を満たすとき，$e_i$によってできる閉路の長さは少なくとも
+    $2Q+1$となり，定理\ref{thm:gmg-geometric-property}を満たす)
+  \end{enumerate}
+\item 追加しない場合
+  \begin{enumerate}
+  \item 次数条件$\cdots$ $i_{x>}=i$なる$x\in e_i$について，$d_H(x)=k$
+  \end{enumerate}
+\end{enumerate}
+追加する場合としない場合のそれぞれについて，条件をすべて満たしたときのみ，
+次の辺$e_{i+1}$に対して判定を行う．
+状態をスタックにプッシュし，あとでポップすることで実現する．
+
+\begin{example}
+  再び頂点数12,次数3の場合について考える．
+  いくつかの辺を追加した後のグラフを図\ref{fig:feasible-edges-example2}に
+  示す．図\ref{fig:feasible-edges-example2}に示した辺
+  $a=\{9,10\},b=\{9,11\},c=\{9,12\}$について考える．
+  辺$a$を追加すると，$d(9,10)=2$のため長さ3の閉路$\{4,\,9,\,10\}$が
+  できてしまい，一般化ムーアグラフの条件を満たさなくなる．
+  そのため，辺$a$は追加せず次の辺に進む．
+  辺$b$についても同様で，長さ4の閉路ができてしまうため，辺を追加しない．
+  辺$c$は，$d(9,12)=5$なので長さ6の閉路が複数できる．これは，
+  $6>2Q$なので，辺を追加できる．
+  \begin{figure}
+    \centering
+    \def\svgwidth{.5\textwidth}
+    \input{feasible-edges-example2.pdf_tex}
+    \caption{探索途中のグラフ}
+    \label{fig:feasible-edges-example2}
+  \end{figure}
+\end{example}
+
+最後の辺を判定した後，グラフ$G$が正則かつ
+定理\ref{thm:gmg-geometric-property}を満たす場合，アルゴリズムは
+$G$を一般化ムーアグラフを出力する．
+判定するグラフがなくなったとき，アルゴリズムは一般化ムーアグラフが
+(これ以上)存在しないことを出力する．
 
 \subsection{アルゴリズム}
 \label{subsect:basic-algorithm}
-最後に，本節で説明したアルゴリズムをアルゴリズム\ref{algo:basic-algorithm}
-に示す．
+最後に，本節で説明したアルゴリズムを
+アルゴリズム\ref{algo:basic-graph-initr}と
+アルゴリズム\ref{algo:basic-state}と
+アルゴリズム\ref{algo:basic-algorithm}に示す．
 \begin{algorithm}
-  \caption{基本アルゴリズム}
-  \label{algo:basic-algorithm}
+  \caption{初期グラフの構築}
+  \label{algo:basic-graph-initr}
   \begin{algorithmic}[1]
     \Require $n,k$
-    \Ensure $M(n,k)$($\varnothing$if not found)
-    \Procedure{Find generalized Moore Graph}{}
-    \State $T\gets$\ref{subsect:initial-graph}で示した初期グラフ
-    \State $\bar{E}\gets$\ref{subsect:initial-graph}で示した辺の候補
-    \ForAll{$\mathrm{addflag}\in\{\top,\bot\}$}
-    \State $I=$\Call{Search Part}{$T,1,\mathrm{addflag}$}
-    \If{$I\neq\varnothing$}
-    \State $\mathrm{return}\:I$
-    \EndIf
+    \Ensure 初期グラフ$G_I$
+    \Comment{\ref{subsect:initial-graph}を参照}
+    \Procedure{Make initial graph}{$n,k$}
+    \State $G_I\gets \varnothing$
+    \ForAll{$v\in\{2,\ldots,k+1\}$}
+    \State $E(G_I)\gets E(G_I)\cup\{(1,v)\}$
     \EndFor
-    \State $\mathrm{return}\:\varnothing$
-    \EndProcedure
-    \Procedure{Search Part}{$G,i,\mathrm{addflag}$}
-    \If{$\mathrm{addflag}$}
-    \State $H\gets G\cup\bar{e}_i$
-    \Else
-    \State $H\gets G$
-    \EndIf
-    \State $\mathrm{satisfy}\gets\bot$
-    \If{$i<|\bar{E}|$かつ
-      \ref{subsect:feasible-edge-(no)-addition}で示した
-      条件\ref{item:degree-constraint},
-      \ref{item:cycle-constraint}をすべて満たす
+    \ForAll{$v\in\{k+2,\ldots,n-R+1\}$}
+    \State \parbox[t]{.6\linewidth}{
+      $w\gets \left\lceil(v-n_{k,\hat{Q}(v)-1})/(k-1)\right\rceil$
+      $+n_{k,\hat{Q}(v)-2}$
     }
-    \State $\mathrm{satisfy}\gets\top$
-    \EndIf
-    \If{$i=|\bar{E}|$かつ
-      \ref{subsect:feasible-edge-(no)-addition}で示した
-      条件\ref{item:degree-constraint},
-      \ref{item:cycle-constraint},
-      \ref{item:diameter-constraint}をすべて満たす
-    }
-    \State $\mathrm{satisfy}\gets\top$
-    \EndIf
-    \If{$\mathrm{satisfy}$}
-    \ForAll{$\mathrm{nextaddflag}\in\{\top,\bot\}$}
-    \State $I=$\Call{Search Part}{$H,i+1,\mathrm{nextaddflag}$}
-    \If{$I\neq\varnothing$}
-    \State $\mathrm{return}\:I$
-    \EndIf
+    \State $E(G_I)\gets E(G_I)\cup\{(w,v)\}$
     \EndFor
-    \Else
-    \State $\mathrm{return}\:\varnothing$
-    \EndIf
+    \State $\mathrm{return}\:G_I$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 
+\begin{algorithm}
+  \caption{辺の追加判定}
+  \label{algo:basic-state}
+  \begin{algorithmic}[1]
+    \Require $G,i$
+    \Ensure 追加できる/できないことの可能性
+    \Comment{\ref{subsect:feasible-edge-(no)-addition}を参照}
+    \Procedure{Can add}{$G,i$}
+    \State $H\gets G\cup\{e_i\}$
+    \State $\mathrm{return\:}$\parbox[t]{\linewidth}{
+      $d_G(v)<k$かつ$d_G(w)<k$かつ，
+      $i_{x>}=i$なる$x\in e_i$について$d_H(x)=k$かつ， \\
+      $d_G(v,w)\geq2Q$
+    }
+    \EndProcedure
+    \Procedure{Can no add}{$G,i$}
+    \State $\mathrm{return}\:$ $i_{x>}=i$なる$x\in e_i$について，$d_G(x)=k$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+  \caption{探索アルゴリズム}
+  \label{algo:basic-algorithm}
+  \begin{algorithmic}[1]
+    \Require $n,k$
+    \Ensure $M(n,k)\:$(見つからない場合，$\varnothing$を返す)
+    \Procedure{Find generalized Moore graph}{}
+    \State $G_I\gets$\Call{Make initial graph}{$n,k$}
+    \State $E=\{e_i\}\gets $\parbox[t]{\linewidth}{
+      $\{(v_i,w_i)\,|$
+      $\,d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}$
+      $\setminus E(G_I)$
+    }
+    \State $\mathrm{State}\gets((G_I,1))$
+    \While{$|\mathrm{State}|>0$}
+    \State $G,i\gets\mathrm{State}$の末尾の要素
+    \State $\mathrm{State}$の末尾の要素を削除
+    \If{$i=|E|$かつ，$G$が正則で定理\ref{thm:gmg-geometric-property}を満たす}
+    \State $\mathrm{return}\:G$
+    \EndIf
+    \If{\Call{Can no add}{$G,i$}}
+    \State $\mathrm{State}$の末尾に$(G,i+1)$を追加
+    \EndIf
+    \If{\Call{Can add}{$G,i$}}
+    \State $H\gets G\cup\{e_i\}$
+    \State $\mathrm{State}$の末尾に$(H,i+1)$を追加
+    \EndIf
+    \EndWhile
+    \State $\mathrm{return}\:\varnothing$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+アルゴリズム\ref{algo:basic-algorithm}に手を加えて，一般化ムーアグラフを
+列挙することができる．
+9行目のグラフ返却の前にスタック($\mathrm{State}$)を保存しておき，
+次回以降の呼び出しの4行目で，保存したスタックから再開することで実現する．
+列挙の結果に同型なグラフが含まれることがある．
+アルゴリズム\ref{algo:basic-algorithm}において，6行目が実行される回数を
+状態の取り出し回数と呼び，後の章で提案する高効率化の指標の一つとする．
+
 \section{実験}
 \label{sect:exp-basic-algorithm}
+本章で提案したアルゴリズムを実装し，実験を行う．
+実験で以下の項目を測定する．
+\begin{enumerate}
+\item 探索開始から最初の一般化ムーアグラフの発見における
+  \begin{enumerate}
+  \item 時間
+  \item 状態の取り出し回数
+  \end{enumerate}
+\item 一般化ムーアグラフの列挙における
+  \begin{enumerate}
+  \item グラフ数
+  \item 時間
+  \item 状態の取り出し回数
+  \end{enumerate}
+\end{enumerate}
+それぞれの実験方法を付録\ref{app:program}で示した方法に従って行う．
+本実験での実行環境は表\ref{tab:basic-algorithm-env}のとおりである．
+\begin{table}
+  \caption{第\ref{chap:basic-algorithm}章の実験の実行環境}
+  \label{tab:basic-algorithm-env}
+  \centering
+  \begin{tabular}{ll}
+    \hline
+    プロセッサ & $\mathrm{Intel^{TM}\ldots}$ \\ \hline
+    メインメモリ & $8\mathrm{GiB}$ \\ \hline
+    $\vdots$ & $\vdots$ \\ \hline
+  \end{tabular}
+\end{table}
 
 \section{結果}
 \label{sect:result-basic-algorithm}
-TBA
+実験結果を示す．
+
