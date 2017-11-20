@@ -45,7 +45,7 @@ $i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであるこ�
 並べ替え前の候補辺を$E$，並べ替え後の候補辺を$E'$とする．
 \begin{enumerate}
 \item 各頂点$v$について，$E$での出現回数を求める．これを$n_v$とする．
-\item $w=\mathrm{argmin}_{v}(n_v)$の頂点$w$に対して，
+\item $w=\argmin_{v}(n_v)$の頂点$w$に対して，
   \begin{enumerate}
   \item $E'$の末尾に$E$中の$v$と接する辺集合を挿入する．
   \item 挿入した内容を$E$から削除する．
@@ -109,3 +109,42 @@ $i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであるこ�
 
 \section{結果}
 \label{sect:result-reduce-by-initial}
+次数が3のときの実験結果を示す．
+探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
+取り出し回数を図\ref{fig:ginitr-time}と図\ref{fig:ginitr-node}に
+それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数と列挙時間と
+状態の取り出し回数を図\ref{fig:ginitr-full-graph}と図\ref{fig:ginitr-full-time}と
+図\ref{fig:ginitr-full-node}にそれぞれ示す．結果から，次のことが考察される．
+指数関数的に増える(適当)．
+
+\begin{figure}
+  \centering
+  \includegraphics{the-ginitr-time.pdf}
+  \caption{最初の一般化ムーアグラフの発見までの時間}
+  \label{fig:ginitr-time}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics{the-ginitr-node.pdf}
+  \caption{最初の一般化ムーアグラフの発見までの展開状態数}
+  \label{fig:ginitr-node}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics{the-ginitr-full-graph.pdf}
+  \caption{列挙された一般化ムーアグラフの数}
+  \label{fig:ginitr-full-graph}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics{the-ginitr-full-time.pdf}
+  \caption{一般化ムーアグラフの列挙に要した時間}
+  \label{fig:ginitr-full-time}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics{the-ginitr-full-node.pdf}
+  \caption{一般化ムーアグラフの列挙における展開状態数}
+  \label{fig:ginitr-full-node}
+\end{figure}
