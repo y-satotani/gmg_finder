@@ -1,0 +1,16 @@
+lab:
+5.8 GiB
+Intel® Core™ i5-4670 CPU @ 3.40GHz × 4
+Ubuntu 16.04.3 LTS 64 ビット
+Oracle VirtualBox バージョン 5.1.18 r114002
+
+mws:
+3.9GiB
+Intel® Core™ i7-4712HQ CPU @ 2.30GHz × 4
+Ubuntu 16.04.3 LTS 64 ビット
+Oracle VirtualBox バージョン 5.1.8 r111374
+
+共通:
+gcc 5.4.0
+igraph 0.7.1-2.1
+

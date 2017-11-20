@@ -245,7 +245,7 @@ $G$を一般化ムーアグラフを出力する．
   \item 状態の取り出し回数
   \end{enumerate}
 \end{enumerate}
-それぞれの実験方法を付録\ref{chap:program}で示した方法に従って行う．
+それぞれの実験を付録\ref{chap:program}で示した方法に従って行う．
 本実験での実行環境は表\ref{tab:basic-algorithm-env}のとおりである．
 \begin{table}
   \caption{第\ref{chap:basic-algorithm}章の実験の実行環境}
@@ -253,13 +253,55 @@ $G$を一般化ムーアグラフを出力する．
   \centering
   \begin{tabular}{ll}
     \hline
-    プロセッサ & $\mathrm{Intel^{TM}\ldots}$ \\ \hline
-    メインメモリ & $8\mathrm{GiB}$ \\ \hline
-    $\vdots$ & $\vdots$ \\ \hline
+    プロセッサ & Intel® Core™ i7-4712HQ CPU @ 2.30GHz × 4 \\ \hline
+    メインメモリ & 3.9GiB \\ \hline
+    ベースシステム & Ubuntu 16.04.3 LTS 64 ビット \\ \hline
+    仮想化 & Oracle VirtualBox バージョン 5.1.8 r111374 \\ \hline
+    コンパイラ & gcc 5.4.0 \\ \hline
+    グラフライブラリ & igraph 0.7.1-2.1 \\ \hline
+    最適化フラグ & -Ofast \\ \hline
   \end{tabular}
 \end{table}
 
 \section{結果}
 \label{sect:result-basic-algorithm}
-実験結果を示す．
+次数が3のときの実験結果を示す．
+探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
+取り出し回数を図\ref{fig:basic-time}と図\ref{fig:basic-node}に
+それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数と列挙時間と
+状態の取り出し回数を図\ref{fig:basic-full-graph}と図\ref{fig:basic-full-time}と
+図\ref{fig:basic-full-node}にそれぞれ示す．結果から，次のことが考察される．
+指数関数的に増える(適当)．
+
+\begin{figure}
+  \centering
+  \includegraphics{the-basic-time.pdf}
+  \caption{最初の一般化ムーアグラフの発見までの時間}
+  \label{fig:basic-time}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics{the-basic-node.pdf}
+  \caption{最初の一般化ムーアグラフの発見までの展開状態数}
+  \label{fig:basic-node}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics{the-basic-full-graph.pdf}
+  \caption{列挙された一般化ムーアグラフの数}
+  \label{fig:basic-full-graph}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics{the-basic-full-time.pdf}
+  \caption{一般化ムーアグラフの列挙に要した時間}
+  \label{fig:basic-full-time}
+\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics{the-basic-full-node.pdf}
+  \caption{一般化ムーアグラフの列挙における展開状態数}
+  \label{fig:basic-full-node}
+\end{figure}
 

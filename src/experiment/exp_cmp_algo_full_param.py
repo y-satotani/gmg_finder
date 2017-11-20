@@ -8,20 +8,18 @@ from __future__ import print_function
 cmp-algo-full.csv
 """
 runs = 1
-d = 3
-#N = list(range(4, 17, 2))
-N = list(range(4, 11, 2))
+D = (3, 4)
+N = {
+    3: list(range(4, 17, 2)),
+    4: list(range(5, 12)),
+}
 
-mtd = [
-    ('basic', 'basic', 'basic'),
-    ('cycle', 'basic', 'sorted'),
-    ('stree', 'basic', 'basic'),
-]
-
-does_sort = lambda g: g == 'cycle'
 mtds = [
-    (g, 'sorted' if does_sort(g) else 'basic', s)
+    (g, 'basic', s)
     for g in ('basic', 'cycle', 'stree')
+    for s in ('basic', 'matrix', 'minmax')
+] + [
+    ('cycle', 'sorted', s)
     for s in ('basic', 'matrix', 'minmax')
 ]
 
@@ -29,5 +27,5 @@ print('\n'.join([
     '{} {} {} {} {}'.format(bdr, srt, mgr, n, d)
     for _ in range(runs)
     for bdr, srt, mgr in mtds
-    for n in N
+    for d in D for n in N[d]
 ]))
