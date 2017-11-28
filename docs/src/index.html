@@ -135,11 +135,70 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </ul>
 <p>次のコマンドで，複数の結果を含むcsvファイルを生成できます． <code>--max-procs=x</code>の<code>x</code>の値だけ並列に実行します． </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;(echo n,d,Q,R,sspl_lb,bdr,srt,mgr,sspl,edge,node,time ;\</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; ./exp_cmp_algo_param.py |\</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) &gt;\</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;cmp-algo.csv</div></div><!-- fragment --><p> パラメータは，<code>exp_cmp_algo_param.py</code>で生成されます． 別のパラメータで実験する場合は，このファイルを編集してください．</p>
 <h5><code>exp_cmp_algo_full.out</code></h5>
-<p>TODO</p>
+<p><code>exp_cmp_algo.out</code>では探索開始から(もしあれば)最初の一個の 一般化ムーアグラフを得るまでの情報を計測したが， <code>exp_cmp_algo_full.out</code>では探索開始からすべての一般化ムーアグラフ を得るまでの情報を計測する．</p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;./exp_cmp_algo_full.out basic basic basic 10 3</div></div><!-- fragment --><p> の実行例は次のとおり． </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;10,3,2,0,150,basic,basic,basic,4,150,150,15,75,0.00042</div></div><!-- fragment --><p> 結果は，次の値が<code>,</code>で区切られている．</p><ul>
+<li>頂点数</li>
+<li>次数</li>
+<li><code>Q</code> (<code><a class="el" href="classgmgf_1_1graph__config.html#afbb13b5b06164de9436acb4cdcb6fe87" title="一般化ムーアグラフの直径に関する量を計算する． ">gmgf::graph_config::Q()</a></code>)</li>
+<li><code>R</code> (<code><a class="el" href="classgmgf_1_1graph__config.html#a2601497da3278aad5fc165d5014fb6b2" title="ムーアグラフの頂点数との比較に関する量を計算する． ">gmgf::graph_config::R()</a></code>)</li>
+<li>頂点間距離の総和の下界</li>
+<li>グラフ初期化子 (<code>exp_cmp_algo.out</code>と同じ)</li>
+<li>候補辺ソート (<code>exp_cmp_algo.out</code>と同じ)</li>
+<li>状態初期化子 (<code>exp_cmp_algo.out</code>と同じ)</li>
+<li>結果のグラフの頂点間距離の総和</li>
+<li>得られたグラフの数 (同型グラフを重複して数える)</li>
+<li>最大の頂点間距離</li>
+<li>最小の頂点間距離</li>
+<li>候補辺の数</li>
+<li>展開した状態数</li>
+<li>実行時間</li>
+</ul>
 <h5><code>exp_dist_delete.out</code></h5>
-<p>TODO</p>
+<p>一辺削除時の頂点間距離の更新の実験を行う．つぎの項目を入力とする．</p><ul>
+<li>ネットワークトポロジ<ul>
+<li>random=Erdős–Rényiモデル</li>
+<li>scale-free=Barabási–Albertモデル</li>
+</ul>
+</li>
+<li>頂点数</li>
+<li>ネットワークパラメータ</li>
+<li>シード値 (ランダム関数の)</li>
+</ul>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;./exp_dist_delete.out random 1000 0.3 0</div></div><!-- fragment --><p> の実行例は以下のとおり． </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;1000,0.3,random,0,150422,1,0.827778,0.076536</div></div><!-- fragment --><p> 結果は次の値が<code>,</code>で区切られている．</p><ul>
+<li>頂点数</li>
+<li>ネットワークパラメータ (トポロジにより，pかm)</li>
+<li>ネットワークトポロジ<ul>
+<li><code>random</code>=Erdős–Rényiモデル</li>
+<li><code>scale-free</code>=Barabási–Albertモデル</li>
+</ul>
+</li>
+<li>シード値</li>
+<li>辺の数</li>
+<li>結果が一致したかどうか (1なら一致)</li>
+<li><code>igraph</code>ライブラリでの計算時間</li>
+<li>提案手法の計算時間</li>
+</ul>
 <h5><code>exp_miner.out</code></h5>
-<p>TODO </p>
+<p><code>exp_cmp_algo.out</code>で，グラフ初期化子を<code><a class="el" href="classgmgf_1_1stree__graph__initr.html" title="全域木を初期グラフとして与えるグラフ初期化子． ">gmgf::stree_graph_initr</a></code>， 状態初期化子を<code><a class="el" href="classgmgf_1_1minmax__state__initr.html" title="gmgf::minmax_state に対する状態初期化子 ">gmgf::minmax_state_initr</a></code>とし， さらに(もしあれば)一般化ムーアグラフを出力する機能を付加したプログラム．</p>
+<div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;./exp_miner.out 10 3</div></div><!-- fragment --><p> の実行例は以下のとおり， </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;10,3,2,0,150,150,15,16,0.000452</div></div><!-- fragment --><p> 結果は次の値が<code>,</code>で区切られている．</p><ul>
+<li>頂点数</li>
+<li>次数</li>
+<li><code>Q</code> (<code><a class="el" href="classgmgf_1_1graph__config.html#afbb13b5b06164de9436acb4cdcb6fe87" title="一般化ムーアグラフの直径に関する量を計算する． ">gmgf::graph_config::Q()</a></code>)</li>
+<li><code>R</code> (<code><a class="el" href="classgmgf_1_1graph__config.html#a2601497da3278aad5fc165d5014fb6b2" title="ムーアグラフの頂点数との比較に関する量を計算する． ">gmgf::graph_config::R()</a></code>)</li>
+<li>頂点間距離の総和の下界</li>
+<li>結果のグラフの頂点間距離の総和</li>
+<li>候補辺の数</li>
+<li>展開した状態数</li>
+<li>実行時間 (<code><a class="el" href="classgmgf_1_1dfs__finder.html#a163062222500bc5206bd67c2562eec71" title="次の一般化ムーアグラフを探索する． ">gmgf::dfs_finder::next()</a></code>の実行時間) さらに，<code>n&lt;頂点数&gt;-d&lt;次数&gt;-miner.elist</code>の形式で，一般化ムーアグラフの 辺リストを保存する．出力例は以下のとおり． <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;1 2</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;1 3</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;1 4</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;2 5</div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;3 6</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;4 7</div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;2 8</div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;3 9</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;4 10</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;5 6</div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;5 7</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;6 10</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;7 9</div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;8 9</div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;8 10</div></div><!-- fragment --></li>
+</ul>
+<h6><code>exp_miner.py</code></h6>
+<p><code>exp_miner.out</code>に並列計算とタイムアウト機能を追加したプログラム． コマンドライン引数は以下のとおり．</p><ul>
+<li><code>-n</code>=頂点数((次数+1)...Nの範囲を対象とする)</li>
+<li><code>-d</code>=次数(3...Dの範囲を対象とする)</li>
+<li><code>-i</code>=結果ファイルリスト(これらの結果に含まれている頂点数次数組は計算しない)</li>
+<li><code>-o</code>=結果ファイル(指定しなければ標準出力)</li>
+<li><code>-t</code>=タイムアウト時間(単位:秒) 結果は，<code>exp_miner.out</code>の結果を列としたcsvファイルである． </li>
+</ul>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
