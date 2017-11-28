@@ -21,7 +21,8 @@ gp <- ggplot(
   scale_y_discrete('Order') +
   scale_fill_manual(
     name ='Exists?',
-    values = c('grey50', 'royalblue'),
+    values = c('grey50', 'coral'),
+    #values = c('grey50', 'royalblue'),
     breaks = c(1, 0),
     labels = c('yes', 'no')
     ) +

@@ -162,7 +162,7 @@ $G$を一般化ムーアグラフを出力する．
     }
     \State $E(G_I)\gets E(G_I)\cup\{(w,v)\}$
     \EndFor
-    \State $\mathrm{return}\:G_I$
+    \State \textbf{return} $G_I$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
@@ -176,14 +176,14 @@ $G$を一般化ムーアグラフを出力する．
     \Comment{\ref{subsect:feasible-edge-(no)-addition}を参照}
     \Procedure{Can add}{$G,i$}
     \State $H\gets G\cup\{e_i\}$
-    \State $\mathrm{return\:}$\parbox[t]{\linewidth}{
-      $d_G(v)<k$かつ$d_G(w)<k$かつ，
+    \State \textbf{return} \parbox[t]{\linewidth}{
+      $d_G(v)<k$かつ$d_G(w)<k$かつ，\\
       $i_{x>}=i$なる$x\in e_i$について$d_H(x)=k$かつ， \\
       $d_G(v,w)\geq2Q$
     }
     \EndProcedure
     \Procedure{Can no add}{$G,i$}
-    \State $\mathrm{return}\:$ $i_{x>}=i$なる$x\in e_i$について，$d_G(x)=k$
+    \State \textbf{return} $i_{x>}=i$なる$x\in e_i$について，$d_G(x)=k$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
@@ -206,7 +206,7 @@ $G$を一般化ムーアグラフを出力する．
     \State $G,i\gets\mathrm{State}$の末尾の要素
     \State $\mathrm{State}$の末尾の要素を削除
     \If{$i=|E|$かつ，$G$が正則で定理\ref{thm:gmg-geometric-property}を満たす}
-    \State $\mathrm{return}\:G$
+    \State \textbf{return} $G$
     \EndIf
     \If{\Call{Can no add}{$G,i$}}
     \State $\mathrm{State}$の末尾に$(G,i+1)$を追加
@@ -216,7 +216,7 @@ $G$を一般化ムーアグラフを出力する．
     \State $\mathrm{State}$の末尾に$(H,i+1)$を追加
     \EndIf
     \EndWhile
-    \State $\mathrm{return}\:\varnothing$
+    \State \textbf{return} $\varnothing$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
