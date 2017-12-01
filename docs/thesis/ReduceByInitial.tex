@@ -25,7 +25,7 @@
   図\ref{fig:initial-graph-cycle-example}に示す．
   \begin{figure}
     \centering
-    \includegraphics[width=.5\linewidth]{initial-tree-cycle-example.pdf}
+    \includegraphics[width=.4\linewidth]{initial-tree-cycle-example.pdf}
     \caption{長さ6の閉路を含む，頂点数12,次数3の初期グラフ}
     \label{fig:initial-graph-cycle-example}
   \end{figure}
@@ -42,7 +42,7 @@
 長さ$2Q+2$の閉路を含む初期グラフから得られる候補辺は，頂点$v$に対する
 $i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであることの判定が遅くなり
 探索が効率よく行えない．そこで，グラフの候補辺を次の手順で並べ替える．
-並べ替え前の候補辺を$E$，並べ替え後の候補辺を$E'$とする．
+並べ替え前の候補辺リストを$E$，並べ替え後の候補辺リストを$E'$とする．
 \begin{enumerate}
 \item 各頂点$v$について，$E$での出現回数を求める．これを$n_v$とする．
 \item $w=\argmin_{v}(n_v)$の頂点$w$に対して，
@@ -50,7 +50,7 @@ $i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであるこ�
   \item $E'$の末尾に$E$中の$v$と接する辺集合を挿入する．
   \item 挿入した内容を$E$から削除する．
   \end{enumerate}
-\item 上記を$E$が空になるまで繰り返す．
+\item $E$が空になるまで繰り返す．
 \end{enumerate}
 
 \section{全域木}
@@ -104,18 +104,19 @@ $i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであるこ�
 
 \section{実験}
 \label{sect:exp-reduce-by-initial}
-アルゴリズム\ref{algo:basic-graph-initr}を先述した構築法で
-置き換えるだけでよい．
+提案した初期グラフの有効性を検証するため，実験を行う．
+初期グラフを変更するには，アルゴリズム\ref{algo:basic-graph-initr}を
+該当する初期グラフの構築手順に置き換えればよい．
+なお，実験で測定する項目や実験環境は
+\ref{sect:exp-basic-algorithm}節と同じである．
 
 \section{結果}
 \label{sect:result-reduce-by-initial}
 次数が3のときの実験結果を示す．
 探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
 取り出し回数を図\ref{fig:ginitr-time}と図\ref{fig:ginitr-node}に
-それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数と列挙時間と
-状態の取り出し回数を図\ref{fig:ginitr-full-graph}と図\ref{fig:ginitr-full-time}と
-図\ref{fig:ginitr-full-node}にそれぞれ示す．結果から，次のことが考察される．
-指数関数的に増える(適当)．
+それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数を
+図\ref{fig:ginitr-full-graph}に示す．
 
 \begin{figure}
   \centering
@@ -129,22 +130,16 @@ $i_{<v}$と$i_{v>}$の値が大きくなるため，正則グラフであるこ�
   \caption{最初の一般化ムーアグラフの発見までの展開状態数}
   \label{fig:ginitr-node}
 \end{figure}
-
 \begin{figure}
   \centering
   \includegraphics{the-ginitr-full-graph.pdf}
   \caption{列挙された一般化ムーアグラフの数}
   \label{fig:ginitr-full-graph}
 \end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-ginitr-full-time.pdf}
-  \caption{一般化ムーアグラフの列挙に要した時間}
-  \label{fig:ginitr-full-time}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-ginitr-full-node.pdf}
-  \caption{一般化ムーアグラフの列挙における展開状態数}
-  \label{fig:ginitr-full-node}
-\end{figure}
+
+結果から，全域木から探索を開始すれば最速かつ最も効率が良いことが分かる．
+また，図\ref{fig:ginitr-time}と図\ref{fig:ginitr-node}より，閉路を含む
+初期グラフにおいて，候補辺の並べ替えを行うことで効率が上がっていることが分かる．
+ここで，一般化ムーアグラフの列挙において，候補辺の並べ替えは効果がないことに
+注意する．なぜなら，列挙は候補辺に含まれる辺のすべての組み合わせの中から，
+一般化ムーアグラフを生じるものを抜き出すためである．

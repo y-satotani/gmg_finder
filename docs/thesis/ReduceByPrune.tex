@@ -38,6 +38,27 @@
 満たさない場合，それはどのように辺を追加しても条件を満たさないので，
 その場で探索を打ちきることができる．
 
+最後に，枝刈りの具体的な手続きをアルゴリズム\ref{algo:minmax-state}
+に示す．これは，アルゴリズム\ref{algo:basic-state}を書き換えるものである．
+\begin{algorithm}[H]
+  \caption{最大グラフを用いた辺の追加判定}
+  \begin{algorithmic}[1]
+    \Require $G,i$
+    \Ensure 追加できる/できないことの可能性
+    \Procedure{Can add}{$G,i$}
+    \State $H\gets G\cup\{e_i\}$
+    \State \textbf{return} \parbox[t]{\linewidth}{
+      $d_G(v)<k$かつ$d_G(w)<k$かつ，\\
+      $i_{x>}=i$なる$x\in e_i$について$d_H(x)=k$かつ， \\
+      $d_G(v,w)\geq2Q$
+    }
+    \EndProcedure
+    \Procedure{Can no add}{$G,i$}
+    \State \textbf{return} $i_{x>}=i$なる$x\in e_i$について，$d_G(x)=k$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
 \section{頂点間距離の高速な更新法}
 \label{sect:faster-min-max}
 第\ref{chap:basic-algorithm}章にて，グラフが枝刈りの対象となるかを
@@ -173,7 +194,7 @@ $G$に辺$e=\{\alpha,\beta\}\notin E(G)$を追加したた後の頂点間距離$
 一般性を失うことなく，$s<t,\,d(s,\alpha)\leq d(s,\beta)$とできる．
 
 アルゴリズムをアルゴリズム\ref{algo:update-distance-on-insert}に示す．
-\begin{algorithm}
+\begin{algorithm}[H]
   \caption{辺$\{\alpha,\beta\}$が追加されたときの$d'(s,t)$と$\sigma'(s,t)$の
   計算}\label{algo:update-distance-on-insert}
   \begin{algorithmic}[1]
@@ -221,7 +242,7 @@ $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(
 定理\ref{lemma:number-of-paths}の式を用いて，$\sigma'(u,v)$を求める．
 
 アルゴリズムをアルゴリズム\ref{algo:update-distance-on-remove}に示す．
-\begin{algorithm}
+\begin{algorithm}[H]
   \caption{辺$\{\alpha,\beta\}$が削除されたときの$d'(s,t)$と$\sigma'(s,t)$の
   計算}\label{algo:update-distance-on-remove}
   \begin{algorithmic}[1]
@@ -276,16 +297,37 @@ $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(
   \end{algorithmic}
 \end{algorithm}
 
+\subsubsection*{実験}
+提案した手法が有効であることを検証するため，
+ランダムネットワーク(Erdos-R{\'e}nyiモデル)と
+スケールフリーネットワーク(Barab{\'a}si-Albertモデル)上で
+実験を行った．
+
+\subsubsection*{結果}
+結果を図\ref{fig:the-dist-delete}に示す．
+\begin{figure}
+  \centering
+  \includegraphics{the-dist-delete.pdf}
+  \caption{一辺削除時の頂点間距離の更新の比較 \\
+      一行目はigraphライブラリのigraph\_shortest\_paths関数の実行時間を，
+      二行目は提案手法の実行時間を表す．\\
+      一列目はランダムネットワークとしてErdos-R{\'e}nyiモデルを，
+      二列目はスケールフリーネットワークとしてBarab{\'a}si-Albertモデルを
+      用いたときの結果を表す．}
+  \label{fig:the-dist-delete}
+\end{figure}
+
 \section{実験}
+\label{sect:exp-reduce-by-initial}
+提案した枝刈りの有効性を検証するため，実験を行う．
+なお，実験で測定する項目や実験環境は
+\ref{sect:exp-basic-algorithm}節と同じである．
 
 \section{結果}
 次数が3のときの実験結果を示す．
 探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
 取り出し回数を図\ref{fig:sinitr-time}と図\ref{fig:sinitr-node}に
-それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数と列挙時間と
-状態の取り出し回数を図\ref{fig:sinitr-full-graph}と図\ref{fig:sinitr-full-time}と
-図\ref{fig:sinitr-full-node}にそれぞれ示す．結果から，次のことが考察される．
-指数関数的に増える(適当)．
+それぞれ示す．
 
 \begin{figure}
   \centering
@@ -298,23 +340,4 @@ $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(
   \includegraphics{the-sinitr-node.pdf}
   \caption{最初の一般化ムーアグラフの発見までの展開状態数}
   \label{fig:sinitr-node}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics{the-sinitr-full-graph.pdf}
-  \caption{列挙された一般化ムーアグラフの数}
-  \label{fig:sinitr-full-graph}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-sinitr-full-time.pdf}
-  \caption{一般化ムーアグラフの列挙に要した時間}
-  \label{fig:sinitr-full-time}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-sinitr-full-node.pdf}
-  \caption{一般化ムーアグラフの列挙における展開状態数}
-  \label{fig:sinitr-full-node}
 \end{figure}

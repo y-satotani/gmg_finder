@@ -69,6 +69,31 @@ d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}
   \end{figure}
 \end{example}
 
+最後に，初期グラフを構築するアルゴリズムをアルゴリズム
+\ref{algo:basic-graph-initr}に示す．
+\begin{algorithm}[H]
+  \caption{初期グラフの構築}
+  \label{algo:basic-graph-initr}
+  \begin{algorithmic}[1]
+    \Require $n,k$
+    \Ensure 初期グラフ$G_I$
+    \Procedure{Make initial graph}{$n,k$}
+    \State $G_I\gets \varnothing$
+    \ForAll{$v\in\{2,\ldots,k+1\}$}
+    \State $E(G_I)\gets E(G_I)\cup\{(1,v)\}$
+    \EndFor
+    \ForAll{$v\in\{k+2,\ldots,n-R+1\}$}
+    \State \parbox[t]{.6\linewidth}{
+      $w\gets \left\lceil(v-n_{k,\hat{Q}(v)-1})/(k-1)\right\rceil$
+      $+n_{k,\hat{Q}(v)-2}$
+    }
+    \State $E(G_I)\gets E(G_I)\cup\{(w,v)\}$
+    \EndFor
+    \State \textbf{return} $G_I$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
 \subsection{可能な辺の追加/無追加}
 \label{subsect:feasible-edge-(no)-addition}
 探索途中の状態(本章では，グラフ$G$)と辺$e_i$が与えられたとき，
@@ -115,12 +140,12 @@ d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}
   再び頂点数12,次数3の場合について考える．
   いくつかの辺を追加した後のグラフを図\ref{fig:feasible-edges-example2}に
   示す．図\ref{fig:feasible-edges-example2}に示した辺
-  $a=\{9,10\},b=\{9,11\},c=\{9,12\}$について考える．
-  辺$a$を追加すると，$d(9,10)=2$のため長さ3の閉路$\{4,\,9,\,10\}$が
+  $\{9,10\}$と$\{9,11\}$と$\{9,12\}$について考える．
+  辺$\{9,10\}$を追加すると，$d(9,10)=2$のため長さ3の閉路$\{4,\,9,\,10\}$が
   できてしまい，一般化ムーアグラフの条件を満たさなくなる．
-  そのため，辺$a$は追加せず次の辺に進む．
-  辺$b$についても同様で，長さ4の閉路ができてしまうため，辺を追加しない．
-  辺$c$は，$d(9,12)=5$なので長さ6の閉路が複数できる．これは，
+  そのため，辺$\{9,10\}$は追加せず次の辺に進む．
+  辺$\{9,11\}$についても同様で，長さ4の閉路ができてしまうため，辺を追加しない．
+  辺$\{9,12\}$は，$d(9,12)=5$なので長さ6の閉路が複数できる．これは，
   $6>2Q$なので，辺を追加できる．
   \begin{figure}
     \centering
@@ -137,43 +162,13 @@ $G$を一般化ムーアグラフを出力する．
 判定するグラフがなくなったとき，アルゴリズムは一般化ムーアグラフが
 (これ以上)存在しないことを出力する．
 
-\subsection{アルゴリズム}
-\label{subsect:basic-algorithm}
-最後に，本節で説明したアルゴリズムを
-アルゴリズム\ref{algo:basic-graph-initr}と
-アルゴリズム\ref{algo:basic-state}と
-アルゴリズム\ref{algo:basic-algorithm}に示す．
-\begin{algorithm}
-  \caption{初期グラフの構築}
-  \label{algo:basic-graph-initr}
-  \begin{algorithmic}[1]
-    \Require $n,k$
-    \Ensure 初期グラフ$G_I$
-    \Comment{\ref{subsect:initial-graph}を参照}
-    \Procedure{Make initial graph}{$n,k$}
-    \State $G_I\gets \varnothing$
-    \ForAll{$v\in\{2,\ldots,k+1\}$}
-    \State $E(G_I)\gets E(G_I)\cup\{(1,v)\}$
-    \EndFor
-    \ForAll{$v\in\{k+2,\ldots,n-R+1\}$}
-    \State \parbox[t]{.6\linewidth}{
-      $w\gets \left\lceil(v-n_{k,\hat{Q}(v)-1})/(k-1)\right\rceil$
-      $+n_{k,\hat{Q}(v)-2}$
-    }
-    \State $E(G_I)\gets E(G_I)\cup\{(w,v)\}$
-    \EndFor
-    \State \textbf{return} $G_I$
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}
+最後に，辺の追加判定のアルゴリズムをアルゴリズム\ref{algo:basic-state}に示す．
+\begin{algorithm}[H]
   \caption{辺の追加判定}
   \label{algo:basic-state}
   \begin{algorithmic}[1]
     \Require $G,i$
     \Ensure 追加できる/できないことの可能性
-    \Comment{\ref{subsect:feasible-edge-(no)-addition}を参照}
     \Procedure{Can add}{$G,i$}
     \State $H\gets G\cup\{e_i\}$
     \State \textbf{return} \parbox[t]{\linewidth}{
@@ -188,8 +183,12 @@ $G$を一般化ムーアグラフを出力する．
   \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
-  \caption{探索アルゴリズム}
+\subsection{探索アルゴリズム}
+\ref{subsect:initial-graph}と\ref{subsect:feasible-edge-(no)-addition}
+で説明した事柄を用いて，深さ優先探索を一般化ムーアグラフの探索に適応する．
+そのアルゴリズムをアルゴリズム\ref{algo:basic-algorithm}に示す．
+\begin{algorithm}[H]
+  \caption{一般化ムーアグラフの探索アルゴリズム}
   \label{algo:basic-algorithm}
   \begin{algorithmic}[1]
     \Require $n,k$
@@ -226,12 +225,11 @@ $G$を一般化ムーアグラフを出力する．
 次回以降の呼び出しの4行目で，保存したスタックから再開することで実現する．
 列挙の結果に同型なグラフが含まれることがある．
 アルゴリズム\ref{algo:basic-algorithm}において，6行目が実行される回数を
-状態の取り出し回数と呼び，後の章で提案する高効率化の指標の一つとする．
+\textbf{展開状態数}と呼び，後の章で提案する高効率化の指標の一つとする．
 
 \section{実験}
 \label{sect:exp-basic-algorithm}
-本章で提案したアルゴリズムを実装し，実験を行う．
-実験で以下の項目を測定する．
+本章で提案したアルゴリズムに関する実験を行う．実験で以下の項目を測定する．
 \begin{enumerate}
 \item 探索開始から最初の一般化ムーアグラフの発見における
   \begin{enumerate}
@@ -241,8 +239,6 @@ $G$を一般化ムーアグラフを出力する．
 \item 一般化ムーアグラフの列挙における
   \begin{enumerate}
   \item グラフ数
-  \item 時間
-  \item 状態の取り出し回数
   \end{enumerate}
 \end{enumerate}
 それぞれの実験を付録\ref{chap:program}で示した方法に従って行う．
@@ -268,10 +264,8 @@ $G$を一般化ムーアグラフを出力する．
 次数が3のときの実験結果を示す．
 探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
 取り出し回数を図\ref{fig:basic-time}と図\ref{fig:basic-node}に
-それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数と列挙時間と
-状態の取り出し回数を図\ref{fig:basic-full-graph}と図\ref{fig:basic-full-time}と
-図\ref{fig:basic-full-node}にそれぞれ示す．結果から，次のことが考察される．
-指数関数的に増える(適当)．
+それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数を
+図\ref{fig:basic-full-graph}に示す．
 
 \begin{figure}
   \centering
@@ -285,22 +279,12 @@ $G$を一般化ムーアグラフを出力する．
   \caption{最初の一般化ムーアグラフの発見までの展開状態数}
   \label{fig:basic-node}
 \end{figure}
-
 \begin{figure}
   \centering
   \includegraphics{the-basic-full-graph.pdf}
   \caption{列挙された一般化ムーアグラフの数}
   \label{fig:basic-full-graph}
 \end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-basic-full-time.pdf}
-  \caption{一般化ムーアグラフの列挙に要した時間}
-  \label{fig:basic-full-time}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-basic-full-node.pdf}
-  \caption{一般化ムーアグラフの列挙における展開状態数}
-  \label{fig:basic-full-node}
-\end{figure}
+
+結果から，同一の$Q(n,k)$について，$R$が大きいほど値が増加していることが
+推測される．
