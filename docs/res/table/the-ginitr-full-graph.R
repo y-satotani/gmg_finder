@@ -20,9 +20,10 @@ gp <- ggplot(data, aes(n, n_graph, color=mtd)) +
                      labels = as.character(data$n)) +
   scale_y_continuous(name = '発見グラフ数',
                      trans = 'log10') +
-  scale_color_discrete(name = '',
-                       breaks = breaks,
-                       labels = labels) +
+  scale_color_manual(name = '初期グラフ',
+                     breaks = breaks,
+                     labels = labels,
+                     values = c('#F8766D', '#619CFF', '#00BA38')) +
   theme(text = element_text(family = 'IPAexGothic', size = 10),
         panel.background = element_rect(fill = 'white', colour = 'grey80'),
         panel.grid.major = element_line(colour = 'grey80'),
