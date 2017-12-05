@@ -4,22 +4,21 @@ library(ggplot2)
 
 breaks <- c('basic', 'minmax', 'matrix')
 labels <- c('なし', 'グラフ', '行列')
-data <- read_csv('cmp-algo-mws.csv') %>%
-  filter(d == 3, bdr == 'basic') %>%
+data <- read_csv('the-cmp-algo-lab.csv') %>%
+  filter(bdr == 'basic') %>%
   mutate(mtd = mgr) %>%
   group_by(n, d, mtd, node) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
-  mutate(mtd = factor(mtd, levels = breaks)) %>%
-  arrange(mtd, n)
+  mutate(mtd = factor(mtd, levels = breaks),
+         d = factor(d, levels = c(3, 4), labels = c('次数:3', '次数:4')))
 
 gp <- ggplot(data, aes(x = n, y = mean_time, color = mtd, shape = mtd, linetype = mtd)) +
   geom_line() +
   geom_point() +
+  facet_wrap(c('d'), scales = 'free') +
   scale_x_continuous(name = '頂点数',
-                     breaks = data$n,
-                     minor_breaks = NULL,
-                     labels = as.character(data$n)) +
+                     minor_breaks = NULL) +
   scale_y_continuous(name = '平均探索時間[s]',
                      trans = 'log10') +
   scale_color_manual(name = '枝刈り',
@@ -38,9 +37,9 @@ gp <- ggplot(data, aes(x = n, y = mean_time, color = mtd, shape = mtd, linetype 
         panel.background = element_rect(fill = 'white', colour = 'grey80'),
         panel.grid.major = element_line(colour = 'grey80'),
         panel.grid.minor = element_line(colour = 'grey80'),
-        axis.ticks = element_line(colour = 'grey80')
-  )
+        axis.ticks = element_line(colour = 'grey80'),
+        strip.background = element_blank())
 
 ggsave('the-sinitr-time.pdf', gp,
-       width = 15, height = 10, units = 'cm',
+       width = 15, height = 6, units = 'cm',
        device = cairo_pdf)
