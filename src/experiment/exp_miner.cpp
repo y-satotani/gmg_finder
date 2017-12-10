@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 
   if(argc < 2) {
     cout << "usage : " << argv[0] << " n d" << endl;
-    cout << "output: n,d,Q,R,sspl_lb,sspl,edge,node,time" << endl;
+    cout << "output: n,d,Q,R,sspl_lb,alg,sspl,edge,node,time" << endl;
     return 1;
   }
 
@@ -29,13 +29,13 @@ int main(int argc, char* argv[]) {
 
   graph_config* config = new graph_config(n, d);
   graph_initr* builder = new stree_graph_initr(config);
-  state_initr* manager = new minmax_state_initr();
+  state_initr* manager = new mmmtr_state_initr();
   igraph_t graph = run_dfs_finder
     (&sspl, &extracted_nodes, &time, builder, manager);
 
   cout << n << "," << d << ","
        << config->Q() << "," << config->R() << ","
-       << config->sspl_lb() << "," << sspl << ","
+       << config->sspl_lb() << ",matrix," << sspl << ","
        << builder->possible_edges().size() << ","
        << extracted_nodes << "," << time << endl;
 
