@@ -2,22 +2,86 @@
 \chapter{準備}
 \label{chap:preliminary}
 本章では，後の章に向けての準備をする．はじめに，グラフ理論の基本事項を説明する．
-・・・などを含む．次に，Cerfらが提唱した一般化ムーアグラフの定義を与え，
-いくつかの性質を証明する．これらの性質は，一般化ムーアグラフを探索する方法に
-用いるもので，極めて重要である．
+頂点間距離や直径などを含む．次に，Cerfらが提案した一般化ムーアグラフの
+定義を与え，いくつかの性質を示す．これらの性質は，一般化ムーアグラフを
+探索する方法に用いるもので，極めて重要である．
 
 \section{グラフ理論の基本事項}
 \label{sect:basic-graph-theory}
-グラフ理論の基本事項を，\cite{Diestel2000}に則り説明する．
+グラフ理論の基本事項を，\cite{Diestel2000}の記号に則り説明する．
 グラフ理論の基礎を理解している読者は\ref{sect:generalized-moore-graph}節まで
 読み飛ばしても差し支えない．
+
+\textbf{グラフ}とは，二つの集合$V$と$E$の組$G=(V,E)$で，$E$は
+$E\subseteq[V]^2$つまり，$V$から重複なく元を2個取り出した集合の部分集合である．
+$V$を\textbf{頂点集合}とよび，その元を\textbf{頂点}とよぶ．
+また，頂点集合の大きさ$|V|$を\textbf{頂点数}とよぶ．
+$E$を\textbf{辺集合}とよび，その元を\textbf{辺}とよぶ．
+後で示すように，グラフを図示する際，頂点は丸や点で，辺は頂点を結ぶ線で
+表されることが多い．
+
+頂点$v$と辺$e$が\textbf{接続する}とは，$v\in e$つまり，$e$の端点に$v$が
+属することをいう．頂点$v$と頂点$w$が\textbf{隣接する}とは，$\{v,w\}$が
+辺集合に属することをいう．
+
+グラフ$G$上の頂点$v$に対して，その頂点と隣接している頂点の数を
+\textbf{次数}と呼び，$d_G(v)$あるいは$d(v)$と記す．
+すべての頂点について，その次数が一定のグラフを\textbf{正則グラフ}と呼ぶ．
+
+\textbf{経路}$P$とは，$P=(V,E)$のグラフで，
+\[ V=\{x_0,x_1,\ldots,x_k\},\:
+E=\{\{x_0,x_1\},\{x_1,x_2\},\ldots,\{x_{k-1},x_k\}\}\]
+を満たす$V$と$E$の組である．このときの辺の数を経路の\textbf{長さ}あるいは
+\textbf{経路長}という．長さが2以上の閉路$P$に対して，その両端の頂点を
+隣接させたグラフを\textbf{閉路}という．つまり，閉路$C=(V,E)$とは，
+\[ V=\{x_0,x_1,\ldots,x_{k-1}\},\:
+E=\{\{x_0,x_1\},\{x_1,x_2\},\ldots,\{x_{k-2},x_{k-1}\},\{x_{k-1},x_0\}\}\]
+を満たす，$k\geq0$のグラフである．閉路$C$の辺の数あるいは頂点の数を，
+閉路の\textbf{長さ}あるいは\textbf{閉路長}とよぶ．
+
+グラフ$G$上の頂点$v$と$w$について，$v$と$w$を結ぶ最短の経路の長さを$v$と$w$の
+\textbf{頂点間距離}とよび，$d_G(v,w)$あるいは$d(v,w)$で表す．
+$v$と$w$を結ぶ経路が存在しないとき，$d(v,w):=\infty$と定義する．
+経路の対称性より，$d(v,w)=d(w,v)$である．すべての二頂点の組合せに対する
+頂点間距離の平均値と最大値をそれぞれ\textbf{平均頂点間距離}と\textbf{直径}
+という．
+
+\begin{example}
+  図\ref{fig:graph-example}にグラフの例を示す．
+  頂点集合は
+  $\{u,v,w,x,y,z\}$
+  で，辺集合は
+  $\{(u,w),(v,x),(w,x),(w,y),(x,z),(y,z)\}$
+  である．次数は，それぞれの頂点に対して，
+  $d(u)=1,\,d(v)=1,\,d(w)=3,\,d(x)=3,\,d(y)=2,\,d(z)=2$
+  である．グラフには，長さ4の閉路
+  $\{w,x,z,y\}$
+  が存在する．頂点間距離は次のとおり．
+  \begin{equation*}
+    \begin{aligned}
+      d(u,v)=3&\:&d(u,w)=1&\:&d(u,x)=2&\:&d(u,y)=2&\:&d(u,z)=3 \\
+      &\:&d(v,w)=2&\:&d(v,x)=1&\:&d(v,y)=3&\:&d(v,z)=2 \\
+      &\:&&\:&d(w,x)=1&\:&d(w,y)=1&\:&d(w,z)=2 \\
+      &\:&&\:&&\:&d(x,y)=2&\:&d(x,z)=1 \\
+      &\:&&\:&&\:&&\:&d(y,z)=1 \\
+    \end{aligned}
+  \end{equation*}
+  平均頂点間距離は，頂点間距離の値の平均を求めると，$1.8$である．
+  直径は，頂点間距離の値の最大値なので，$3$である．
+  \begin{figure}
+    \centering
+    \input{graph-example.pdf_tex}
+    \caption{グラフの例}
+    \label{fig:graph-example}
+  \end{figure}
+\end{example}
 
 \section{一般化ムーアグラフ}
 \label{sect:generalized-moore-graph}
 本節では一般化ムーアグラフを定義する．
 さらに，これが満たすいくつかの性質を示す．
 
-\begin{definition}[Cerf et.al., 1973\,\cite{cerf1973computer}]
+\begin{definition}[Cerf et.al., 1973\,\cite{Cerf1973}]
   \label{def:generalized-moore-graph}
   次の性質が成り立つ頂点数$n$,次数$k$の正則グラフを
   \textbf{一般化ムーアグラフ}(\textbf{Generalized Moore graph})とよぶ．
@@ -36,10 +100,10 @@
     \end{aligned}
   \end{equation}
   であること．ただし，
-  \begin{align*}
-    Q(n,k) &= \max\{q | n-1-\sum_{i=1}^{q}k(k-1)^{i-1} \geq 0\} \\
-    R(n,k) &= n - 1 - \sum_{i=1}^{Q(n,k)}k(k-1)^{i-1}
-  \end{align*}
+  \begin{align}
+    Q(n,k)&=\max\{q|n-1-\sum_{i=1}^{q}k(k-1)^{i-1}\geq 0\}\label{eq:gmg-q} \\
+    R(n,k)&=n-1-\sum_{i=1}^{Q(n,k)}k(k-1)^{i-1}\label{eq:gmg-r}
+  \end{align}
   とする．
 \end{definition}
 \begin{example}
@@ -70,17 +134,17 @@
   c_3 &= R(12,3) = 2 & \\
   c_i &= 0 & (i>3)
   \end{align*}
-  となるので，定義\ref{def:generalized-moore-graph}で示した距離と頂点数の
+  となるので，式\ref{eq:gmg-verts-dist}で示した距離と頂点数の
   関係を満たす．同様に，他のすべての頂点について，上述の距離と頂点数の関係を
   満たす．よって，このグラフは一般化ムーアグラフである．
 \end{example}
 以下，頂点数$n$,次数$k$の一般化ムーアグラフを$M(n,k)$と記し，
-$Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとおりとする．
+$Q(n,k)$と$R(n,k)$をそれぞれ式\ref{eq:gmg-q}と式\ref{eq:gmg-r}のとおりとする．
 頂点数と次数が文脈から明らかな場合は省略してそれぞれ$M,Q,R$と表す．
 
 一般化ムーアグラフの頂点間距離の総和を求め，これが正則グラフの頂点間距離の総和の
 下界であることを示す．
-\begin{theorem}[Cerf et.al., 1974\,\cite{Cerf1974}]
+\begin{theorem}[Cerf et.al., 1974\,\cite{Cerf1974Lower}]
   \label{thm:gmg-lower-bound}
   $M(n,k)$の頂点間距離の総和は，
   \begin{equation}
@@ -97,8 +161,8 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
     \sum_{i=1}^{n-1}i c_i
   \end{equation}
   ここで，$c_i$は$v$との距離が$i$の頂点の個数とする．
-  一般化ムーアグラフの場合，$c_i$は式\ref{eq:gmg-verts-dist}のとおりである．
-  式\ref{eq:gmg-verts-dist}を式\ref{eq:gmg-lb-1}に代入すると，
+  一般化ムーアグラフの場合，$c_i$は式\ref{eq:gmg-verts-dist}で与えられる．
+  そのため，式\ref{eq:gmg-lb-1}から，
   \begin{align}
       \sum_{i=1}^{n-1}ic_i
       &=\sum_{i=1}^{Q}ic_i+(Q+1)c_{Q+1}+\sum_{i=Q+2}^{n-1}ic_i \nonumber\\
@@ -143,7 +207,7 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
       \end{cases}
     \end{aligned}
   \end{equation}
-  が成り立つ．次が知られている．
+  が成り立つ．$c_i$の定義より，次が成り立つ．
   \begin{equation}
     \label{eq:gmg-lb-6}
     \sum_{i=1}^{n-1}c_i = \sum_{i=1}^{n-1}c'_i = n-1
@@ -157,18 +221,18 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
       \sum_{i=1}^{Q+1}|c_i-c'_i| &= \sum_{i=Q+2}^{n-1}|c_i-c'_i|
     \end{aligned}
   \end{equation}
-  が得られる．式\ref{eq:gmg-lb-7a}を用いて，次を考える．
+  が得られる．式\ref{eq:gmg-lb-7a}を用いて，式\ref{eq:gmg-lb-8a}を考える．
   \begin{equation}
     \label{eq:gmg-lb-8a}
     \sum_{i=1}^{n-1}i(c_i-c'_i)=
     \sum_{i=1}^{Q+1}i|c_i-c'_i|-\sum_{i=Q+2}^{n-1}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8a}の第一項の上界は，次である．
+  式\ref{eq:gmg-lb-8a}の第一項の上界は，式\ref{eq:gmg-lb-8a1}である．
   \begin{equation}
     \label{eq:gmg-lb-8a1}
     \sum_{i=1}^{Q+1}i|c_i-c'_i|\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8a}の第二項の下界は，次である．
+  式\ref{eq:gmg-lb-8a}の第二項の下界は，式\ref{eq:gmg-lb-8a2}である．
   \begin{equation}
     \label{eq:gmg-lb-8a2}
     \sum_{i=Q+2}^{n-1}i|c_i-c'_i|\geq (Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i|
@@ -208,18 +272,18 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
       \sum_{i=1}^{Q}|c_i-c'_i| &= \sum_{i=Q+1}^{n-1}|c_i-c'_i|
     \end{aligned}
   \end{equation}
-  が得られる．式\ref{eq:gmg-lb-7a}を用いて，次を考える．
+  が得られる．式\ref{eq:gmg-lb-7a}を用いて，次の式\ref{eq:gmg-lb-8b}を考える．
   \begin{equation}
     \label{eq:gmg-lb-8b}
     \sum_{i=1}^{n-1}i(c_i-c'_i)=
     \sum_{i=1}^{Q}i|c_i-c'_i|-\sum_{i=Q+1}^{n-1}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8b}の第一項の上界は，次である．
+  式\ref{eq:gmg-lb-8b}の第一項の上界は，次の式\ref{eq:gmg-lb-8b1}である．
   \begin{equation}
     \label{eq:gmg-lb-8b1}
     \sum_{i=1}^{Q}i|c_i-c'_i|\leq Q\sum_{i=1}^{Q}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8b}の第二項の下界は，次である．
+  式\ref{eq:gmg-lb-8b}の第二項の下界は，次の式\ref{eq:gmg-lb-8b2}である．
   \begin{equation}
     \label{eq:gmg-lb-8b2}
     \sum_{i=Q+1}^{n-1}i|c_i-c'_i|\geq (Q+1)\sum_{i=Q+1}^{n-1}|c_i-c'_i|
@@ -244,12 +308,12 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   頂点間距離の総和を求めると，同じく252である．
 \end{example}
 
-次の性質は，一般化ムーアグラフの構造的特徴を定める．
+次の性質は，一般化ムーアグラフが満たす構造的な特徴を示す．
 後に説明する探索方法に用いる極めて重要な性質である．
 \begin{theorem}
   \label{thm:gmg-geometric-property}
   ある正則グラフが一般化ムーアグラフであることの必要十分条件は，
-  \begin{enumerate}[a]
+  \begin{enumerate}[(a)]
   \item 長さ$2Q$以下の閉路を持たないこと
     \label{gmg-geom-a}
   \item 直径が$R=0$のときは$Q$,\hspace{1ex}$R>0$のときは$Q+1$であること．
@@ -259,17 +323,17 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
 \end{theorem}
 \begin{proof}
   正則グラフの頂点数を$n$,次数を$k$とする．
-  条件\ref{gmg-geom-a}を満たすならば，すべての頂点$v$に対する
-  $d(v,w)=i$なる頂点$w$の数$c'_i$は，$1\leq i\leq Q$に対して
-  $c'_i=k(k-1)^{i-1}$となる．また，条件\ref{gmg-geom-b}を満たすならば，
-  $Q+2\leq i$の範囲で$c'_i=0$である．これら二つを同時に満たすとき，
+  条件\ref{gmg-geom-a}を満たすならば，すべての頂点$v$に対して，
+  $d(v,w)=i$なる頂点$w$の数$c'_i$は，$c'_i=k(k-1)^{i-1}(1\leq i\leq Q)$となる．
+  また，条件\ref{gmg-geom-b}を満たすならば，$c'_i=0(Q+2\leq i)$である．
+  これら二つを同時に満たすとき，
   \[ c'_{Q+1}=n-1-\sum_{i=1}^{Q}k(k-1)^{i-1}=R \]
   を満たす．よって，ある正則グラフが条件\ref{gmg-geom-a}と
   条件\ref{gmg-geom-b}を同時に満たすとき，それは$M(n,k)$である．
 
-  逆を証明する．$1\leq i\leq Q$の範囲で$c_i=k(k-1)^{i-1}$ならば，
-  すべての頂点$v$について，$d(v,w)=i<Q$を満たす頂点$w$は，
-  $d(v,x)=i+1$を満たす$k-1$個の頂点$x$と隣接する．
+  逆を証明する．$c_i=k(k-1)^{i-1}(1\leq i\leq Q)$ならば，
+  すべての頂点$v$について，頂点$w\,(d(v,w)=i<Q)$は，
+  $k-1$個の頂点$x\,(d(v,x)=i+1)$と隣接する．
   従って，一般化ムーアグラフ$M(n,k)$には，長さ$2Q$以下の閉路は存在しない．
   また，$Q+2\leq i$(ただし，$R=0$の場合$Q+1\leq i$)の範囲で$c_i=0$なので，
   すべての頂点$v$について，$d(v,w)\geq Q+2$\hspace{.3ex}$(Q+1)$となるような
@@ -303,7 +367,7 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
 \end{example}
 
 最後に，一般化ムーアグラフの直径の式を与える．その前に，
-定義\ref{def:generalized-moore-graph}の$Q$の式を変形する．
+式\ref{eq:gmg-q}を変形する．
 \begin{lemma}
   \label{lem:gmg-q}
   \begin{equation}
@@ -312,13 +376,13 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   \end{equation}
 \end{lemma}
 \begin{proof}
-  式\ref{eq:gmg-lb-6}より，
+  式\ref{eq:gmg-q}より，
   \begin{align}
     n &= 1 + \sum_{i=1}^Qk\cdot(k-1)^{i-1} + R \nonumber\\
     &= 1 + \frac{k\left((k-1)^{Q}-1\right)}{k-2} + R
     \label{eq:gmg-q-1}
   \end{align}
-  とできる．さらに変形して，
+  が得られる．さらに変形して，
   \begin{align}
     (k-1)^Q &= 1+\frac{(n-R-1)(k-2)}{k} \nonumber\\
     Q &= \log_{k-1}\left(1+\frac{(n-R-1)(k-2)}{k}\right)
@@ -330,9 +394,9 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
     \label{eq:gmg-q-3}
     f(n,k) = \log_{k-1}\left(1+\frac{(n-1)(k-2)}{k}\right)
   \end{equation}
-  $f(n',k)=Q'$を満たす$n'$は，式\ref{eq:gmg-q-3}より，
+  $f(n',k)=Q'$を満たす$n'$は，式\ref{eq:gmg-q-3}から，
   \[ n'=1+\sum_{i=1}^{Q'}k(k-1)^{i-1} \]
-  である．同様に，$f(n'',k)=Q'+1$を満たす$n''$は，同様に，
+  と求められる．同様に，$f(n'',k)=Q'+1$を満たす$n''$は，
   \[ n''=1+\sum_{i=1}^{Q'+1}k(k-1)^{i-1} = n''+k(k-1)^{Q'} \]
   である．
   $0\leq R' < k(k-1)^{Q'}$なる$R'$について，$f(n'+R',k)$の値は，
@@ -358,12 +422,11 @@ $Q(n,k)$と$R(n,k)$の意味を定義\ref{def:generalized-moore-graph}のとお�
   \end{equation}
 \end{theorem}
 \begin{proof}
-  式\ref{eq:gmg-q-4}より，$R=0$のとき，
-  $\hat{Q}(n,k)=\lceil f(n,k)\rceil=Q(n,k)$が成り立つ．
+  $R=0$のとき，$\hat{Q}(n,k)=\lceil f(n,k)\rceil=Q(n,k)$が成り立つ．
   また，$0<R<k(k-1)^{Q(n,k)}$のとき，
   $\hat{Q}(n,k)=\lceil f(n,k)\rceil=Q(n,k)+1$となる．
-  これら二つが成り立つので，定理\ref{thm:gmg-geometric-property}より，
-  $\hat{Q}(n,k)$は一般化ムーアグラフ$M(n,k)$の直径の値と一致する．
+  これら二つが成り立つので，定理\ref{thm:gmg-geometric-property}の直径
+  の条件より，$\hat{Q}(n,k)$は一般化ムーアグラフ$M(n,k)$の直径の値と一致する．
 \end{proof}
 $\hat{Q}(v,k)$は，頂点$2$から順番に，頂点$1$から遠くなるように頂点を
 配置した際の，頂点$1$と頂点$v$の距離$d(1,v)$の意味もある．
