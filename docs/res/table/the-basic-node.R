@@ -1,6 +1,17 @@
 library(readr)
 library(dplyr)
 library(ggplot2)
+library(extrafont)
+library(gridExtra)
+
+theme_set(theme_light())
+
+g_grob <- function(gp, elem) {
+  tmp <- ggplot_gtable(ggplot_build(gp))
+  g <- grep(elem, sapply(tmp$grobs, function(x) x$name))
+  grob <- tmp$grobs[[g]]
+  return(grob)
+}
 
 data <- read_csv('the-cmp-algo-lab.csv') %>%
   filter(bdr == 'basic' & mgr == 'basic') %>%
@@ -9,25 +20,29 @@ data <- read_csv('the-cmp-algo-lab.csv') %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
   mutate(mtd = as.factor(mtd),
-         d = factor(d, levels = c(3, 4), labels = c('次数:3', '次数:4')))
+         d = factor(d))
 
-gp <- ggplot(data, aes(x = n, y = node, color = mtd)) +
-  geom_point() +
-  geom_line() +
-  facet_wrap(c('d'), scales = 'free') +
-  scale_x_continuous(name = '頂点数',
-                     minor_breaks = NULL) +
-  scale_y_continuous(name = '展開状態数',
-                     trans = 'log10') +
-  theme(text = element_text(family = 'IPAexGothic', size = 10),
-        panel.background = element_rect(fill = 'white', colour = 'grey80'),
-        panel.grid.major = element_line(colour = 'grey80'),
-        panel.grid.minor = element_line(colour = 'grey80'),
-        axis.ticks = element_line(colour = 'grey80'),
-        legend.position = 'none',
-        strip.background = element_blank()
-        )
+pf <- function(vd) {
+  gp <- ggplot(data %>% filter(d == vd), aes(x = n, y = node, color = mtd)) +
+    geom_point() +
+    geom_line() +
+    scale_x_continuous(name = '頂点数',
+                       minor_breaks = NULL) +
+    scale_y_continuous(name = '展開状態数',
+                       trans = 'log10') +
+    theme(text = element_text(size = 10),
+          plot.caption = element_text(family = 'TakaoPMincho', hjust = 0.5),
+          axis.title.y = element_text(family = 'TakaoPGothic', angle = 90, hjust = 0.65),
+          axis.title.x = element_text(family = 'TakaoPGothic', angle = 0, hjust = 0.5),
+          legend.position = 'none'
+    )
+  return(gp)
+}
 
-ggsave('the-basic-node.pdf', gp,
-       width = 13, height = 6, units = 'cm',
-       device = cairo_pdf)
+cairo_pdf('the-basic-node.pdf', width = 5.2, height = 2.5)
+grid.arrange(
+  pf(3) + labs(caption = '(a) 次数 3') + theme(axis.title.y = element_blank(), legend.position = 'none'),
+  pf(4) + labs(caption = '(b) 次数 4') + theme(axis.title.y = element_blank(), legend.position = 'none'),
+  ncol = 2, left = g_grob(pf(3), 'axis.title.y')
+)
+dev.off()
