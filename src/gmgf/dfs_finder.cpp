@@ -17,7 +17,11 @@ namespace gmgf {
   }
 
   unsigned long long dfs_finder::extracted_nodes() {
-    return m_extracted_nodes;
+    return m_extracted_states;
+  }
+
+  unsigned long long dfs_finder::extracted_states() {
+    return m_extracted_states;
   }
 
   void dfs_finder::reset() {
@@ -26,12 +30,12 @@ namespace gmgf {
     m_stack.clear();
     m_stack.push_back
       (std::pair<std::size_t, state*>(0, m_sinitr->initial(m_ginitr)));
-    m_extracted_nodes = 0;
+    m_extracted_states = 0;
   }
 
   igraph_t dfs_finder::next() {
     while(m_stack.size() > 0) {
-      ++m_extracted_nodes;
+      ++m_extracted_states;
 
       std::pair<std::size_t, state*> node = m_stack.back();
       std::size_t ei = node.first;

@@ -28,7 +28,7 @@ igraph_t run_dfs_finder(int* sspl_ret,
   clock_t end = clock();
 
   *sspl_ret = sspl(&G);
-  *n_node   = finder->extracted_nodes();
+  *n_node   = finder->extracted_states();
   *time     = double(end - begin) / CLOCKS_PER_SEC;
 
   delete finder;
@@ -70,7 +70,7 @@ void run_dfs_finder_full(int* n_graph,
   }
 
   if(*n_graph == 0) *sspl_min = 0;
-  *n_node = finder->extracted_nodes();
+  *n_node = finder->extracted_states();
   *time = double(clock_sum) / CLOCKS_PER_SEC;
   delete finder;
 }

@@ -48,9 +48,9 @@ make_margin <- function(gp, p_height) {
 breaks <- c('basic', 'minmax')
 labels <- c('なし', 'あり')
 data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
-  filter(bdr == 'basic', mgr == 'basic' | mgr == 'minmax') %>%
-  mutate(mtd = mgr) %>%
-  group_by(n, d, mtd, node) %>%
+  filter(ginitr == 'basic', sinitr == 'basic' | sinitr == 'minmax') %>%
+  mutate(mtd = sinitr) %>%
+  group_by(n, d, mtd, n_state) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
   mutate(mtd = factor(mtd, levels = breaks),
@@ -58,7 +58,7 @@ data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
 
 pf_state <- function(vd) {
   gp <- ggplot(data %>% filter(d == vd),
-               aes(x = n, y = node, color = mtd)) +
+               aes(x = n, y = n_state, color = mtd)) +
     geom_line() +
     geom_point() +
     scale_x_continuous(name = '頂点数',

@@ -47,9 +47,9 @@ make_margin <- function(gp, p_height) {
 breaks <- c('basic basic', 'cycle basic', 'cycle sorted', 'stree basic')
 labels <- c('基本', '閉路', '閉路(並べ替えあり)', '全域木')
 data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
-  filter(mgr == 'basic') %>%
-  mutate(mtd = paste(bdr, srt)) %>%
-  group_by(n, d, bdr, srt, mtd, node) %>%
+  filter(sinitr == 'basic') %>%
+  mutate(mtd = paste(ginitr, sinitr)) %>%
+  group_by(n, d, mtd, n_state) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
   mutate(mtd = factor(mtd, levels = breaks),
@@ -58,8 +58,8 @@ data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
 breaks_full <- c('basic', 'cycle', 'stree')
 labels_full <- c('基本', '閉路', '全域木')
 data_full <- read_csv('../data/the-cmp-algo-full-lab.csv') %>%
-  filter(mgr == 'basic', srt == 'basic') %>%
-  mutate(mtd = bdr) %>%
+  filter(sinitr == 'basic', sorted == 'basic') %>%
+  mutate(mtd = ginitr) %>%
   select(n, d, mtd, n_graph) %>%
   mutate(mtd = factor(mtd, levels = breaks_full),
          d = factor(d))
@@ -93,7 +93,7 @@ pf_time <- function(vd) {
 }
 pf_state <- function(vd) {
   gp <- ggplot(data %>% filter(d == vd),
-               aes(x = n, y = node, color = mtd, shape = mtd, linetype = mtd)) +
+               aes(x = n, y = n_state, color = mtd, shape = mtd, linetype = mtd)) +
     geom_line() +
     geom_point() +
     scale_x_continuous(name = '頂点数',

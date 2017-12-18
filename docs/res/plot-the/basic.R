@@ -45,17 +45,17 @@ make_margin <- function(gp, p_height) {
 }
 
 data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
-  filter(bdr == 'basic' & mgr == 'basic') %>%
+  filter(ginitr == 'basic' & sinitr == 'basic') %>%
   mutate(mtd = 'basic') %>%
-  group_by(n, d, mtd, node) %>%
+  group_by(n, d, mtd, n_state) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
   mutate(d = factor(d))
 
 data_full <- read_csv('../data/the-cmp-algo-full-lab.csv') %>%
-  filter(bdr == 'basic' & mgr == 'basic') %>%
+  filter(ginitr == 'basic' & sinitr == 'basic') %>%
   mutate(mtd = 'basic') %>%
-  mutate(node_per_graph = node / n_graph) %>%
+  mutate(state_per_graph = n_state / n_graph) %>%
   select(n, d, mtd, n_graph) %>%
   mutate(d = factor(d))
 
@@ -74,7 +74,7 @@ pf_time <- function(vd) {
   return(gp)
 }
 pf_state <- function(vd) {
-  gp <- ggplot(data %>% filter(d == vd), aes(x = n, y = node, color = mtd)) +
+  gp <- ggplot(data %>% filter(d == vd), aes(x = n, y = n_state, color = mtd)) +
     geom_line() +
     geom_point() +
     scale_x_continuous(name = '頂点数',

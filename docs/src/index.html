@@ -45,6 +45,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -133,7 +134,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>展開した状態数</li>
 <li>実行時間 (<code><a class="el" href="classgmgf_1_1dfs__finder.html#a163062222500bc5206bd67c2562eec71" title="次の一般化ムーアグラフを探索する． ">gmgf::dfs_finder::next()</a></code>の実行時間)</li>
 </ul>
-<p>次のコマンドで，複数の結果を含むcsvファイルを生成できます． <code>--max-procs=x</code>の<code>x</code>の値だけ並列に実行します． </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;(echo n,d,Q,R,sspl_lb,bdr,srt,mgr,sspl,edge,node,time ;\</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; ./exp_cmp_algo_param.py |\</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) &gt;\</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;cmp-algo.csv</div></div><!-- fragment --><p> パラメータは，<code>exp_cmp_algo_param.py</code>で生成されます． 別のパラメータで実験する場合は，このファイルを編集してください．</p>
+<p>次のコマンドで，複数の結果を含むcsvファイルを生成できます． <code>--max-procs=x</code>の<code>x</code>の値だけ並列に実行します． </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;(echo n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,sspl,edge,node,time ;\</div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; ./exp_cmp_algo_param.py |\</div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) &gt;\</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;cmp-algo.csv</div></div><!-- fragment --><p> パラメータは，<code>exp_cmp_algo_param.py</code>で生成されます． 別のパラメータで実験する場合は，このファイルを編集してください．</p>
 <h5><code>exp_cmp_algo_full.out</code></h5>
 <p><code>exp_cmp_algo.out</code>では探索開始から(もしあれば)最初の一個の 一般化ムーアグラフを得るまでの情報を計測したが， <code>exp_cmp_algo_full.out</code>では探索開始からすべての一般化ムーアグラフ を得るまでの情報を計測する．</p>
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;./exp_cmp_algo_full.out basic basic basic 10 3</div></div><!-- fragment --><p> の実行例は次のとおり． </p><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;10,3,2,0,150,basic,basic,basic,4,150,150,15,75,0.00042</div></div><!-- fragment --><p> 結果は，次の値が<code>,</code>で区切られている．</p><ul>

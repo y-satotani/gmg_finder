@@ -48,9 +48,9 @@ make_margin <- function(gp, p_height) {
 breaks <- c('basic', 'minmax', 'matrix')
 labels <- c('なし', '最大グラフ', '距離更新')
 data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
-  filter(bdr == 'basic') %>%
-  mutate(mtd = mgr) %>%
-  group_by(n, d, mtd, node) %>%
+  filter(ginitr == 'basic') %>%
+  mutate(mtd = sinitr) %>%
+  group_by(n, d, mtd, n_state) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
   mutate(mtd = factor(mtd, levels = breaks),

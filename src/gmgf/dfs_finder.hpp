@@ -22,7 +22,7 @@ namespace gmgf {
     std::vector<std::pair<std::size_t, state*> > m_stack;
     std::vector<edge_t> m_e_possible;
     std::vector<std::pair<std::size_t, std::size_t> > m_v_range;
-    unsigned long long m_extracted_nodes;
+    unsigned long long m_extracted_states;
 
   public:
     /**
@@ -41,10 +41,17 @@ namespace gmgf {
     ~dfs_finder();
 
     /**
+     * \deprecated
      * \brief 呼び出されるまでに展開された状態数を返す．
      * \return 展開状態数
      */
     unsigned long long extracted_nodes();
+
+    /**
+     * \brief 呼び出されるまでに展開された状態数を返す．
+     * \return 展開状態数
+     */
+    unsigned long long extracted_states();
 
     /**
      * \brief 初期化時の状態に戻す．

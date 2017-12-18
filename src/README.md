@@ -54,7 +54,7 @@ src> experiment/exp_cmp_algo.out basic basic basic 10 3
 次のコマンドで，複数の結果を含むcsvファイルを生成できます．
 `--max-procs=x`の`x`の値だけ並列に実行します．
 ```
-(echo n,d,Q,R,sspl_lb,bdr,srt,mgr,sspl,edge,node,time ;\
+(echo n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,sspl,edge,node,time ;\
  ./exp_cmp_algo_param.py |\
  xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) >\
 cmp-algo.csv

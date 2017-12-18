@@ -1,4 +1,4 @@
-n,d,Q,R,sspl_lb,bdr,srt,mgr,n_graph,sspl_max,sspl_min,edge,node,time
+n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,n_graph,sspl_max,sspl_min,n_edge,n_state,time
 4,3,1,0,12,basic,basic,basic,1,12,12,3,5,9e-05
 6,3,1,2,42,basic,basic,basic,7,42,42,10,135,0.000374
 10,3,2,0,150,basic,basic,basic,4,150,150,15,75,0.000553

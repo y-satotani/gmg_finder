@@ -48,8 +48,8 @@ make_margin <- function(gp, p_height) {
 breaks <- c('minmax', 'matrix')
 labels <- c('最大グラフ', '距離更新')
 data <- read_csv('../data/the-cmp-algo-state-lab.csv') %>%
-  mutate(mtd = mgr) %>%
-  group_by(n, d, mtd, node) %>%
+  mutate(mtd = sinitr) %>%
+  group_by(n, d, mtd, n_state) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
   mutate(mtd = factor(mtd, levels = breaks),
@@ -57,7 +57,7 @@ data <- read_csv('../data/the-cmp-algo-state-lab.csv') %>%
 
 pf_time <- function(vd) {
   gp <- ggplot(data %>% filter(d == vd),
-               aes(x = node, y = mean_time, color = mtd, shape = mtd)) +
+               aes(x = n_state, y = mean_time, color = mtd, shape = mtd)) +
     geom_point() +
     scale_x_continuous(name = '展開状態数',
                        breaks = c(0, 1e2, 1e4, 1e6),

@@ -11,8 +11,8 @@ extern "C" {
 using namespace std;
 using namespace gmgf;
 
-char basic_bdr[] = "basic", cycle_bdr[] = "cycle", stree_bdr[] = "stree";
-char basic_mgr[] = "basic", minmax_mgr[] = "minmax", mmmtr_mgr[] ="matrix";
+char basic_ginitr[] = "basic", cycle_ginitr[] = "cycle", stree_ginitr[] = "stree";
+char basic_sinitr[] = "basic", minmax_sinitr[] = "minmax", mmmtr_sinitr[] ="matrix";
 char disable_srt[] = "basic", enable_srt[] = "sorted";
 
 int main(int argc, char* argv[]) {
@@ -23,23 +23,23 @@ int main(int argc, char* argv[]) {
          << " (basic|sorted)"
          << " (basic|minmax|matrix)"
          << " n d" << endl;
-    cout << "output: n,d,Q,R,sspl_lb,bdr,str,mgr,"
-         << "n_graph,sspl_max,sspl_min,edge,node,time" << endl;
+    cout << "output: n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,"
+         << "n_graph,sspl_max,sspl_min,n_edge,n_state,time" << endl;
     return 1;
   }
 
-  char* bdr_name = argv[1];
+  char* ginitr_name = argv[1];
   char* srt_flag = argv[2];
-  char* mgr_name = argv[3];
+  char* sinitr_name = argv[3];
   unsigned int n = (unsigned int) atoi(argv[4]);
   unsigned int d = (unsigned int) atoi(argv[5]);
 
   graph_config* config = new graph_config(n, d);
 
   graph_initr* ginitr, * ginitr_base = NULL;
-  if(strcmp(bdr_name, cycle_bdr) == 0)
+  if(strcmp(ginitr_name, cycle_ginitr) == 0)
     ginitr = new cycle_graph_initr(config);
-  else if(strcmp(bdr_name, stree_bdr) == 0)
+  else if(strcmp(ginitr_name, stree_ginitr) == 0)
     ginitr = new stree_graph_initr(config);
   else
     ginitr = new basic_graph_initr(config);
@@ -49,27 +49,27 @@ int main(int argc, char* argv[]) {
   }
 
   state_initr* sinitr;
-  if(strcmp(mgr_name, minmax_mgr) == 0)
+  if(strcmp(sinitr_name, minmax_sinitr) == 0)
     sinitr = new minmax_state_initr();
-  else if(strcmp(mgr_name, mmmtr_mgr) == 0)
+  else if(strcmp(sinitr_name, mmmtr_sinitr) == 0)
     sinitr = new mmmtr_state_initr();
   else
     sinitr = new basic_state_initr();
 
   int n_graph, min_sspl, max_sspl;
-  unsigned long long extracted_nodes;
+  unsigned long long extracted_states;
   double time;
   run_dfs_finder_full(&n_graph, &min_sspl, &max_sspl,
-                      &extracted_nodes, &time,
+                      &extracted_states, &time,
                       ginitr, sinitr);
 
   cout << n << "," << d << ","
        << config->Q() << "," << config->R() << ","
        << config->sspl_lb() << ","
-       << bdr_name << "," << srt_flag << "," << mgr_name << ","
+       << ginitr_name << "," << srt_flag << "," << sinitr_name << ","
        << n_graph << "," << min_sspl << "," << max_sspl << ","
        << ginitr->possible_edges().size() << ","
-       << extracted_nodes << "," << time << endl;
+       << extracted_states << "," << time << endl;
 
   delete sinitr;
   delete ginitr;

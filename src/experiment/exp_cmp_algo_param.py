@@ -2,7 +2,7 @@
 from __future__ import print_function
 
 """
-(echo n,d,Q,R,sspl_lb,bdr,srt,mgr,sspl,edge,node,time ;\
+(echo n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,sspl,n_edge,n_state,time ;\
  ./exp_cmp_algo_param.py |\
  xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) >\
 cmp-algo.csv
