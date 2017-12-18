@@ -1,40 +1,19 @@
-CC := g++
-IDIR := /usr/include/igraph $(shell pwd)
-LDIR := /usr/lib/x86_64-linux-gnu/
-LIBS := -lm -ligraph
-CFLAGS := -g -std=c++11 -Ofast -Wall \
-          $(addprefix -I,$(IDIR)) $(addprefix -L,$(LDIR))
+MAKE := make
+.PHONY: all, install, clean, uninstall
 
-LPAR := (
-OBJ := $(patsubst %.cpp,%.o,$(shell\
-	find . -name "*.cpp" |\
-	xargs -I{} sh -c "echo -n '{} ' ; grep 'main$(LPAR)' {} | wc -l" |\
-	awk '{ if($$NF == 0) print $$1 }')\
-)
-EXEDIR := bin
-EXE := $(patsubst %.cpp,%.out,$(shell\
-	find . -name "*.cpp" |\
-	xargs -I{} sh -c "echo -n '{} ' ; grep 'main$(LPAR)' {} | wc -l" |\
-	awk '{ if($$NF > 0) print $$1 }')\
-)
-
-.PHONY: objects executables all install clean
-
-all: executables
-
-executables: $(OBJ) $(EXE)
-objects: $(OBJ)
-
-%.o: %.cpp
-	$(CC) $(CFLAGS) -c -o $@ $< $(LIBS)
-
-%.out: %.cpp
-	$(CC) $(CFLAGS) -o $@ $< $(OBJ) $(LIBS)
+all:
+	$(MAKE) -C gmgf all
+	$(MAKE) -C experiment all
+	$(MAKE) -C test all
 
 install:
-	mkdir -p $(EXEDIR)
-	cp $(EXE) $(EXEDIR)
+	mkdir -p bin
+	cp experiment/*.out test/*.out bin
 
 clean:
-	find . -regextype posix-egrep -regex ".*\.(o|out)$$" | xargs rm -f
+	$(MAKE) -C gmgf clean
+	$(MAKE) -C experiment clean
+	$(MAKE) -C test clean
+
+uninstall:
 	rm -rf bin
