@@ -16,7 +16,7 @@ g_grob <- function(gp, elem) {
 
 breaks <- c('basic basic', 'cycle basic', 'cycle sorted', 'stree basic')
 labels <- c('基本', '閉路', '閉路(並べ替えあり)', '全域木')
-data <- read_csv('the-cmp-algo-lab.csv') %>%
+data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
   filter(mgr == 'basic') %>%
   mutate(mtd = paste(bdr, srt)) %>%
   group_by(n, d, bdr, srt, mtd, node) %>%
@@ -27,12 +27,12 @@ data <- read_csv('the-cmp-algo-lab.csv') %>%
 
 pf <- function(vd) {
   gp <- ggplot(data %>% filter(d == vd),
-               aes(x = n, y = node, color = mtd, shape = mtd, linetype = mtd)) +
+               aes(x = n, y = mean_time, color = mtd, shape = mtd, linetype = mtd)) +
     geom_line() +
     geom_point() +
     scale_x_continuous(name = '頂点数',
                        minor_breaks = NULL) +
-    scale_y_continuous(name = '展開状態数',
+    scale_y_continuous(name = '平均探索時間[s]',
                        trans = 'log10') +
     scale_color_manual(name = '初期グラフ',
                        breaks = breaks,
@@ -62,7 +62,7 @@ gp <- arrangeGrob(p3, p4, ncol = 2)
 ylab <- g_grob(pf(3), 'axis.title.y')
 legend <- g_grob(pf(3), 'guide-box')
 
-cairo_pdf('the-ginitr-node.pdf', width = 6.0, height = 2.5)
+cairo_pdf('the-ginitr-time.pdf', width = 6.0, height = 2.5)
 grid.arrange(
   ylab, gp, legend,
   ncol = 3,

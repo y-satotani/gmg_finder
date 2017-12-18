@@ -13,36 +13,34 @@ g_grob <- function(gp, elem) {
   return(grob)
 }
 
-data <- read_csv('the-cmp-algo-lab.csv') %>%
+data <- read_csv('../data/the-cmp-algo-full-lab.csv') %>%
   filter(bdr == 'basic' & mgr == 'basic') %>%
   mutate(mtd = 'basic') %>%
-  group_by(n, d, mtd, node) %>%
-  summarise(mean_time = mean(time)) %>%
-  ungroup() %>%
-  mutate(mtd = as.factor(mtd),
-         d = factor(d))
+  mutate(node_per_graph = node / n_graph) %>%
+  select(n, d, mtd, n_graph) %>%
+  mutate(d = factor(d, levels = c(3, 4)))
 
 pf <- function(vd) {
-  gp <- ggplot(data %>% filter(d == vd), aes(x = n, y = node, color = mtd)) +
+  gp <- ggplot(data %>% filter(d == vd), aes(n, n_graph, color = mtd)) +
     geom_point() +
     geom_line() +
     scale_x_continuous(name = '頂点数',
                        minor_breaks = NULL) +
-    scale_y_continuous(name = '展開状態数',
+    scale_y_continuous(name = '列挙されたグラフ数',
                        trans = 'log10') +
     theme(text = element_text(size = 10),
           plot.caption = element_text(family = 'TakaoPMincho', hjust = 0.5),
-          axis.title.y = element_text(family = 'TakaoPGothic', angle = 90, hjust = 0.65),
+          axis.title.y = element_text(family = 'TakaoPGothic', angle = 90, hjust = 0.7),
           axis.title.x = element_text(family = 'TakaoPGothic', angle = 0, hjust = 0.5),
           legend.position = 'none'
     )
   return(gp)
 }
 
-cairo_pdf('the-basic-node.pdf', width = 5.2, height = 2.5)
+cairo_pdf('the-basic-full-graph.pdf', width = 5.2, height = 2.5)
 grid.arrange(
   pf(3) + labs(caption = '(a) 次数 3') + theme(axis.title.y = element_blank(), legend.position = 'none'),
   pf(4) + labs(caption = '(b) 次数 4') + theme(axis.title.y = element_blank(), legend.position = 'none'),
   ncol = 2, left = g_grob(pf(3), 'axis.title.y')
-)
+  )
 dev.off()

@@ -12,34 +12,42 @@
 \usepackage{multicol}
 \usepackage{enumerate}
 \usepackage{verbatim}
+\usepackage{mytitle}
 
-\input{preamble}
+\input{setting}
+
+\title{一般化ムーアグラフの探索の\\高効率化と高速化}
+\author{里谷 佳紀}
+\date{\today}
+%\reportname{特　別　研　究　報　告　書}
+\reportname{卒業論文}
+\department{岡山大学工学部情報系学科}
+\supervisor{高橋 規一}
 
 \begin{document}
 
-\input{Title.tex}
-
-\newgeometry{tmargin=2cm,lmargin=2cm,rmargin=2cm,bmargin=2cm}
+\maketitle
 
 \include{Abstract}
-
 \tableofcontents
-
 \include{Introduction}
-\include{Preliminary}
-\include{BasicAlgorithm}
-\include{ReduceByInitial}
-\include{ReduceByPrune}
-\include{Enumeration}
+%\include{Preliminary}
+%\include{BasicAlgorithm}
+%\include{ReduceByInitial}
+%\include{ReduceByPrune}
+%\include{Enumeration}
 \include{Conclusion}
 
 \chapter*{謝辞}
-ありがとう
+本論文は筆者が岡山大学工学部情報系学科に在籍中の研究結果をまとめたものである．
+本研究を行うにあたり，ご指導を頂いた岡山大学大学院自然科学研究科産業創成工学専攻
+高橋規一教授に深謝の意を表する．
+また，情報数理工学研究室の皆様には，日常の議論を通して多くの知識や示唆を頂いた．
+ここに謝意を表する．
 
 \appendix
 \include{Appendix}
 
-\bibliographystyle{junsrt}
 \bibliography{../res/MyCollection}
 
 \end{document}

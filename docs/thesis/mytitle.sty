@@ -1,0 +1,29 @@
+
+\makeatletter
+\def\reportname{\def\@reportname}
+\def\department{\def\@department}
+\def\supervisor{\def\@supervisor}
+
+\def\maketitle{
+  \newgeometry{margin=1in}
+  \begin{titlepage}
+    \centering
+    \vspace*{1cm}
+    \Huge\textbf{\@title} \\
+    \vspace{2.5cm}
+    \Large{指導教員} \\
+    \Large{\@supervisor} \\
+    \vspace{1.5cm}
+    \Large{著者} \\
+    \Large{\@author} \\
+    \vfill
+    \Large{\@reportname} \\
+    \vspace{.8cm}
+    \includegraphics[width=.4\textwidth]{elgraph.pdf} \\
+    \Large{\@department} \\
+    \Large{\@date}
+  \end{titlepage}
+  \restoregeometry
+}
+
+\makeatother

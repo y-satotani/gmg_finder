@@ -1,26 +1,92 @@
 
 \chapter{基本アルゴリズム}
 \label{chap:basic-algorithm}
-\ref{sect:generalized-moore-graph}節で示した一般化ムーアグラフの性質を利用して，
-与えられた頂点数と次数の一般化ムーアグラフを探索する基本的なアルゴリズムを
-深さ優先探索をベースに開発する．後の章で探索空間を縮小する手法の比較対象となる．
-本章では，一般的な深さ優先探索の説明をしたあと，これを一般化ムーアグラフの探索に
+本章ででは，\ref{sect:generalized-moore-graph}節で示した一般化ムーアグラフの
+性質を利用して，与えられた頂点数と次数の一般化ムーアグラフを探索する基本的な
+アルゴリズムを与える．このアルゴリズムは，後の章で探索空間を縮小する手法の
+比較対象となる．
+まず，一般的な深さ優先探索の説明をしたあと，これを一般化ムーアグラフの探索に
 適応する方法を示す．最後にアルゴリズムを示し，結果を与える．
 
 \section{深さ優先探索}
 \label{sect:depth-first-search}
 深さ優先探索について説明する．理解している読者は\ref{sect:apply-to-gmg}節
 まで読み飛ばして差し支えない．
+本節では，\cite{Makoto1988}の用語を用いて，8パズルを例に説明する．
+
+8パズルとは，図\ref{fig:8puzzle}に示すように，$3\times3$のマスの中に
+1から8の数字が書かれたコマが8つ収まっているパズルである．
+残り一個のマスの空白である．
+マスの並びを\textbf{状態}と呼ぶ．図\ref{fig:8puzzle}の状態はマスを行優先で
+並べて，$(1,8,2,x,4,3,7,6,5)$とできる．ここで，$x$は空白を示す．
+とりうる状態をすべて集めた集合を\textbf{状態空間}と呼ぶ．
+
+空白に隣接するコマは空白のマスに移動できる．
+このとき，移動前のコマのマスは空白になる．
+コマおよび空白の移動を\textbf{オペレータ}と呼ぶ．一般的に，オペレータとは
+状態を変化させる操作と言える．
+図\ref{fig:8puzzle}の4のコマを左に移動させた場合，状態は次のとおりに変化する．
+\[ (1,8,2,x,4,3,6,5) \xrightarrow{\text{4を左に移動}} (1,8,2,4,x,3,7,6,5) \]
+8パズルの場合，オペレータは4種類(コマを上下左右に移動)存在するが，
+図\ref{fig:8puzzle}の状態に適応できるオペレータは，空白の左側に隣接するコマが
+存在しないため，3種類である．このように，状態によってに適応できないオペレータ
+がある．
+
+パズルの目的は，移動を繰り返して図\ref{fig:8puzzle-goal}に示した
+配置にすることである．目的を達成するために，与えられた状態
+(\textbf{初期状態}という)からオペレータの適応を繰り返すことを
+\textbf{状態空間探索}あるいは単に\textbf{探索}と言う．
+\textbf{深さ優先探索}とは，探索の手法の一つで，状態をスタックからポップし，
+オペレータ適応後の状態をスタックにプッシュする方法である．
+一般的な深さ優先探索のアルゴリズムをアルゴリズム
+\ref{algo:depth-first-search}に示す．
+
+\begin{figure}
+  \centering
+  \subfloat[状態の例]{
+    \includegraphics[width=.14\linewidth]{8puzzle-example.pdf}
+    \label{fig:8puzzle}
+  }\hspace{3em}
+  \subfloat[目的の状態]{
+    \includegraphics[width=.14\linewidth]{8puzzle-goal.pdf}
+    \label{fig:8puzzle-goal}
+  }
+  \caption{8パズルの状態}
+\end{figure}
+
+\begin{algorithm}[H]
+  \caption{深さ優先探索}
+  \label{algo:depth-first-search}
+  \begin{algorithmic}[1]
+    \Procedure{DepthFirstSearch}{}
+    \State $Stack\gets(初期状態)$
+    \While{$|Stack|>0$}
+    \State $state\gets pop(Stack)$
+    \If{$state$が終了条件を満たす}
+    \State \textbf{return} $state$
+    \Comment 探索成功
+    \EndIf
+    \ForAll{$state$に適応可能なオペレータ$operator$}
+    \State $push(Stack, operator(state))$
+    \Comment オペレータの適応
+    \EndFor
+    \EndWhile
+    \State \textbf{return} $\varnothing$
+    \Comment 探索失敗
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
 
 \section{一般化ムーアグラフへの適応}
 \label{sect:apply-to-gmg}
 本節では，\ref{sect:depth-first-search}で説明した深さ優先探索を用いて，
-一般化ムーアグラフを発見する方法を述べる．
+一般化ムーアグラフを発見する方法を述べる．探索の初期状態と状態空間に
+ついて説明した後，オペレータの適応について説明する．
+最後に，これらと定理\ref{thm:gmg-geometric-property}を組み合わせることで
+全体的なアルゴリズムを与える．
 
-\subsection{初期グラフと辺の候補}
-\label{subsect:initial-graph}
-探索の初期状態となる\textbf{初期グラフ}を定義し，候補となる辺を求める．まず，
-初期グラフを構築する前に次を定義する．
+まず，探索の初期状態となる\textbf{初期グラフ}を定義する．
+初期グラフを構築する前に次のムーアバウンドを定義する．
 \begin{definition}
   \textbf{ムーアバウンド}(\textbf{Moore bound})とは，
   次数が$k$,直径が$D$の正則グラフの頂点数の上界で，次式で定義される．
@@ -28,114 +94,103 @@
     n_{k,D} = 1 + \sum_{i=1}^Dk(k-1)^{i-1}
   \end{equation}
 \end{definition}
-これは，$R=0$,$Q=D$かつ，次数が一致する一般化ムーアグラフの頂点数に等しい．
-
-探索の初期状態となる初期グラフを次の手順で作成する．
-\begin{enumerate}
-\item 頂点$v\in\{2,\ldots,k+1\}$と，頂点$1$とを隣接させる．
-\item 頂点$v\in\{k+2,\ldots,n-R+1\}$と，次の式で求められる頂点番号の
-  頂点$w$とを隣接させる．
-  \[ w=\left\lceil\frac{v-n_{k,\hat{Q}(v)-1}}{k-1}\right\rceil
-  +n_{k,\hat{Q}(v)-2}\]
-\end{enumerate}
-このとき，残りの$R$個の頂点は孤立点であることに注意する．
-
-初期グラフ$G_I$を構築した後，$G_I$上での次数が$k$未満の頂点同士を
-隣接させる，次の辺の列を考える．
-\[ E = \{e_i\} = \{(v_i,w_i)\,|\,
-d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}
-\setminus E(G_I) \]
-探索では，$e_1,\ldots,e_m\in E$と順番に辺を取り出し，
-グラフに追加する/しないを判定して新たなグラフを作ることを繰り返す．
-
-\begin{example}
-  図\ref{fig:initial-tree-example}に頂点数12,次数3の初期グラフを示す．
-  あわせて，図\ref{fig:feasible-edges-example}にその候補辺を示す．
-  \begin{figure}
-    \centering
-    \begin{minipage}{.4\columnwidth}
-      \def\svgwidth{\textwidth}
-      \input{initial-tree-example.pdf_tex}
-      \captionof{figure}{頂点数12,次数3の初期グラフ}
-      \label{fig:initial-tree-example}
-    \end{minipage}
-    \hfill
-    \begin{minipage}{.4\columnwidth}
-      \def\svgwidth{\textwidth}
-      \input{feasible-edges-example.pdf_tex}
-      \captionof{figure}{頂点数12,次数3の辺の候補}
-      \label{fig:feasible-edges-example}
-    \end{minipage}
-  \end{figure}
-\end{example}
-
-最後に，初期グラフを構築するアルゴリズムをアルゴリズム
-\ref{algo:basic-graph-initr}に示す．
-\begin{algorithm}[H]
-  \caption{初期グラフの構築}
-  \label{algo:basic-graph-initr}
-  \begin{algorithmic}[1]
-    \Require $n,k$
-    \Ensure 初期グラフ$G_I$
-    \Procedure{Make initial graph}{$n,k$}
-    \State $G_I\gets \varnothing$
-    \ForAll{$v\in\{2,\ldots,k+1\}$}
-    \State $E(G_I)\gets E(G_I)\cup\{(1,v)\}$
-    \EndFor
-    \ForAll{$v\in\{k+2,\ldots,n-R+1\}$}
-    \State \parbox[t]{.6\linewidth}{
-      $w\gets \left\lceil(v-n_{k,\hat{Q}(v)-1})/(k-1)\right\rceil$
-      $+n_{k,\hat{Q}(v)-2}$
-    }
-    \State $E(G_I)\gets E(G_I)\cup\{(w,v)\}$
-    \EndFor
-    \State \textbf{return} $G_I$
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
-
-\subsection{可能な辺の追加/無追加}
-\label{subsect:feasible-edge-(no)-addition}
-探索途中の状態(本章では，グラフ$G$)と辺$e_i$が与えられたとき，
-辺$e_i$を追加した後のグラフおよび追加しない後のグラフが
-定理\ref{thm:gmg-geometric-property}を満たすか
-判定する方法を与える．はじめに，いくつかの記号を導入する．
-\begin{definition}
-  頂点$v$に対して，それと接する辺$e_i$の$i$の
-  最小値$i_{<v}$と最大値$i_{v>}$を考える．
-  $i_{<v}$は探索中，初めて$v$と接する辺の番号を，
-  $i_{v>}$は探索中に最後に$v$と接する辺の番号をそれぞれ表す．
-  $i_{<v}$と$i_{v>}$の具体的な式は，次で与えられる．
+これは，同一の次数で$R=0$,$Q=D$の一般化ムーアグラフの頂点数に等しい．
+ムーアバウンドを用いて基本となる初期グラフを定義する．
+\begin{definition}[\textbf{基本初期グラフ}]
+  \label{def:basic-initial-graph}
+  基本初期グラフとは，次のグラフ$G_I$である．
   \begin{equation}
-    \label{eq:frontier}
     \begin{aligned}
-    i_{<v} &= \min(i\,|\,\{v,w\}=e_i) \\
-    i_{v>} &= \max(i\,|\,\{v,w\}=e_i)
+      \label{eq:basic-initial-graph}
+      G_I&=(V,E) \\
+      V&=\{1,\ldots,n\} \\
+      E&=\{(1,2),\ldots,(1,k+1)\}\cup
+      \{(\text{parent}(v),v)|v=k+2,\ldots,n-R\} \\
+      \text{parent}(v)&=
+      \left\lceil\frac{v-n_{k,\hat{Q}(v)-1}}{k-1}\right\rceil+n_{k,\hat{Q}(v)-2}
     \end{aligned}
   \end{equation}
 \end{definition}
+基本初期グラフの例を図\ref{fig:initial-tree-example}に示す．
 
-以上を踏まえて，辺$e_i$を追加した後のグラフと追加しない後のグラフが
-定理\ref{thm:gmg-geometric-property}を満たすか判定する条件を述べる．
-辺を$e_i=\{v,w\}$，元のグラフを$G$，操作後のグラフを$H$とする．
-\begin{enumerate}
-\item 追加する場合
+次に，探索空間の基底となる辺の列を定義する．
+\begin{definition}[\textbf{候補辺}]
+  \label{def:candidate-edges}
+  候補辺$\{e_i\}_{i\in\mathbb{N}}$とは，初期グラフ$G_I$に対して，
+  $G_I$上で次数が$k$未満の頂点を隣接させる辺のうち，$G_I$に属していない
+  辺の集合に順序を付加した列である．具体的には，次の式で定義される．
+  \begin{equation}
+    \{e_i\}_{i\in\mathbb{N}} =
+    \{(v,w)\,|\,d_{G_I}(v)<k,d_{G_I}(w)<k,(v,w)\in[V]^2\}\setminus E(G_I)
+  \end{equation}
+\end{definition}
+候補辺の定義より，一般化ムーアグラフの探索の探索空間は，候補辺から任意の個数の
+辺を取り出した組合せと言える．
+図\ref{fig:initial-tree-example}に対する候補辺を
+図\ref{fig:feasible-edges-example}に破線で示す．
+
+\begin{figure}
+  \centering
+  \begin{minipage}{.35\columnwidth}
+    \def\svgwidth{\textwidth}
+    \input{initial-tree-example.pdf_tex}
+    \captionof{figure}{頂点数12,次数3の初期グラフ}
+    \label{fig:initial-tree-example}
+  \end{minipage}
+  \hspace{9em}
+  \begin{minipage}{.35\columnwidth}
+    \def\svgwidth{\textwidth}
+    \input{feasible-edges-example.pdf_tex}
+    \captionof{figure}{図\ref{fig:initial-tree-example}のグラフに対する候補辺}
+    \label{fig:feasible-edges-example}
+  \end{minipage}
+\end{figure}
+
+状態を表すグラフ$G$と候補辺の番号$i$が与えられたとき，
+辺$e_i$を追加するオペレータ(\textbf{追加オペレータ})と
+追加しないオペレータ(\textbf{無追加オペレータ})の動作を与える．
+はじめに，次の記号を定義する．
+\begin{definition}
+  頂点$v$と候補辺$\{e_i\}_{i\in\mathbb{N}}$について，$v$と接続している辺
+  $e_i$の番号$i$の最小値と最大値をそれぞれ$\text{Enter}(v)$と
+  $\text{Exit}(v)$とする．
+  $\text{Enter}(v)$と$\text{Exit}(v)$の具体的な式は，次で与えられる．
+  \begin{equation}
+    \label{eq:frontier}
+    \begin{aligned}
+    \text{Enter}(v) &= \min\{i\,|\,v\in e_i\} \\
+    \text{Exit}(v) &= \max\{i\,|\,v\in e_i\}
+    \end{aligned}
+  \end{equation}
+\end{definition}
+二種類のオペレータそれぞれについて，対象の辺以降の辺の選び方で
+一般化ムーアグラフとなる見込みがあるかどうかを判定する方法を，
+定理\ref{thm:gmg-geometric-property}より与える．
+\begin{collary-without-proof}
+  \label{coll:basic-add-operator}
+  追加オペレータについて，適応前のグラフを$G$，対象の辺を$e_i=\{v,w\}$，
+  適応後のグラフを$G'$とする．$i$以降の辺$\{e_j\}_{j>i}$の選び方次第で
+  $G'+E\,(E\subset \{e_j\}_{j>i})$が一般化ムーアグラフとなる見込み
+  があることは，次の二条件を満たすことである．
   \begin{enumerate}
-  \item 次数条件$\cdots$ $d_G(v)<k$かつ$d_G(w)<k$かつ，
-    $i_{x>}=i$なる$x\in e_i$について，$d_H(x)=k$
+  \item 次数条件$\cdots$ $d_G(v)<k$かつ，$d_G(w)<k$かつ，
+    $\text{Exit}(x)=i$なる$x\in e_i$について$d_{G'}(x)=k$
   \item 閉路条件$\cdots$ $d_G(v,w)\geq2Q$\\
     (この条件を満たすとき，$e_i$によってできる閉路の長さは少なくとも
     $2Q+1$となり，定理\ref{thm:gmg-geometric-property}を満たす)
   \end{enumerate}
-\item 追加しない場合
+\end{collary-without-proof}
+\begin{collary-without-proof}
+  \label{coll:basic-noadd-operator}
+  無追加オペレータについて，適応前のグラフを$G$，対象の辺を$e_i=\{v,w\}$，
+  適応後のグラフを$G'$とする．$i$以降の辺$\{e_j\}_{j>i}$の選び方次第で
+  $G'+E\,(E\subset \{e_j\}_{j>i})$が一般化ムーアグラフとなる見込み
+  があることは，次の条件を満たすことである．
   \begin{enumerate}
-  \item 次数条件$\cdots$ $i_{x>}=i$なる$x\in e_i$について，$d_H(x)=k$
+  \item 次数条件$\cdots$ $\text{Exit}(x)=i$なる$x\in e_i$について，$d_{G'}(x)=k$
   \end{enumerate}
-\end{enumerate}
-追加する場合としない場合のそれぞれについて，条件をすべて満たしたときのみ，
-次の辺$e_{i+1}$に対して判定を行う．
-状態をスタックにプッシュし，あとでポップすることで実現する．
-
+\end{collary-without-proof}
+次は，追加オペレータの適応可能性を判定する例を示している．
 \begin{example}
   再び頂点数12,次数3の場合について考える．
   いくつかの辺を追加した後のグラフを図\ref{fig:feasible-edges-example2}に
@@ -147,45 +202,16 @@ d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}
   辺$\{9,11\}$についても同様で，長さ4の閉路ができてしまうため，辺を追加しない．
   辺$\{9,12\}$は，$d(9,12)=5$なので長さ6の閉路が複数できる．これは，
   $6>2Q$なので，辺を追加できる．
-  \begin{figure}
-    \centering
-    \def\svgwidth{.5\textwidth}
-    \input{feasible-edges-example2.pdf_tex}
-    \caption{探索途中のグラフ}
-    \label{fig:feasible-edges-example2}
-  \end{figure}
 \end{example}
+\begin{figure}
+  \centering
+  \def\svgwidth{.35\textwidth}
+  \input{feasible-edges-example2.pdf_tex}
+  \caption{探索途中の状態}
+  \label{fig:feasible-edges-example2}
+\end{figure}
 
-最後の辺を判定した後，グラフ$G$が正則かつ
-定理\ref{thm:gmg-geometric-property}を満たす場合，アルゴリズムは
-$G$を一般化ムーアグラフを出力する．
-判定するグラフがなくなったとき，アルゴリズムは一般化ムーアグラフが
-(これ以上)存在しないことを出力する．
-
-最後に，辺の追加判定のアルゴリズムをアルゴリズム\ref{algo:basic-state}に示す．
-\begin{algorithm}[H]
-  \caption{辺の追加判定}
-  \label{algo:basic-state}
-  \begin{algorithmic}[1]
-    \Require $G,i$
-    \Ensure 追加できる/できないことの可能性
-    \Procedure{Can add}{$G,i$}
-    \State $H\gets G\cup\{e_i\}$
-    \State \textbf{return} \parbox[t]{\linewidth}{
-      $d_G(v)<k$かつ$d_G(w)<k$かつ，\\
-      $i_{x>}=i$なる$x\in e_i$について$d_H(x)=k$かつ， \\
-      $d_G(v,w)\geq2Q$
-    }
-    \EndProcedure
-    \Procedure{Can no add}{$G,i$}
-    \State \textbf{return} $i_{x>}=i$なる$x\in e_i$について，$d_G(x)=k$
-    \EndProcedure
-  \end{algorithmic}
-\end{algorithm}
-
-\subsection{探索アルゴリズム}
-\ref{subsect:initial-graph}と\ref{subsect:feasible-edge-(no)-addition}
-で説明した事柄を用いて，深さ優先探索を一般化ムーアグラフの探索に適応する．
+最後に，説明した事柄を用いて深さ優先探索を一般化ムーアグラフの探索に適応する．
 そのアルゴリズムをアルゴリズム\ref{algo:basic-algorithm}に示す．
 \begin{algorithm}[H]
   \caption{一般化ムーアグラフの探索アルゴリズム}
@@ -193,59 +219,61 @@ $G$を一般化ムーアグラフを出力する．
   \begin{algorithmic}[1]
     \Require $n,k$
     \Ensure $M(n,k)\:$(見つからない場合，$\varnothing$を返す)
-    \Procedure{Find generalized Moore graph}{}
-    \State $G_I\gets$\Call{Make initial graph}{$n,k$}
-    \State $E=\{e_i\}\gets $\parbox[t]{\linewidth}{
-      $\{(v_i,w_i)\,|$
-      $\,d_{G_I}(v_i)<k,d_{G_I}(w_i)<k,v_i<w_i,v_i\in V,w_i\in V\}$
-      $\setminus E(G_I)$
-    }
-    \State $\mathrm{State}\gets((G_I,1))$
-    \While{$|\mathrm{State}|>0$}
-    \State $G,i\gets\mathrm{State}$の末尾の要素
-    \State $\mathrm{State}$の末尾の要素を削除
-    \If{$i=|E|$かつ，$G$が正則で定理\ref{thm:gmg-geometric-property}を満たす}
+    \Procedure{FindGeneralizedMooreGraph}{}
+    \State $G_I\gets\text{初期グラフ}$
+    \Comment 定義\ref{def:basic-initial-graph}
+    \State $\{e_i\}_{i\in\mathbb{N}}^M\gets G_I\text{の候補辺}$
+    \Comment 定義\ref{def:candidate-edges}
+    \State $Stack\gets((G_I,1))$
+    \While{$|Stack|>0$}
+    \State $G,i\gets pop(Stack)$
+    \If{$i>M$かつ
+      $G$が正則で定理\ref{thm:gmg-geometric-property}を満たす}
     \State \textbf{return} $G$
+    \Comment 探索成功
     \EndIf
-    \If{\Call{Can no add}{$G,i$}}
-    \State $\mathrm{State}$の末尾に$(G,i+1)$を追加
+    \ForAll{$operator\in\{\text{追加オペレータ},\text{無追加オペレータ}\}$}
+    \If{$G,e_i$に$operator$が適応できる}
+    \Comment 系\ref{coll:basic-add-operator}と系\ref{coll:basic-noadd-operator}
+    \State $push(Stack,(operator(G,e_i),i+1))$
     \EndIf
-    \If{\Call{Can add}{$G,i$}}
-    \State $H\gets G\cup\{e_i\}$
-    \State $\mathrm{State}$の末尾に$(H,i+1)$を追加
-    \EndIf
+    \EndFor
     \EndWhile
     \State \textbf{return} $\varnothing$
+    \Comment 探索失敗
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 アルゴリズム\ref{algo:basic-algorithm}に手を加えて，一般化ムーアグラフを
 列挙することができる．
-9行目のグラフ返却の前にスタック($\mathrm{State}$)を保存しておき，
+8行目のグラフ返却の前にスタック($Stack$)を保存しておき，
 次回以降の呼び出しの4行目で，保存したスタックから再開することで実現する．
-列挙の結果に同型なグラフが含まれることがある．
+列挙の結果に同型なグラフが含まれることに注意する．
 アルゴリズム\ref{algo:basic-algorithm}において，6行目が実行される回数を
-\textbf{展開状態数}と呼び，後の章で提案する高効率化の指標の一つとする．
+\textbf{展開状態数}と呼び，性能の指標の一つとする．
 
 \section{実験}
 \label{sect:exp-basic-algorithm}
-本章で提案したアルゴリズムに関する実験を行う．実験で以下の項目を測定する．
+本章で提案した方法の性能を測定するための実験を行う．実験で以下の項目を測定する．
 \begin{enumerate}
-\item 探索開始から最初の一般化ムーアグラフの発見における
-  \begin{enumerate}
-  \item 時間
-  \item 状態の取り出し回数
-  \end{enumerate}
-\item 一般化ムーアグラフの列挙における
-  \begin{enumerate}
-  \item グラフ数
-  \end{enumerate}
+\item 探索開始から最初の一般化ムーアグラフの発見に要する時間
+\item 探索開始から最初の一般化ムーアグラフの発見までの展開状態数
+\item 一般化ムーアグラフの列挙における，列挙されたグラフ数
 \end{enumerate}
-それぞれの実験を付録\ref{chap:program}で示した方法に従って行う．
-本実験での実行環境は表\ref{tab:basic-algorithm-env}のとおりである．
+実験のパラメータは，次数を$k=3,4$，頂点数を
+\begin{equation*}
+  \begin{aligned}
+    n=\begin{cases}
+      4,6,8,10,12,14,16,18 & (k=3) \\
+      5,6,7,8,9,10,11,12 & (k=4)
+    \end{cases}
+  \end{aligned}
+\end{equation*}
+とする．
+本実験での実行環境は表\ref{tab:env-lab}のとおりである．
 \begin{table}
   \caption{実行環境}
-  \label{tab:basic-algorithm-env}
+  \label{tab:env-lab}
   \centering
   \begin{tabular}{ll}
     \hline
@@ -261,30 +289,59 @@ $G$を一般化ムーアグラフを出力する．
 
 \section{結果}
 \label{sect:result-basic-algorithm}
-次数が3のときの実験結果を示す．
-探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
-取り出し回数を図\ref{fig:basic-time}と図\ref{fig:basic-node}に
-それぞれ示す．また，一般化ムーアグラフの列挙におけるグラフ数を
-図\ref{fig:basic-full-graph}に示す．
+探索開始から最初の一般化ムーアグラフの発見までに要した探索時間を
+図\ref{fig:basic-time}に示す．探索開始から最初の一般化ムーアグラフの発見までの
+状態展開数を図\ref{fig:basic-state}に示す．さらに，一般化ムーアグラフの列挙で
+取り出されたグラフ数を図\ref{fig:basic-ngraph}に示す．
+
+結果から，すべての測定値について，同一の$Q$の値に対して$R$が大きいほど値が
+増加していることが言える．また，$k=3$の結果から，$Q$が大きくなるほど指数の
+ベキが大きくなることが言える．
 
 \begin{figure}
   \centering
-  \includegraphics{the-basic-time.pdf}
+  \includegraphics{basic-time-ylab.pdf}
+  \includegraphics{basic-time-d3-yaxis.pdf}\hspace{-3mm}
+  \subfloat[$k=3$]{
+    \includegraphics{basic-time-d3.pdf}
+  }\hspace{5mm}
+  \includegraphics{basic-time-d4-yaxis.pdf}\hspace{-3mm}
+  \subfloat[$k=4$]{
+    \includegraphics{basic-time-d4.pdf}
+  }
+  \includegraphics{basic-time-rpad.pdf}
   \caption{最初の一般化ムーアグラフの発見までの時間}
   \label{fig:basic-time}
 \end{figure}
+
 \begin{figure}
   \centering
-  \includegraphics{the-basic-node.pdf}
+  \includegraphics{basic-state-ylab.pdf}
+  \includegraphics{basic-state-d3-yaxis.pdf}\hspace{-3mm}
+  \subfloat[$k=3$]{
+    \includegraphics{basic-state-d3.pdf}
+  }\hspace{5mm}
+  \includegraphics{basic-state-d4-yaxis.pdf}\hspace{-3mm}
+  \subfloat[$k=4$]{
+    \includegraphics{basic-state-d4.pdf}
+  }
+  \includegraphics{basic-state-rpad.pdf}
   \caption{最初の一般化ムーアグラフの発見までの展開状態数}
-  \label{fig:basic-node}
-\end{figure}
-\begin{figure}
-  \centering
-  \includegraphics{the-basic-full-graph.pdf}
-  \caption{列挙された一般化ムーアグラフの数}
-  \label{fig:basic-full-graph}
+  \label{fig:basic-state}
 \end{figure}
 
-結果から，同一の$Q(n,k)$について，$R$が大きいほど値が増加していることが
-推測される．
+\begin{figure}
+  \centering
+  \includegraphics{basic-ngraph-ylab.pdf}
+  \includegraphics{basic-ngraph-d3-yaxis.pdf}\hspace{-3mm}
+  \subfloat[$k=3$]{
+    \includegraphics{basic-ngraph-d3.pdf}
+  }\hspace{5mm}
+  \includegraphics{basic-ngraph-d4-yaxis.pdf}\hspace{-3mm}
+  \subfloat[$k=4$]{
+    \includegraphics{basic-ngraph-d4.pdf}
+  }
+  \includegraphics{basic-ngraph-rpad.pdf}
+  \caption{列挙された一般化ムーアグラフの数}
+  \label{fig:basic-ngraph}
+\end{figure}

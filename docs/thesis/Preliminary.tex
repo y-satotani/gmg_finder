@@ -107,14 +107,7 @@ $v$と$w$を結ぶ経路が存在しないとき，$d(v,w):=\infty$と定義す�
   とする．
 \end{definition}
 \begin{example}
-  頂点数12,次数3の一般化ムーアグラフを考える．そのようなグラフを
-  \begin{figure}
-    \centering
-    \includegraphics[width=.6\textwidth]{gmg-example-bignode.pdf}
-    \caption{頂点数12,次数3の一般化ムーアグラフの例}
-    \label{fig:moore-graph-example}
-  \end{figure}
-  図\ref{fig:moore-graph-example}に示したグラフを考える．
+  図\ref{fig:gmg-example}に示したグラフを考える．
   $Q(12,3)$と$R(12,3)$はそれぞれ，
   \begin{align*}
     Q(12,3) &= \max\{q | 12-1-\sum_{i=1}^{q}3\cdot2^{i-1} \geq 0\} = 2 \\
@@ -137,6 +130,12 @@ $v$と$w$を結ぶ経路が存在しないとき，$d(v,w):=\infty$と定義す�
   となるので，式\ref{eq:gmg-verts-dist}で示した距離と頂点数の
   関係を満たす．同様に，他のすべての頂点について，上述の距離と頂点数の関係を
   満たす．よって，このグラフは一般化ムーアグラフである．
+  \begin{figure}
+    \centering
+    \includegraphics{gmg-example.pdf}
+    \caption{頂点数12,次数3の一般化ムーアグラフの例}
+    \label{fig:gmg-example}
+  \end{figure}
 \end{example}
 以下，頂点数$n$,次数$k$の一般化ムーアグラフを$M(n,k)$と記し，
 $Q(n,k)$と$R(n,k)$をそれぞれ式\ref{eq:gmg-q}と式\ref{eq:gmg-r}のとおりとする．
@@ -304,7 +303,7 @@ $Q(n,k)$と$R(n,k)$をそれぞれ式\ref{eq:gmg-q}と式\ref{eq:gmg-r}のとお
   式\ref{eq:gmg-lb}より，
   \[ 12\left[\sum_{i=1}^2i\cdot3\cdot(3-1)^{i-1}+(2+1)\cdot2\right]=
   12(3+12+6)=252\]
-  である．ちなみに，図\ref{fig:moore-graph-example}に示したグラフの
+  である．ちなみに，図\ref{fig:gmg-example}に示したグラフの
   頂点間距離の総和を求めると，同じく252である．
 \end{example}
 
@@ -342,8 +341,8 @@ $Q(n,k)$と$R(n,k)$をそれぞれ式\ref{eq:gmg-q}と式\ref{eq:gmg-r}のとお
   同時に満たす．
 \end{proof}
 \begin{example}
-  もう一度$M(12,3)$について考える．図\ref{fig:moore-graph-example}のグラフを
-  \verb|igraph|ライブラリで解析する．図\ref{fig:moore-graph-example}の
+  もう一度$M(12,3)$について考える．図\ref{fig:gmg-example}のグラフを
+  \verb|igraph|ライブラリで解析する．図\ref{fig:gmg-example}の
   データとして，ファイル\verb|n12-d3-example.elist|に
   \begin{multicols}{4}
     \verbatiminput{n12-d3-example.elist}

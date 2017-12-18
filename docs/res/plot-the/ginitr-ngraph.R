@@ -14,29 +14,27 @@ g_grob <- function(gp, elem) {
   return(grob)
 }
 
-breaks <- c('basic', 'minmax')
-labels <- c('なし', 'あり')
-data <- read_csv('the-cmp-algo-lab.csv') %>%
-  filter(bdr == 'basic', mgr == 'basic' | mgr == 'minmax') %>%
-  mutate(mtd = mgr) %>%
-  group_by(n, d, mtd, node) %>%
-  summarise(mean_time = mean(time)) %>%
-  ungroup() %>%
+breaks <- c('basic', 'cycle', 'stree')
+labels <- c('基本', '閉路', '全域木')
+data <- read_csv('../data/the-cmp-algo-full-lab.csv') %>%
+  filter(mgr == 'basic', srt == 'basic') %>%
+  mutate(mtd = bdr) %>%
+  select(n, d, mtd, n_graph) %>%
   mutate(mtd = factor(mtd, levels = breaks),
          d = factor(d))
 
 pf <- function(vd) {
-  gp <- ggplot(data %>% filter(d == vd),
-               aes(x = n, y = node, color = mtd)) +
+  gp <- ggplot(data %>% filter(d == vd), aes(n, n_graph, color=mtd)) +
     geom_line() +
     geom_point() +
     scale_x_continuous(name = '頂点数',
                        minor_breaks = NULL) +
-    scale_y_continuous(name = '展開状態数',
+    scale_y_continuous(name = '列挙されたグラフ数',
                        trans = 'log10') +
-    scale_color_discrete(name = '枝刈り',
-                         breaks = breaks,
-                         labels = labels) +
+    scale_color_manual(name = '初期グラフ',
+                       breaks = breaks,
+                       labels = labels,
+                       values = c('#F8766D', '#619CFF', '#00BA38')) +
     theme(text = element_text(size = 10),
           plot.caption = element_text(family = 'TakaoPMincho', hjust = 0.5),
           axis.title.y = element_text(family = 'TakaoPGothic', angle = 90, hjust = 0.7),
@@ -53,7 +51,7 @@ gp <- arrangeGrob(p3, p4, ncol = 2)
 ylab <- g_grob(pf(3), 'axis.title.y')
 legend <- g_grob(pf(3), 'guide-box')
 
-cairo_pdf('the-sinitr-node.pdf', width = 6.0, height = 2.5)
+cairo_pdf('the-ginitr-full-graph.pdf', width = 6.0, height = 2.5)
 grid.arrange(
   ylab, gp, legend,
   ncol = 3,

@@ -8,25 +8,27 @@ theme_set(theme_light())
 
 g_grob <- function(gp, elem) {
   tmp <- ggplot_gtable(ggplot_build(gp))
-  g <- grep(elem, sapply(tmp$grobs, function(x) x$name))
-  grob <- tmp$grobs[[g]]
-  return(grob)
+  lab <- grep(elem, sapply(tmp$grobs, function(x) x$name))
+  ylab <- tmp$grobs[[lab]]
+  return(ylab)
 }
 
-data <- read_csv('the-cmp-algo-full-lab.csv') %>%
+data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
   filter(bdr == 'basic' & mgr == 'basic') %>%
   mutate(mtd = 'basic') %>%
-  mutate(node_per_graph = node / n_graph) %>%
-  select(n, d, mtd, n_graph) %>%
-  mutate(d = factor(d, levels = c(3, 4)))
+  group_by(n, d, mtd, node) %>%
+  summarise(mean_time = mean(time)) %>%
+  ungroup() %>%
+  mutate(mtd = as.factor(mtd),
+         d = factor(d))
 
 pf <- function(vd) {
-  gp <- ggplot(data %>% filter(d == vd), aes(n, n_graph, color = mtd)) +
+  gp <- ggplot(data %>% filter(d == vd), aes(x = n, y = mean_time, color = mtd)) +
     geom_point() +
     geom_line() +
     scale_x_continuous(name = '頂点数',
                        minor_breaks = NULL) +
-    scale_y_continuous(name = '列挙されたグラフ数',
+    scale_y_continuous(name = '平均探索時間[s]',
                        trans = 'log10') +
     theme(text = element_text(size = 10),
           plot.caption = element_text(family = 'TakaoPMincho', hjust = 0.5),
@@ -34,13 +36,12 @@ pf <- function(vd) {
           axis.title.x = element_text(family = 'TakaoPGothic', angle = 0, hjust = 0.5),
           legend.position = 'none'
     )
-  return(gp)
 }
 
-cairo_pdf('the-basic-full-graph.pdf', width = 5.2, height = 2.5)
+cairo_pdf('the-basic-time.pdf', width = 5.2, height = 2.5)
 grid.arrange(
   pf(3) + labs(caption = '(a) 次数 3') + theme(axis.title.y = element_blank(), legend.position = 'none'),
   pf(4) + labs(caption = '(b) 次数 4') + theme(axis.title.y = element_blank(), legend.position = 'none'),
   ncol = 2, left = g_grob(pf(3), 'axis.title.y')
-  )
+)
 dev.off()

@@ -6,12 +6,12 @@
 の条件\ref{gmg-geom-b}を満足するか求めることで実現する．
 
 \section{直径の下界の計算}
-\label{sect:distance-lower-bound}
+\label{sect:diameter-lower-bound}
 直径の下界を計算する方法を与える．まず，次のグラフを定義する．
 \begin{definition}
   探索途中のグラフ$G$が与えられ，$i$番目の辺$e_i\in E$の追加判定および追加が
   行われたとする．$G$の辺と追加が未決定の辺すべて($\{e_j\}_{j>i}\subseteq E$)
-  を合わせたグラフを\textbf{最大グラフ}と定義する．
+  を追加したグラフを\textbf{最大グラフ}と定義する．
   このとき，最大グラフのもとになったグラフを\textbf{最小グラフ}と呼ぶ．
 \end{definition}
 \begin{example}
@@ -38,73 +38,126 @@
 満たさない場合，それはどのように辺を追加しても条件を満たさないので，
 その場で探索を打ちきることができる．
 
-最後に，枝刈りの具体的な手続きをアルゴリズム\ref{algo:minmax-state}
-に示す．これは，アルゴリズム\ref{algo:basic-state}を書き換えるものである．
+この事実を応用して，一般化ムーアグラフの探索に直径の条件を考慮した
+枝刈りを与える．探索で用いる状態は，最小グラフと最大グラフと候補辺の番号の
+三つ組である．
+
+次に，追加オペレータと無追加オペレータをこの状態に適応する．
+追加オペレータは，最小グラフ$G_{\min}$と最大グラフ$G_{\max}$と辺$e_i$に対して，
+最小グラフ$G'_{\min}=G_{\min}+e_i$と最大グラフ$G'_{\max}=G_{\max}$を返す．
+また，無追加オペレータは，最小グラフ$G_{\min}$と最大グラフ$G_{\max}$と辺$e_i$に
+対して，最小グラフ$G'_{\min}=G_{\min}$と最大グラフ$G'_{\max}=G_{\max}-e_i$を返す．
+さらに，系\ref{coll:basic-noadd-operator}で示した無追加オペレータの適応条件は
+次のようになる．
+\begin{collary-without-proof}
+  \label{coll:minmax-noadd-operator}
+  無追加オペレータについて，適応前の最小グラフを$G_{\min}$，最大グラフを
+  $G_{\max}$，対象の辺を$e_i=\{v,w\}$とし，
+  適応後の最小グラフを$G'_{\min}$，最大グラフを$G_{\max}$とする．
+  $i$以降の辺$\{e_j\}_{j>i}$の選び方次第で
+  $G_{\min}'+E\,(E\subset \{e_j\}_{j>i})$が一般化ムーアグラフとなる見込み
+  があることは，次の二条件を満たすことである．
+  \begin{enumerate}
+  \item 次数条件$\cdots$ $\text{Exit}(x)=i$なる$x\in e_i$について，
+    $d_{G'_{\min}}(x)=k$.
+  \item 直径条件$\cdots$ $G'_{\max}$の直径が定理\ref{thm:gmg-geometric-property}で
+    示された直径以下である.
+  \end{enumerate}
+\end{collary-without-proof}
+
+最後に，枝刈りを適応した探索の手続きをアルゴリズム\ref{algo:minmax-algorithm}
+に示す．これは，アルゴリズム\ref{algo:basic-algorithm}を書き換えるものである．
 \begin{algorithm}[H]
-  \caption{最大グラフを用いた辺の追加判定}
+  \caption{最大グラフを用いた一般化ムーアグラフの探索アルゴリズム}
+  \label{algo:minmax-algorithm}
   \begin{algorithmic}[1]
-    \Require $G,i$
-    \Ensure 追加できる/できないことの可能性
-    \Procedure{Can add}{$G,i$}
-    \State $H\gets G\cup\{e_i\}$
-    \State \textbf{return} \parbox[t]{\linewidth}{
-      $d_G(v)<k$かつ$d_G(w)<k$かつ，\\
-      $i_{x>}=i$なる$x\in e_i$について$d_H(x)=k$かつ， \\
-      $d_G(v,w)\geq2Q$
-    }
-    \EndProcedure
-    \Procedure{Can no add}{$G,i$}
-    \State \textbf{return} $i_{x>}=i$なる$x\in e_i$について，$d_G(x)=k$
+    \Require $n,k$
+    \Ensure $M(n,k)\:$(見つからない場合，$\varnothing$を返す)
+    \Procedure{FindGeneralizedMooreGraph}{}
+    \State $G_{I\min}\gets\text{初期グラフ}$
+    \State $\{e_i\}_{i\in\mathbb{N}}^M\gets G_{I\min}\text{の候補辺}$
+    \State $G_{I\max}\gets G_{I\min}+\{e_i\}$
+    \Comment 初期グラフに対する最大グラフ
+    \State $Stack\gets((G_{I\min},G_{I\max},1))$
+    \While{$|Stack|>0$}
+    \State $G_{\min},G_{\max},i\gets pop(Stack)$
+    \If{$i>M$かつ
+      $G_{\min}$が正則で定理\ref{thm:gmg-geometric-property}を満たす}
+    \State \textbf{return} $G_{\min}$
+    \EndIf
+    \ForAll{$operator\in\{\text{追加オペレータ},\text{無追加オペレータ}\}$}
+    \If{$G_{\min},G_{\max},e_i$に$operator$が適応できる}
+    \Comment 系\ref{coll:basic-add-operator}と系\ref{coll:minmax-noadd-operator}
+    \State $push(Stack,(operator(G_{\min},G_{\max},e_i),i+1))$
+    \EndIf
+    \EndFor
+    \EndWhile
+    \State \textbf{return} $\varnothing$
     \EndProcedure
   \end{algorithmic}
 \end{algorithm}
 
 \section{頂点間距離の高速な更新法}
-\label{sect:faster-min-max}
-第\ref{chap:basic-algorithm}章にて，グラフが枝刈りの対象となるかを
-判定するには，追加する辺の頂点間距離と直径の下界を求める必要があることを述べた．
-本節では，これらの値を高速に計算するため，辺の追加と削除に対して，頂点間距離と
-直径の下界を更新するアルゴリズムを与える．
+\label{sect:fast-distance-update}
+\ref{sect:diameter-lower-bound}節にて，グラフが枝刈りの対象となるかを
+判定するには，追加する辺に接続する二つの頂点間距離と，
+直径の下界を求める必要があることを述べた．
+本節では，これらの値を高速に計算するため，辺の挿入と削除に対して頂点間距離を
+更新するアルゴリズムを与える．
 探索空間の削減にはつながらないが，計算量が削減され，実行時間の短縮が期待できる．
-また，この方法は辺の追加と削除に対する媒介中心性の高速な計算法への応用が期待できる．
+また，この方法は辺の挿入と削除に対する媒介中心性の高速な更新法への応用が期待できる．
 
-グラフ$G=(V,E),V=\{1,\ldots n\}$のすべての頂点の組$(s,t)$の距離$d(s,t)$と
+グラフ$G=(V,E),V=\{1,\ldots n\}$のすべての頂点の組$\{s,t\}$の距離$d(s,t)$と
 距離が$d(s,t)$となる最短経路の数$\sigma(s,t)$が与えられているとする．
-まず，追加と削除に共通するいくつかの補題を示す．
+便宜上，$s=t$の場合はそれぞれ$d(s,s)=0,\,\sigma(s,s)=1$とする．
+まず，$d(s,t)$と$\sigma(s,t)$について，追加と削除に共通するいくつかの
+補題を示す．
 \begin{lemma-without-proof}[Brandes\cite{Brandes2001}]
-  $G=(V,E)$の異なる2頂点$s,t\in V$に対して，$s$から$t$への最短経路
-  $G_{st}=(V_{st},E{st})$が$i\in V$を含む，すなわち$i\in V_{st}$であるための
+  \label{lemma:distance-1}
+  $G=(V,E)$の異なる二頂点$s,t\in V$に対して，$s$から$t$への最短経路
+  $G_{st}=(V_{st},E_{st})$が$v\in V$を含む，すなわち$v\in V_{st}$であるための
   必要十分条件は
-  \[ d(s,t)=d(s,i)+d(i,t) \]
+  \[ d(s,t)=d(s,v)+d(v,t) \]
   が成り立つことである．
 \end{lemma-without-proof}
-\begin{lemma-without-proof}[難波ら\cite{Namba2016}]
-  $G=(V,E)$の異なる2頂点$s,v\in V$と辺$\{i,j\}\in E$を考える．
-  $s$から$t$への最短経路$G_{st}=(V_{st},E_{st})$が有向辺$(i,j)$を含む，
-  すなわち$(i,j)\in E_{st}$が成り立つための必要十分条件は
-  \[ d(s,t)=d(s,i)+d(j,t)+1 \]
-  が成り立つことである．
+\begin{lemma-without-proof}[難波ら\cite{Nanba2016}]
+  \label{lemma:distance-2}
+  $G=(V,E)$の異なる二頂点$s,t\in V$と辺$\{v,w\}\in E$を考える．
+  $s$から$t$への最短経路$G_{st}=(V_{st},E_{st})$が辺$\{v,w\}$を含む，
+  すなわち$\{v,w\}\in E_{st}$が成り立つための必要十分条件は
+  \[ d(s,t)=d(s,v)+d(w,t)+1 \]
+  が成り立つことである．ただし，$d(s,v)\leq d(s,w)$とする．
 \end{lemma-without-proof}
 \begin{lemma-without-proof}[Brandes\cite{Brandes2001}]
-  $G=(V,E)$の異なる2頂点$s,t\in V$に対して，$s$から$t$への最短経路の中で
-  $i$を通るものの個数$\sigma_{st}(i)$は次式で与えられる．
-  \[ \sigma(s,t)=\begin{aligned}\begin{cases}
-    \sigma(s,i)\sigma(i,t) & d(s,t)=d(s,i)+d(i,t)\mathrm{のとき} \\
-    0 & \mathrm{それ以外のとき}
+  \label{lemma:path-num-1}
+  $G=(V,E)$の異なる二頂点$s,t\in V$に対して，$s$から$t$への最短経路の中で
+  $v$を通るものの個数$\sigma_v(s,t)$は次式で与えられる．
+  \[ \sigma_v(s,t)=\begin{aligned}\begin{cases}
+    \sigma(s,v)\sigma(v,t) & d(s,t)=d(s,v)+d(v,t)\text{のとき} \\
+    0 & \text{それ以外のとき}
   \end{cases}\end{aligned} \]
 \end{lemma-without-proof}
+\begin{lemma-without-proof}[難波ら\cite{Nanba2016}]
+  \label{lemma:path-num-2}
+  $G=(V,E)$の異なる二頂点$s,t\in V$に対して，$s$から$t$への最短経路の中で
+  辺$\{v,w\}$を通るものの個数$\sigma_{vw}(s,t)$は次式で与えられる．
+  \[ \sigma_{vw}(s,t)=\begin{aligned}\begin{cases}
+    \sigma(s,v)\sigma(w,t) & d(s,t)=d(s,v)+d(w,t)+1\text{のとき} \\
+    0 & \text{それ以外のとき}
+  \end{cases}\end{aligned} \]
+  ただし，$d(s,v)\leq d(s,w)$とする．
+\end{lemma-without-proof}
 
-次の補題は，ある2頂点間の最短経路の個数と，その経路に含まれる
+次の補題は，ある二頂点間の最短経路の個数と，その経路に含まれる
 短い最短経路の個数との関係を示す．
 \begin{lemma}
   \label{lemma:number-of-paths}
-  $d(s,t)=d(s,v)+d(v,t)$である$v\in V$(ただし$v\neq s,v\neq t$)について，
+  $G=(V,E)$の異なる二頂点$s,t\in V$について，$v$を$d(s,t)=d(s,v)+d(v,t)$
+  である頂点(ただし$v\neq s,t$)とすると，次が成り立つ．
   \begin{equation}
     \label{eq:number-of-paths}
-    \sigma(s,t)=\left(
-    \sum_{v}\sigma(s,v)\sigma(v,t)\right) / (d(s,t)-1)
+    \sigma(s,t)=\frac{\sum_{v}\sigma(s,v)\sigma(v,t)}{d(s,t)-1}
   \end{equation}
-  が成り立つ．
 \end{lemma}
 \begin{proof}
   $s$と$t$の間の一般的な経路を図\ref{fig:proof-number-of-paths}に示す．
@@ -117,22 +170,25 @@
   \end{figure}
   $s$からの距離が一定の頂点を並べて，一つの層とする．$d(s,v)=k$なる頂点
   $v$の集合を，第$k$層と定義し，$L_k$と表す．
-  $L_k$に属する頂点の数を$n_k$，$l$番目の頂点を$v_{kl}$と表す．
-  ここで，すべての層に属する頂点$v$は，隣接する層以外の層に属する頂点$w$と
-  隣接しないことに注意する．もしそのような頂点が存在すると，最短経路長が
-  変化する．式\ref{eq:number-of-paths}の両辺に$d(s,t)-1$を掛けて，
+  $L_k$に属する頂点の数を$n_k$，$L_k$に属する$l$番目の頂点を$v_{kl}$と表す．
+  ここで，第$k$層に属する頂点$v$は，隣接する層(第$k-1$層と第$k+1$層)
+  以外の層に属する頂点$w$と隣接しないことに注意する．
+  もしそのような頂点が存在すると，最短経路長が変化する．
+  式\ref{eq:number-of-paths}の両辺に$d(s,t)-1$を掛けて，
+  次の式\ref{eq:number-of-paths1}を得る．
   \begin{equation}
     \sigma(s,t)(d(s,t)-1)=\sum_{v}\sigma(s,v)\sigma(v,t)
     \label{eq:number-of-paths1}
   \end{equation}
-  となる．式\ref{eq:number-of-paths1}の右辺を，
-  図\ref{fig:proof-number-of-paths}にならって変形して，
+  式\ref{eq:number-of-paths1}の右辺を，
+  図\ref{fig:proof-number-of-paths}にならって表すと，
   \begin{equation}
     \sum_{v}\sigma(s,v)\sigma(v,t)=
     \sum_{k=1}^m\sum_{l=1}^{n_k}\sigma(s,v_{kl})\sigma(v_{kl},t)
     \label{eq:number-of-paths2}
   \end{equation}
-  とする．二つの頂点$v$と$w$について，
+  が得られる．ここで，二つの頂点$v$と$w$について，次の隣接を表す記号$a$を
+  導入する．
   \begin{align*}
     a(v,w)=
     \begin{cases}
@@ -140,9 +196,8 @@
       0 & vとwが隣接していないとき
     \end{cases}
   \end{align*}
-  と定義する．
   各々の$\sigma(s,v_{kl})\sigma(v_{kl},t)$について議論する．
-  定義に沿って式を変形すると，
+  $a$の定義を用いて式を変形すると，
   \begin{align}
     &\sigma(s,v_{kl})\sigma(v_{kl},t)\nonumber\\
     =&\left(\sum_{v'\in L_{k-1}}\sigma(s,v')a(v',v_{kl})\right)
@@ -165,7 +220,7 @@
     a(s,v_1)\cdots a(v_{k-1},v_{kl})a(v_{kl},v_{k+1})\cdots a(v_m,t)
     \label{eq:number-of-paths3}
   \end{align}
-  となる．式\ref{eq:number-of-paths3}を式\ref{eq:number-of-paths2}に
+  が得られる．式\ref{eq:number-of-paths3}を式\ref{eq:number-of-paths2}に
   代入すると，
   \begin{align}
     &\sum_{k=1}^m\sum_{l=1}^{n_k}\sigma(s,v_{kl})\sigma(v_{kl},t)\nonumber\\
@@ -180,168 +235,420 @@
     a(s,v_1)\cdots a(v_m,t)\right)
     \label{eq:number-of-paths4}
   \end{align}
-  とできる．式\ref{eq:number-of-paths4}の総和の対象が$1$となるのは，
+  と変形できる．式\ref{eq:number-of-paths4}の総和の対象が$1$となるのは，
   $a(s,v_1),\ldots,a(v_m,t)$のすべてが$1$のとき，
-  すなわち，$s$と$t$の最短経路となっているときである．
-  従って，総和の値は$s$と$t$の最短経路の数を一致し，
-  式\ref{eq:number-of-paths4}は$m\sigma(s,t)$と等しい．
+  すなわち，$s$と$v_1$,$v_1$と$v_2$,$\ldots$,$v_m$と$t$がすべて隣接している
+  とき，すなわち，$s$と$t$の最短経路となっているときである．
+  従って，総和の値は$s$と$t$の最短経路の数と一致し，
+  式\ref{eq:number-of-paths4}は$\sigma(s,t)(d(s,t)-1)$と等しい．
+  従って，補題が成り立つ．
 \end{proof}
 
-\subsection{辺の追加に対する頂点間距離の更新}
-\label{subsect:update-path-length}
-$G$に辺$e=\{\alpha,\beta\}\notin E(G)$を追加したた後の頂点間距離$d'(s,t)$と
+\subsection*{辺の挿入に対する頂点間距離の更新}
+$G$に辺$e=\{\alpha,\beta\}\notin E(G)$を挿入したた後の頂点間距離$d'(s,t)$と
 最短経路数$\sigma'(s,t)$を求める．
-一般性を失うことなく，$s<t,\,d(s,\alpha)\leq d(s,\beta)$とできる．
+ここでは，難波ら\cite{Nanba2016}が提案した方法に関する重要な定理と
+アルゴリズムを示す．
+\begin{theorem-without-proof}[難波ら\cite{Nanba2016}]
+  \label{thm:update-distance-on-insert}
+  グラフ$G=(V,E)$から辺$\{\alpha,\beta\}\notin E$を追加した後の
+  頂点間距離$d'(s,t)$と最短経路数$\sigma'(s,t)$について，次が成り立つ．
+  ただし，$d(s,\alpha)\leq d(s,\beta)$とする．
+  \begin{enumerate}
+  \item $d(s,\alpha)<d(s,\beta)$かつ$d(s,t)>d(s,\alpha)+d(\beta,t)+1$ならば，
+    次が成り立つ．
+    \[ d'(s,t)=d(s,\alpha)+d(\beta,t)+1,\:
+    \sigma'(s,t)=\sigma(s,\alpha)\sigma(\beta,t) \]
+  \item $d(s,\alpha)<d(s,\beta)$かつ$d(s,t)=d(s,\alpha)+d(\beta,t)+1$ならば，
+    次が成り立つ．
+    \[ d'(s,t)=d(s,t),\:
+    \sigma'(s,t)=\sigma(s,t)+\sigma(s,\alpha)\sigma(\beta,t) \]
+  \item $d(s,\alpha)=d(s,\beta)$または$d(s,t)<d(s,\alpha)+d(\beta,t)+1$ならば，
+    次が成り立つ．
+    \[ d'(s,t)=d(s,t),\:\sigma'(s,t)=\sigma(s,t) \]
+  \end{enumerate}
+\end{theorem-without-proof}
 
-アルゴリズムをアルゴリズム\ref{algo:update-distance-on-insert}に示す．
+定理\ref{thm:update-distance-on-insert}を元にして，
+辺の挿入に対する$d(s,t)$と$\sigma(s,t)$の更新の手順を与える．
+それをアルゴリズム\ref{algo:update-distance-on-insert}に示す．
 \begin{algorithm}[H]
   \caption{辺$\{\alpha,\beta\}$が追加されたときの$d'(s,t)$と$\sigma'(s,t)$の
-  計算}\label{algo:update-distance-on-insert}
+    更新}\label{algo:update-distance-on-insert}
   \begin{algorithmic}[1]
     \Require $G=(V,E),\,d(s,t),\,\sigma(s,t)$
     \Ensure $d'(s,t),\,\sigma'(s,t)$
-    \State $d'$と$\sigma'$の初期値を$d$と$\sigma$の値にしておく
     \ForAll{$(s,t)\in V\times V,\,s<t$}
     \State $(\alpha,\beta)$のうち$s$に近いほうを$\alpha$とする
     \If{$d(s,\alpha)<d(s,\beta)$かつ$d(s,t)>d(s,\alpha)+d(\beta,t)+1$}
     \State $d'(s,t)\gets d(s,\alpha)+d(\beta,t)+1$
-    \State $d'(t,s)\gets d(s,\alpha)+d(\beta,t)+1$
     \State $\sigma'(s,t)\gets \sigma(s,\alpha)\sigma(\beta,t)$
-    \State $\sigma'(t,s)\gets \sigma(s,\alpha)\sigma(\beta,t)$
     \ElsIf{$d(s,\alpha)<d(s,\beta)$かつ$d(s,t)=d(s,\alpha)+d(\beta,t)+1$}
+    \State $d'(s,t)\gets d(s,t)$
     \State $\sigma'(s,t)\gets \sigma(s,t)+\sigma(s,\alpha)\sigma(\beta,t)$
-    \State $\sigma'(t,s)\gets \sigma(s,t)+\sigma(s,\alpha)\sigma(\beta,t)$
+    \ElsIf{$d(s,\alpha)=d(s,\beta)$または$d(s,t)<d(s,\alpha)+d(\beta,t)+1$}
+    \State $d'(s,t)\gets d(s,t)$
+    \State $\sigma'(s,t)\gets\sigma(s,t)$
     \Else
     \EndIf
     \EndFor
   \end{algorithmic}
 \end{algorithm}
 
-\subsection{辺の削除に対する頂点間距離の更新}
-\label{subsect:update-lower-bound-of-diameter}
+\subsection*{辺の削除に対する頂点間距離の更新}
 $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(s,t)$と
-最短経路数$\sigma'(s,t)$を求める．
-一般性を失うことなく，$s<t,\,d(s,\alpha)\leq d(s,\beta)$とできる．
-
-削除による影響を受けない場合は，$\cdots$である．
-削除により，頂点間距離が変化せず，経路の個数が変化する場合は，$\cdots$である．
-削除により，頂点間距離が変化する場合は，$\cdots$である．
-
-次に，頂点間距離の更新が行われる組$(s,t)$の$\sigma'(s,t)$について議論する．
-まず，準備のため次を示す．
-\begin{collary}
-  $\sigma'(s,t)$を再計算するには，すべての$d'(s,t)>d'(u,v)$の$\sigma'(u,v)$
-  を先に計算しなければならない．
-\end{collary}
+最短経路数$\sigma'(s,t)$を求める．次の定理が成り立つ．
+\begin{theorem}
+  \label{thm:update-distance-on-delete}
+  グラフ$G=(V,E)$から辺$\{\alpha,\beta\}\in E$を削除した後の
+  頂点間距離$d'(s,t)$と最短経路数$\sigma'(s,t)$について，次が成り立つ．
+  ただし，$d(s,\alpha)\leq d(s,\beta)$とする．
+  \begin{enumerate}
+  \item $\sigma_{\alpha\beta}(s,t)=0$ならば，次が成り立つ．
+    \[ d'(s,t)=d(s,t),\:\sigma'(s,t)=\sigma(s,t) \]
+  \item $0<\sigma_{\alpha\beta}(s,t)<\sigma(s,t)$ならば，次が成り立つ．
+    \[ d'(s,t)=d(s,t),\:\sigma'(s,t)=\sigma(s,t)-\sigma_{\alpha\beta}(s,t) \]
+  \item $\sigma_{\alpha\beta}(s,t)=\sigma(s,t)>0$ならば，次が成り立つ．
+    \begin{equation*}
+      \begin{aligned}
+        d'(s,t)&=\min\{d(s,v)+d(v,t)\,|\,v\in V,\,
+        \sigma(s,v)>\sigma_{\alpha\beta}(s,v),\,
+        \sigma(v,t)>\sigma_{\alpha\beta}(v,t) \\
+        \sigma'(s,t)&=\frac{\sum_v(\sigma'(s,v)\sigma'(v,t))}{d'(s,t)-1}\:
+        (v\in V,\,v\neq s,t,\,d'(s,t)=d'(s,v)+d'(v,t))
+      \end{aligned}
+    \end{equation*}
+  \end{enumerate}
+\end{theorem}
 \begin{proof}
-  補題\ref{lemma:number-of-paths}の式\ref{eq:number-of-paths2}を見ると，
-  $s$と$t$の最短経路の中に$d'(s,t)>d'(u,v)$なる$u$と$v$の最短経路が含まれ，
-  そのような$u,v$に対する$\sigma'(u,v)$が含まれる．
-\end{proof}
-更新の対象となる頂点組の列$\{(s_i,t_i)\}$を更新後の距離$d'$の昇順に，
-定理\ref{lemma:number-of-paths}の式を用いて，$\sigma'(u,v)$を求める．
+  辺削除による更新の操作は次の三種類である．
+  \begin{enumerate}
+  \item 削除による影響はなく，何も行わない
+  \item 削除により最短経路数を更新する
+  \item 削除により頂点間距離を更新し，さらに最短経路数を再計算する
+  \end{enumerate}
 
-アルゴリズムをアルゴリズム\ref{algo:update-distance-on-remove}に示す．
+  一つ目の操作が実施される場合は，辺$\{\alpha,\beta\}$が$s$と$t$との
+  最短経路に含まれていないときである．これは，補題\ref{lemma:path-num-2}より，
+  $\sigma_{\alpha\beta}(s,t)=0$のときと言い換えられる．
+
+  二つ目の操作が実施される場合は，
+  $s$と$t$との最短経路の集合$P\neq\varnothing$と，
+  $P$の中で辺$\{\alpha,\beta\}$を含む経路の集合$P'\neq\varnothing$に対して，
+  $P'\subset P$のときである．
+  言い換えると，補題\ref{lemma:path-num-2}より，
+  $0<\sigma_{\alpha\beta}(s,t)<\sigma(s,t)$のときである．
+  このとき，削除により$P'$に属する最短経路がなくなるため，
+  その数($\sigma_{\alpha\beta}(s,t)$)だけ$\sigma(s,t)$から引いた値とする．
+
+  三つ目の操作が実施される場合は，
+  $s$と$t$との最短経路の集合$P\neq\varnothing$と，
+  $P$の中で辺$\{\alpha,\beta\}$を含む経路の集合$P'\neq\varnothing$に対して，
+  $P'=P$のときである．
+  言い換えると，補題\ref{lemma:path-num-2}より，
+  $\sigma_{\alpha\beta}(s,t)=\sigma(s,t)>0$のときである．
+  このとき，削除により$P$に属する最短経路がすべて無効になるため，頂点間距離を
+  再計算する．補題\ref{lemma:distance-1}より，
+  新しい頂点間距離$d'(s,t)$を計算できる．このとき，中間の頂点$v$は
+  削除による頂点間距離の更新が起こらない頂点を選ぶ．
+  また，新しい最短経路数$\sigma'(s,t)$は補題\ref{lemma:number-of-paths}により
+  計算できる．
+\end{proof}
+
+定理\ref{thm:update-distance-on-delete}より，一辺削除時の頂点間距離の
+更新の方法が分かる．
+その手順ををアルゴリズム\ref{algo:update-distance-on-delete}に示す．
 \begin{algorithm}[H]
   \caption{辺$\{\alpha,\beta\}$が削除されたときの$d'(s,t)$と$\sigma'(s,t)$の
-  計算}\label{algo:update-distance-on-remove}
+    更新}\label{algo:update-distance-on-delete}
   \begin{algorithmic}[1]
     \Require $G=(V,E),\,d(s,t),\,\sigma(s,t)$
     \Ensure $d'(s,t),\,\sigma'(s,t)$
-    \State $d'$と$\sigma'$の初期値を$d$と$\sigma$の値にしておく
-    \State $P\gets\varnothing$
+    \State $P\gets()$
     \Comment{更新の対象となる頂点組$(s,t)$}
     \ForAll{$(s,t)\in V\times V,\,s<t$}
-    \State $\textrm{npath}\gets$\Call{Path num not contain}{$s,t$}
-    \If{$d(s,t)=\infty$または$\textrm{npath}>0$}
-    \State $\sigma'(s,t)\gets\textrm{npath},\:\sigma'(t,s)\gets\textrm{npath}$
-    \Else\Comment{削除により頂点間距離が変化する}
+    \If{$\sigma_{\alpha\beta}(s,t)=0$}
+    \State $d'(s,t)=d(s,t)$
+    \State $\sigma'(s,t)=\sigma(s,t)$
+    \ElsIf{$0<\sigma_{\alpha\beta}(s,t)<\sigma(s,t)$}
+    \State $d'(s,t)=d(s,t)$
+    \State $\sigma'(s,t)=\sigma(s,t)-\sigma_{\alpha\beta}(s,t)$
+    \ElsIf{$\sigma_{\alpha\beta}(s,t)=\sigma(s,t)>0$}
+    \Comment{頂点間距離を再計算}
     \State $d_{\min}\gets \infty$
-    \ForAll{$v\in V$}
-    \If{\Call{Path num not contain}{$s,v$}$>0$かつ
-      \Call{Path num not contain}{$v,t$}$>0$}
-    \State $d_{\min}\gets\min\left(d_{\min},d(s,v)+d(v,t)\right)$
-    \EndIf
+    \ForAll{$v\in V,\,
+      \sigma(s,v)>\sigma_{\alpha\beta}(s,v),\,
+      \sigma(v,t)>\sigma_{\alpha\beta}(v,t)$}
+    \State $d_{\min}\gets\min\left\{d_{\min},d(s,v)+d(v,t)\right\}$
     \EndFor
     \If{$d_{\min}=\infty$}
-    \Comment{削除により連結でなくなった}
-    \State $d'(s,t)\gets\infty,\:d'(t,s)\gets\infty$
-    \State $\sigma'(s,t)\gets 0,\:\sigma'(t,s)\gets 0$
+    \State $d'(s,t)\gets\infty$
+    \State $\sigma'(s,t)\gets0$
     \Else
-    \State $d'(s,t)\gets d_{\min},\:d'(t,s)\gets d_{\min}$
+    \State $d'(s,t)\gets d_{\min}$
     \State \parbox[t]{\linewidth}{
-      $P\gets \{\ldots,(s_i,t_i),(s,t),(s_{i+1},t_{i+1}),\ldots\}$\\
+      $P\gets(\ldots,(s_i,t_i),(s,t),(s_{i+1},t_{i+1}),\ldots)$ \\
       ただし，$d'(s_i,t_i)\leq d'(s,t)\leq d'(s_{i+1},t_{i+1}),\:$
-      $(s_1,t_1),\ldots,(s_i,t_i),\ldots\in P$
+      $\ldots,(s_i,t_i),\ldots\in P$
     }
     \EndIf
     \EndIf
     \EndFor
-    \ForAll{$i=\{1,\ldots,|P|\}$}\Comment{最短経路数を更新}
-    \State $(s_i,t_i)\gets P_i$
-    \State \parbox[t]{\linewidth}{
-      $\sigma'(s_i,t_i)\gets$
-      $\left(\sum_{v}\sigma(s_i,v)\sigma(v,t_i)\right) / (d'(s_i,t_i)-1)$ \\
-      ただし，
-      $v\in V,\,d'(s_i,t_i)=d'(s_i,v_i)+d'(v_i,t_i),\,v\neq s_i,\,v\neq t_i$
-    }
+    \ForAll{$(s_i,t_i)\in P$}
+    \Comment{最短経路数を再計算}
+    \State $\sigma'\gets0$
+    \ForAll{$v\in V,\:v\neq s_i,t_i,\:d'(s_i,t_i)=d'(s_i,v)+d'(v,t_i)$}
+    \State $\sigma'\gets\sigma'+\sigma'(s_i,v)\sigma'(v,t_i)$
     \EndFor
-    \Procedure{Path num not contain}{$s,t$}
-    \State $(\alpha,\beta)$のうち$s$に近いほうを$\alpha$とする
-    \If{$d(s,t)<d(s,\alpha)+d(\beta,t)+1$}
-    \State \textbf{return} $\sigma(s,t)$
-    \Else
-    \State \textbf{return} $\sigma(s,t)-\sigma(s,\alpha)\sigma(\beta,t)$
-    \EndIf
-    \EndProcedure
+    \State $\sigma'(s_i,t_i)\gets\sigma'/(d'(s_i,t_i)-1)$
+    \EndFor
   \end{algorithmic}
 \end{algorithm}
 
-\subsubsection*{実験}
-提案した手法が有効であることを検証するため，
-ランダムネットワーク(Erdos-R{\'e}nyiモデル)と
-スケールフリーネットワーク(Barab{\'a}si-Albertモデル)上で
-実験を行った．
+アルゴリズム\ref{algo:update-distance-on-delete}では，頂点間距離の
+再計算の対象の組$(s,t)$を$d'(s,t)$の昇順になるようにリストに追加している．
+この根拠は次の系\ref{coll:update-distance-on-delete}で与える．
+\begin{collary}
+  \label{coll:update-distance-on-delete}
+  頂点間距離を再計算した組$(s,t)$について，最短経路数
+  $\sigma'(s,t)$を再計算するには，すべての$d'(s,t)>d'(u,v)$なる
+  $(u,v)$の$\sigma'(u,v)$を先に計算しなければならない．
+\end{collary}
+\begin{proof}
+  定理\ref{thm:update-distance-on-delete}の更新手順より，
+  $s$と$t$の最短経路数の中に$d'(s,t)>d'(u,v)$なる$u$と$v$の最短経路数
+  が含まれる．よって，$\sigma'(s,t)$を再計算するには，すべての
+  $d'(s,t)>d'(u,v)$なる$(u,v)$の$\sigma'(u,v)$を先に計算しなければならない．
+\end{proof}
+
+\subsection*{一辺削除時の頂点間距離の更新の実験}
+提案した手法が有効であることを検証するために，次の手順で実験を行う．
+\begin{enumerate}
+\item 削除前のグラフ$G=(V,E)$を構築する．グラフの種類はランダムネットワーク
+  (Erdos-R{\'e}nyiモデル)\cite{Erdos1959}とスケールフリーネットワーク
+  (Barab{\'a}si-Albertモデル)\cite{Barabasi1999}の二種類とする．
+\item $G$のすべての頂点の組$(s,t)\in[V]^2$に対して，
+  頂点間距離$d(s,t)$と最短経路数$\sigma(s,t)$を求める．
+  このとき，igraphライブラリの\verb|igraph_get_all_shortest_paths|
+  を用いて求める．
+\item 辺$\{\alpha,\beta\}\in E$をランダムに選ぶ．選んだ辺を削除した後の
+  頂点間距離と最短経路数を二通りの方法で求め，計算に要した時間を計測する．
+  \begin{enumerate}[a]
+  \item (igraphライブラリ)\verb|igraph_shortest_paths|で求める
+  \item (提案手法)アルゴリズム\ref{algo:update-distance-on-delete}で求める
+  \end{enumerate}
+\item 以上の手順を，ネットワーク種類とパラメータごとに100回繰り返し，
+  計算に要した時間の平均を求める．
+\end{enumerate}
+ネットワークのパラメータは，頂点数は$10,50,100,300,600,1000,1500,2000$とし，
+Erdos-R{\'e}nyiモデルに対しては$p=0.1,0.3,0.6,0.9$とし，
+Barab{\'a}si-Albertモデルに対しては$m=3,6,10,15,20$とする．
+
+実験の実行環境は表\ref{tab:env-mws}のとおりである．
+\begin{table}
+  \caption{実行環境}
+  \label{tab:env-mws}
+  \centering
+  \begin{tabular}{ll}
+    \hline
+    プロセッサ & Intel® Core™ i7-4712HQ CPU @ 2.30GHz × 4 \\ \hline
+    メインメモリ & 3.9GiB \\ \hline
+    ベースシステム & Ubuntu 16.04.3 LTS 64 ビット \\ \hline
+    仮想化 & Oracle VirtualBox バージョン 5.1.18 r111374 \\ \hline
+    コンパイラ & gcc 5.4.0 \\ \hline
+    グラフライブラリ & igraph 0.7.1-2.1 \\ \hline
+    最適化フラグ & -Ofast \\ \hline
+  \end{tabular}
+\end{table}
 
 \subsubsection*{結果}
-結果を図\ref{fig:the-dist-delete}に示す．
+一辺削除時の頂点間距離の更新の実験結果を図\ref{fig:dist-delete}に示す．
+図\ref{fig:dist-delete-igraph-random}にigraphライブラリとErdos-R{\'e}nyiモデル
+の結果を，
+図\ref{fig:dist-delete-igraph-scalefree}にigraphライブラリと
+Barab{\'a}si-Albertモデルの結果を，
+図\ref{fig:dist-delete-proposed-random}に提案手法とErdos-R{\'e}nyiモデル
+の結果を，
+図\ref{fig:dist-delete-proposed-scalefree}に提案手法と
+Barab{\'a}si-Albertモデルの結果をそれぞれ示す．
+
+図\ref{fig:dist-delete-igraph-random}と図\ref{fig:dist-delete-igraph-scalefree}
+よりigraphライブラリでは$p$と$m$の増加による計算時間の増加が見られるが，
+図\ref{fig:dist-delete-proposed-random}と
+図\ref{fig:dist-delete-proposed-scalefree}より
+提案手法ではそのような傾向は見られない．
+このことから，提案手法は，頂点数に対して辺数が比較的多い密なグラフに対して
+有効であることが確認できる．
+
 \begin{figure}
   \centering
-  \includegraphics{the-dist-delete.pdf}
-  \caption{一辺削除時の頂点間距離の更新の比較 \\
-      一行目はigraphライブラリのigraph\_shortest\_paths関数の実行時間を，
-      二行目は提案手法の実行時間を表す．\\
-      一列目はランダムネットワークとしてErdos-R{\'e}nyiモデルを，
-      二列目はスケールフリーネットワークとしてBarab{\'a}si-Albertモデルを
-      用いたときの結果を表す．}
-  \label{fig:the-dist-delete}
+  \includegraphics{dist-delete-1-1.pdf}
+  \includegraphics{dist-delete-1-2.pdf}
+  \hspace{-5mm}
+  \includegraphics{dist-delete-random-title.pdf}
+  \hspace{5mm}
+  \includegraphics{dist-delete-1-2.pdf}
+  \hspace{-5mm}
+  \includegraphics{dist-delete-scalefree-title.pdf}
+  \includegraphics{dist-delete-1-1.pdf}
+  \vspace{-3mm}
+
+  \includegraphics{dist-delete-2-1.pdf}
+  \includegraphics{dist-delete-2-2.pdf}
+  \hspace{-5mm}
+  \includegraphics{dist-delete-random-legend.pdf}
+  \hspace{5mm}
+  \includegraphics{dist-delete-2-2.pdf}
+  \hspace{-5mm}
+  \includegraphics{dist-delete-scalefree-legend.pdf}
+  \includegraphics{dist-delete-2-1.pdf}
+  \vspace{-3mm}
+
+  \includegraphics{dist-delete-igraph-ylab.pdf}
+  \includegraphics{dist-delete-igraph-random-yaxis.pdf}
+  \hspace{-5mm}
+  \subfloat[igraphライブラリ,Erdos-R{\'e}nyiモデル]{
+    \includegraphics{dist-delete-igraph-random.pdf}
+    \label{fig:dist-delete-igraph-random}
+  }\hspace{5mm}
+  \includegraphics{dist-delete-igraph-scalefree-yaxis.pdf}
+  \hspace{-5mm}
+  \subfloat[igraphライブラリ,Barab{\'a}si-Albertモデル]{
+    \includegraphics{dist-delete-igraph-scalefree.pdf}
+    \label{fig:dist-delete-igraph-scalefree}
+  }
+  \includegraphics{dist-delete-3-6.pdf} \\
+  \vspace{3mm}
+
+  \includegraphics{dist-delete-proposed-ylab.pdf}
+  \includegraphics{dist-delete-proposed-random-yaxis.pdf}
+  \hspace{-5mm}
+  \subfloat[提案手法,Erdos-R{\'e}nyiモデル]{
+    \includegraphics{dist-delete-proposed-random.pdf}
+    \label{fig:dist-delete-proposed-random}
+  }\hspace{5mm}
+  \includegraphics{dist-delete-proposed-scalefree-yaxis.pdf}
+  \hspace{-5mm}
+  \subfloat[提案手法,Barab{\'a}si-Albertモデル]{
+    \includegraphics{dist-delete-proposed-scalefree.pdf}
+    \label{fig:dist-delete-proposed-scalefree}
+  }
+  \includegraphics{dist-delete-3-6.pdf}
+
+  \caption{一辺削除時の頂点間距離の更新の比較}
+  \label{fig:dist-delete}
 \end{figure}
 
 \section{実験}
-\label{sect:exp-reduce-by-initial}
-提案した枝刈りの有効性を検証するため，実験を行う．
-実験で，次の項目を測定する．
-\begin{itemize}
+\label{sect:exp-reduce-by-prune}
+提案した枝刈りの有効性を検証するため，次の実験を行う．
+枝刈りを導入する前の探索と\ref{sect:diameter-lower-bound}節で説明した枝刈りと
+\ref{sect:fast-distance-update}節で説明した高速化に対して，次の指標を測定する
+ことで比較を行う．
+\begin{enumerate}
 \item 最初の一般化ムーアグラフが発見されるまでの時間
 \item 最初の一般化ムーアグラフが発見されるまでの展開状態数
-\end{itemize}
-なお，実験環境は\ref{sect:exp-basic-algorithm}節と同じである．
+\end{enumerate}
+実験のパラメータは\ref{sect:exp-basic-algorithm}節で示したものと同じである．
+
+さらに，\ref{sect:fast-distance-update}節で説明した高速化の効果を検証するため，
+次の指標を用いて\ref{sect:diameter-lower-bound}節の枝刈りと比較する．
+\begin{enumerate}\setcounter{enumi}{2}
+\item 展開状態数に対する平均探索時間
+\end{enumerate}
+なお，用いる初期グラフは\ref{sect:initial-spanning-tree}節で説明した
+全域木初期グラフとする．
+この実験のパラメータは，頂点数を$n\leq30$,次数を$k=3,4$とする．
+
+二つの実験とも，環境は\ref{sect:exp-basic-algorithm}節で示したものと同じである．
 
 \section{結果}
-次数が3のときの実験結果を示す．
-探索開始から最初の一般化ムーアグラフの発見における探索時間と状態の
-取り出し回数を図\ref{fig:sinitr-time}と図\ref{fig:sinitr-node}に
-それぞれ示す．
+探索開始から最初の一般化ムーアグラフの発見までに要した探索時間を
+図\ref{fig:sinitr-time}に示す．探索開始から最初の一般化ムーアグラフの発見までの
+状態展開数を図\ref{fig:sinitr-state}に示す．さらに，展開状態数に対する
+平均探索時間を図\ref{fig:sinitr-time-by-state}に示す．
+図\ref{fig:sinitr-time}と図\ref{fig:sinitr-time-by-state}にて，
+最大グラフとは，\ref{sect:diameter-lower-bound}節で示した枝刈りの方法を，
+距離更新とは，\ref{sect:fast-distance-update}節で示した頂点間距離更新を
+導入した方法を表す．
+
+枝刈りの導入の効果について考察する．
+図\ref{fig:sinitr-state}より，枝刈りによって展開状態数が減少し，高効率化に
+成功している．しかし，図\ref{fig:sinitr-time}より，枝刈りの導入によって
+探索時間が増加するような頂点数と次数の組合せもある．これは，枝刈りのために
+プログラムが大量のグラフのデータの生成と破棄を繰り返すことによって，
+枝刈りで得られる高効率化に追いつかないことが原因と考えられる．
+その根拠は，図\ref{fig:sinitr-state-d3}にて，頂点数が10のときは展開状態数が
+少なくならないが，図\ref{fig:sinitr-time-d3}の頂点数が10のときは
+探索時間が長くなっていることが挙げられる．
+
+枝刈りの高速化について考察する．図\ref{fig:sinitr-time-by-state-d3}より，
+$k=3$のときは距離更新の導入によって時間がかかることに対して，
+図\ref{fig:sinitr-time-by-state-d4}より，$k=4$のときは距離更新の導入によって
+わずかに高速に探索できることが分かる．理由として，距離更新の導入によって状態が
+保持するデータが増加したこと(グラフ1個と$n\times n$行列が4個)によって，
+状態の生成と削除に必要な時間が増加したことと，距離更新アルゴリズムは
+密なグラフで有効であることが考えられる．
 
 \begin{figure}
   \centering
-  \includegraphics{the-sinitr-time.pdf}
+  \noindent\makebox[\textwidth]{
+    \includegraphics{sinitr-time-lpad.pdf}
+    \includegraphics{sinitr-time-ylab.pdf}
+    \includegraphics{sinitr-time-d3-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=3$]{
+      \includegraphics{sinitr-time-d3.pdf}
+      \label{fig:sinitr-time-d3}
+    }\hspace{5mm}
+    \includegraphics{sinitr-time-d4-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=4$]{
+      \includegraphics{sinitr-time-d4.pdf}
+      \label{fig:sinitr-time-d4}
+    }
+    \includegraphics{sinitr-time-legend.pdf}
+  }
   \caption{最初の一般化ムーアグラフの発見までの時間}
   \label{fig:sinitr-time}
 \end{figure}
+
 \begin{figure}
   \centering
-  \includegraphics{the-sinitr-node.pdf}
+  \noindent\makebox[\textwidth]{
+    \includegraphics{sinitr-state-lpad.pdf}
+    \includegraphics{sinitr-state-ylab.pdf}
+    \includegraphics{sinitr-state-d3-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=3$]{
+      \includegraphics{sinitr-state-d3.pdf}
+      \label{fig:sinitr-state-d3}
+    }\hspace{5mm}
+    \includegraphics{sinitr-state-d4-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=4$]{
+      \includegraphics{sinitr-state-d4.pdf}
+      \label{fig:sinitr-state-d4}
+    }
+    \includegraphics{sinitr-state-legend.pdf}
+  }
   \caption{最初の一般化ムーアグラフの発見までの展開状態数}
-  \label{fig:sinitr-node}
+  \label{fig:sinitr-state}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \noindent\makebox[\textwidth]{
+    \includegraphics{sinitr-time-by-state-lpad.pdf}
+    \includegraphics{sinitr-time-by-state-ylab.pdf}
+    \includegraphics{sinitr-time-by-state-d3-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=3$]{
+      \includegraphics{sinitr-time-by-state-d3.pdf}
+      \label{fig:sinitr-time-by-state-d3}
+    }\hspace{5mm}
+    \includegraphics{sinitr-time-by-state-d4-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=4$]{
+      \includegraphics{sinitr-time-by-state-d4.pdf}
+      \label{fig:sinitr-time-by-state-d4}
+    }
+    \includegraphics{sinitr-time-by-state-legend.pdf}
+  }
+  \caption{展開状態数に対する平均探索時間}
+  \label{fig:sinitr-time-by-state}
 \end{figure}

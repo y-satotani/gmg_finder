@@ -1,10 +1,13 @@
 
 \renewcommand{\thesubsection}{(\alph{subsection})}
 
-\graphicspath{{../res/figure/}{../res/table/}}
+\graphicspath{{../res/figure/}{../res/plot-the/}}
 \makeatletter
 \def\input@path{{../res/figure/}{../res/graph/}}
 \makeatother
+
+% setting margin
+\newgeometry{tmargin=2cm,lmargin=2cm,rmargin=2cm,bmargin=2cm}
 
 % adding new symbol (vrectangle and vrectangleblack)
 \DeclareFontEncoding{LS1}{}{}
@@ -69,3 +72,4 @@
 
 % bibtex preference
 \renewcommand{\bibname}{参考文献}
+\bibliographystyle{junsrt}
