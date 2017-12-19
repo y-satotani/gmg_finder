@@ -48,7 +48,7 @@ breaks <- c('basic basic', 'cycle basic', 'cycle sorted', 'stree basic')
 labels <- c('基本', '閉路', '閉路(並べ替えあり)', '全域木')
 data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
   filter(sinitr == 'basic') %>%
-  mutate(mtd = paste(ginitr, sinitr)) %>%
+  mutate(mtd = paste(ginitr, sorted)) %>%
   group_by(n, d, mtd, n_state) %>%
   summarise(mean_time = mean(time)) %>%
   ungroup() %>%
