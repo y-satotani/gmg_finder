@@ -7,12 +7,10 @@
 - `igraph`
 - `python` (一部)
 
-### 基本的な使い方
-そのうちかきます
-
 ### 実験
 すべての実験は`src/experiment`ディレクトリに含まれています．
-`src`ディレクトリで`make`を実行すると，以下の実行ファイルが生成されます．
+`src`ディレクトリで`make ; make install`を実行すると，
+以下の実行ファイルが`bin`ディレクトリに生成されます．
 - `exp_cmp_algo.out`
 - `exp_cmp_algo_full.out`
 - `exp_dist_delete.out`

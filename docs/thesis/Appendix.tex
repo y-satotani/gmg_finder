@@ -1,6 +1,216 @@
 
 \chapter{実験プログラム}
-\label{chap:program}
+\label{chap:experimental-program}
+実験に用いたプログラムとその実行方法について説明する．
+プログラムは，\verb|www.github.com/y-satotani/gmg-finder|にある．
+まず，実験プログラムのビルド手順を示した後，それぞれの実験プログラムについて
+説明する．
+
+まず，実験プログラムのビルド手順を示す．
+\begin{enumerate}
+\item 必要なソフトウェアやライブラリをインストールする
+  \begin{itemize}
+  \item \verb|git|
+  \item \verb|gcc|
+  \item \verb|igraph|
+  \end{itemize}
+\item \verb|git|でクローンする
+  (\verb|git clone www.github.com/y-satotani/gmg-finder.git|)
+\item \verb|src|ディレクトリに移動(\verb|cd gmg-finder/src|)
+\item \verb|gmgf/Makefile|と\verb|test/Makefile|と
+  \verb|experiment/Makefile|の編集
+  (\verb|IDIR|と\verb|LDIR|の値を\verb|igraph|がある場所に設定する)
+\item \verb|make|の実行(\verb|make ; make install|)
+\end{enumerate}
+ビルドに成功すると，実験プログラムとテストプログラムが\verb|src/bin|ディレクトリ
+に現れる．
+
+以降，これらの実験プログラムについて説明する．
+\begin{enumerate}
+\item \texttt{exp\_cmp\_algo.out}
+\item \texttt{exp\_cmp\_algo\_full.out}
+\item \texttt{exp\_dist\_delete.out}
+\item \texttt{exp\_miner.out}
+\end{enumerate}
+
+\section*{\texttt{exp\_cmp\_algo.out}}
+\texttt{exp\_cmp\_algo.out}は，初期グラフと枝刈りの方法を変えて性能を測定する
+プログラムである．実行例と結果例を以下に示す．
+\begin{verbatim}
+experiment/exp_cmp_algo.out basic basic basic 10 3
+10,3,2,0,150,basic,basic,basic,150,15,16,0.000144
+\end{verbatim}
+結果は次の値が'',''で区切られる．
+\begin{enumerate}
+\item 頂点数
+\item 次数
+\item $Q$(式\ref{eq:gmg-q})
+\item $R$(式\ref{eq:gmg-r})
+\item 頂点間距離の総和の下界(定理\ref{thm:gmg-lower-bound})
+\item 初期グラフ
+  \begin{itemize}
+  \item basic$\cdots$基本初期グラフ(定義\ref{def:basic-initial-graph})
+  \item cycle$\cdots$閉路初期グラフ(定義\ref{def:cycle-initial-graph})
+  \item stree$\cdots$全域木初期グラフ(定義\ref{def:stree-initial-graph})
+  \end{itemize}
+\item 候補辺ソート
+  \begin{itemize}
+  \item basic$\cdots$ソートなし
+  \item sorted$\cdots$アルゴリズム\ref{algo:sort-edges}でソート
+  \end{itemize}
+\item 枝刈り
+  \begin{itemize}
+  \item basic$\cdots$枝刈りなし
+  \item minmax$\cdots$最大グラフを利用した枝刈り
+    (\ref{sect:diameter-lower-bound}節)
+  \item matrix$\cdots$頂点間距離の更新を利用した枝刈り
+    (\ref{sect:fast-distance-update}節)
+  \end{itemize}
+\item 結果のグラフの頂点間距離の総和
+\item 候補辺の数
+\item 展開状態数
+\item 探索時間(単位:秒)
+\end{enumerate}
+
+次のコマンドで，複数の結果を含むcsvファイルを生成する．
+\verb|--max-procs=x|の\verb|x|の値だけ並列に実行する．
+\begin{verbatim}
+(echo n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,sspl,edge,node,time ;\
+ experiment/exp_cmp_algo_param.py |\
+ xargs --max-lines=1 --max-procs=4 experiment/exp_cmp_algo.out) >\
+cmp-algo.csv
+\end{verbatim}
+パラメータは，\texttt{exp\_cmp\_algo\_param.py}で生成される．
+そのため，別のパラメータで実験する場合は，このファイルを編集すればよい．
+
+\section*{exp\_cmp\_algo\_full.out}
+\texttt{exp\_cmp\_algo.out}では探索開始から(もしあれば)最初の一個の
+一般化ムーアグラフを得るまでの情報を計測したが，
+\texttt{exp\_cmp\_algo\_full.out}では探索開始からすべての一般化ムーアグラフ
+を得るまでの情報を計測する．実行例と実行結果例は次のとおり．
+
+\begin{verbatim}
+./exp_cmp_algo_full.out basic basic basic 10 3
+10,3,2,0,150,basic,basic,basic,4,150,150,15,75,0.00042
+\end{verbatim}
+
+結果は，次の値が'',''で区切られている．
+\begin{enumerate}
+\item 頂点数
+\item 次数
+\item $Q$
+\item $R$
+\item 頂点間距離の総和の下界
+\item 初期グラフ (\texttt{exp\_cmp\_algo.out}と同じ)
+\item 候補辺ソート (\texttt{exp\_cmp\_algo.out}と同じ)
+\item 枝刈り (\texttt{exp\_cmp\_algo.out}と同じ)
+\item 結果のグラフの頂点間距離の総和
+\item 得られたグラフの数 (同型グラフを重複して数える)
+\item 頂点間距離の総和の最大値
+\item 頂点間距離の総和の最小値
+\item 候補辺の数
+\item 展開状態数
+\item 探索時間(単位:秒)
+\end{enumerate}
+
+\section*{exp\_dist\_delete.out}
+\texttt{exp\_dist\_delete.out}は一辺削除時の頂点間距離の更新の実験を行う．
+次の項目を入力とする．
+\begin{enumerate}
+\item ネットワークトポロジ
+  \begin{itemize}
+  \item \verb|random|=Erdos-R{\'e}nyiモデル
+  \item \verb|scale-free|=Barab{\'a}si-Albertモデル
+  \end{itemize}
+\item 頂点数
+\item ネットワークパラメータ
+\item シード値
+\end{enumerate}
+
+コマンドの例と実行結果の例は以下のとおり．
+\begin{verbatim}
+./exp_dist_delete.out random 1000 0.3 0
+1000,0.3,random,0,150422,1,0.827778,0.076536
+\end{verbatim}
+
+結果は次の値が`,`で区切られている．
+\begin{enumerate}
+\item 頂点数
+\item ネットワークパラメータ (トポロジにより，$p$か$m$)
+\item ネットワークトポロジ
+  \begin{itemize}
+  \item \verb|random|=Erdos-R{\'e}nyiモデル
+  \item \verb|scale-free|=Barab{\'a}si-Albertモデル
+  \end{itemize}
+\item シード値
+\item 辺の数
+\item 結果が一致したかどうか (1なら一致)
+\item \verb|igraph|ライブラリでの計算時間
+\item 提案手法の計算時間
+\end{enumerate}
+
+\section*{exp\_miner.out}
+\texttt{exp\_cmp\_algo.out}を，初期グラフを全域木に，枝刈りを
+\ref{sect:fast-distance-update}節で示した方法に固定したプログラムである．
+さらに，(もしあれば)一般化ムーアグラフを出力する機能を付加した．
+
+実行結果と実行例は次のとおり．
+\begin{verbatim}
+./exp_miner.out 12 3
+12,3,2,2,252,matrix,252,26,27,0.000925
+\end{verbatim}
+
+標準出力の結果は次の値が'',''で区切られている．
+\begin{enumerate}
+\item 頂点数
+\item 次数
+\item $Q$
+\item $R$
+\item 頂点間距離の総和の下界
+\item 使用アルゴリズム(\verb|matrix|で固定)
+\item 結果のグラフの頂点間距離の総和
+\item 候補辺の数
+\item 展開した状態数
+\item 探索時間(単位:秒)
+\end{enumerate}
+
+さらに，''\texttt{n<頂点数>-d<次数>-miner.elist}''のファイル名で，
+一般化ムーアグラフの辺リストを保存する．出力例は以下のとおり．
+\begin{multicols}{4}
+  \verbatiminput{n12-d3-example.elist}
+\end{multicols}
+ただし，辺のリストを4列で表しているが実際は1列である．
+
+\subsection*{\texttt{exp\_miner.py}}
+\texttt{exp\_miner.out}に並列計算とタイムアウト機能を追加したプログラムである．
+コマンドライン引数は以下のとおり．
+\begin{itemize}
+\item \texttt{-n}$\cdots$頂点数((次数+1)...Nの範囲を対象とする)
+\item \texttt{-d}$\cdots$次数(3...Dの範囲を対象とする)
+\item \texttt{-i}$\cdots$結果ファイルリスト(これらの結果に含まれている頂点数次数組は計算しない)
+\item \texttt{-o}$\cdots$結果ファイル(指定しなければ標準出力)
+\item \texttt{-t}$\cdots$タイムアウト時間(単位:秒)
+\end{itemize}
+結果は，\texttt{exp\_miner.out}の結果を列としたcsvファイルである．
 
 \chapter{一般化ムーアグラフのリスト}
+\label{chap:list-of-gmg}
+付録\ref{chap:experimental-program}で説明した\verb|exp-miner.out|を
+用いて，与えられた頂点数と次数の組の一般化ムーアグラフが存在するかを
+求めた．その結果を図\ref{fig:gmg-existence}に示す．
+ただし，予想\ref{conj:spanning-tree}の結果次第で，存在しない組が無効になる
+可能性があることに注意する．ちなみに，一般化ムーアグラフの実体は
+\begin{itemize}
+\item \verb|github.com/y-satotani/gmg-finder/tree/master/docs/res/graph|
+\end{itemize}
+で公開している．
 
+\begin{figure}[htbp]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics{gmg-existence.pdf}
+  \caption{頂点数と次数の一般化ムーアグラフの存在\\
+    空白部分は，正則グラフが存在しない組合せもしくは，
+    まだ終了していない組合せを表す．}
+  \label{fig:gmg-existence}
+\end{figure}

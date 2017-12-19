@@ -19,28 +19,28 @@ gp <- ggplot(
     fill = v
     )
   ) +
-  ggtitle('G-Moore graph existence') +
   geom_tile(
     width = 0.9,
     height = 0.9
   ) +
   scale_x_continuous(
-    'Degree',
+    '次数',
     position = 'top',
     breaks = seq(min(data$d), max(data$d)),
     expand = c(0, 0)
     ) +
   scale_y_continuous(
-    'Order',
+    '頂点数',
     breaks = seq(min(data$n), max(data$n)),
     trans = 'reverse',
     expand = c(0, 0)
     ) +
   scale_fill_manual(
-    name ='Exists?',
+    #name = 'Exists?',
+    name = NULL,
     values = c('grey50', 'royalblue'),
     breaks = c(1, 0),
-    labels = c('yes', 'no')
+    labels = c('存在する', '存在しない')
     ) +
   theme(
     text = element_text(size = 11),
@@ -49,7 +49,10 @@ gp <- ggplot(
     #panel.background = element_blank(),
     plot.title = element_text(hjust = 0.5),
     #axis.line = element_blank(),
-    axis.ticks = element_blank()
+    axis.ticks = element_blank(),
+    legend.position = 'bottom'
     )
-ggsave('miner-existence.pdf', gp,
-       width = 7, height = 15, units = 'cm')
+
+cairo_pdf('gmg-existence.pdf', width = 2.5, height = 6.5)
+gp
+dev.off()

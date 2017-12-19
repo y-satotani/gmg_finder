@@ -8,8 +8,6 @@ geometry: no
 bibliography: ../res/MyCollection.bib
 csl: physical-review-e.csl
 output:
-  md_document:
-    variant: markdown_github
   pdf_document:
     pandoc_args:
     - --variable=biblio-title:参考文献
@@ -18,6 +16,8 @@ output:
     fig_caption: yes
     includes:
       in_header: packages.tex
+  md_document:
+    variant: markdown_github
 ---
   
 ```{r setup, include=FALSE}
@@ -70,14 +70,7 @@ show_table <- function(x, cap) {
 同時に，これらの改良を評価する．
 
 # 前回打ち合わせ時に定めた短期目標
-1. 実験の継続
-2. 報告書の下書きの執筆
+1. 報告書の下書きの執筆
 
 # 本日までの進捗状況
-1. 三つの実験を完了した/継続している．
-(a)頂点数/次数の組の数を増やした実験
-(b)頂点間距離更新アルゴリズムを探索に採用したときの効果を調べる実験
-(c)一般化ムーアグラフを発見する実験．
-今回は，頂点間距離更新アルゴリズムに変更し，タイムアウトを1日に設定している．
-翌年1月上旬に完了する予定である．
-2. 報告書の下書きを執筆している．今回は，序論(第1章)と準備(第2章)を仕上げた．
+1. 下書きを最後まで書き終えた．次は誤字脱字などがないか見る予定である．
