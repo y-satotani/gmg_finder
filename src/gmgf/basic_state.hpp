@@ -86,6 +86,8 @@ namespace gmgf {
     virtual state* copy();
 
     virtual igraph_t make_graph();
+
+    virtual bool is_isomorphic(state* state);
   };
 
 }

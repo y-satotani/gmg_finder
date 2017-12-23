@@ -152,4 +152,11 @@ namespace gmgf {
     return H;
   }
 
+  bool basic_state::is_isomorphic(state* state) {
+    igraph_t H = ((basic_state*) state)->G;
+    igraph_bool_t iso;
+    igraph_isomorphic(&G, &H, &iso);
+    return iso;
+  }
+
 }

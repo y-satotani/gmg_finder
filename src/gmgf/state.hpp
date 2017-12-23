@@ -177,6 +177,12 @@ namespace gmgf {
      * 使用後は，igraph_destroy関数で破棄しなければならない．
      */
     virtual igraph_t make_graph() = 0;
+
+    /**
+     * /brief 二つの状態が表すグラフの同型テストを行う．
+     * /return 同型であればtrue,そうでなければfalse
+     */
+    virtual bool is_isomorphic(state* state) = 0;
   };
 
 }

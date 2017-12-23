@@ -22,5 +22,6 @@
 
 #include "gmgf/distance_update.hpp"
 #include "gmgf/dfs_finder.hpp"
+#include "gmgf/fbs_enumer.hpp"
 
 #endif // _GMGF_HPP_
