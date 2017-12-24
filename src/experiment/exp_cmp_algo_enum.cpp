@@ -12,10 +12,11 @@ using namespace std;
 using namespace gmgf;
 
 char basic_ginitr[] = "basic", cycle_ginitr[] = "cycle", stree_ginitr[] = "stree";
-char basic_sinitr[] = "basic", minmax_sinitr[] = "minmax", mmmtr_sinitr[] = "matrix";
+char basic_sinitr[] = "basic", minmax_sinitr[] = "minmax", mmmtr_sinitr[] ="matrix";
 char disable_srt[] = "basic", enable_srt[] = "sorted";
 
 int main(int argc, char* argv[]) {
+
   if(argc < 6) {
     cout << "usage : " << argv[0]
          << " (basic|cycle|stree)"
@@ -23,7 +24,7 @@ int main(int argc, char* argv[]) {
          << " (basic|minmax|matrix)"
          << " n d" << endl;
     cout << "output: n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,"
-         << "sspl,n_edge,n_state,time" << endl;
+         << "test,n_graph,n_edge,n_state,time" << endl;
     return 1;
   }
 
@@ -55,21 +56,22 @@ int main(int argc, char* argv[]) {
   else
     sinitr = new basic_state_initr();
 
-  int sspl;
+  int test;
   unsigned long long extracted_states;
   double time;
-  igraph_t G = run_dfs_finder(&sspl, &extracted_states, &time,
-                              ginitr, sinitr);
+  vector<igraph_t> graphs = run_fbs_enumer
+    (&test, &extracted_states, &time, ginitr, sinitr);
 
   cout << n << "," << d << ","
        << config->Q() << "," << config->R() << ","
        << config->sspl_lb() << ","
        << ginitr_name << "," << srt_flag << "," << sinitr_name << ","
-       << sspl << ","
+       << test << "," << graphs.size() << ","
        << ginitr->possible_edges().size() << ","
        << extracted_states << "," << time << endl;
 
-  igraph_destroy(&G);
+  for(size_t gi = 0; gi < graphs.size(); gi++)
+    igraph_destroy(&graphs[gi]);
   delete sinitr;
   delete ginitr;
   if(ginitr_base) delete ginitr_base;
@@ -77,4 +79,3 @@ int main(int argc, char* argv[]) {
 
   return 0;
 }
-

@@ -52,7 +52,7 @@ int main(int argc, char* argv[]) {
   if(strcmp(sinitr_name, minmax_sinitr) == 0)
     sinitr = new minmax_state_initr();
   else if(strcmp(sinitr_name, mmmtr_sinitr) == 0)
-    sinitr = new mmmtr_state_initr();
+    sinitr = new matrix_state_initr();
   else
     sinitr = new basic_state_initr();
 

@@ -13,12 +13,14 @@
 #include "gmgf/state.hpp"
 #include "gmgf/basic_state.hpp"
 #include "gmgf/minmax_state.hpp"
-#include "gmgf/mmmtr_state.hpp"
+#include "gmgf/matrix_state.hpp"
+#include "gmgf/matrix_opt_state.hpp"
 
 #include "gmgf/state_initr.hpp"
 #include "gmgf/basic_state_initr.hpp"
 #include "gmgf/minmax_state_initr.hpp"
-#include "gmgf/mmmtr_state_initr.hpp"
+#include "gmgf/matrix_state_initr.hpp"
+#include "gmgf/matrix_opt_state_initr.hpp"
 
 #include "gmgf/distance_update.hpp"
 #include "gmgf/dfs_finder.hpp"

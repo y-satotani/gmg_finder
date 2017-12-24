@@ -1,11 +1,11 @@
 
-#include "mmmtr_state_initr.hpp"
-#include "mmmtr_state.hpp"
+#include "matrix_state_initr.hpp"
+#include "matrix_state.hpp"
 #include "distance_update.hpp"
 
 namespace gmgf {
 
-  state* mmmtr_state_initr::initial(graph_initr* ginitr) {
+  state* matrix_state_initr::initial(graph_initr* ginitr) {
     graph_config* config = ginitr->get_config();
     igraph_t G = ginitr->build();
     igraph_t H = ginitr->build();
@@ -23,7 +23,7 @@ namespace gmgf {
     set_distance_matrix_with_path_num(&d_min, &s_min, &G);
     set_distance_matrix_with_path_num(&d_max, &s_max, &H);
     igraph_destroy(&H);
-    return new mmmtr_state(config, G, d_min, s_min, d_max, s_max);
+    return new matrix_state(config, G, d_min, s_min, d_max, s_max);
   }
 
 }

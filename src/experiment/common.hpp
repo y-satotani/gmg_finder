@@ -1,16 +1,20 @@
 
+extern "C" {
+#include <igraph.h>
+}
 #include "gmgf.hpp"
 #include <ctime>
+#include <vector>
 
-int sspl(igraph_t* G) {
+unsigned int sspl(igraph_t* G) {
   igraph_matrix_t path;
-  int sspl;
+  unsigned int sspl;
   igraph_matrix_init(&path,
                      igraph_vcount(G), igraph_vcount(G));
   igraph_shortest_paths(G, &path,
                         igraph_vss_all(), igraph_vss_all(),
                         IGRAPH_ALL);
-  sspl = (int) igraph_matrix_sum(&path);
+  sspl = (unsigned int) igraph_matrix_sum(&path);
   igraph_matrix_destroy(&path);
   return sspl;
 }
@@ -33,6 +37,31 @@ igraph_t run_dfs_finder(int* sspl_ret,
 
   delete finder;
   return G;
+}
+
+std::vector<igraph_t> run_fbs_enumer(igraph_bool_t* test,
+                                     unsigned long long* n_state,
+                                     double* time,
+                                     gmgf::graph_initr* ginitr,
+                                     gmgf::state_initr* sinitr)
+{
+  gmgf::fbs_enumer* enumer = new gmgf::fbs_enumer(ginitr, sinitr);
+
+  clock_t begin = clock();
+  std::vector<igraph_t> Glist = enumer->enumerate();
+  clock_t end = clock();
+
+  *test = true;
+  for(std::size_t gi = 0; gi < Glist.size(); gi++) {
+    if(sspl(&Glist[gi]) != ginitr->get_config()->sspl_lb()) {
+      *test = false;
+    }
+  }
+  *n_state = enumer->extracted_states();
+  *time    = double(end - begin) / CLOCKS_PER_SEC;
+
+  delete enumer;
+  return Glist;
 }
 
 void run_dfs_finder_full(int* n_graph,

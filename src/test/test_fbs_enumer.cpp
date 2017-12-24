@@ -15,7 +15,7 @@ extern "C" {
 #include "gmgf/state_initr.hpp"
 #include "gmgf/basic_state_initr.hpp"
 #include "gmgf/minmax_state_initr.hpp"
-#include "gmgf/mmmtr_state_initr.hpp"
+#include "gmgf/matrix_state_initr.hpp"
 
 #include "gmgf/fbs_enumer.hpp"
 
@@ -47,7 +47,7 @@ int main(int argc, char* argv[]) {
   state_initr* sinitr =
     new basic_state_initr();
     //new minmax_state_initr();
-    //new mmmtr_state_initr();
+    //new matrix_state_initr();
   fbs_enumer* enumer = new fbs_enumer(ginitr, sinitr);
 
   clock_t begin = clock();

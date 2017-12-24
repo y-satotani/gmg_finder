@@ -15,7 +15,8 @@ extern "C" {
 #include "gmgf/state_initr.hpp"
 #include "gmgf/basic_state_initr.hpp"
 #include "gmgf/minmax_state_initr.hpp"
-#include "gmgf/mmmtr_state_initr.hpp"
+#include "gmgf/matrix_state_initr.hpp"
+#include "gmgf/matrix_opt_state_initr.hpp"
 
 #include "gmgf/dfs_finder.hpp"
 
@@ -47,7 +48,8 @@ int main(int argc, char* argv[]) {
   state_initr* sinitr =
     new basic_state_initr();
     //new minmax_state_initr();
-    //new mmmtr_state_initr();
+    //new matrix_state_initr();
+    //new matrix_opt_state_initr();
   dfs_finder* finder = new dfs_finder(ginitr, sinitr);
 
   clock_t begin = clock();
