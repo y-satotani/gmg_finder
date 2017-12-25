@@ -52,8 +52,7 @@ int main(int argc, char* argv[]) {
       igraph_integer_t v, w;
       igraph_edge(&graph, eid, &v, &w);
       fp << v+1 << " " << w+1;
-      if(eid < igraph_ecount(&graph)-1)
-        fp << endl;
+      fp << endl;
     }
     fp.close();
   }
