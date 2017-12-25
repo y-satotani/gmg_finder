@@ -35,7 +35,7 @@ int main(int argc, char* argv[]) {
 
   cout << n << "," << d << ","
        << config->Q() << "," << config->R() << ","
-       << config->sspl_lb() << ",matrix," << sspl << ","
+       << config->sspl_lb() << "," << sspl << ","
        << builder->possible_edges().size() << ","
        << extracted_states << "," << time << endl;
 

@@ -47,7 +47,7 @@ def make_params(args):
 
 def write_result(args, rows):
     rows = [r for r in rows if r]
-    header = 'n,d,Q,R,sspl_lb,alg,sspl,edge,node,time'
+    header = 'n,d,Q,R,sspl_lb,sspl,edge,state,time'
     out = open(args.o, 'w') if args.o else sys.stdout
     print('\n'.join([header]+rows), file=out)
     out.close()

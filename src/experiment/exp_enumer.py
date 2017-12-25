@@ -13,8 +13,8 @@ else:
     import subprocess
 
 """ example:
-./exp_miner.py -n 40 -d 5 -t 3600 \
--i ../../document/resource/table/miner.csv \
+./exp_enumer.py -n 40 -d 5 -t 3600 \
+-i ../../document/resource/table/enumer.csv \
 -o out.csv
 """
 
@@ -47,7 +47,7 @@ def make_params(args):
 
 def write_result(args, rows):
     rows = [r for r in rows if r]
-    header = 'n,d,Q,R,sspl_lb,alg,sspl,edge,node,time'
+    header = 'n,d,Q,R,sspl_lb,test,ngraph,edge,state,time'
     out = open(args.o, 'w') if args.o else sys.stdout
     print('\n'.join([header]+rows), file=out)
     out.close()
@@ -55,9 +55,9 @@ def write_result(args, rows):
 def mgr_init():
     signal.signal(signal.SIGINT, signal.SIG_IGN)
 
-def run_miner(n, d, t, n_proc, rows):
+def run_enumer(n, d, t, n_proc, rows):
     proc = subprocess.Popen(
-        ['./exp_miner.out', str(n), str(d)],
+        ['./exp_enumer.out', str(n), str(d)],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE
     )
@@ -91,7 +91,7 @@ def main():
             while n_proc.value == n_cpu:
                 time.sleep(1)
             n_proc.value += 1
-            p = multiprocessing.Process(target=run_miner,
+            p = multiprocessing.Process(target=run_enumer,
                                        args=(n, d, args.t, n_proc, rows))
             p.start()
             processes.append(p)
