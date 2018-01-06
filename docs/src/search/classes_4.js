@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['minmax_5fstate',['minmax_state',['../classgmgf_1_1minmax__state.html',1,'gmgf']]],
-  ['minmax_5fstate_5finitr',['minmax_state_initr',['../classgmgf_1_1minmax__state__initr.html',1,'gmgf']]],
-  ['mmmtr_5fstate',['mmmtr_state',['../classgmgf_1_1mmmtr__state.html',1,'gmgf']]],
-  ['mmmtr_5fstate_5finitr',['mmmtr_state_initr',['../classgmgf_1_1mmmtr__state__initr.html',1,'gmgf']]]
+  ['graph_5fconfig',['graph_config',['../classgmgf_1_1graph__config.html',1,'gmgf']]],
+  ['graph_5finitr',['graph_initr',['../classgmgf_1_1graph__initr.html',1,'gmgf']]]
 ];

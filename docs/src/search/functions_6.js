@@ -1,9 +1,6 @@
 var searchData=
 [
-  ['initial',['initial',['../classgmgf_1_1basic__state__initr.html#a4ab1f7bde11e41a094c45969c3e75094',1,'gmgf::basic_state_initr::initial()'],['../classgmgf_1_1minmax__state__initr.html#a38890cdfa3e54792d99519bd10300f1c',1,'gmgf::minmax_state_initr::initial()'],['../classgmgf_1_1mmmtr__state__initr.html#ae5cad4734ea8afc3b5139d3ff2e1af2c',1,'gmgf::mmmtr_state_initr::initial()'],['../classgmgf_1_1state__initr.html#a503e046de3f322a3c57523f4096a1d3b',1,'gmgf::state_initr::initial()']]],
-  ['initial_5fedges',['initial_edges',['../classgmgf_1_1basic__graph__initr.html#af02f73d8904c555f920c00fcb74f80d1',1,'gmgf::basic_graph_initr::initial_edges()'],['../classgmgf_1_1cycle__graph__initr.html#af5a9640771e4344a1b9c7ef21bc76064',1,'gmgf::cycle_graph_initr::initial_edges()'],['../classgmgf_1_1graph__initr.html#ae779b47d1734f32d3554ca0c1a88d77e',1,'gmgf::graph_initr::initial_edges()'],['../classgmgf_1_1sorted__graph__initr.html#aa13c49159ecefcab9ee3486fad232076',1,'gmgf::sorted_graph_initr::initial_edges()'],['../classgmgf_1_1stree__graph__initr.html#a64291e61221ced3d75306cb883c7878c',1,'gmgf::stree_graph_initr::initial_edges()']]],
-  ['is_5ffinal',['is_final',['../classgmgf_1_1state.html#ad661fd223d414e7eecedb0a0b0fc3ff1',1,'gmgf::state']]],
-  ['is_5ffinal_5fcycle',['is_final_cycle',['../classgmgf_1_1basic__state.html#abfe2e64d209002429db79f08cebadf4e',1,'gmgf::basic_state::is_final_cycle()'],['../classgmgf_1_1state.html#a245f0bad3a2e5565390b58eb549fe055',1,'gmgf::state::is_final_cycle()']]],
-  ['is_5ffinal_5fdegree',['is_final_degree',['../classgmgf_1_1basic__state.html#a3ba50e0948451e2aefd81baef9e29a38',1,'gmgf::basic_state::is_final_degree()'],['../classgmgf_1_1state.html#a810fe6ee8c0af4e25595ba1aadd713cb',1,'gmgf::state::is_final_degree()']]],
-  ['is_5ffinal_5fdiameter',['is_final_diameter',['../classgmgf_1_1basic__state.html#abf73d93bcaef6e8e6fae5bafdcb3473e',1,'gmgf::basic_state::is_final_diameter()'],['../classgmgf_1_1mmmtr__state.html#aeb9641f39099e198edb201f962e789fb',1,'gmgf::mmmtr_state::is_final_diameter()'],['../classgmgf_1_1state.html#a50309fa7f33e8225a5ef4bd3f615efc3',1,'gmgf::state::is_final_diameter()']]]
+  ['get_5fconfig',['get_config',['../classgmgf_1_1graph__initr.html#af0dc3b48c08b30f2e5b5c30396f4a866',1,'gmgf::graph_initr']]],
+  ['graph_5fconfig',['graph_config',['../classgmgf_1_1graph__config.html#ae1e15eadd6b2bbc7eb26aae8b6e945e1',1,'gmgf::graph_config']]],
+  ['graph_5finitr',['graph_initr',['../classgmgf_1_1graph__initr.html#aac43d624f6195fc363b90b72a2e5afd4',1,'gmgf::graph_initr']]]
 ];

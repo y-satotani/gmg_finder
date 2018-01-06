@@ -1,7 +1,9 @@
 var searchData=
 [
-  ['sorted_5fgraph_5finitr',['sorted_graph_initr',['../classgmgf_1_1sorted__graph__initr.html',1,'gmgf']]],
-  ['state',['state',['../classgmgf_1_1state.html',1,'gmgf']]],
-  ['state_5finitr',['state_initr',['../classgmgf_1_1state__initr.html',1,'gmgf']]],
-  ['stree_5fgraph_5finitr',['stree_graph_initr',['../classgmgf_1_1stree__graph__initr.html',1,'gmgf']]]
+  ['matrix_5fopt_5fstate',['matrix_opt_state',['../classgmgf_1_1matrix__opt__state.html',1,'gmgf']]],
+  ['matrix_5fopt_5fstate_5finitr',['matrix_opt_state_initr',['../classgmgf_1_1matrix__opt__state__initr.html',1,'gmgf']]],
+  ['matrix_5fstate',['matrix_state',['../classgmgf_1_1matrix__state.html',1,'gmgf']]],
+  ['matrix_5fstate_5finitr',['matrix_state_initr',['../classgmgf_1_1matrix__state__initr.html',1,'gmgf']]],
+  ['minmax_5fstate',['minmax_state',['../classgmgf_1_1minmax__state.html',1,'gmgf']]],
+  ['minmax_5fstate_5finitr',['minmax_state_initr',['../classgmgf_1_1minmax__state__initr.html',1,'gmgf']]]
 ];

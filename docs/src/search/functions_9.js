@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['n',['n',['../classgmgf_1_1graph__config.html#a77289e4829029d780cf98ff40e79ec7e',1,'gmgf::graph_config']]],
-  ['n_5fvert_5fbtree',['n_vert_btree',['../namespacegmgf.html#adea883ff834e8876c8c41df391c235f9',1,'gmgf']]],
-  ['next',['next',['../classgmgf_1_1dfs__finder.html#a163062222500bc5206bd67c2562eec71',1,'gmgf::dfs_finder']]],
-  ['noadd_5fedge',['noadd_edge',['../classgmgf_1_1basic__state.html#a044c80dd343847bbc11296d08a1c86f6',1,'gmgf::basic_state::noadd_edge()'],['../classgmgf_1_1minmax__state.html#a1fb55876609f2986ac6ae753fda81404',1,'gmgf::minmax_state::noadd_edge()'],['../classgmgf_1_1mmmtr__state.html#a29930521d3590c1b01e10f110ee4a416',1,'gmgf::mmmtr_state::noadd_edge()'],['../classgmgf_1_1state.html#a5b72a6ce57b71da8068c77660e045987',1,'gmgf::state::noadd_edge()']]]
+  ['make_5fgraph',['make_graph',['../classgmgf_1_1basic__state.html#a81f85d9c0c7734952e20f0245e86b7c2',1,'gmgf::basic_state::make_graph()'],['../classgmgf_1_1state.html#aa0afcb61a2714858957db36105565395',1,'gmgf::state::make_graph()']]],
+  ['matrix_5fopt_5fstate',['matrix_opt_state',['../classgmgf_1_1matrix__opt__state.html#a30b3fb83b39e05ef6cb87d338d7cbd58',1,'gmgf::matrix_opt_state::matrix_opt_state(graph_config *config, igraph_t G, igraph_matrix_t d_min, igraph_matrix_t d_max, igraph_matrix_t s_max, igraph_real_t diam)'],['../classgmgf_1_1matrix__opt__state.html#afbcb418b5a149c010f3ebba0187a5064',1,'gmgf::matrix_opt_state::matrix_opt_state(const matrix_opt_state &amp;s)']]],
+  ['matrix_5fstate',['matrix_state',['../classgmgf_1_1matrix__state.html#a1a5949a89c406a85325d4d78ce8c18c1',1,'gmgf::matrix_state::matrix_state(graph_config *config, igraph_t G, igraph_matrix_t d_min, igraph_matrix_t s_min, igraph_matrix_t d_max, igraph_matrix_t s_max)'],['../classgmgf_1_1matrix__state.html#aa8f89f30ed4ae8be0b19ddd90e241845',1,'gmgf::matrix_state::matrix_state(const matrix_state &amp;s)']]],
+  ['minmax_5fstate',['minmax_state',['../classgmgf_1_1minmax__state.html#a4155f55201add3edf2b99a1c25cbbef7',1,'gmgf::minmax_state::minmax_state(graph_config *config, igraph_t G, igraph_t H)'],['../classgmgf_1_1minmax__state.html#a8eab828a3172b4f0470d28751b8ad3b0',1,'gmgf::minmax_state::minmax_state(const minmax_state &amp;s)']]]
 ];

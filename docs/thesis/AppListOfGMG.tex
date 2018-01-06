@@ -1,0 +1,21 @@
+
+\chapter{一般化ムーアグラフのリスト}
+\label{chap:list-of-gmg}
+付録\ref{chap-experimental-program}で説明した\verb|exp-miner.out|を
+用いて，与えられた頂点数と次数の組の一般化ムーアグラフが存在するかを
+求めた．その結果を図\ref{fig:gmg-existence}に示す．
+ただし，予想\ref{conj:spanning-tree}の結果次第で，存在しない組が無効になる
+可能性があることに注意する．ちなみに，一般化ムーアグラフの実体は，次の
+URLにて公開している．
+
+\url{github.com/y-satotani/gmg-finder/tree/master/docs/res/graph}
+
+\begin{figure}[htbp]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics{gmg-existence.pdf}
+  \caption{頂点数と次数の一般化ムーアグラフの存在\\
+    空白部分は，正則グラフが存在しない組合せもしくは，
+    まだ終了していない組合せを表す．}
+  \label{fig:gmg-existence}
+\end{figure}

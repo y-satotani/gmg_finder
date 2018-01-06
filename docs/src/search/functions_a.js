@@ -1,4 +1,7 @@
 var searchData=
 [
-  ['possible_5fedges',['possible_edges',['../classgmgf_1_1basic__graph__initr.html#a56799599da63bddf1e3c51cfa992e4cc',1,'gmgf::basic_graph_initr::possible_edges()'],['../classgmgf_1_1cycle__graph__initr.html#a5b0d53f7be58d34209156a495b2b4dd9',1,'gmgf::cycle_graph_initr::possible_edges()'],['../classgmgf_1_1graph__initr.html#a72b2121c2c3142dfe15dbfe5830affd2',1,'gmgf::graph_initr::possible_edges()'],['../classgmgf_1_1sorted__graph__initr.html#a041182703b533d1e6916c0ab1edc02f0',1,'gmgf::sorted_graph_initr::possible_edges()'],['../classgmgf_1_1stree__graph__initr.html#abbc9a35ba11cf2e343c2d31c8450ef89',1,'gmgf::stree_graph_initr::possible_edges()']]]
+  ['n',['n',['../classgmgf_1_1graph__config.html#a77289e4829029d780cf98ff40e79ec7e',1,'gmgf::graph_config']]],
+  ['n_5fvert_5fbtree',['n_vert_btree',['../namespacegmgf.html#adea883ff834e8876c8c41df391c235f9',1,'gmgf']]],
+  ['next',['next',['../classgmgf_1_1dfs__finder.html#a163062222500bc5206bd67c2562eec71',1,'gmgf::dfs_finder']]],
+  ['noadd_5fedge',['noadd_edge',['../classgmgf_1_1basic__state.html#a044c80dd343847bbc11296d08a1c86f6',1,'gmgf::basic_state::noadd_edge()'],['../classgmgf_1_1matrix__opt__state.html#a8f8ced7eedc4a4c2b42319f6473d0293',1,'gmgf::matrix_opt_state::noadd_edge()'],['../classgmgf_1_1matrix__state.html#ae0f67b2a07634287387593de3dd72f59',1,'gmgf::matrix_state::noadd_edge()'],['../classgmgf_1_1minmax__state.html#a1fb55876609f2986ac6ae753fda81404',1,'gmgf::minmax_state::noadd_edge()'],['../classgmgf_1_1state.html#a5b72a6ce57b71da8068c77660e045987',1,'gmgf::state::noadd_edge()']]]
 ];

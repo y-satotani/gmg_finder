@@ -1,0 +1,418 @@
+\chapter{gmg\_finder マニュアル}\label{chap-experimental-program}
+
+一般化ムーアグラフを探索するためのライブラリ
+
+\section*{依存ライブラリ・ソフトウェア}\label{ux4f9dux5b58ux30e9ux30a4ux30d6ux30e9ux30eaux30bdux30d5ux30c8ux30a6ux30a7ux30a2}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{gcc}
+\item
+  \texttt{makefile}
+\item
+  \texttt{igraph}
+\item
+  \texttt{python} (一部)
+\end{itemize}
+
+\section*{実験プログラム}\label{ux5b9fux9a13ux30d7ux30edux30b0ux30e9ux30e0}
+
+プログラムをビルドするには，\texttt{git}で
+\texttt{https://github.com/y-satotani/gmg-finder}をクローンする．
+すべての実験は\texttt{src/experiment}ディレクトリに含まれている．
+\texttt{src}ディレクトリで\texttt{make\ ;\ make\ install}を実行すると，
+以下の実行ファイルが\texttt{bin}ディレクトリに生成される．
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{exp\_cmp\_algo.out}
+\item
+  \texttt{exp\_cmp\_algo\_full.out}
+\item
+  \texttt{exp\_dist\_delete.out}
+\item
+  \texttt{exp\_miner.out}
+\item
+  \texttt{exp\_cmp\_algo\_enum.out}
+\item
+  \texttt{exp\_enumer.out}
+\end{itemize}
+
+以下，各プログラムを順番に説明する．
+
+\subsection*{\texorpdfstring{\texttt{exp\_cmp\_algo.out}}{exp\_cmp\_algo.out}}\label{expux5fcmpux5falgo.out}
+
+初期グラフと枝刈りの方法を変えて，性能を測定する．
+実行例と結果例は以下のとおり．
+
+\begin{verbatim}
+src> experiment/exp_cmp_algo.out basic basic basic 10 3
+\end{verbatim}
+
+\begin{verbatim}
+10,3,2,0,150,basic,basic,basic,150,15,16,0.000144
+\end{verbatim}
+
+結果は，次の値が\texttt{,}で区切られている．
+
+\begin{itemize}
+\tightlist
+\item
+  頂点数
+\item
+  次数
+\item
+  \texttt{Q} (\texttt{gmgf::graph\_config::Q()})
+\item
+  \texttt{R} (\texttt{gmgf::graph\_config::R()})
+\item
+  頂点間距離の総和の下界
+\item
+  グラフ初期化子
+\item
+  \texttt{basic}=\texttt{gmgf::basic\_graph\_initr}
+\item
+  \texttt{cycle}=\texttt{gmgf::cycle\_graph\_initr}
+\item
+  \texttt{stree}=\texttt{gmgf::stree\_graph\_initr}
+\item
+  候補辺ソート
+\item
+  \texttt{basic}=ソートなし
+\item
+  \texttt{sorted}=\texttt{gmgf::sorted\_graph\_initr}でソート
+\item
+  状態初期化子
+\item
+  \texttt{basic}=\texttt{gmgf::basic\_state\_initr}
+\item
+  \texttt{minmax}=\texttt{gmgf::minmax\_state\_initr}
+\item
+  \texttt{matrix}=\texttt{gmgf::mmmtr\_state\_initr}
+\item
+  結果のグラフの頂点間距離の総和
+\item
+  候補辺の数
+\item
+  展開した状態数
+\item
+  実行時間 (\texttt{gmgf::dfs\_finder::next()}の実行時間)
+\end{itemize}
+
+次のコマンドで，複数の結果を含むcsvファイルを生成できる．
+\texttt{-\/-max-procs=x}の\texttt{x}の値だけ並列に実行する．
+
+\begin{verbatim}
+(echo n,d,Q,R,sspl_lb,ginitr,sorted,sinitr,sspl,edge,node,time ;\
+ ./exp_cmp_algo_param.py |\
+ xargs --max-lines=1 --max-procs=4 ./exp_cmp_algo.out) >\
+cmp-algo.csv
+\end{verbatim}
+
+パラメータは，\texttt{exp\_cmp\_algo\_param.py}で生成される．
+別のパラメータで実験する場合は，このファイルを編集する．
+
+\subsection*{\texorpdfstring{\texttt{exp\_cmp\_algo\_full.out}}{exp\_cmp\_algo\_full.out}}\label{expux5fcmpux5falgoux5ffull.out}
+
+\texttt{exp\_cmp\_algo.out}では探索開始から(もしあれば)最初の一個の
+一般化ムーアグラフを得るまでの情報を計測したが，
+\texttt{exp\_cmp\_algo\_full.out}では探索開始からすべての一般化ムーアグラフ
+を得るまでの情報を計測する．
+
+\begin{verbatim}
+./exp_cmp_algo_full.out basic basic basic 10 3
+\end{verbatim}
+
+の実行例は次のとおり．
+
+\begin{verbatim}
+10,3,2,0,150,basic,basic,basic,4,150,150,15,75,0.00042
+\end{verbatim}
+
+結果は，次の値が\texttt{,}で区切られている．
+
+\begin{itemize}
+\tightlist
+\item
+  頂点数
+\item
+  次数
+\item
+  \texttt{Q} (\texttt{gmgf::graph\_config::Q()})
+\item
+  \texttt{R} (\texttt{gmgf::graph\_config::R()})
+\item
+  頂点間距離の総和の下界
+\item
+  グラフ初期化子 (\texttt{exp\_cmp\_algo.out}と同じ)
+\item
+  候補辺ソート (\texttt{exp\_cmp\_algo.out}と同じ)
+\item
+  状態初期化子 (\texttt{exp\_cmp\_algo.out}と同じ)
+\item
+  結果のグラフの頂点間距離の総和
+\item
+  得られたグラフの数 (同型グラフを重複して数える)
+\item
+  最大の頂点間距離
+\item
+  最小の頂点間距離
+\item
+  候補辺の数
+\item
+  展開した状態数
+\item
+  実行時間
+\end{itemize}
+
+\subsection*{\texorpdfstring{\texttt{exp\_dist\_delete.out}}{exp\_dist\_delete.out}}\label{expux5fdistux5fdelete.out}
+
+一辺削除時の頂点間距離の更新の実験を行う．次の項目を入力とする．
+
+\begin{itemize}
+\tightlist
+\item
+  ネットワークトポロジ
+\item
+  random=Erdős--Rényiモデル
+\item
+  scale-free=Barabási--Albertモデル
+\item
+  頂点数
+\item
+  ネットワークパラメータ
+\item
+  シード値 (ランダム関数の)
+\end{itemize}
+
+\begin{verbatim}
+./exp_dist_delete.out random 1000 0.3 0
+\end{verbatim}
+
+の実行例は以下のとおり．
+
+\begin{verbatim}
+1000,0.3,random,0,150422,1,0.827778,0.076536
+\end{verbatim}
+
+結果は次の値が\texttt{,}で区切られている．
+
+\begin{itemize}
+\tightlist
+\item
+  頂点数
+\item
+  ネットワークパラメータ (トポロジにより，pかm)
+\item
+  ネットワークトポロジ
+\item
+  \texttt{random}=Erdős--Rényiモデル
+\item
+  \texttt{scale-free}=Barabási--Albertモデル
+\item
+  シード値
+\item
+  辺の数
+\item
+  結果が一致したかどうか (1なら一致)
+\item
+  \texttt{igraph}ライブラリでの計算時間
+\item
+  提案手法の計算時間
+\end{itemize}
+
+\subsection*{\texorpdfstring{\texttt{exp\_miner.out}}{exp\_miner.out}}\label{expux5fminer.out}
+
+\texttt{exp\_cmp\_algo.out}で，グラフ初期化子を\texttt{gmgf::stree\_graph\_initr}，
+状態初期化子を\texttt{gmgf::minmax\_state\_initr}とし，
+さらに(もしあれば)一般化ムーアグラフを出力する機能を付加したプログラム．
+
+\begin{verbatim}
+./exp_miner.out 10 3
+\end{verbatim}
+
+の実行例は以下のとおり，
+
+\begin{verbatim}
+10,3,2,0,150,150,15,16,0.000452
+\end{verbatim}
+
+結果は次の値が\texttt{,}で区切られている．
+
+\begin{itemize}
+\tightlist
+\item
+  頂点数
+\item
+  次数
+\item
+  \texttt{Q} (\texttt{gmgf::graph\_config::Q()})
+\item
+  \texttt{R} (\texttt{gmgf::graph\_config::R()})
+\item
+  頂点間距離の総和の下界
+\item
+  結果のグラフの頂点間距離の総和
+\item
+  候補辺の数
+\item
+  展開した状態数
+\item
+  実行時間 (\texttt{gmgf::dfs\_finder::next()}の実行時間)
+\end{itemize}
+
+さらに，\texttt{n\textless{}頂点数\textgreater{}-d\textless{}次数\textgreater{}-miner.elist}の形式で，一般化ムーアグラフの
+辺リストを保存する．
+
+\subsubsection*{\texorpdfstring{\texttt{exp\_miner.py}}{exp\_miner.py}}\label{expux5fminer.py}
+
+\texttt{exp\_miner.out}に並列計算とタイムアウト機能を追加したプログラム．
+コマンドライン引数は以下のとおり．
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{-n}=頂点数((次数+1)\ldots{}Nの範囲を対象とする)
+\item
+  \texttt{-d}=次数(3\ldots{}Dの範囲を対象とする)
+\item
+  \texttt{-i}=結果ファイルリスト(これらの結果に含まれている頂点数次数組は計算しない)
+\item
+  \texttt{-o}=結果ファイル(指定しなければ標準出力)
+\item
+  \texttt{-t}=タイムアウト時間(単位:秒)
+\end{itemize}
+
+結果は，\texttt{exp\_miner.out}の結果を列としたcsvファイルである．
+
+\subsection*{\texorpdfstring{\texttt{exp\_cmp\_algo\_enum.out}}{exp\_cmp\_algo\_enum.out}}\label{expux5fcmpux5falgoux5fenum.out}
+
+初期グラフと枝刈りの方法を変えて，互いに非同型な一般化ムーアグラフを列挙する．
+実行例と結果例は以下のとおり．
+
+\begin{verbatim}
+src> experiment/exp_cmp_algo_enum.out basic basic basic 10 3
+\end{verbatim}
+
+\begin{verbatim}
+10,3,2,0,150,basic,basic,basic,1,1,15,23,0.030401
+\end{verbatim}
+
+結果は，次の値が\texttt{,}で区切られている．
+
+\begin{itemize}
+\tightlist
+\item
+  頂点数
+\item
+  次数
+\item
+  \texttt{Q} (\texttt{gmgf::graph\_config::Q()})
+\item
+  \texttt{R} (\texttt{gmgf::graph\_config::R()})
+\item
+  頂点間距離の総和の下界
+\item
+  グラフ初期化子
+\item
+  \texttt{basic}=\texttt{gmgf::basic\_graph\_initr}
+\item
+  \texttt{cycle}=\texttt{gmgf::cycle\_graph\_initr}
+\item
+  \texttt{stree}=\texttt{gmgf::stree\_graph\_initr}
+\item
+  候補辺ソート
+\item
+  \texttt{basic}=ソートなし
+\item
+  \texttt{sorted}=\texttt{gmgf::sorted\_graph\_initr}でソート
+\item
+  状態初期化子
+\item
+  \texttt{basic}=\texttt{gmgf::basic\_state\_initr}
+\item
+  \texttt{minmax}=\texttt{gmgf::minmax\_state\_initr}
+\item
+  \texttt{matrix}=\texttt{gmgf::mmmtr\_state\_initr}
+\item
+  列挙されたすべてのグラフの頂点間距離の総和が下界に一致したか
+\item
+  列挙されたグラフの数
+\item
+  候補辺の数
+\item
+  展開した状態数
+\item
+  実行時間 (\texttt{gmgf::fbs\_enumer::enumerate()}の実行時間)
+\end{itemize}
+
+\texttt{exp\_cmp\_algo\_enum\_param.py}を用いて，複数のパラメータで実験することが
+できる．方法は\texttt{exp\_cmp\_algo.out}の項を参照のこと．
+
+\subsection*{\texorpdfstring{\texttt{exp\_enumer.out}}{exp\_enumer.out}}\label{expux5fenumer.out}
+
+\texttt{exp\_cmp\_algo\_enum.out}で，グラフ初期化子を\texttt{gmgf::stree\_graph\_initr}，
+状態初期化子を\texttt{gmgf::minmax\_state\_initr}とし，
+さらに，列挙された一般化ムーアグラフを出力する機能を付加したプログラム．
+
+\begin{verbatim}
+./exp_enumer.out 10 3
+\end{verbatim}
+
+の実行例は以下のとおり，
+
+\begin{verbatim}
+10,3,2,0,150,1,1,15,22,0.00152
+\end{verbatim}
+
+結果は次の値が\texttt{,}で区切られている．
+
+\begin{itemize}
+\tightlist
+\item
+  頂点数
+\item
+  次数
+\item
+  \texttt{Q} (\texttt{gmgf::graph\_config::Q()})
+\item
+  \texttt{R} (\texttt{gmgf::graph\_config::R()})
+\item
+  頂点間距離の総和の下界
+\item
+  列挙されたグラフすべての頂点間距離の総和が下界に一致したか
+\item
+  列挙されたグラフの数
+\item
+  候補辺の数
+\item
+  展開した状態数
+\item
+  実行時間 (\texttt{gmgf::fbs\_enumer::enumerate()}の実行時間)
+\end{itemize}
+
+さらに，\texttt{n\textless{}頂点数\textgreater{}-d\textless{}次数\textgreater{}-g\textless{}グラフ番号\textgreater{}-enumer.elist}の形式で，
+一般化ムーアグラフの辺リストを保存する．
+
+\subsubsection*{\texorpdfstring{\texttt{exp\_enumer.py}}{exp\_enumer.py}}\label{expux5fenumer.py}
+
+\texttt{exp\_enumer.out}に並列計算とタイムアウト機能を追加したプログラム．
+コマンドライン引数は以下のとおり．
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{-n}=頂点数((次数+1)\ldots{}Nの範囲を対象とする)
+\item
+  \texttt{-d}=次数(3\ldots{}Dの範囲を対象とする)
+\item
+  \texttt{-i}=結果ファイルリスト(これらの結果に含まれている頂点数次数組は計算しない)
+\item
+  \texttt{-o}=結果ファイル(指定しなければ標準出力)
+\item
+  \texttt{-t}=タイムアウト時間(単位:秒)
+\end{itemize}
+
+結果は，\texttt{exp\_enumer.out}の結果を列としたcsvファイルである．

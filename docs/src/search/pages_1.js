@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gmg_5ffinder_20ソースコード',['gmg_finder ソースコード',['../index.html',1,'']]]
+  ['gmg_5ffinder_20マニュアル',['gmg_finder マニュアル',['../index.html',1,'']]]
 ];
