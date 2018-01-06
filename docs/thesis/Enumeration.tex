@@ -1,0 +1,64 @@
+
+\chapter{一般化ムーアグラフの列挙}
+本章では，第\ref{chap:reduce-by-initial-graph}章で導入した初期グラフの
+妥当性(予想\ref{conj:gmg-cycle}と予想\ref{conj:spanning-tree})を検証する．
+そのために，一般化ムーアグラフを重複なく列挙する方法を与え，実験を行う．
+
+\section{列挙アルゴリズム}
+\label{sect:enum-algorithm}
+一般化ムーアグラフを重複なく列挙する，つまり，非同型なグラフを列挙する
+方法を与える．そのためのアルゴリズムをアルゴリズム\ref{algo:gmg-enumeration}
+に示す．ここで，$\text{Aut}(G)$をグラフ$G$の同型グラフの集合とする．
+
+\begin{algorithm}[H]
+  \caption{一般化ムーアグラフの列挙アルゴリズム}
+  \label{algo:gmg-enumeration}
+  \begin{algorithmic}[1]
+    \Require $n,k$
+    \Ensure 互いに非同型な$M(n,k)$の集合
+    \Procedure{EnumerateGeneralizedMooreGraph}{}
+    \State $G_I\gets\text{初期グラフ}$
+    \State $\{e_i\}_{i\in\mathbb{N}}^M\gets G_I\text{の候補辺}$
+    \State $Gs_1\gets\{G_I\}$
+    \ForAll{$i\in\{1,\ldots,M\}$}
+    \State $Gs_{i+1}\gets\varnothing$
+    \ForAll{$G\in Gs_i$}
+    \ForAll{$operator\in\{\text{追加オペレータ},\text{無追加オペレータ}\}$}
+    \If{$G,e_i$に$operator$が適応でき，かつ，
+      $operator(G,e_i)\notin\cup_{H\in Gs_{i+1}}\text{Aut}(H)$}
+    \State $Gs_{i+1}\gets Gs_{i+1}\cup\{operator(G,e_i)\}$
+    \EndIf
+    \EndFor
+    \EndFor
+    \EndFor
+    \State \textbf{return} $\{G\,|\,G\in Gs_{M+1},$
+    $G\text{が正則で定理\ref{thm:gmg-geometric-property}を満たす}\}$
+    \EndProcedure
+  \end{algorithmic}
+\end{algorithm}
+
+\section{実験}
+節\ref{sect:enum-algorithm}で定義したアルゴリズムを用いて，一般化ムーアグラフを
+列挙し，第\ref{chap:reduce-by-initial-graph}章で導入した初期グラフの妥当性を
+検証する．具体的には，初期グラフを変更してアルゴリズムを開始し，得られた
+一般化ムーアグラフの個数が同じかを確認する．
+検証する頂点数$n$と次数$k$は，$k=3,4$と
+\begin{equation*}
+  \begin{aligned}
+    n=\begin{cases}
+      4,6,8,10,12,14,16,18 & (k=3) \\
+      5,6,7,8,9,10,11 & (k=4)
+    \end{cases}
+  \end{aligned}
+\end{equation*}
+とする．実験を行った環境は，表\ref{tab:env-lab}の通りである．
+
+\section{結果}
+アルゴリズムにより得られた一般化ムーアグラフの数を表\ref{tab:ginitr-ngraph-iso}
+に示す．
+
+\input{ginitr-ngraph-iso}
+
+結果のとおり，初期グラフを変更したことによって列挙されない一般化ムーアグラフは
+存在しないことが分かる．つまり，実験を行った頂点数と次数の範囲では，
+初期グラフの変更は妥当である．
