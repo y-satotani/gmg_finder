@@ -424,7 +424,7 @@ $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(
 提案した手法が有効であることを検証するために，次の手順で実験を行う．
 \begin{enumerate}
 \item 削除前のグラフ$G=(V,E)$を構築する．グラフの種類はランダムネットワーク
-  (Erdos-R{\'e}nyiモデル\cite{Erdos1959})とスケールフリーネットワーク
+  (Erd\H{o}s-R{\'e}nyiモデル\cite{Erdos1959})とスケールフリーネットワーク
   (Barab{\'a}si-Albertモデル\cite{Barabasi1999})の二種類とする．
 \item $G$のすべての頂点の組$(s,t)\in[V]^2$に対して，
   頂点間距離$d(s,t)$と最短経路数$\sigma(s,t)$を求める．
@@ -440,7 +440,7 @@ $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(
   計算に要した時間の平均を求める．
 \end{enumerate}
 ネットワークのパラメータは，頂点数は$10,50,100,300,600,1000,1500,2000$とし，
-Erdos-R{\'e}nyiモデルに対しては$p=0.1,0.3,0.6,0.9$とし，
+Erd\H{o}s-R{\'e}nyiモデルに対しては$p=0.1,0.3,0.6,0.9$とし，
 Barab{\'a}si-Albertモデルに対しては$m=3,6,10,15,20$とする．
 
 実験の実行環境は表\ref{tab:env-mws}のとおりである．
@@ -462,11 +462,11 @@ Barab{\'a}si-Albertモデルに対しては$m=3,6,10,15,20$とする．
 
 \subsubsection*{結果}
 一辺削除時の頂点間距離の更新の実験結果を図\ref{fig:dist-delete}に示す．
-図\ref{fig:dist-delete-igraph-random}にigraphライブラリとErdos-R{\'e}nyiモデル
+図\ref{fig:dist-delete-igraph-random}にigraphライブラリとErd\H{o}s-R{\'e}nyiモデル
 の結果を，
 図\ref{fig:dist-delete-igraph-scalefree}にigraphライブラリと
 Barab{\'a}si-Albertモデルの結果を，
-図\ref{fig:dist-delete-proposed-random}に提案手法とErdos-R{\'e}nyiモデル
+図\ref{fig:dist-delete-proposed-random}に提案手法とErd\H{o}s-R{\'e}nyiモデル
 の結果を，
 図\ref{fig:dist-delete-proposed-scalefree}に提案手法と
 Barab{\'a}si-Albertモデルの結果をそれぞれ示す．
@@ -506,7 +506,7 @@ Barab{\'a}si-Albertモデルの結果をそれぞれ示す．
   \includegraphics{dist-delete-igraph-ylab.pdf}
   \includegraphics{dist-delete-igraph-random-yaxis.pdf}
   \hspace{-5mm}
-  \subfloat[igraphライブラリ,Erdos-R{\'e}nyiモデル]{
+  \subfloat[igraphライブラリ,Erd\H{o}s-R{\'e}nyiモデル]{
     \includegraphics{dist-delete-igraph-random.pdf}
     \label{fig:dist-delete-igraph-random}
   }\hspace{5mm}
@@ -522,7 +522,7 @@ Barab{\'a}si-Albertモデルの結果をそれぞれ示す．
   \includegraphics{dist-delete-proposed-ylab.pdf}
   \includegraphics{dist-delete-proposed-random-yaxis.pdf}
   \hspace{-5mm}
-  \subfloat[提案手法,Erdos-R{\'e}nyiモデル]{
+  \subfloat[提案手法,Erd\H{o}s-R{\'e}nyiモデル]{
     \includegraphics{dist-delete-proposed-random.pdf}
     \label{fig:dist-delete-proposed-random}
   }\hspace{5mm}
