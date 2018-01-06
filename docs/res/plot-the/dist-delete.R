@@ -63,7 +63,7 @@ data <- read_csv('../data/the-dist-delete-mws.csv') %>%
   arrange(type, alg)
 
 pf <- function(vtype, valg) {
-  title <- ifelse(vtype == 'random', 'Erdos-Rényiモデル', 'Barabási-Albertモデル')
+  title <- ifelse(vtype == 'random', 'Erdős-Rényiモデル', 'Barabási-Albertモデル')
   title_ylab <- ifelse(valg == 'proposed', '提案手法[s]', 'igraphライブラリ[s]')
   title_xlab <- '頂点数'
   gp <- ggplot(
