@@ -49,7 +49,7 @@
 最大グラフ$G'_{\max}=G_{\max}-e_i$と次の候補辺番号$i+1$を返す．
 さらに，系\ref{coll:basic-noadd-operator}で示した無追加オペレータの適応条件は
 次のようになる．
-\begin{collary-without-proof}
+\begin{corollary-without-proof}
   \label{coll:minmax-noadd-operator}
   無追加オペレータについて，与えられた最小グラフを$G_{\min}$，最大グラフを
   $G_{\max}$，候補辺番号を$i$，対象の辺を$e_i=\{v,w\}$とし，
@@ -63,7 +63,7 @@
   \item 直径条件$\cdots$ $G'_{\max}$の直径が定理\ref{thm:gmg-geometric-property}で
     示された直径以下である.
   \end{enumerate}
-\end{collary-without-proof}
+\end{corollary-without-proof}
 
 最後に，枝刈りを適応した探索の手続きをアルゴリズム\ref{algo:minmax-algorithm}
 に示す．これは，アルゴリズム\ref{algo:basic-algorithm}を書き換えるものである．
@@ -407,12 +407,12 @@ $G$から辺$e=\{\alpha,\beta\}\in E(G)$を削除した後の頂点間距離$d'(
 アルゴリズム\ref{algo:update-distance-on-delete}では，頂点間距離の
 再計算の対象の組$(s,t)$を$d'(s,t)$の昇順になるようにリストに追加している．
 この根拠は次の系\ref{coll:update-distance-on-delete}で与える．
-\begin{collary}
+\begin{corollary}
   \label{coll:update-distance-on-delete}
   頂点間距離を再計算した組$(s,t)$について，最短経路数
   $\sigma'(s,t)$を再計算するには，すべての$d'(s,t)>d'(u,v)$なる
   $(u,v)$の$\sigma'(u,v)$を先に計算しなければならない．
-\end{collary}
+\end{corollary}
 \begin{proof}
   定理\ref{thm:update-distance-on-delete}の更新手順より，
   $s$と$t$の最短経路数の中に$d'(s,t)>d'(u,v)$なる$u$と$v$の最短経路数
