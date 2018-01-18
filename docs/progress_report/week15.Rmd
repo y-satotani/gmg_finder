@@ -1,0 +1,80 @@
+---
+title: "研究進捗報告"
+author: "里谷 佳紀"
+date: "平成30年1月16日"
+documentclass: bxjsarticle
+classoption: xelatex,ja=standard,11pt
+geometry: no
+bibliography: ../res/MyCollection.bib
+csl: physical-review-e.csl
+output:
+  md_document:
+    variant: markdown_github
+  pdf_document:
+    pandoc_args:
+      - --variable=biblio-title:参考文献
+    latex_engine: xelatex
+    number_sections: yes
+    fig_caption: yes
+    includes:
+      in_header: packages.tex
+---
+  
+```{r setup, include=FALSE}
+library(captioner)
+
+library(readr)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(knitr)
+library(pander)
+
+library(network)
+library(sna)
+library(ggnet)
+library(igraph)
+library(intergraph)
+
+is_latex = !is.null(knitr::opts_knit$get('rmarkdown.pandoc.to')) &&
+  knitr::opts_knit$get('rmarkdown.pandoc.to') %in% c('beamer', 'latex')
+panderOptions('table.style', 'grid')
+knitr::opts_chunk$set(fig.width=6.5, fig.height=6,
+                      echo=FALSE, warning=FALSE, message=FALSE
+)
+if(is_latex) {
+  options(device = function(file, width = 6.5, height = 6, ...) {
+    cairo_pdf(tempfile(), width = width, height = height, ...)
+  })
+  knitr::opts_chunk$set(dev='cairo_pdf', dev.args=list(family='IPAexGothic'))
+}
+
+fig_num <- captioner(prefix = '図', suffix = '')
+tab_num <- captioner(prefix = '表', suffix = '')
+cap_str <- function(x) {
+  if(!is_latex) return(x)
+  else return(tail(unlist(strsplit(x, ' ')), 1))
+}
+show_table <- function(x, cap) {
+  if(is_latex) {
+    kable(x, caption = cap)
+  } else {
+    pander(x, caption = cap)
+  }
+}
+```
+
+# 研究全体の目的
+深さ優先探索をベースにした，一般化ムーアグラフを発見するアルゴリズムを開発する．
+さらに，初期グラフの改良や枝刈りを導入する，更なる改良案を提案する．
+同時に，これらの改良を評価する．
+
+# 前回打ち合わせ時に定めた短期目標
+1. 報告書の見直し
+2. 一辺削除時の媒介中心性を求めるプログラムの開発
+
+# 本日までの進捗状況
+1. 完了した．
+2. 頂点間距離と経路の数から媒介中心性を求めるプログラムを開発した．
+しかし，定義どおりに計算しているためか性能が悪い．
+Brandesのアルゴリズムを参考にアルゴリズムを変更する予定．
