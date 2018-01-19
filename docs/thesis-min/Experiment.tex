@@ -1,0 +1,113 @@
+
+\chapter{実験}
+\label{sect:experiment}
+第\ref{chap:reduction}章で定義した初期グラフおよび枝刈りの有効性を検証する．
+本章では，検証のための実験方法を示した後，結果を与えて考察を行う．
+
+\section{実験方法}
+検証のための実験方法を説明する．
+実験で比較する方法は次の四種である．
+\begin{enumerate}
+\item 基本アルゴリズム(基本)$\cdots$
+  アルゴリズム\ref{algo:basic-algorithm}をそのまま用いる．
+\item 閉路初期グラフ(閉路)$\cdots$
+  閉路初期グラフ(定義\ref{def:cycle-initial-graph})を導入する．
+\item 全域木初期グラフ(全域木)$\cdots$
+  全域木初期グラフ(定義\ref{def:stree-initial-graph})を導入する．
+\item 枝刈り$\cdots$
+  \ref{sect:reduce-by-prune}節で提案した枝刈りを導入する．
+\end{enumerate}
+実験で調べる一般化ムーアグラフの頂点数$n$と次数$k$を次のとおりとする．
+\begin{equation*}
+  \begin{aligned}
+    n=\begin{cases}
+      4,6,8,10,12,14,16,18 & (k=3) \\
+      5,6,7,8,9,10,11,12 & (k=4)
+    \end{cases}
+  \end{aligned}
+\end{equation*}
+探索開始から最初の一般化ムーアグラフの発見について次の項目を測定する．
+\begin{enumerate}
+\item 探索時間
+\item 展開状態数
+\end{enumerate}
+探索時間について，それぞれの方法，頂点数，次数で10回測定してその平均を求める．
+最後に本実験での実行環境を表\ref{tab:env-lab}に示す．
+\begin{table}
+  \caption{実行環境}
+  \label{tab:env-lab}
+  \centering
+  \begin{tabular}{ll}
+    \hline
+    プロセッサ & Intel® Core™ i5-4670 CPU @ 3.40GHz × 4 \\ \hline
+    メインメモリ & 5.8GiB \\ \hline
+    ベースシステム & Ubuntu 16.04.3 LTS 64 ビット \\ \hline
+    仮想化 & Oracle VirtualBox バージョン 5.1.18 r1140024 \\ \hline
+    コンパイラ & gcc 5.4.0 \\ \hline
+    グラフライブラリ & igraph 0.7.1-2.1 \\ \hline
+    最適化フラグ & -Ofast \\ \hline
+  \end{tabular}
+\end{table}
+
+\section{結果}
+探索開始から最初の一般化ムーアグラフの発見までに要した探索時間を
+図\ref{fig:time}に示す．探索開始から最初の一般化ムーアグラフの発見までの
+状態展開数を図\ref{fig:state}に示す．
+まず，初期グラフの変更の効果について考察する．
+図\ref{fig:time}と図\ref{fig:state}より，
+全域木から探索を開始すれば最速かつ最も展開状態数が少ないことが分かる．
+閉路初期グラフ導入後の展開状態数について，頂点数12,次数3の組合せで基本より
+多くの状態を展開している．これは，候補辺が適切な順番でなく，正則グラフであることの判定が
+多くの辺が追加された後で行われていることが原因と考えられる．
+
+次に，枝刈りの導入の効果について考察する．
+図\ref{fig:state}より，枝刈りによって展開状態数が減少し，高効率化に
+成功している．しかし，図\ref{fig:time}より，比較的小さい頂点数に対して，
+枝刈りの導入によって探索時間が増加するような頂点数と次数の組合せがある．
+必要なグラフが2個になり，より多くのグラフデータの生成と破棄が発生することで，
+枝刈りによる高効率化が無効になることが原因と考えられる．
+例えば，図\ref{fig:state-d3}において頂点数14の展開状態数は少なくなっているが，
+図\ref{fig:time-d3}の頂点数14の平均探索時間は長くなっている．
+
+\begin{figure}
+  \centering
+  \noindent\makebox[\textwidth]{
+    \includegraphics{time-lpad.pdf}
+    \includegraphics{time-ylab.pdf}
+    \includegraphics{time-d3-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=3$]{
+      \includegraphics{time-d3.pdf}
+      \label{fig:time-d3}
+    }\hspace{5mm}
+    \includegraphics{time-d4-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=4$]{
+      \includegraphics{time-d4.pdf}
+      \label{fig:time-d4}
+    }
+    \includegraphics{time-legend.pdf}
+  }
+  \caption{最初の一般化ムーアグラフの発見までの時間}
+  \label{fig:time}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \noindent\makebox[\textwidth]{
+    \includegraphics{state-lpad.pdf}
+    \includegraphics{state-ylab.pdf}
+    \includegraphics{state-d3-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=3$]{
+      \includegraphics{state-d3.pdf}
+      \label{fig:state-d3}
+    }\hspace{5mm}
+    \includegraphics{state-d4-yaxis.pdf}\hspace{-3mm}
+    \subfloat[$k=4$]{
+      \includegraphics{state-d4.pdf}
+      \label{fig:state-d4}
+    }
+    \includegraphics{state-legend.pdf}
+  }
+  \caption{最初の一般化ムーアグラフの発見までの展開状態数}
+  \label{fig:state}
+\end{figure}
+

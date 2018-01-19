@@ -53,6 +53,6 @@ gp <- ggplot(
     legend.position = 'bottom'
     )
 
-cairo_pdf('gmg-existence.pdf', width = 2.5, height = 6.5)
+cairo_pdf('gmg-existence-v.pdf', width = 2.5, height = 6.5)
 gp
 dev.off()

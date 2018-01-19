@@ -1,0 +1,20 @@
+
+\chapter{一般化ムーアグラフの存在}
+\label{chap:list-of-gmg}
+全域木初期グラフと枝刈りを用いて，与えられた頂点数と次数の組の一般化ムーアグラフが存在するかを
+求めるプログラムを作成した．得られた結果を図\ref{fig:gmg-existence}に示す．
+ただし，予想\ref{conj:spanning-tree}の結果次第で，存在しない組が無効になる
+可能性があることに注意する．一般化ムーアグラフの実体は次のURLに公開している．
+\begin{verbatim}
+github.com/y-satotani/gmg-finder/tree/master/docs/res/graph
+\end{verbatim}
+
+\begin{figure}[htbp]
+  \centering
+  \captionsetup{justification=centering}
+  \includegraphics{gmg-existence-h.pdf}
+  \caption{与えられた頂点数と次数の一般化ムーアグラフの存在\\
+    空白部分は，正則グラフが存在しない組合せ，
+    または，まだ完了していない組合せを表す．}
+  \label{fig:gmg-existence}
+\end{figure}

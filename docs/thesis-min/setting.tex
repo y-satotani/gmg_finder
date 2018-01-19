@@ -1,0 +1,36 @@
+
+\graphicspath{{../res/figure/}{../res/plot-the/}}
+\makeatletter
+\def\input@path{{../res/figure/}{../res/graph/}{../res/table-the/}}
+\makeatother
+
+% proof setting
+\newenvironment{proof}{\par \noindent {\gt 証明}\ }{\hspace{\fill}$\Box$
+\vspace{0.5\baselineskip} \par}
+
+% theorem preference
+\newtheorem{definition}{定義}
+\newtheorem{lemma}{補題}
+\newtheorem{theorem}{定理}
+\newtheorem{corollary}{系}
+\newtheorem{assumption}{仮定}
+\newtheorem{example}{例}
+%\newtheorem{algorithm}{アルゴリズム}
+\newtheorem{conjecture}{予想}
+\newtheorem{corollary-without-proof}{系}
+
+% add math operator
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\DeclareMathOperator*{\argmax}{\arg\!\max}
+
+% algorithm preference
+\renewcommand{\listalgorithmname}{アルゴリズムリスト}
+\renewcommand{\thealgorithm}{\arabic{chapter}.\arabic{algorithm}}
+\makeatletter
+\renewcommand{\ALG@name}{アルゴリズム}
+\@addtoreset{algorithm}{chapter}
+\makeatother
+
+% bibtex preference
+\renewcommand{\bibname}{参考文献}
+\bibliographystyle{junsrt}

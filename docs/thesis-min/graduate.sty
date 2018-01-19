@@ -1,0 +1,179 @@
+% platex版 graduate.sty <7 Feb 1999> by Yasuhiro Tachibana
+% modified by Norikazu Takahashi (23 Dec 2015)
+%
+\typeout{Option Style `graduate' <23 Dec 2015>.}
+
+\makeatletter
+\def\reportname{\def\@reportname}
+\def\department{\def\@department}
+\def\supervisor{\def\@supervisor}
+\def\abst{\def\@abst}
+\def\@acknowledgmentname{謝辞}
+\def\@appendixname{付録}
+\def\@referencename{参考文献}
+\renewcommand{\abstractname}{要約}
+
+%行間の変更
+\baselineskip=1473097sp         % 行間設定
+\def\baselinestretch{1.2}
+
+\textwidth     16cm
+\oddsidemargin 0pt
+\topmargin     4.6mm
+\headheight    6.4mm
+\headsep       9.2mm
+\textheight    215mm
+\footskip      6.4mm
+%\textwidth 16cm%470pt
+%\textheight 23.7cm%698pt
+%\headsep 26pt
+%\topskip 20pt
+%\oddsidemargin 0pt
+%\topmargin 4.6mm%-22pt
+%\footskip 18pt
+
+\partopsep 2pt plus 2pt minus 2pt
+
+\def\head@chapapp{\@chapapp{\thechapter}}
+\def\baselinechange#1{\def\baselinestretch{#1}\@normalsize}
+
+% \chapter コマンド用 heading
+\renewcommand{\@makechapterhead}[1]{
+  \vspace*{50pt}
+  {\parindent 0pt \raggedright 
+    \ifnum \c@secnumdepth >\m@ne      % IF secnumdepth > -1 THEN
+      \huge\bf \@chapapp \thechapter \par
+    \vskip 20pt \fi
+    \Huge \bf #1 \par
+    \nobreak
+    \vskip 40pt                       % タイトルとテキストの間のスペース.
+  }
+}
+
+\def\maketitle{
+\begin{titlepage}
+\thispagestyle{empty}
+\newgeometry{margin=0pt}
+\null
+\vfil
+\begin{center}
+\framebox{\parbox[c][257mm][c]{182mm}{
+\begin{center}
+\ \vskip 2em minus 1em
+{\large\@reportname\par}\vskip 3em minus 1em
+{\large 題　目\par}\vskip 1.5em minus 1em
+{\Large\@title\par}\vskip 7em minus 1em
+{\large 指　導　教　員\par}\vskip 1.5em minus 1em
+{\Large\@supervisor}\vskip 7em minus 1em
+{\large 報　告　者\par}\vskip 1.5em minus 1em
+{\Large\@author\par}\vskip 7em minus 1em
+{\large\@department\par}\vskip 2em minus 1em
+{\large\@date{提出}}
+\end{center}
+}}
+\end{center}
+\vfil
+\restoregeometry
+\newpage
+\thispagestyle{empty}
+\null
+\vfil
+\begin{center}
+{\Large\@reportname\par}\vskip 4em minus 1em
+{\Large 題　目\par}\vskip 2em minus 1em
+{\LARGE\@title\par}\vskip 8em minus 1em
+{\Large 指　導　教　員\par}\vskip 2em minus 1em
+{\LARGE 　}\vskip 8em minus 1em
+{\Large 報　告　者\par}\vskip 2em minus 1em
+{\LARGE\@author\par}\vskip 8em minus 1em
+{\Large\@department\par}\vskip 2em minus 1em
+{\Large\@date{提出}}
+\end{center}
+\vfil
+\newpage
+\thispagestyle{empty}
+\begin{center}
+{\Large 要　約\par}\vskip 3em minus 1em
+\end{center}
+\hskip\parindent\@abst
+\newpage
+{\pagenumbering{roman}
+ \baselinechange{1}
+ \tableofcontents}
+\newpage
+\pagenumbering{arabic}
+\pagestyle{myheadings}
+\gdef\chaptermark##1{\@chaptermark{\head@chapapp\ \ {##1}}}
+\gdef\@chaptermark##1{\gdef\@thehead{\vbox{\hbox to \textwidth{
+  \gt\bf\ {##1}\hfil\thepage\ }
+  \hbox{\rule[-2pt]{\textwidth}{1pt}}}}}
+\gdef\@thefoot{\vbox{
+ \hrule width\textwidth height0.25pt\vskip3pt
+ \hbox to\textwidth{\hfill{\footnotesize\@department}}}}
+\setcounter{page}{1}
+\end{titlepage}}
+
+\def\preface#1{\clearpage\typeout{#1}
+ \thispagestyle{plain}
+ \global\@topnum\z@ \@afterindenttrue
+ \addcontentsline{toc}{chapter}{#1}
+ \@chaptermark{\bf\gt #1}
+ \@makeschapterhead{\bf\gt #1}
+ \@afterheading}
+\def\acknowledgment{\clearpage\typeout{\@acknowledgmentname}
+ \thispagestyle{plain}
+ \global\@topnum\z@ \@afterindenttrue
+ \addcontentsline{toc}{chapter}{\@acknowledgmentname}
+ \refstepcounter{chapter}
+ \@chaptermark{\@acknowledgmentname}
+ \@makeschapterhead{\@acknowledgmentname}
+ \@afterheading}
+
+\def\thebibliography#1{\chapter*{\@referencename\@mkboth
+ {\refname}{\refname}}
+ \typeout{\@referencename}\addcontentsline{toc}{chapter}{\@referencename}
+ \@chaptermark{\@referencename}
+ \list
+ {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000
+ \sfcode`\.=1000\relax}
+\let\endthebibliography=\endlist
+
+\def\appendix{\par
+ \setcounter{chapter}{0}
+ \setcounter{section}{0}
+ \def\@chapapp{\@appendixname\ \Alph{chapter}}
+ \def\head@chapapp{\@appendixname\ \Alph{chapter}}
+ \def\thechapter{}
+ \def\thesection {\Alph{chapter}.\arabic{section}}
+\def\thefigure{\Alph{chapter}.\@arabic\c@figure}
+ \def\thetable{\Alph{chapter}.\@arabic\c@table}
+ \def\theequation{\Alph{chapter}.\arabic{equation}}
+ \gdef\@chapter[##1]##2{
+  \refstepcounter{chapter}
+  \typeout{\@appendixname\space\Alph{chapter}}
+  \addcontentsline{toc}{chapter}{\@appendixname\ \Alph{chapter} ##1}
+  \chaptermark{##1}
+  \addtocontents{lof}{\protect\addvspace{10pt}}
+  \addtocontents{lot}{\protect\addvspace{10pt}} \if@twocolumn
+  \@topnewpage[\@makechapterhead{##2}] 
+  \else \@makechapterhead{##2}
+  \@afterheading \fi}
+}
+
+\def\tableofcontents{\@restonecolfalse\if@twocolumn\@restonecoltrue\onecolumn
+ \fi\chapter*{\contentsname\@mkboth{\contentsname}{\contentsname}}
+ \@starttoc{toc}\if@restonecol\twocolumn\fi}
+\def\l@part#1#2{\addpenalty{-\@highpenalty}
+ \addvspace{2.25em plus 1pt} \begingroup
+ \@tempdima 3em \parindent \z@ \rightskip \@pnumwidth \parfillskip
+-\@pnumwidth 
+ {\large \bf \leavevmode #1\hfil \hbox to\@pnumwidth{\hss #2}}\par
+ \nobreak \endgroup}
+
+\def\@chapapp#1{第\thechapter 章}
+\def\@chappos{}
+\makeatother
