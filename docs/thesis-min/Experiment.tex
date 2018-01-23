@@ -8,14 +8,13 @@
 検証のための実験方法を説明する．
 実験で比較する方法は次の四種である．
 \begin{enumerate}
-\item 基本アルゴリズム(基本)$\cdots$
-  アルゴリズム\ref{algo:basic-algorithm}をそのまま用いる．
-\item 閉路初期グラフ(閉路)$\cdots$
-  閉路初期グラフ(定義\ref{def:cycle-initial-graph})を導入する．
-\item 全域木初期グラフ(全域木)$\cdots$
-  全域木初期グラフ(定義\ref{def:stree-initial-graph})を導入する．
-\item 枝刈り$\cdots$
-  \ref{sect:reduce-by-prune}節で提案した枝刈りを導入する．
+\item 基本アルゴリズム(基本):\ アルゴリズム\ref{algo:basic-algorithm}を
+  そのまま用いる方法
+\item 閉路初期グラフ(閉路):\ アルゴリズム\ref{algo:basic-algorithm}の
+  初期グラフに閉路初期グラフ(定義\ref{def:cycle-initial-graph})を用いる方法
+\item 全域木初期グラフ(全域木):\ アルゴリズム\ref{algo:basic-algorithm}の
+  初期グラフに全域木初期グラフ(定義\ref{def:stree-initial-graph})を用いる方法
+\item 枝刈り:\ \ref{sect:reduce-by-prune}節で提案した枝刈りを用いる方法
 \end{enumerate}
 実験で調べる一般化ムーアグラフの頂点数$n$と次数$k$を次のとおりとする．
 \begin{equation*}
@@ -26,12 +25,9 @@
     \end{cases}
   \end{aligned}
 \end{equation*}
-探索開始から最初の一般化ムーアグラフの発見について次の項目を測定する．
-\begin{enumerate}
-\item 探索時間
-\item 展開状態数
-\end{enumerate}
-探索時間について，それぞれの方法，頂点数，次数で10回測定してその平均を求める．
+評価指標には，探索開始から最初の一般化ムーアグラフを発見するまでに要する
+探索時間と展開状態数を用いる．
+探索時間については，それぞれの方法，頂点数，次数で10回測定してその平均を求める．
 最後に本実験での実行環境を表\ref{tab:env-lab}に示す．
 \begin{table}
   \caption{実行環境}

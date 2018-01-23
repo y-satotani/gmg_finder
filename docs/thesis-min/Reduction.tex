@@ -14,6 +14,7 @@
 \label{subsect:initial-graph-cycle}
 長さ$2Q+2$の閉路を含む初期グラフ$G_I$を次のように定義する．
 ただし，このような初期グラフは$R(n,k)>0$を満たすときのみ構築できる．
+
 \begin{definition}[長さ$2Q+2$の閉路を含む初期グラフ]\rm
   \label{def:cycle-initial-graph}
   次のグラフ$G_I$を\textbf{閉路を含む初期グラフ}あるいは
@@ -28,6 +29,7 @@
     \end{aligned}
   \end{equation}
 \end{definition}
+
 閉路初期グラフの例として，$n=12$,$k=3$の閉路初期グラフの図を
 図\ref{fig:initial-graph-cycle-example}に示す．
 
@@ -40,6 +42,7 @@
 
 定義\ref{def:cycle-initial-graph}のグラフを初期グラフとすることの
 妥当性はまだ証明されていない．次は，その妥当性に関する予想である．
+
 \begin{conjecture}\rm
   \label{conj:gmg-cycle}
   $R>0$の一般化ムーアグラフには，長さ$2Q+2$の閉路が少なくとも一つ存在する．
@@ -63,7 +66,7 @@
       (v-n_{k,\hat{Q}(v)-1}-1)\mod(k(k-1)^{\hat{Q}(v)-2})+1+n_{k,\hat{Q}-1}
     \end{aligned}
   \end{equation}
-  ここで，$\mod$は除余を表す．
+  ここで，$\text{mod}$は除余を表す．
 \end{definition}
 全域木初期グラフの例として，$n=12$,$k=3$と$n=18$,$k=3$の二つの
 全域木初期グラフの図を図\ref{fig:initial-spanning-tree-example}に
@@ -162,9 +165,9 @@
   $i$以降の辺の選び方次第で$G_{\min}'$が一般化ムーアグラフとなる見込み
   があることとは，次の二条件の両方を満たすことである．
   \begin{enumerate}
-  \item 次数条件$\cdots$ $\text{Exit}(x)=i$なる$x\in e_i$について，
-    $d_{G'_{\min}}(x)=k$.
-  \item 直径条件$\cdots$ $G'_{\max}$の直径が定理\ref{thm:gmg-geometric-property}で
+  \item 次数条件:\ $\text{Exit}(x)=i$なる$x\in e_i$について，
+    $d_{G'_{\min}}(x)=k$である.
+  \item 直径条件:\ $G'_{\max}$の直径が定理\ref{thm:gmg-geometric-property}で
     示された直径以下である.
   \end{enumerate}
 \end{corollary-without-proof}

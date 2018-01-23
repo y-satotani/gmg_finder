@@ -5,22 +5,21 @@
 いくつかの性質を示す．
 \begin{definition}[Cerfら\cite{Cerf1973}]\rm
   \label{def:generalized-moore-graph}
-  次の性質が成り立つ頂点数$n$,次数$k$の正則グラフを
-  \textbf{一般化ムーアグラフ}(\textbf{Generalized Moore graph})とよぶ．
-
-  すべての頂点$v$について，$v$との距離が$i$である頂点の数$c_i$が，
+  頂点数$n$,次数$k$の正則グラフ$G$を考える．
+  $G$のすべての頂点$v$について，$v$との距離が$i$である頂点の数$c_i$が，
   \begin{equation}
     \label{eq:gmg-verts-dist}
     \begin{aligned}
       c_i =
       \begin{cases}
-        k(k-1)^{i-1} & 1\leq i\leq Q \\
-        R & i = Q+1 \\
-        0 & Q+2\leq i \leq n-1
+        k(k-1)^{i-1} & 1\leq i\leq Q(n,k) \\
+        R(n,k) & i = Q(n,k)+1 \\
+        0 & Q(n,k)+2\leq i \leq n-1
       \end{cases}
     \end{aligned}
   \end{equation}
-  を満たすこと．ただし，
+  を満たすとき，$G$を\textbf{一般化ムーアグラフ}
+  (\textbf{Generalized Moore graph})とよぶ．ただし，
   \begin{align}
     Q(n,k)&=\max\{q|n-1-\sum_{i=1}^{q}k(k-1)^{i-1}\geq 0\}\label{eq:gmg-q} \\
     R(n,k)&=n-1-\sum_{i=1}^{Q(n,k)}k(k-1)^{i-1}\label{eq:gmg-r}
@@ -41,7 +40,7 @@
     c_3&= |\{11,12\}| = 2 = R(12,3) & \\
     c_i&= 0 & (i>3)
   \end{align*}
-  となるので，式\ref{eq:gmg-verts-dist}で示した距離と頂点数の
+  となるので，式\eqref{eq:gmg-verts-dist}で示した距離と頂点数の
   関係を満たす．同様に，他のすべての頂点について，同様の距離と頂点数の関係を
   満たす．
   \begin{figure}
@@ -51,13 +50,14 @@
     \label{fig:gmg-example}
   \end{figure}
 \end{example}
-以下，頂点数$n$,次数$k$の一般化ムーアグラフを$M(n,k)$と記す．
-$Q(n,k)$と$R(n,k)$をそれぞれ式\ref{eq:gmg-q}と式\ref{eq:gmg-r}のとおりとする．
+
+以下では頂点数$n$,次数$k$の一般化ムーアグラフを$M(n,k)$と記す．
+$Q(n,k)$と$R(n,k)$をそれぞれ式\eqref{eq:gmg-q}と式\eqref{eq:gmg-r}のとおりとする．
 $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
 頂点数と次数が文脈から明らかな場合は省略してそれぞれ$M,Q,R$と表す．
 
-一般化ムーアグラフの頂点間距離の総和を求め，これが正則グラフの頂点間距離の総和の
-下界であることを示す．
+次の定理は一般化ムーアグラフの頂点間距離の総和が正則グラフの頂点間距離の総和の
+下界であることを示すものである．
 \begin{theorem}[Cerfら\cite{Cerf1974Lower}]\rm
   \label{thm:gmg-lower-bound}
   $M(n,k)$の頂点間距離の総和は，
@@ -75,8 +75,8 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
     \sum_{i=1}^{n-1}i c_i
   \end{equation}
   ここで，$c_i$は$v$との距離が$i$の頂点の個数とする．
-  一般化ムーアグラフの場合，$c_i$は式\ref{eq:gmg-verts-dist}で与えられる．
-  そのため，式\ref{eq:gmg-lb-1}から，
+  一般化ムーアグラフの場合，$c_i$は式\eqref{eq:gmg-verts-dist}で与えられる．
+  そのため，式\eqref{eq:gmg-lb-1}から，
   \begin{align}
       \sum_{i=1}^{n-1}ic_i
       &=\sum_{i=1}^{Q}ic_i+(Q+1)c_{Q+1}+\sum_{i=Q+2}^{n-1}ic_i \nonumber\\
@@ -84,9 +84,9 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
       \label{eq:gmg-lb-2}
   \end{align}
   が得られる．これは一つの頂点から他のすべての頂点への距離の総和を表すので，
-  式\ref{eq:gmg-lb-2}を$n$倍すると，式\ref{eq:gmg-lb}が得られる．
+  式\eqref{eq:gmg-lb-2}を$n$倍すると，式\eqref{eq:gmg-lb}が得られる．
 
-  次に，式\ref{eq:gmg-lb}が頂点数が$n$,次数が$k$の正則グラフの頂点間距離の総和の
+  次に，式\eqref{eq:gmg-lb}が頂点数が$n$,次数が$k$の正則グラフの頂点間距離の総和の
   下界であることを示す．一般的な$c'_i$に対して，
   \begin{equation}
     \label{eq:gmg-lb-3}
@@ -108,7 +108,7 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
   $c_{Q+1}\geq c'_{Q+1}$と$c_{Q+1}\leq c'_{Q+1}$のふたつの場合について考える．
   $c_{Q+1}\geq c'_{Q+1}$のとき，
   $c_{Q+1}\geq c'_{Q+1}$ならば$c_{Q+1}-c'_{Q+1}\geq0$となり，
-  式\ref{eq:gmg-lb-4}より，
+  式\eqref{eq:gmg-lb-4}より，
   \begin{equation}
     \label{eq:gmg-lb-5a}
     \begin{aligned}
@@ -124,7 +124,7 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
     \label{eq:gmg-lb-6}
     \sum_{i=1}^{n-1}c_i = \sum_{i=1}^{n-1}c'_i = n-1
   \end{equation}
-  式\ref{eq:gmg-lb-5a}と式\ref{eq:gmg-lb-6}より，
+  式\eqref{eq:gmg-lb-5a}と式\eqref{eq:gmg-lb-6}より，
   \begin{equation}
     \label{eq:gmg-lb-7a}
     \begin{aligned}
@@ -133,23 +133,23 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
       \sum_{i=1}^{Q+1}|c_i-c'_i| &= \sum_{i=Q+2}^{n-1}|c_i-c'_i|
     \end{aligned}
   \end{equation}
-  が得られる．式\ref{eq:gmg-lb-7a}を用いて，式\ref{eq:gmg-lb-8a}を考える．
+  が得られる．式\eqref{eq:gmg-lb-7a}を用いて，式\eqref{eq:gmg-lb-8a}を考える．
   \begin{equation}
     \label{eq:gmg-lb-8a}
     \sum_{i=1}^{n-1}i(c_i-c'_i)=
     \sum_{i=1}^{Q+1}i|c_i-c'_i|-\sum_{i=Q+2}^{n-1}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8a}の第一項の上界は，式\ref{eq:gmg-lb-8a1}である．
+  式\eqref{eq:gmg-lb-8a}の第一項の上界は，式\eqref{eq:gmg-lb-8a1}である．
   \begin{equation}
     \label{eq:gmg-lb-8a1}
     \sum_{i=1}^{Q+1}i|c_i-c'_i|\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8a}の第二項の下界は，式\ref{eq:gmg-lb-8a2}である．
+  式\eqref{eq:gmg-lb-8a}の第二項の下界は，式\eqref{eq:gmg-lb-8a2}である．
   \begin{equation}
     \label{eq:gmg-lb-8a2}
     \sum_{i=Q+2}^{n-1}i|c_i-c'_i|\geq (Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i|
   \end{equation}
-  式\ref{eq:gmg-lb-8a1}と式\ref{eq:gmg-lb-8a2}より，次が成り立つ．
+  式\eqref{eq:gmg-lb-8a1}と式\eqref{eq:gmg-lb-8a2}より，次が成り立つ．
   \begin{align*}
     \sum_{i=1}^{n-1}i(c_i-c'_i)
     &\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i| \\
@@ -157,22 +157,22 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
     &= -\sum_{i=1}^{Q+1}|c_i-c'_i| \\
     &\leq 0
   \end{align*}
-  ゆえに式\ref{eq:gmg-lb-3}が成り立つ．
+  ゆえに式\eqref{eq:gmg-lb-3}が成り立つ．
   $c_{Q+1}\leq c'_{Q+1}$の場合も，総和の範囲が異なることを除いて同じである．
 \end{proof}
 
-次の性質は，一般化ムーアグラフが満たす構造的な性質を示す．
+次の定理は，一般化ムーアグラフが満たす構造的な性質を示す．
 後に説明する探索方法に用いる重要な性質である．
 \begin{theorem}\rm
   \label{thm:gmg-geometric-property}
-  ある正則グラフが一般化ムーアグラフであることの必要十分条件は，
+  ある正則グラフが一般化ムーアグラフであることの必要十分条件は，以下の
+  二条件を同時に満たすことである．
   \begin{enumerate}[(a)]
-  \item 長さ$2Q$以下の閉路を持たないこと
+  \item 長さ$2Q$以下の閉路を持たない．
     \label{gmg-geom-a}
-  \item $R=0$のとき，直径が$Q$,\hspace{2ex}$R>0$のとき，直径が$Q+1$であること．
+  \item $R=0$のとき直径が$Q$,\hspace{2ex}$R>0$のとき直径が$Q+1$である．
     \label{gmg-geom-b}
   \end{enumerate}
-  の二条件を同時に満たすことである．
 \end{theorem}
 \begin{proof}\rm
   正則グラフの頂点数を$n$,次数を$k$とする．
@@ -195,6 +195,7 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
   直径は$Q+1$である．以上から，$M(n,k)$は条件(\ref{gmg-geom-a})と
   条件(\ref{gmg-geom-b})を同時に満たす．
 \end{proof}
+
 便宜上，$M(n,k)$の直径を$\hat{Q}(n,k)$または$\hat{Q}(n)$，$\hat{Q}$で表す．
 $\hat{Q}(n)$は，最大次数$k$の平衡木において，頂点$1$から順に，頂点$1$から遠くなるように並べた
 ときの$1$と$n$との距離に等しいことに注意する．最大次数$k$の平衡木を

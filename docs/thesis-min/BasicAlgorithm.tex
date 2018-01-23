@@ -7,7 +7,7 @@
 まず，探索の初期状態と状態空間について説明した後，状態から新たな状態を生む
 オペレータについて説明する．最後に，全体的なアルゴリズムを与える．
 
-はじめに，次のムーアバウンドを定義する．
+はじめに，ムーアバウンドを定義する．
 \begin{definition}\rm
   \textbf{ムーアバウンド}(\textbf{Moore bound})とは，
   次数が$k$,直径が$D$の正則グラフの頂点数の上界で，次式で定義される．
@@ -15,11 +15,13 @@
     n_{k,D} = 1 + \sum_{i=1}^Dk(k-1)^{i-1}
   \end{equation}
 \end{definition}
-これは，同一の次数で$R=0$,$Q=D$の一般化ムーアグラフの頂点数に等しい．
+
+ムーアバウンド$n_{k,D}$は次数$k$で$R=0,\ Q=D$の一般化ムーアグラフの頂点数に等しい．
 ムーアバウンドを用いて探索の初期状態となる\textbf{初期グラフ}を定義する．
-特に，定義\ref{def:basic-initial-graph}の初期グラフを\textbf{基本初期グラフ}と呼ぶ．
+
 \begin{definition}\rm
   \label{def:basic-initial-graph}
+  以下で定義されるグラフ$G_I$を\textbf{基本初期グラフ}とよぶ．
   基本初期グラフとは，次のグラフ$G_I$である．
   \begin{equation}
     \begin{aligned}
@@ -27,27 +29,32 @@
       G_I&=(V,E) \\
       V&=\{1,\ldots,n\} \\
       E&=\{(1,2),\ldots,(1,k+1)\}\cup
-      \{(\text{parent}(v),v)|v=k+2,\ldots,n-R\} \\
-      \text{parent}(v)&=
-      \left\lceil\frac{v-n_{k,\hat{Q}(v)-1}}{k-1}\right\rceil+n_{k,\hat{Q}(v)-2}
+      \{(\text{parent}(v),v)|v=k+2,\ldots,n-R\}
     \end{aligned}
   \end{equation}
+  ただし
+  \[\text{parent}(v)=
+  \left\lceil\frac{v-n_{k,\hat{Q}(v)-1}}{k-1}\right\rceil+n_{k,\hat{Q}(v)-2}\]
+  である．
 \end{definition}
+
 基本初期グラフの例を図\ref{fig:initial-tree-example}に示す．
 
-次に，探索空間の基底となる辺の列である\textbf{候補辺}を定義する．
+次に，探索空間の基底となる辺の列である\textbf{候補辺列}を定義する．
+
 \begin{definition}\rm
   \label{def:candidate-edges}
-  候補辺$\{e_i\}_{i\in\mathbb{N}}$とは，初期グラフ$G_I$に対して，
+  候補辺列$\{e_i\}_{i\in\mathbb{N}}$とは，初期グラフ$G_I$に対して，
   $G_I$上で次数が$k$未満の頂点同士を隣接させる辺のうち，$G_I$に属していない
   辺の集合に順序を付加した列である．具体的には，次の式で定義される．
   \begin{equation}
     \{e_i\}_{i\in\mathbb{N}} =
     \{(v,w)\,|\,d_{G_I}(v)<k,d_{G_I}(w)<k,(v,w)\in[V]^2\}\setminus E(G_I)
   \end{equation}
-  便宜上，候補辺に属する辺も候補辺と呼ぶことにする．
+  候補辺列に属する辺を候補辺とよぶ．
 \end{definition}
-候補辺の定義より，一般化ムーアグラフの探索の探索空間は，候補辺から任意の個数の
+
+候補辺列の定義より，一般化ムーアグラフの探索の探索空間は，候補辺列から任意の個数の
 辺を取り出した組合せと言える．
 候補辺の例を図\ref{fig:feasible-edges-example}に破線で示す．
 
@@ -92,6 +99,7 @@
 二種類のオペレータそれぞれについて，対象の辺以降の辺の選び方で
 一般化ムーアグラフとなる見込みがあるかどうかを判定する方法を，
 定理\ref{thm:gmg-geometric-property}より与える．
+
 \begin{corollary-without-proof}\rm
   \label{coll:basic-add-operator}
   追加オペレータについて，与えられたグラフを$G$，候補辺番号を$i$，候補辺を
@@ -99,21 +107,23 @@
   選び方次第で$G'$が一般化ムーアグラフとなる見込み
   があることとは，次の二条件の両方を満たすことである．
   \begin{enumerate}
-  \item 次数条件$\cdots$ $d_G(v)<k$かつ，$d_G(w)<k$かつ，
+  \item 次数条件:\ $d_G(v)<k$かつ，$d_G(w)<k$かつ，
     $\text{Exit}(x)=i$なる$x\in e_i$について$d_{G'}(x)=k$
-  \item 閉路条件$\cdots$ $d_G(v,w)\geq2Q$\\
-    (この条件を満たすとき，$e_i$によってできる閉路の長さは少なくとも
-    $2Q+1$となり，定理\ref{thm:gmg-geometric-property}を満たす)
+  \item 閉路条件:\ $d_G(v,w)\geq2Q$
   \end{enumerate}
 \end{corollary-without-proof}
+
+次数条件を満たすとき，辺が追加されてできる閉路の長さは少なくとも
+$2Q+1$であり，定理\ref{thm:gmg-geometric-property}に反しない．
+
 \begin{corollary-without-proof}\rm
   \label{coll:basic-noadd-operator}
   無追加オペレータについて，与えられたグラフを$G$，候補辺番号を$i$，候補辺を
   $e_i=\{v,w\}$，適応後のグラフを$G'$とする．$i$以降の候補辺の
   選び方次第で$G'$が一般化ムーアグラフとなる見込み
-  があることとは，次の二条件の両方を満たすことである．
+  があることとは，次の条件を満たすことである．
   \begin{enumerate}
-  \item 次数条件$\cdots$ $\text{Exit}(x)=i$なる$x\in e_i$について，$d_{G'}(x)=k$
+  \item 次数条件:\ $\text{Exit}(x)=i$なる$x\in e_i$について，$d_{G'}(x)=k$
   \end{enumerate}
 \end{corollary-without-proof}
 
