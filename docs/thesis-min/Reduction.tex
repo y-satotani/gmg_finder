@@ -93,19 +93,21 @@
   一般化ムーアグラフ$M(n,k)$に，定義\ref{def:stree-initial-graph}
   で定義された全域木が存在する．
 \end{conjecture}
+
 また，条件を緩めて次も予想できる．
+
 \begin{conjecture}\rm
   \label{conj:spanning-tree-2}
-  一般化ムーアグラフ$M(n,k)$の全域木に，次の条件を満たす全域木が存在する．\par
-  ある頂点$v$との距離が$Q$である頂点の集合$V=\{w\,|\,d(v,w)=Q\}$に
-  ついて，次が成り立つ．
+  一般化ムーアグラフ$M(n,k)$にある頂点$v$とある全域木が存在し，
+  その全域木において，
   \[ \max\{d(w)\,|\,w\in V\}-\min\{d(w)\,|\,w\in V\}\leq 1 \]
-  つまり，次数の差がたかだか$1$である．
+  が成り立つ．ただし，$d(w)$は全域木における頂点$v$の次数を表し，
+  $V$は全域木における$v$からの距離が$Q$である頂点の集合を表す．
 \end{conjecture}
 
 初期グラフの変更を第\ref{chap:basic-algorithm}章で提案した方法に適応するには，
 アルゴリズム\ref{algo:basic-algorithm}の2行目の$G_I$を新たに定義した
-初期グラフに変更する．
+初期グラフに変更すればよい．
 
 \section{枝刈りによる探索空間の削減}
 \label{sect:reduce-by-prune}
@@ -119,27 +121,30 @@
   を追加したグラフを\textbf{最大グラフ}と定義する．
   このとき，最大グラフのもとになったグラフ$G$を\textbf{最小グラフ}と呼ぶ．
 \end{definition}
+
 \begin{example}\rm
   図\ref{fig:min-max-graph}に最小グラフと最大グラフの例を示す．
-  図\ref{fig:min-graph-example}の破線部分はオペレータ適応の判定が行われていない候補辺を表す．
+  図\subref*{fig:min-graph-example}の破線部分はオペレータ適応の判定が行われていない候補辺を表す．
   最大グラフは，最小グラフのオペレータ適応未決定の辺をすべて追加したグラフと
   なっている．
 \end{example}
+
 \begin{figure}
   \centering
   \subfloat[最小グラフ(破線部分は未適応の候補辺)]{
+    \label{fig:min-graph-example}
     \includegraphics[width=.4\linewidth]
                     {min-graph-example.pdf}
-    \label{fig:min-graph-example}
   }\hfill
   \subfloat[最大グラフ]{
+    \label{fig:max-graph-example}
     \includegraphics[width=.4\linewidth]
                     {max-graph-example.pdf}
-    \label{fig:max-graph-example}
   }
   \caption{最小グラフと最大グラフの例}
   \label{fig:min-max-graph}
 \end{figure}
+
 直径の下界は，最大グラフの直径を計算すればよい．もし直径の下界が
 定理\ref{thm:gmg-geometric-property}の条件(\ref{gmg-geom-b})を
 満たさない場合，それ以降どのように辺を追加しても条件を満たさないので，

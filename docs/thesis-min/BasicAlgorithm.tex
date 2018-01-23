@@ -83,7 +83,7 @@
 
 オペレータが適応可能な状態の条件を示す．その前に，次の記号を定義する．
 \begin{definition}\rm
-  頂点$v$と候補辺$\{e_i\}_{i\in\mathbb{N}}$について，$v$と接続している辺
+  頂点$v$と候補辺列$\{e_i\}_{i\in\mathbb{N}}$について，$v$と接続している辺
   $e_i$の番号$i$の最小値と最大値をそれぞれ$\text{Enter}(v)$と
   $\text{Exit}(v)$とする．
   $\text{Enter}(v)$と$\text{Exit}(v)$の具体的な式は，次で与えられる．
@@ -138,7 +138,7 @@ $2Q+1$であり，定理\ref{thm:gmg-geometric-property}に反しない．
     \Procedure{FindGeneralizedMooreGraph}{}
     \State $G_I\gets\text{初期グラフ}$
     \Comment 定義\ref{def:basic-initial-graph}
-    \State $\{e_i\}_{i\in\mathbb{N}}^M\gets G_I\text{の候補辺}$
+    \State $\{e_i\}_{i\in\mathbb{N}}^M\gets G_I\text{の候補辺列}$
     \Comment 定義\ref{def:candidate-edges}
     \State $Stack\gets((G_I,1))$
     \While{$|Stack|>0$}
