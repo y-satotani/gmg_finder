@@ -5,7 +5,7 @@
 性質を利用して，与えられた頂点数と次数の一般化ムーアグラフを探索する基本的な
 アルゴリズムを与える．これは後の章で探索空間を縮小する手法の比較対象となる．
 まず，探索の初期状態と状態空間について説明した後，状態から新たな状態を生む
-オペレータについて説明する．最後に，全体的なアルゴリズムを与える．
+遷移について説明する．最後に，全体的なアルゴリズムを与える．
 
 はじめに，ムーアバウンドを定義する．
 \begin{definition}\rm
@@ -39,6 +39,7 @@
 \end{definition}
 
 基本初期グラフの例を図\ref{fig:initial-tree-example}に示す．
+基本初期グラフは頂点数$n-R$,最大次数$k$の平衡木と$R$個の孤立点で構成される．
 
 次に，探索空間の基底となる辺の列である\textbf{候補辺列}を定義する．
 
@@ -51,11 +52,10 @@
     \{e_i\}_{i\in\mathbb{N}} =
     \{(v,w)\,|\,d_{G_I}(v)<k,d_{G_I}(w)<k,(v,w)\in[V]^2\}\setminus E(G_I)
   \end{equation}
-  候補辺列に属する辺を候補辺とよぶ．
+  候補辺列に属する辺を\textbf{候補辺}とよぶ．
 \end{definition}
 
-候補辺列の定義より，一般化ムーアグラフの探索の探索空間は，候補辺列から任意の個数の
-辺を取り出した組合せと言える．
+一般化ムーアグラフの探索の探索空間は，候補辺の任意の個数の組合せと言える．
 候補辺の例を図\ref{fig:feasible-edges-example}に破線で示す．
 
 \begin{figure}
@@ -74,14 +74,14 @@
   \end{minipage}
 \end{figure}
 
-探索に用いる状態として，グラフ$G$と次に追加する候補辺の番号$i$の組を使う．
-初期状態は，$(G_I,1)$である．状態$(G,i)$が与えられたとき，
-候補辺$e_i$を追加するオペレータ(\textbf{追加オペレータ})と
-追加しないオペレータ(\textbf{無追加オペレータ})の動作を与える．
-追加オペレータは，与えられた状態$(G,i)$に対して，状態$(G+e_i,i+1)$を返す．
-また，無追加オペレータは，与えられた状態$(G,i)$に対して，状態$(G,i+1)$を返す．
+探索に用いる状態としてグラフ$G$と次に追加する候補辺の番号$i$の組を使う．
+初期状態は$(G_I,1)$である．状態$(G,i)$が与えられたとき，
+候補辺$e_i$を追加する遷移(\textbf{追加型遷移})と
+追加しない遷移(\textbf{非追加型遷移})の動作を与える．
+追加型遷移は与えられた状態$(G,i)$に対して状態$(G+e_i,i+1)$を返す．
+また，非追加型遷移は与えられた状態$(G,i)$に対して状態$(G,i+1)$を返す．
 
-オペレータが適応可能な状態の条件を示す．その前に，次の記号を定義する．
+遷移が適応可能な状態の条件を示す．その前に次の記号を定義する．
 \begin{definition}\rm
   頂点$v$と候補辺列$\{e_i\}_{i\in\mathbb{N}}$について，$v$と接続している辺
   $e_i$の番号$i$の最小値と最大値をそれぞれ$\text{Enter}(v)$と
@@ -96,13 +96,13 @@
   \end{equation}
 \end{definition}
 
-二種類のオペレータそれぞれについて，対象の辺以降の辺の選び方で
+二種類の遷移それぞれについて，対象の候補辺以降の候補辺の選び方で
 一般化ムーアグラフとなる見込みがあるかどうかを判定する方法を，
 定理\ref{thm:gmg-geometric-property}より与える．
 
 \begin{corollary-without-proof}\rm
-  \label{coll:basic-add-operator}
-  追加オペレータについて，与えられたグラフを$G$，候補辺番号を$i$，候補辺を
+  \label{coll:basic-add-transition}
+  追加型遷移について，与えられたグラフを$G$，候補辺番号を$i$，候補辺を
   $e_i=\{v,w\}$，適応後のグラフを$G'$とする．$i$以降の候補辺の
   選び方次第で$G'$が一般化ムーアグラフとなる見込み
   があることとは，次の二条件の両方を満たすことである．
@@ -113,12 +113,12 @@
   \end{enumerate}
 \end{corollary-without-proof}
 
-次数条件を満たすとき，辺が追加されてできる閉路の長さは少なくとも
+閉路条件を満たすとき，辺が追加されてできる閉路の長さは少なくとも
 $2Q+1$であり，定理\ref{thm:gmg-geometric-property}に反しない．
 
 \begin{corollary-without-proof}\rm
-  \label{coll:basic-noadd-operator}
-  無追加オペレータについて，与えられたグラフを$G$，候補辺番号を$i$，候補辺を
+  \label{coll:basic-noadd-transition}
+  非追加型遷移について，与えられたグラフを$G$，候補辺番号を$i$，候補辺を
   $e_i=\{v,w\}$，適応後のグラフを$G'$とする．$i$以降の候補辺の
   選び方次第で$G'$が一般化ムーアグラフとなる見込み
   があることとは，次の条件を満たすことである．
@@ -148,10 +148,10 @@ $2Q+1$であり，定理\ref{thm:gmg-geometric-property}に反しない．
     \State \textbf{return} $G$
     \Comment 探索成功
     \EndIf
-    \ForAll{$operator\in\{\text{無追加オペレータ},\text{追加オペレータ}\}$}
-    \If{$operator$が$(G,i)$に適応できる}
-    \Comment 系\ref{coll:basic-add-operator}と系\ref{coll:basic-noadd-operator}
-    \State $push(Stack,operator(G,i))$
+    \ForAll{$transition\in\{\text{非追加型遷移},\text{追加型遷移}\}$}
+    \If{$transition$が$(G,i)$に適応できる}
+    \Comment 系\ref{coll:basic-add-transition}と系\ref{coll:basic-noadd-transition}
+    \State $push(Stack,transition(G,i))$
     \EndIf
     \EndFor
     \EndWhile
