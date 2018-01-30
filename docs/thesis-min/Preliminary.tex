@@ -1,7 +1,7 @@
 
 \chapter{一般化ムーアグラフ}
 \label{chap:generalized-moore-graph}
-本章では一般化ムーアグラフを定義する．さらに，一般化ムーアグラフが満たす
+本章では一般化ムーアグラフの定義を示し，一般化ムーアグラフが満たす
 いくつかの性質を示す．
 \begin{definition}[Cerfら\cite{Cerf1973}]\rm
   \label{def:generalized-moore-graph}
@@ -12,9 +12,9 @@
     \begin{aligned}
       c_i =
       \begin{cases}
-        k(k-1)^{i-1} & 1\leq i\leq Q(n,k) \\
-        R(n,k) & i = Q(n,k)+1 \\
-        0 & Q(n,k)+2\leq i \leq n-1
+        k(k-1)^{i-1}, & 1\leq i\leq Q(n,k) \\
+        R(n,k), & i = Q(n,k)+1 \\
+        0, & Q(n,k)+2\leq i \leq n-1
       \end{cases}
     \end{aligned}
   \end{equation}
@@ -24,7 +24,7 @@
     Q(n,k)&=\max\{q|n-1-\sum_{i=1}^{q}k(k-1)^{i-1}\geq 0\}\label{eq:gmg-q} \\
     R(n,k)&=n-1-\sum_{i=1}^{Q(n,k)}k(k-1)^{i-1}\label{eq:gmg-r}
   \end{align}
-  とする．
+  である．
 \end{definition}
 \begin{example}\rm
   図\ref{fig:gmg-example}に頂点数と次数がそれぞれ12と3の一般化ムーアグラフの例を示す．
@@ -35,10 +35,10 @@
   \end{align*}
   である．このグラフの頂点$1$に着目すると，距離が$i$の頂点数$c_i$は，
   \begin{align*}
-    c_1&= |\{2,3,4\}| = 3 = 3\cdot2^0 & \\
-    c_2&= |\{5,6,7,8,9,10\}| = 6 = 3\cdot2^1 & \\
-    c_3&= |\{11,12\}| = 2 = R(12,3) & \\
-    c_i&= 0 & (i>3)
+    c_1&= |\{2,3,4\}| = 3 = 3\cdot2^0 \\
+    c_2&= |\{5,6,7,8,9,10\}| = 6 = 3\cdot2^1 \\
+    c_3&= |\{11,12\}| = 2 = R(12,3) \\
+    c_i&= 0\;(4\leq i\leq11)
   \end{align*}
   となるので，式\eqref{eq:gmg-verts-dist}で示した距離と頂点数の
   関係を満たす．同様に，他のすべての頂点について，同様の距離と頂点数の関係を
@@ -99,13 +99,13 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
     \begin{aligned}
       c_i - c'_i
       \begin{cases}
-        \geq 0 & 1\leq i\leq Q \\
-        \lesseqgtr 0 & i = Q+1 \\
-        \leq 0 & Q+2\leq i\leq n-1
+        \geq 0, & 1\leq i\leq Q \\
+        \lesseqgtr 0, & i = Q+1 \\
+        \leq 0, & Q+2\leq i\leq n-1
       \end{cases}
     \end{aligned}
   \end{equation}
-  $c_{Q+1}\geq c'_{Q+1}$と$c_{Q+1}\leq c'_{Q+1}$のふたつの場合について考える．
+  $c_{Q+1}\geq c'_{Q+1}$と$c_{Q+1}\leq c'_{Q+1}$の二つの場合について考える．
   $c_{Q+1}\geq c'_{Q+1}$のとき，
   $c_{Q+1}\geq c'_{Q+1}$ならば$c_{Q+1}-c'_{Q+1}\geq0$となり，
   式\eqref{eq:gmg-lb-4}より，
@@ -114,8 +114,8 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
     \begin{aligned}
       c_i-c'_i
       \begin{cases}
-        \geq 0 & 1\leq i\leq Q+1 \\
-        \leq 0 & Q+2\leq i\leq n-1
+        \geq 0, & 1\leq i\leq Q+1 \\
+        \leq 0, & Q+2\leq i\leq n-1
       \end{cases}
     \end{aligned}
   \end{equation}
@@ -133,23 +133,24 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
       \sum_{i=1}^{Q+1}|c_i-c'_i| &= \sum_{i=Q+2}^{n-1}|c_i-c'_i|
     \end{aligned}
   \end{equation}
-  が得られる．式\eqref{eq:gmg-lb-7a}を用いて，式\eqref{eq:gmg-lb-8a}を考える．
+  が得られる．ここで，
   \begin{equation}
     \label{eq:gmg-lb-8a}
     \sum_{i=1}^{n-1}i(c_i-c'_i)=
     \sum_{i=1}^{Q+1}i|c_i-c'_i|-\sum_{i=Q+2}^{n-1}|c_i-c'_i|
   \end{equation}
-  式\eqref{eq:gmg-lb-8a}の第一項の上界は，式\eqref{eq:gmg-lb-8a1}である．
+  を考える．
+  式\eqref{eq:gmg-lb-8a}の右辺の第一項の上界は，
   \begin{equation}
     \label{eq:gmg-lb-8a1}
     \sum_{i=1}^{Q+1}i|c_i-c'_i|\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|
   \end{equation}
-  式\eqref{eq:gmg-lb-8a}の第二項の下界は，式\eqref{eq:gmg-lb-8a2}である．
+  で与えられ，右辺の第二項の下界は，
   \begin{equation}
     \label{eq:gmg-lb-8a2}
     \sum_{i=Q+2}^{n-1}i|c_i-c'_i|\geq (Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i|
   \end{equation}
-  式\eqref{eq:gmg-lb-8a1}と式\eqref{eq:gmg-lb-8a2}より，次が成り立つ．
+  で与えられる．  式\eqref{eq:gmg-lb-8a1}と式\eqref{eq:gmg-lb-8a2}より，
   \begin{align*}
     \sum_{i=1}^{n-1}i(c_i-c'_i)
     &\leq (Q+1)\sum_{i=1}^{Q+1}|c_i-c'_i|-(Q+2)\sum_{i=Q+2}^{n-1}|c_i-c'_i| \\
@@ -157,20 +158,20 @@ $M(n,k)$と$Q(n,k)$と$R(n,k)$について，
     &= -\sum_{i=1}^{Q+1}|c_i-c'_i| \\
     &\leq 0
   \end{align*}
-  ゆえに式\eqref{eq:gmg-lb-3}が成り立つ．
+  が成り立つので式\eqref{eq:gmg-lb-3}が成り立つ．
   $c_{Q+1}\leq c'_{Q+1}$の場合も，総和の範囲が異なることを除いて同じである．
 \end{proof}
 
-次の定理は，一般化ムーアグラフが満たす構造的な性質を示す．
+次の定理は，一般化ムーアグラフが有する構造的な性質を示す．
 後に説明する探索方法に用いる重要な性質である．
 \begin{theorem}\rm
   \label{thm:gmg-geometric-property}
-  ある正則グラフが一般化ムーアグラフであることの必要十分条件は，以下の
+  ある正則グラフが一般化ムーアグラフであるための必要十分条件は，以下の
   二条件を同時に満たすことである．
   \begin{enumerate}[(a)]
-  \item 長さ$2Q$以下の閉路を持たない．
+  \item 長さ$2Q$以下の閉路をもたない．
     \label{gmg-geom-a}
-  \item $R=0$のとき直径が$Q$,\hspace{2ex}$R>0$のとき直径が$Q+1$である．
+  \item $R=0$のとき直径が$Q$であり，$R>0$のとき直径が$Q+1$である．
     \label{gmg-geom-b}
   \end{enumerate}
 \end{theorem}

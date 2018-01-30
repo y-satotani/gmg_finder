@@ -25,7 +25,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -43,8 +43,8 @@
      id="namedview5042"
      showgrid="false"
      inkscape:zoom="2.8284271"
-     inkscape:cx="91.900134"
-     inkscape:cy="65.866462"
+     inkscape:cx="78.288328"
+     inkscape:cy="80.008598"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -200,7 +200,7 @@
      clip-path="url(#p26280e154e)"
      transform="matrix(0.45,0,0,0.45,-28.809135,-21.30705)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="399.72833"
      xlink:href="#m6c4d14b3d2"
      y="370.28571"
@@ -209,7 +209,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-208.68688,-187.93563)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="357.88873"
      xlink:href="#m6c4d14b3d2"
      y="228.01985"
@@ -218,7 +218,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-189.85907,-123.91599)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="477.0224"
      xlink:href="#m6c4d14b3d2"
      y="323.94504"
@@ -227,7 +227,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-243.46922,-167.08233)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="86.837181"
      xlink:href="#m6c4d14b3d2"
      y="65.614395"
@@ -236,7 +236,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-67.885876,-50.83353)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="82.285713"
      xlink:href="#m6c4d14b3d2"
      y="243.61646"
@@ -245,7 +245,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-65.837716,-130.93446)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="160.62566"
      xlink:href="#m6c4d14b3d2"
      y="116.1341"
@@ -254,7 +254,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-101.09069,-73.567406)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="327.65381"
      xlink:href="#m6c4d14b3d2"
      y="151.16248"
@@ -263,7 +263,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-176.25335,-89.330156)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="325.65909"
      xlink:href="#m6c4d14b3d2"
      y="71.916412"
@@ -272,7 +272,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-175.35573,-53.66943)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="262.6792"
      xlink:href="#m6c4d14b3d2"
      y="287.97031"
@@ -281,7 +281,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-147.01478,-150.8937)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="184.52229"
      xlink:href="#m6c4d14b3d2"
      y="240.23303"
@@ -290,7 +290,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-111.84416,-129.4119)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="493.71429"
      xlink:href="#m6c4d14b3d2"
      y="156.44649"
@@ -299,7 +299,7 @@
      height="100%"
      transform="matrix(0.9,0,0,0.9,-250.98056,-91.707956)" />
   <use
-     style="fill:#4169e1;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none"
+     style="fill:#ffffff;stroke:#000000;stroke-width:0.94488192;stroke-linecap:butt;stroke-linejoin:round;stroke-miterlimit:100;stroke-dasharray:none;fill-opacity:1"
      x="227.88431"
      xlink:href="#m6c4d14b3d2"
      y="357.64902"

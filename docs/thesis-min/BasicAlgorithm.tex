@@ -2,15 +2,15 @@
 \chapter{探索アルゴリズム}
 \label{chap:basic-algorithm}
 本章では，第\ref{chap:generalized-moore-graph}章で示した一般化ムーアグラフの
-性質を利用して，与えられた頂点数と次数の一般化ムーアグラフを探索する基本的な
-アルゴリズムを与える．これは後の章で探索空間を縮小する手法の比較対象となる．
+性質を利用して，与えられた頂点数と次数の一般化ムーアグラフを探索する
+アルゴリズムを提案する．これは後の章で探索空間を削減する手法の比較対象となる．
 まず，探索の初期状態と状態空間について説明した後，状態から新たな状態を生む
-遷移について説明する．最後に，全体的なアルゴリズムを与える．
+遷移について説明する．最後に，アルゴリズムの全体像を与える．
 
 はじめに，ムーアバウンドを定義する．
 \begin{definition}\rm
   \textbf{ムーアバウンド}(\textbf{Moore bound})とは，
-  次数が$k$,直径が$D$の正則グラフの頂点数の上界で，次式で定義される．
+  次数が$k$,直径が$D$の正則グラフの頂点数の上界であり，次式で定義される．
   \begin{equation}
     n_{k,D} = 1 + \sum_{i=1}^Dk(k-1)^{i-1}
   \end{equation}
@@ -96,9 +96,9 @@
   \end{equation}
 \end{definition}
 
-二種類の遷移それぞれについて，対象の候補辺以降の候補辺の選び方で
-一般化ムーアグラフとなる見込みがあるかどうかを判定する方法を，
-定理\ref{thm:gmg-geometric-property}より与える．
+二種類の遷移のそれぞれについて，対象の候補辺以降の候補辺の選び方で
+一般化ムーアグラフとなる見込みがあるかどうかを判定する方法が，
+定理\ref{thm:gmg-geometric-property}より導かれる．
 
 \begin{corollary-without-proof}\rm
   \label{coll:basic-add-transition}
@@ -127,7 +127,7 @@ $2Q+1$であり，定理\ref{thm:gmg-geometric-property}に反しない．
   \end{enumerate}
 \end{corollary-without-proof}
 
-最後に，説明した事柄を用いて深さ優先探索を一般化ムーアグラフの探索に適応する．
+最後に，上記の結果を利用した一般化ムーアグラフの深さ優先探索を提案する．
 その手順をアルゴリズム\ref{algo:basic-algorithm}に示す．
 \begin{algorithm}[H]
   \caption{一般化ムーアグラフの探索アルゴリズム}
