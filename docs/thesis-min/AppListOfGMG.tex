@@ -3,9 +3,11 @@
 \label{chap:list-of-gmg}
 全域木初期グラフと枝刈りを用いて，与えられた頂点数と次数をもつ一般化
 ムーアグラフが存在するかを求めるプログラムを作成した．
-頂点数と次数の組に対する一般化ムーアグラフの存在を
+頂点数と次数の組と一般化ムーアグラフの存在の関係を
 図\ref{fig:gmg-existence}に示す．
-ここで，予想\ref{conj:spanning-tree}の結果次第で，一般化ムーアグラフが
+図\ref{fig:gmg-existence}において，空白部分は正則グラフが存在しないことを
+意味している．
+ここで，予想\ref{conj:spanning-tree}の真偽によっては一般化ムーアグラフが
 存在しないと示された組が無効になることに注意する．
 一般化ムーアグラフの実体は次のURLに公開している．
 \begin{verbatim}
@@ -16,8 +18,6 @@ github.com/y-satotani/gmg-finder/tree/master/docs/res/graph
   \centering
   \captionsetup{justification=centering}
   \includegraphics{gmg-existence-h.pdf}
-  \caption{与えられた頂点数と次数の一般化ムーアグラフの存在\\
-    空白部分は，正則グラフが存在しない組合せ，
-    または，まだ完了していない組合せを表す．}
+  \caption{頂点数と次数の組と一般化ムーアグラフの存在の関係}
   \label{fig:gmg-existence}
 \end{figure}
