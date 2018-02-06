@@ -8,22 +8,23 @@
   \begin{itemize}
   \item HPCにおけるネットワークのトポロジ(グラフ)
     \begin{itemize}
+    \item 無向(スイッチは双方向に通信可能)
     \item 正則(すべてのスイッチは同一個数のポートを有する)
     \item 平均頂点間距離が短いと遅延も短い
       \cite{Koibuchi2012,Singla2011}
     \end{itemize}
-  \item 平均頂点間距離が短い正則グラフを求める試み
-    \cite{Fujita2015,Yamamoto2016,Fujiwara2015}
   \end{itemize}
   \begin{columns}[T]
     \begin{column}{.5\textwidth}
       \begin{itemize}
       \item \alert{一般化ムーアグラフ}
         \begin{itemize}
-        \item 平均頂点間距離が理論的な下界に等しい正則グラフ
+        \item 平均頂点間距離が理論的な下界と等しい正則グラフ
           \cite{Cerf1973,Cerf1974Lower}
-        \item グラフの性質を利用した探索法は知られていない
         \end{itemize}
+      \item 一般化ムーアグラフを求める試み
+        \cite{Yamamoto2016}
+      \item 一般化ムーアグラフの性質を利用した探索法は知られていない
       \end{itemize}
     \end{column}
     \begin{column}{.5\textwidth}
@@ -41,34 +42,37 @@
 \begin{frame}[allowframebreaks]{探索アルゴリズム}
   \begin{columns}
     \begin{column}{.4\textwidth}
-      \parbox[t]{\columnwidth}{
+      \begin{figure}
         \centering
-        \includegraphics[width=.8\columnwidth]
-                        {feasible-edges-example-color}
-      }
+        \includegraphics[height=.3\textheight]{feasible-edges-example-color}
+        \caption{初期グラフと候補辺}
+      \end{figure}
     \end{column}
     \begin{column}{.6\textwidth}
+      \small
+      \par 深さ優先探索に基づく
       \begin{enumerate}
-      \item 初期状態のグラフ(黒)から探索開始
-      \item 逐次，候補辺(赤)を追加したグラフと
-        追加しないグラフを生成し次に進む
-      \item 定理\ref{thm:gmg-geom}を満たす可能性がないなら
-        それ以降の探索を行わない
+      \item 初期グラフから探索を開始する
+      \item 候補辺を追加したグラフと追加しないグラフをスタックにプッシュする
+      \item 定理\ref{thm:gmg-geom}の条件に反するならプッシュしない
       \end{enumerate}
     \end{column}
   \end{columns}
+  \vspace*{-1em}
   \begin{theorem}
     \label{thm:gmg-geom}
+    {\scriptsize
     正則グラフ$(n,k)$が一般化ムーアグラフであることの必要十分条件は
     次の二つの条件を同時に満たすことである．
     \begin{enumerate}
-    \item 長さ$2Q$以下の閉路が存在しない
+    \item 長さ$2Q$以下の閉路が存在しない．
       \label{itm:gmg-geom-1}
-    \item $R=0$なら直径が$Q$,\:$R>0$なら直径が$Q+1$
+    \item $R=0$ならば直径が$Q$であり，$R>0$ならば直径が$Q+1$である．
       \label{itm:gmg-geom-2}
     \end{enumerate}
-    \[ Q=\max\{q|n-1-\sum_{i=1}^{q}k(k-1)^{i-1}\geq 0\},\:
+    \[ Q=\max\{q|n-1-\sum_{i=1}^{q}k(k-1)^{i-1}\geq 0\},\quad
     R=n-1-\sum_{i=1}^{Q}k(k-1)^{i-1} \]
+    }
   \end{theorem}
 \end{frame}
 
@@ -76,33 +80,34 @@
   \begin{columns}[T]
     \begin{column}{.5\textwidth}
       \begin{itemize}
-        \item 初期グラフの変更
-          \begin{itemize}
-          \item 閉路を含むグラフ(閉路)
-            \par\vbox{\parbox[t]{\columnwidth}{
-                \centering
-                \includegraphics[width=.7\columnwidth]
-                                {initial-tree-cycle-example}
-            }}
-          \item 全域木
-            \par\vbox{\parbox[t]{\columnwidth}{
-                \centering
-                \includegraphics[width=.7\columnwidth]
-                                {initial-spanning-tree-12-example}
-            }}
-          \end{itemize}
+      \item 初期グラフの制限
       \end{itemize}
+      \vspace*{-1em}
+      \begin{figure}
+        \centering
+        \includegraphics[width=.7\columnwidth]
+                        {initial-tree-cycle-example-color}
+                        \caption{閉路を含むグラフ（閉路）}
+      \end{figure}
+      \vspace*{-2em}
+      \begin{figure}
+        \centering
+        \includegraphics[width=.8\columnwidth]
+                        {initial-spanning-tree-18-example-color}
+                        \caption{全域木}
+      \end{figure}
     \end{column}
     \begin{column}{.5\textwidth}
       \begin{itemize}
-      \item 直径を考慮した枝刈り
-        \par まだ見ていない辺をすべて追加したグラフの直径を計算
-        \par 条件\ref{itm:gmg-geom-2}の直径より大きければ枝刈り
-        \par\vbox{\parbox[t]{\columnwidth}{
-          \centering
-          \includegraphics[width=.9\columnwidth]{max-graph-example-color}
-        }}
+      \item 直径の下界を利用した枝刈り
+      \item[] まだ見ていない候補辺をすべて追加したグラフの直径を計算
+      \item[] 定理\ref{thm:gmg-geom}の条件\ref{itm:gmg-geom-2}に反するなら枝刈り
       \end{itemize}
+      \begin{figure}
+        \centering
+        \includegraphics[width=.9\columnwidth]{max-graph-example-color}
+        \caption{直径の下界の計算に用いるグラフ}
+      \end{figure}
     \end{column}
   \end{columns}
 \end{frame}
@@ -111,14 +116,14 @@
   \begin{itemize}
   \item 測定項目
     \begin{enumerate}
-    \item 探索時間(10回の平均を算出)
-    \item 展開状態数
+    \item 探索時間(10回の平均)
+    \item 展開状態数(スタックからグラフを取り出した回数)
     \end{enumerate}
-  \item パラメータ
+  \item パラメータ(頂点数$n$と次数$k$)
     \begin{itemize}
     \item[]\par$\begin{aligned}
-      k &= 3 \\
-      n &= 4,6,8,10,12,14,16,18
+      n &= 4,6,8,10,12,14,16,18 \\
+      k &= 3
     \end{aligned}$
     \end{itemize}
   \item 実行環境
@@ -146,17 +151,22 @@
   \begin{columns}[T]
     \begin{column}{.5\textwidth}
       \begin{itemize}
-      \item 全域木から探索を開始すれば最速かつ最も展開状態数が少ない
+      \item 全域木を使うと最速で最も展開状態数が少ない
       \item 閉路は頂点数12で基本より展開状態数が多い
         \begin{itemize}
-        \item 候補辺が適切な順番でなく，正則グラフになる可能性の判定が遅くなるため
+        \item 候補辺が適切な順番でなく，正則グラフの判定が遅くなるため
         \end{itemize}
         \medskip
-      \item 枝刈りによって展開状態数が減少し効率化に成功した
-      \item 比較的小さい頂点数に対して探索時間が増加
+      \item 枝刈りによって展開状態数が減少する
+      \item 小さい頂点数に対して探索時間が増加する
         \begin{itemize}
-        \item 必要なグラフが2個になり多くのグラフの生成と破棄が発生するため
+        \item 下記により効率化が無効になるため
         \end{itemize}
+        \vspace*{-.5em}
+        \begin{enumerate}
+        \item 直径の計算が必要になること
+        \item 多くのグラフの生成と破棄が発生すること
+        \end{enumerate}
       \end{itemize}
     \end{column}
     \begin{column}{.5\textwidth}
@@ -165,7 +175,7 @@
       \captionof{figure}{平均探索時間}
       \vfill
       \includegraphics[height=.35\textheight]{cmp-algo-state}
-      \captionof{figure}{グラフ取り出し回数}
+      \captionof{figure}{展開状態数}
     \end{column}
   \end{columns}
 \end{frame}
@@ -174,13 +184,13 @@
   \begin{itemize}
   \item 一般化ムーアグラフの探索の探索空間の削減の効果を研究
     \begin{itemize}
-    \item 全域木から探索を始める
-    \item 直径を考慮した枝刈りを採用する
+    \item 全域木
+    \item 直径の下界を利用した枝刈り
     \end{itemize}
-  \item[] 効率が良く最速で探索できる
+  \item[] を使用することで効率良く探索できる
   \item 今後の課題
     \begin{itemize}
-    \item 提案した初期状態から探索を開始することの妥当性の証明
+    \item 提案した初期グラフへの制限の妥当性の検証
     \item 一般化ムーアグラフが存在しないときの平均頂点間距離最小のグラフ
     \end{itemize}
   \end{itemize}
