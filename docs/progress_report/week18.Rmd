@@ -1,13 +1,15 @@
 ---
 title: "研究進捗報告"
 author: "里谷 佳紀"
-date: "平成30年1月30日"
+date: "平成30年2月6日"
 documentclass: bxjsarticle
 classoption: xelatex,ja=standard,11pt
 geometry: no
 bibliography: ../res/MyCollection.bib
 csl: physical-review-e.csl
 output:
+  md_document:
+    variant: markdown_github
   pdf_document:
     pandoc_args:
       - --variable=biblio-title:参考文献
@@ -16,8 +18,6 @@ output:
     fig_caption: yes
     includes:
       in_header: packages.tex
-  md_document:
-    variant: markdown_github
 ---
   
 ```{r setup, include=FALSE}
@@ -70,11 +70,13 @@ show_table <- function(x, cap) {
 同時に，これらの改良を評価する．
 
 # 前回打ち合わせ時に定めた短期目標
-1. 発表会用スライドの作成続き
-2. 報告書の修正
+1. 報告書の修正
+2. 発表会用スライドの作成続き
 3. 一辺削除時の媒介中心性を求めるプログラムの開発
 
 # 本日までの進捗状況
-1. 未着手
-2. 完了した．査読待ちである．
-3. Brandesのアルゴリズムを基にした方法を実装し，実験を行った(別紙参照)．
+1. 考察部分に見落としがあったので，修正する．
+2. ほぼ完成した．以後，原稿や予想される質問を考える．
+3. プロファイラによると，データ構造に問題があることが分かった．
+配列を集合として扱っていたため，要素の追加に時間がかかっていた．
+別のライブラリやプログラミング言語の使用を検討する．
