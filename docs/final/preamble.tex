@@ -21,7 +21,7 @@
 \setbeamertemplate{caption label separator}[space]
 \setbeamertemplate{bibliography item}[text]
 \setbeamertemplate{theorems}[numbered]
-\setbeamertemplate{frametitle continuation}[from second][(続き)]
+\setbeamertemplate{frametitle continuation}[from second][（続き）]
 \renewcommand{\figurename}{図}
 \renewcommand{\tablename}{表}
 \renewcommand{\appendixname}{補足}
@@ -32,9 +32,9 @@
 \declaretheorem[sibling=definition,title=定理]{theorem}
 \declaretheorem[sibling=definition,title=予想]{conjecture}
 
-\graphicspath{{../res/figure/}{../res/plot-fin/}}
+\graphicspath{{../res/figure/}{../res/plot-fin/}{../res/figure-fin/}}
 \makeatletter
-\def\input@path{{../res/figure/}{../res/plot-fin/}}
+\def\input@path{{../res/figure/}{../res/plot-fin/}{../res/figure-fin/}}
 \makeatother
 \bibliographystyle{jalpha}
 
