@@ -18,8 +18,8 @@ data <- read_csv('../data/the-cmp-algo-lab.csv') %>%
 theme_set(theme_gray(base_size = 11))
 
 gp <- ggplot(data, aes(n, mean_time, color = algo)) +
-  geom_line() +
-  geom_point() +
+  geom_line(size = 0.6) +
+  geom_point(size = 1) +
   scale_x_continuous('頂点数') +
   scale_y_continuous('平均探索時間[s]', trans = 'log10') +
   scale_color_discrete(NULL)

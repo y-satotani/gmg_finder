@@ -45,26 +45,6 @@
 \end{frame}
 
 \begin{frame}[allowframebreaks]{探索アルゴリズム}
-  \begin{columns}
-    \begin{column}{.4\textwidth}
-      \begin{figure}
-        \centering
-        \includegraphics[height=.3\textheight]{feasible-edges-example-color}
-        \caption{初期グラフと候補辺}
-      \end{figure}
-    \end{column}
-    \begin{column}{.6\textwidth}
-      \small
-      \par 深さ優先探索に基づく
-      \begin{enumerate}
-      \item 初期グラフをスタックにプッシュする
-      \item ポップしたグラフと，それに候補辺を追加したグラフを
-        スタックにプッシュする
-      \item 定理\ref{thm:gmg-geom}の条件に反するならプッシュしない
-      \end{enumerate}
-    \end{column}
-  \end{columns}
-  \vspace*{-1em}
   \begin{theorem}
     \label{thm:gmg-geom}
     {\scriptsize
@@ -80,6 +60,26 @@
     R=n-1-\sum_{i=1}^{Q}k(k-1)^{i-1} \]
     }
   \end{theorem}
+  \vspace*{-1em}
+  \begin{columns}
+    \begin{column}{.4\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[height=.3\textheight]{feasible-edges-example-color}
+        \caption{初期グラフと候補辺}
+      \end{figure}
+    \end{column}
+    \begin{column}{.6\textwidth}
+      \small
+      \par 深さ優先探索に基づく
+      \begin{enumerate}
+      \item 初期グラフをスタックにプッシュする
+      \item ポップしたグラフと，それに候補辺を追加したグラフを
+        スタックにプッシュする
+      \par 定理\ref{thm:gmg-geom}の条件に反するならプッシュしない
+      \end{enumerate}
+    \end{column}
+  \end{columns}
 \end{frame}
 
 \begin{frame}{探索空間の削減}
