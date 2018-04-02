@@ -64,7 +64,7 @@ def main():
     args = get_arguments()
     for n, d in make_params(args):
         print(
-            '-n {} -d {} -t {}'.format(n, d, args.t) if args.t else\
+            '-n {} -d {} -t {}'.format(n, d, args.t) if args.t is not None else\
             '-n {} -d {}'.format(n, d),
             file=sys.stdout
         )
